@@ -7,7 +7,11 @@ Basic info:
 		Windows: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py; python get-pip.py. 
 
 
+<<<<<<< HEAD
 ### Django
+=======
+# Django
+>>>>>>> d23f4b6 (readmd)
 
 	-----MVC-----
 
@@ -26,7 +30,11 @@ Basic info:
 
 	Postgresql - the most used and powerful opensource object-relation database that we are going to use. Similar to sql but has some nice features
 
+<<<<<<< HEAD
 ### VirtualEnvironment
+=======
+# VirtualEnvironment
+>>>>>>> d23f4b6 (readmd)
 
 1) ALWAYS use virtual environemt!!!!!
 
@@ -68,7 +76,11 @@ Basic info:
 
 ------------------
 
+<<<<<<< HEAD
 ### Django usage
+=======
+# Django usage
+>>>>>>> d23f4b6 (readmd)
 
 	django-admin startproject <project_name>
 
@@ -77,13 +89,21 @@ Basic info:
 
 ## Django Database
 
+<<<<<<< HEAD
 # When changes to database model are done must use "migrate" to apply:
+=======
+### When changes to database model are done must use "migrate" to apply:
+>>>>>>> d23f4b6 (readmd)
 
 	python manager.py makemigrations (creates a migration file that contains all updates)
 
 	python manager.py migrate        (applies the changes)
 
+<<<<<<< HEAD
 # To access django shell (for debugging purpose):
+=======
+### To access django shell (for debugging purpose):
+>>>>>>> d23f4b6 (readmd)
 	
 	python manage.py shell
 
