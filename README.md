@@ -7,7 +7,7 @@ Basic info:
 		Windows: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py; python get-pip.py. 
 
 
-### Django
+# Django
 
 	-----MVC-----
 
@@ -26,7 +26,7 @@ Basic info:
 
 	Postgresql - the most used and powerful opensource object-relation database that we are going to use. Similar to sql but has some nice features
 
-### VirtualEnvironment
+# VirtualEnvironment
 
 1) ALWAYS use virtual environemt!!!!!
 
@@ -68,7 +68,7 @@ Basic info:
 
 ------------------
 
-### Django usage
+# Django usage
 
 	django-admin startproject <project_name>
 
@@ -77,13 +77,13 @@ Basic info:
 
 ## Django Database
 
-# When changes to database model are done must use "migrate" to apply:
+### When changes to database model are done must use "migrate" to apply:
 
 	python manager.py makemigrations (creates a migration file that contains all updates)
 
 	python manager.py migrate        (applies the changes)
 
-# To access django shell (for debugging purpose):
+### To access django shell (for debugging purpose):
 	
 	python manage.py shell
 
