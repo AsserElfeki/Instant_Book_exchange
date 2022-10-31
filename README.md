@@ -36,31 +36,31 @@ Basic info:
     
     - To create virtual environement https://docs.python.org/3/library/venv.html:
    
-		python3 -m venv /path/to/new/virtual/environment
+		`python3 -m venv /path/to/new/virtual/environment`
 
-		e.g. python3 -m venv env
+		e.g. `python3 -m venv env`
 
 	- Afterwards, always when working with django you must use virtual environment:
 
-		source <environment>/bin/activate
+		`source <environment>/bin/activate`
 
 		e.g. env/bin/activate
 
 	- To deactivate virtual environemt:
 
-		deactivate
+		`deactivate`
 
     - When you install/update some dependencies ALWAYS renew requirements.txt file
 
-		pip freeze > requirements.txt
+		`pip freeze > requirements.txt`
 
-		--- pip freeze - shows all dependencies in the current environement
+		--- `pip freeze` - shows all dependencies in the current environement
 
 		-- ">" the outout of the command to a file "requirements.txt", Note the file is being overwritten
 
 	- To install dependencies defined in requirements.txt:
 
-		pip3 install -r requirements.txt
+		`pip3 install -r requirements.txt`
 
 
 
