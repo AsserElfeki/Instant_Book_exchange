@@ -172,7 +172,7 @@ Cloud where our server will be running
    ```
    Note: there might be additional step be needed if there are problem with architectures. Might be not, dunno
 8) Now me or you should apply changes at the server in aws.
-9) Finally you must be able to see changes on the server and even people on the moon
+9) Finally you and even people on the moon must be able to see changes on the server 
 
 
 
