@@ -103,9 +103,10 @@ Basic info:
 
 Files used:
 
-	###DockerFile - an instruction file that tells how to build docker image
-	f.e.
-		```
+###DockerFile - an instruction file that tells how to build docker image
+f.e.
+
+```
 		FROM python:3.9.6-alpine    | based on which image to build our custom image
  
 		WORKDIR .                   | working directory inside out image
@@ -129,12 +130,12 @@ Files used:
 		RUN sed -i 's/\r$//g' ./entrypoint.sh | sed command to remove trash character at the end of lines
 		
 		ENTRYPOINT ["./entrypoint.sh"]   | use our entrypoint.sh as entrypoint (first executable shell)
-		```
-	###docker-compose.yml - file that simplifies the run of containers, basically each element can be substitute with "docker run" command
-
-	IMPORTANT in yml extension spaces make difference, be careful
-	f.e.
-	  ```
+```
+		
+###docker-compose.yml - file that simplifies the run of containers, basically each element can be substitute with "docker run" command
+IMPORTANT in yml extension spaces make difference, be careful
+f.e.
+```	  
 	  db:
 	    image: postgres:13.0-alpine                 | based on which image instatiate the container
 	    volumes:
@@ -145,8 +146,8 @@ Files used:
 	      - POSTGRES_DB=hello_django_dev
 	    ports:
 	      - "5432:5432"                             | port expose <transfer_to>:<postgres_port>
-	  ```
-	###entrypoint.sh - a script created by me to make sure that db run as expected
+```
+###entrypoint.sh - a script created by me to make sure that db run as expected
 
 ## AWS
 
