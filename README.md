@@ -103,7 +103,7 @@ Basic info:
 
 Files used:
 
-##DockerFile - an instruction file that tells how to build docker image
+### DockerFile - an instruction file that tells how to build docker image
 f.e.
 
 ```
@@ -132,7 +132,7 @@ f.e.
 		ENTRYPOINT ["./entrypoint.sh"]   | use our entrypoint.sh as entrypoint (first executable shell)
 ```
 		
-##docker-compose.yml - file that simplifies the run of containers, basically each element can be substitute with "docker run" command
+### docker-compose.yml - file that simplifies the run of containers, basically each element can be substitute with "docker run" command
 IMPORTANT in yml extension spaces make difference, be careful
 f.e.
 ```	  
@@ -147,7 +147,7 @@ f.e.
 	    ports:
 	      - "5432:5432"                             | port expose <transfer_to>:<postgres_port>
 ```
-##entrypoint.sh - a script created by me to make sure that db run as expected
+### entrypoint.sh - a script created by me to make sure that db run as expected
 
 ## AWS
 
