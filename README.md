@@ -93,9 +93,12 @@ Basic info:
 
 #SE bookexchanger development guide:
 
-## Docker
+
+
+# Docker
 
 14min Docker main idea explained https://www.youtube.com/watch?v=rOTqprHv1YE&t=438s&ab_channel=Simplilearn
+
 2min Docker really bried idea https://www.youtube.com/watch?v=Gjnup-PuquQ&ab_channel=Fireship
 
 Files used:
