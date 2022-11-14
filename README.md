@@ -91,7 +91,7 @@ Basic info:
 
 
 
-#SE bookexchanger development guide:
+# SE bookexchanger development guide:
 
 
 
@@ -154,7 +154,7 @@ entrypoint.sh - a script created by me to make sure that db run as expected
 Cloud where our server will be running
 
 
-#The flow
+# The flow
 
 1) You must pull from master branch on github https://github.com/AsserElfeki/Instant_Book_exchange
 2) Set environment, `python -m venv .env; source .env/bin/activate`
