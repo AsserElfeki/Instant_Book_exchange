@@ -38,7 +38,7 @@ Basic info:
    
 		`python3 -m venv /path/to/new/virtual/environment`
 
-		e.g. `python3 -m venv env`
+		e.g. `python3 -m venv .env`
 
 	- Afterwards, always when working with django you must use virtual environment:
 
