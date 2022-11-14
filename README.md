@@ -103,7 +103,7 @@ Basic info:
 
 Files used:
 
-DockerFile - an instruction file that tells how to build docker image
+Dockerfile - an instruction file that tells how to build docker image
 f.e.
 
 ```
