@@ -6,11 +6,6 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect, requires_csr
 
 from .models import User
 
-
-
-
-
-@requires_csrf_token
 def profile(request):
     if request.method == "POST":
         data = request.POST
@@ -18,9 +13,4 @@ def profile(request):
         user.login = data.get("email")
         user.password = data.get("psw")
         user.save()
-    return render("index.html",  RequestContext(request))
-
-
-def index(request):
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render())
+    return render(request, "index.html")
