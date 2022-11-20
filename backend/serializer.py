@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserCreateSerializer(serializers.ModelSerializer):
     login = serializers.CharField(required=True)
     password=serializers.CharField(required=True)
 
@@ -13,3 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
             'login',
             'password',
         ]
+
+class UserSerializer(serializers.Serializer):
+    login = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)
+
