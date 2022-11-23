@@ -8,13 +8,10 @@ from rest_framework.views import APIView
 from .models import User
 from .serializer import UserCreateSerializer, UserSerializer, UsernameSerializer
 
+
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
-
-    # permission_classes = (IsAuthenticated,)
-    def perform_create(self, serializer):
-        serializer.save()
 
 
 class UserListAPIView(generics.ListAPIView):
@@ -28,6 +25,7 @@ class UserListAPIView(generics.ListAPIView):
 
 class LoginView(APIView):
     permission_classes = (permissions.AllowAny,)
+
     def get(self, request):
         return render(request, "index.html")
 
@@ -36,7 +34,7 @@ class LoginView(APIView):
                                         context={'request': self.request})
         serializer.is_valid(raise_exception=True)
         if serializer.validated_data['status'] == 200:
-            user = serializer.validated_data['username'][0]
+            user = serializer.validated_data['user']
             return HttpResponse(f"You are welcome {user.username}")
         elif serializer.validated_data['status'] == 404:
             return HttpResponse("You are not welcome")

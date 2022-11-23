@@ -16,10 +16,16 @@ class UserCreateSerializer(serializers.ModelSerializer):
             'username',
             'password',
         ]
+
     def validate(self, data):
-        if re.match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", data["password"]):
+        strong_password_regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
+        if re.match(strong_password_regex, data["password"]):
             return data
-        raise serializers.ValidationError({"password": "Your password must be secured"})
+        raise serializers.ValidationError({"password": "Your password must be secured\n"
+                                                       "It should contain:\n"
+                                                       "at least 1 letter\n"
+                                                       "at least 1 number\n"
+                                                       "at least 8 characters"})
 
 
 class UserSerializer(serializers.Serializer):
@@ -45,18 +51,17 @@ class UsernameSerializer(serializers.Serializer):
         write_only=True
     )
 
-    def validate(self, attrs):
+    def validate(self, request):
         # Take username and password from request
         response = {}
-        username = attrs.get('username')
-        password = attrs.get('password')
+        username = request.get('username')
+        password = request.get('password')
 
         if username and password:
             existing_user = User.objects.all().filter(username=username, password=password)
             if existing_user:
-                response['username'] = existing_user
+                response['user'] = existing_user.get()
                 response['status'] = 200
-
                 return response
             else:
                 response['status'] = 404
@@ -64,5 +69,3 @@ class UsernameSerializer(serializers.Serializer):
         else:
             msg = 'Both "username" and "password" are required.'
             raise serializers.ValidationError(msg, code='authorization')
-
-
