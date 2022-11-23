@@ -3,26 +3,31 @@ from django.http import HttpResponse
 from rest_framework import serializers, status
 
 from .models import User
+import re
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
-    login = serializers.CharField(required=True)
+    username = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
 
     class Meta:
         model = User
         fields = [
-            'login',
+            'username',
             'password',
         ]
+    def validate(self, data):
+        if re.match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", data["password"]):
+            return data
+        raise serializers.ValidationError({"password": "Your password must be secured"})
 
 
 class UserSerializer(serializers.Serializer):
-    login = serializers.CharField(required=True)
+    username = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
 
 
-class LoginSerializer(serializers.Serializer):
+class UsernameSerializer(serializers.Serializer):
     """
     This serializer defines two fields for authentication:
       * username
@@ -35,7 +40,6 @@ class LoginSerializer(serializers.Serializer):
     )
     password = serializers.CharField(
         label="Password",
-        # This will be used when the DRF browsable API is enabled
         style={'input_type': 'password'},
         trim_whitespace=False,
         write_only=True
@@ -43,19 +47,20 @@ class LoginSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         # Take username and password from request
+        response = {}
         username = attrs.get('username')
         password = attrs.get('password')
 
         if username and password:
-            existing_user = User.objects.all().filter(login=username, password=password)
+            existing_user = User.objects.all().filter(username=username, password=password)
             if existing_user:
-                attrs['user'] = existing_user
-                attrs['status'] = 200
+                response['username'] = existing_user
+                response['status'] = 200
 
-                return attrs
+                return response
             else:
-                attrs['status'] = 404
-                return attrs
+                response['status'] = 404
+                return response
         else:
             msg = 'Both "username" and "password" are required.'
             raise serializers.ValidationError(msg, code='authorization')

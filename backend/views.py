@@ -1,20 +1,21 @@
-from django.contrib.auth import login
+import re
+
 from django.http import HttpResponse
 from django.shortcuts import render
-from rest_framework import generics, permissions, status
-from rest_framework.response import Response
+from rest_framework import generics, permissions
 from rest_framework.views import APIView
 
 from .models import User
-from .serializer import UserCreateSerializer, UserSerializer, LoginSerializer
-
+from .serializer import UserCreateSerializer, UserSerializer, UsernameSerializer
 
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
+
     # permission_classes = (IsAuthenticated,)
     def perform_create(self, serializer):
         serializer.save()
+
 
 class UserListAPIView(generics.ListAPIView):
     queryset = User.objects.all()
@@ -27,13 +28,15 @@ class UserListAPIView(generics.ListAPIView):
 
 class LoginView(APIView):
     permission_classes = (permissions.AllowAny,)
+    def get(self, request):
+        return render(request, "index.html")
 
-    def post(self, request, format=None):
-        serializer = LoginSerializer(data=self.request.data,
-                                                 context={'request': self.request})
+    def post(self, request):
+        serializer = UsernameSerializer(data=self.request.data,
+                                        context={'request': self.request})
         serializer.is_valid(raise_exception=True)
         if serializer.validated_data['status'] == 200:
-            user = serializer.validated_data['user']
-            return Response(status.HTTP_200_OK)
+            user = serializer.validated_data['username'][0]
+            return HttpResponse(f"You are welcome {user.username}")
         elif serializer.validated_data['status'] == 404:
-            return Response(status.HTTP_400_BAD_REQUEST)
+            return HttpResponse("You are not welcome")
