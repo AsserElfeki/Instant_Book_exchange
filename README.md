@@ -29,4 +29,12 @@ python manage.py runserver #starts the server
 python manage.py makemigrations #makes migrations, run it after changes to your models.py files
 python manage.py migrate #run it after makemigrations
 ```
+## Dependencies
+* pipenv 
+* python3 at least 3.8
+
+```sh
+pip3 install pipenv
+```
+
 That's it folks.
