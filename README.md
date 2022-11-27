@@ -38,3 +38,15 @@ pip3 install pipenv
 ```
 
 That's it folks.
+
+NO IT IS NOT
+
+To run with docker
+
+```sh
+docker-compose -f docker-compose-local.yml build
+```
+
+```sh
+docker-compose -f docker-compose-local.yml up
+```
