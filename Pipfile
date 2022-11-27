@@ -7,13 +7,14 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 markdown = "*"
-python-magic = "*"
 django-filter = "*"
 django-versatileimagefield = "*"
 drf-flex-fields = "*"
 djangorestframework-simplejwt = "*"
+shell = "*"
+python-magic = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.10"
