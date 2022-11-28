@@ -3,12 +3,15 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from versatileimagefield.fields import VersatileImageField, PPOIField
 
+from authentication.models import BookReader
+
+
 class Image(models.Model):
     name = models.CharField(max_length=255)
     image = VersatileImageField(
-            'Image',
-            upload_to='images/',
-            ppoi_field='image_ppoi'
+        'Image',
+        upload_to='images/',
+        ppoi_field='image_ppoi'
     )
     image_ppoi = PPOIField()
 
@@ -45,6 +48,8 @@ class Book(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     image = models.ManyToManyField('boookzdata.Image', related_name='books')
+    book_owner = models.ForeignKey(BookReader, on_delete=models.CASCADE, related_name='books',
+                                   related_query_name='books', blank=True, null=True)
 
     class Meta:
         ordering = ['-created']
@@ -57,7 +62,8 @@ class BookSite(models.Model):
     name = models.CharField(max_length=255)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='sites', related_query_name='site')
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='sites', related_query_name='site')
-    bookcondition = models.ForeignKey(BookCondition, on_delete=models.CASCADE, related_name='sites', related_query_name='site')
+    book_condition = models.ForeignKey(BookCondition, on_delete=models.CASCADE, related_name='sites',
+                                       related_query_name='site')
     price = models.DecimalField(max_digits=9, decimal_places=2)
     url = models.TextField()
     created = models.DateField(auto_now_add=True)
@@ -77,6 +83,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class CustomerReportRecord(models.Model):
     time_raised = models.DateTimeField(default=timezone.now, editable=False)

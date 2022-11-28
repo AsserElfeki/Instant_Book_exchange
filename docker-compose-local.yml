@@ -7,7 +7,7 @@ services:
     command: python manage.py runserver 0.0.0.0:80
     volumes:  
       - ./boookz:/boookz
-      - ./auth:/auth
+      - ./authentication:/authentication
       - ./boookzdata:/boookzdata
       - ./frontend:/frontend
       - ./media:/media

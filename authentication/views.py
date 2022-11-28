@@ -1,29 +1,43 @@
 from django.shortcuts import render
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_flex_fields import FlexFieldsModelViewSet
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, OutstandingToken, BlacklistedToken
 from rest_framework.response import Response
-from .serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer
+
+from .models import BookReader
+from .serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer, ListBookReaderSerializer
 from rest_framework import generics, status
 from django.contrib.auth.models import User
 
+
 # Create your views here.
+class ListBookReaderBooks(FlexFieldsModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ListBookReaderSerializer
+
+    def get_queryset(self):
+        book_readers = BookReader.objects.all()
+        return book_readers.filter(user=self.request.user)
 
 class UpdateProfileView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdateUserSerializer
 
+
 class ChangePasswordView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
 
+
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
+
 
 class LogoutView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -37,6 +51,7 @@ class LogoutView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class LogoutAllView(APIView):
     permission_classes = (IsAuthenticated,)

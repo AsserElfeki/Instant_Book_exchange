@@ -1,6 +1,8 @@
 from rest_flex_fields import FlexFieldsModelSerializer
 from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image
 from versatileimagefield.serializers import VersatileImageFieldSerializer
+from rest_framework import serializers
+
 
 class ImageSerializer(FlexFieldsModelSerializer):
     image = VersatileImageFieldSerializer(
@@ -33,15 +35,20 @@ class BookConditionSerializer(FlexFieldsModelSerializer):
 
 
 class BookSerializer(FlexFieldsModelSerializer):
+    book_owner = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Book
-        fields = ['pk', 'name', 'content', 'created', 'updated']
+        fields = ['pk', 'name', 'content', 'created', 'updated', 'book_owner']
         expandable_fields = {
             'category': ('boookzdata.CategorySerializer', {'many': True}),
             'sites': ('boookzdata.BookSiteSerializer', {'many': True}),
             'comments': ('boookzdata.CommentSerializer', {'many': True}),
             'image': ('boookzdata.ImageSerializer', {'many': True}),
         }
+
+    def get_book_owner(self, instance):
+        self.user
 
 
 class BookSiteSerializer(FlexFieldsModelSerializer):
@@ -53,12 +60,6 @@ class BookSiteSerializer(FlexFieldsModelSerializer):
             'bookcondition': 'boookzdata.BookConditionSerializer',
             'author': 'boookzdata.AuthorSerializer',
         }
-
-
-class UserSerializer(FlexFieldsModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username']
 
 
 class CommentSerializer(FlexFieldsModelSerializer):
