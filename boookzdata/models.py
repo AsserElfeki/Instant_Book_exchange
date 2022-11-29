@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from versatileimagefield.fields import VersatileImageField, PPOIField
+from polymorphic.models import PolymorphicModel
 
 
 class Image(models.Model):
@@ -47,8 +48,9 @@ class Book(models.Model):
     updated = models.DateField(auto_now=True)
     image = models.ManyToManyField('boookzdata.Image', related_name='books', null=True)
     book_owner = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='books',
-                                   related_query_name='book', null=True)
-    book_shelf = models.ForeignKey('boookzdata.BookGiveawayShelf', on_delete=models.CASCADE, related_name='books', related_query_name='book')
+                                   related_query_name='book')
+    book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, related_name='books',
+                                   related_query_name='book')
 
     class Meta:
         ordering = ['-created']
@@ -56,11 +58,25 @@ class Book(models.Model):
     def __str__(self):
         return self.name
 
-class BookGiveawayShelf(models.Model):
-    shelf_owner = models.OneToOneField('authentication.BookReader', on_delete=models.CASCADE, null=True)
+
+class BookShelf(PolymorphicModel):
+    book_shelf = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='book_shelfs',
+                                   related_query_name='book_shelfs')
+
+
+class BookGiveawayShelf(BookShelf):
+    pass
 
     def __str__(self):
-        return f"{self.shelf_owner}'s give-away shelf"
+        return f"{self.book_shelf.user}'s give-away shelf"
+
+
+class BookWantedShelf(BookShelf):
+    pass
+
+    def __str__(self):
+        return f"{self.book_shelf.user}'s wanted shelf"
+
 
 class BookSite(models.Model):
     name = models.CharField(max_length=255)
