@@ -8,6 +8,16 @@ from authentication.models import BookReader
 from boookzdata.models import Book
 
 
+class BookReaderSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(
+        default=serializers.CurrentUserDefault(),
+        queryset=serializers.CurrentUserDefault()
+    )
+    class Meta:
+        model = BookReader
+        fields = ['user']
+
+
 class ListBookReaderSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(
         default=serializers.CurrentUserDefault(),

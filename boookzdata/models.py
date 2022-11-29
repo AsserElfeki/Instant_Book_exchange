@@ -48,8 +48,8 @@ class Book(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     image = models.ManyToManyField('boookzdata.Image', related_name='books')
-    book_owner = models.ForeignKey(BookReader, on_delete=models.CASCADE, related_name='books',
-                                   related_query_name='books', blank=True, null=True)
+    book_owner = models.ForeignKey(BookReader, on_delete=models.CASCADE, related_name='+',
+                                   related_query_name='+')
 
     class Meta:
         ordering = ['-created']

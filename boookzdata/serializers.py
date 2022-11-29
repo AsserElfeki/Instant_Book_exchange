@@ -1,4 +1,8 @@
+from django.core.serializers import serialize
 from rest_flex_fields import FlexFieldsModelSerializer
+
+from authentication.models import BookReader
+from authentication.serializers import BookReaderSerializer
 from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
@@ -34,8 +38,10 @@ class BookConditionSerializer(FlexFieldsModelSerializer):
         fields = ['pk', 'name']
 
 
-class BookSerializer(FlexFieldsModelSerializer):
-    book_owner = serializers.SerializerMethodField(read_only=True)
+class BookUploadSerializer(FlexFieldsModelSerializer):
+    name = serializers.CharField(required=False)
+    content = serializers.CharField(required=False)
+    book_owner = BookReaderSerializer(read_only=True)
 
     class Meta:
         model = Book
@@ -47,8 +53,25 @@ class BookSerializer(FlexFieldsModelSerializer):
             'image': ('boookzdata.ImageSerializer', {'many': True}),
         }
 
-    def get_book_owner(self, instance):
-        self.user
+    # def get_book_owner(self, instance):
+    #     request = self.context.get('request', None)
+    #     if request:
+    #         book_reader = BookReaderSerializer()
+    #         return book_reader
+
+class BookSerializer(FlexFieldsModelSerializer):
+    name = serializers.CharField(required=False)
+    content = serializers.CharField(required=False)
+
+    class Meta:
+        model = Book
+        fields = ['pk', 'name', 'content', 'created', 'updated', 'book_owner']
+        expandable_fields = {
+            'category': ('boookzdata.CategorySerializer', {'many': True}),
+            'sites': ('boookzdata.BookSiteSerializer', {'many': True}),
+            'comments': ('boookzdata.CommentSerializer', {'many': True}),
+            'image': ('boookzdata.ImageSerializer', {'many': True}),
+        }
 
 
 class BookSiteSerializer(FlexFieldsModelSerializer):
