@@ -3,8 +3,6 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from versatileimagefield.fields import VersatileImageField, PPOIField
 
-from authentication.models import BookReader
-
 
 class Image(models.Model):
     name = models.CharField(max_length=255)
@@ -47,9 +45,10 @@ class Book(models.Model):
     category = models.ManyToManyField(Category, related_name='books')
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
-    image = models.ManyToManyField('boookzdata.Image', related_name='books')
-    book_owner = models.ForeignKey(BookReader, on_delete=models.CASCADE, related_name='+',
-                                   related_query_name='+')
+    image = models.ManyToManyField('boookzdata.Image', related_name='books', null=True)
+    book_owner = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='books',
+                                   related_query_name='book', null=True)
+    book_shelf = models.ForeignKey('boookzdata.BookGiveawayShelf', on_delete=models.CASCADE, related_name='books', related_query_name='book')
 
     class Meta:
         ordering = ['-created']
@@ -57,6 +56,11 @@ class Book(models.Model):
     def __str__(self):
         return self.name
 
+class BookGiveawayShelf(models.Model):
+    shelf_owner = models.OneToOneField('authentication.BookReader', on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"{self.shelf_owner}'s give-away shelf"
 
 class BookSite(models.Model):
     name = models.CharField(max_length=255)

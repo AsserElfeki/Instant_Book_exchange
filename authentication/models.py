@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 
 class BookReader(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    book_giveaway_shelf = models.OneToOneField('boookzdata.BookGiveawayShelf', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"{self.user}'s profile"

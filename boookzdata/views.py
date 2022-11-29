@@ -4,7 +4,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from authentication.models import BookReader
 from .serializers import BookSerializer, ImageSerializer, BookUploadSerializer
-from .models import Book, Image
+from .models import Book, Image, BookGiveawayShelf
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
@@ -47,7 +47,6 @@ class BookUploadView(generics.CreateAPIView):
     serializer_class = BookUploadSerializer
 
     def perform_create(self, serializer):
-        name = self.request.query_params.get('name')
-        content = self.request.query_params.get('content')
         book_reader = BookReader.objects.get(user=self.request.user)
-        serializer.save(book_owner=book_reader, name=name, content=content)
+        book_shelf = BookGiveawayShelf.objects.get(shelf_owner=book_reader)
+        serializer.save(book_owner=book_reader, book_shelf=book_shelf)

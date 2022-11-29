@@ -12,6 +12,7 @@ django-filter = "*"
 django-versatileimagefield = "*"
 drf-flex-fields = "*"
 djangorestframework-simplejwt = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
