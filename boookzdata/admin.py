@@ -7,6 +7,7 @@ from django.contrib.auth.models import Group
 
 
 admin.site.register(Image)
+admin.site.register(Book)
 admin.site.register(BookShelf)
 admin.site.register(BookWantedShelf)
 admin.site.register(BookGiveawayShelf)

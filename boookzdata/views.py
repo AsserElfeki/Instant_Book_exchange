@@ -1,12 +1,20 @@
 from rest_flex_fields.views import FlexFieldsMixin, FlexFieldsModelViewSet
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.exceptions import APIException
+from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from authentication.models import BookReader
 from .serializers import BookSerializer, ImageSerializer, BookUploadSerializer
-from .models import Book, Image, BookGiveawayShelf
+from .models import Book, Image, BookGiveawayShelf, BookWantedShelf
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+
+
+class NotCorrectUrlProvided(APIException):
+    status_code = 503
+    default_detail = 'Not correct url is provided, expected data/upload/wanted or data/upload/giveaway'
+    default_code = 'service_unavailable'
 
 
 class ImageViewSet(FlexFieldsModelViewSet):
@@ -48,5 +56,16 @@ class BookUploadView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         book_reader = BookReader.objects.get(user=self.request.user)
-        book_shelf = BookGiveawayShelf.objects.get(book_reader=book_reader)
-        serializer.save(book_shelf=book_shelf)
+        if self.kwargs['bookshelf'] == "giveaway":
+            giveaway_bookshelf = BookGiveawayShelf.objects.get(book_reader=book_reader)
+            serializer.save(book_shelf=giveaway_bookshelf)
+        elif self.kwargs['bookshelf'] == "wanted":
+            wanted_bookshelf = BookWantedShelf.objects.get(book_reader=book_reader)
+            serializer.save(book_shelf=wanted_bookshelf)
+        else:
+            raise NotCorrectUrlProvided()
+
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            bookshelf=self.kwargs['bookshelf']
+        )

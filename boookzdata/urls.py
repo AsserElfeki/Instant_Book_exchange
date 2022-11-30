@@ -9,5 +9,5 @@ router.register(r'image', ImageViewSet, basename='Image')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('upload/', BookUploadView.as_view(), name='upload'),
+    path('upload/<str:bookshelf>', BookUploadView.as_view(), name='upload'),
 ]
