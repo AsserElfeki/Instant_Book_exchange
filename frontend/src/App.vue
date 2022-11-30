@@ -1,14 +1,14 @@
 <template>
   <div class="navbar">
     <img class="logo" alt="Bookz logo" src="@/assets/logo.png">
-    <h class="signboard"> Bookz</h>
-    <h class="undertext"> Book xchange website</h>
+    <h1 class="signboard"> Boookz</h1>
+    <h1 class="undertext"> Book xchange website</h1>
     <div class="wrap">
       <div class="search">
         <input type="text" class="searchTerm" placeholder="Type">
         <button type="submit" class="searchButton">
-        </button>
         <img class="searchlogo" alt="search glass" src="@/assets/search.png">
+        </button>
       </div>
     </div>
     <button @click="login" class="button"> Sign in
@@ -18,7 +18,7 @@
   </div>
   <div>
     <img class="bgrectangle" alt="Background rectangle" src="@/assets/bgrectangle.png">
-    <h class="randombk"> #RANDOM BOOK</h>
+    <h1 class="randombk"> #RANDOM BOOK</h1>
     <h1 class="mba">The Visual MBA</h1>
     <h2 class="upperau">by Jason Barron</h2>
     <img class="bgellipse" alt="Background ellipse" src="@/assets/bgellipse.png">
@@ -27,11 +27,11 @@
     <h1 class="mba2">The Visual MBA</h1>
     <h2 class="jason"> Jason Barron</h2>
     <button class="readmore">
-      <router-link to="/"> Read more</router-link>
+      Read more
     </button>
   </div>
   <div>
-    <h class="reviewboard"> Books</h>
+    <h1 class="reviewboard"> Books</h1>
     <img class="bgstartup" alt="Background startup" src="@/assets/bgstartup.png">
     <h3 class="bkstartup">The Lean Startup</h3>
     <p class="austartup">Eric Ries</p>
@@ -53,9 +53,7 @@
     <p class="auwork">Austin Kleon</p>
     <!--stars-->
   </div>
-  <router-view/>
 </template>
-
 <script>
 
 import axios from 'axios';
@@ -138,7 +136,7 @@ export default {
   width: 117px;
   height: 35px;
   left: 232px;
-  top: 23px;
+  top: 5px;
   font-family: 'Segoe UI';
   font-style: normal;
   font-weight: 700;
@@ -266,6 +264,7 @@ export default {
 
 .register {
   position: absolute;
+  cursor: pointer;
   background-color: #695AC9;
   border-radius: 10px;
   width: 139px;
@@ -377,7 +376,7 @@ export default {
   font-family: 'Segoe UI';
   font-style: normal;
   font-weight: 600;
-  font-size: 33.3962px;
+  font-size: 30px;
   line-height: 1px;
   color: #5A5A5A;
 }
@@ -387,7 +386,7 @@ export default {
   width: 379px;
   height: 45px;
   left: 290px;
-  top: 382px;
+  top: 450px;
   font-family: 'Segoe UI';
   font-style: normal;
   font-weight: 600;
