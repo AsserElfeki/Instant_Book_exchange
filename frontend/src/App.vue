@@ -1,87 +1,116 @@
 <template>
-<div class = "navbar">
-  <img class = "logo" alt="Bookz logo" src="@/assets/logo.png">
-  <h class = "signboard"> Bookz </h>
-  <h class = "undertext"> Book xchange website</h>
-  <div class="wrap">
+  <div class="navbar">
+    <img class="logo" alt="Bookz logo" src="@/assets/logo.png">
+    <h class="signboard"> Bookz</h>
+    <h class="undertext"> Book xchange website</h>
+    <div class="wrap">
       <div class="search">
         <input type="text" class="searchTerm" placeholder="Type">
         <button type="submit" class="searchButton">
         </button>
-        <img class = "searchlogo" alt="search glass" src="@/assets/search.png">
+        <img class="searchlogo" alt="search glass" src="@/assets/search.png">
       </div>
     </div>
-    <button @click="getData" class="button"> Sign up
+    <button @click="login" class="button"> Sign in
     </button>
-    <button class="register"> <router-link to="/about">Register</router-link>
+    <button @click="register" class="register"> Register
     </button>
-</div>
-<div>
-  <img class = "bgrectangle" alt="Background rectangle" src="@/assets/bgrectangle.png">
-  <h class = "randombk"> #RANDOM BOOK</h>
-  <h1 class = "mba">The Visual MBA</h1>
-  <h2 class = "upperau">by Jason Barron</h2>
-  <img class = "bgellipse" alt="Background ellipse" src="@/assets/bgellipse.png">
-  <img class = "bgdwnellipse" alt="Background down ellipse" src="@/assets/bgdwnellipse.png">
-  <img class = "bgmba" alt="Background mba text" src="@/assets/bgmba.png">
-  <h1 class = "mba2">The Visual MBA</h1>
-  <h2 class = "jason"> Jason Barron</h2>
-  <button class="readmore">
-    <router-link to="/"> Read more</router-link>
-  </button>
-</div>
-<div>
-  <h class = "reviewboard"> Books </h>
-  <img class = "bgstartup" alt="Background startup" src="@/assets/bgstartup.png">
-  <h3 class = "bkstartup">The Lean Startup</h3>
-  <p class = "austartup">Eric Ries</p>
-  <!---->
-  <img class = "bgrework" alt="Background rework" src="@/assets/bgrework.png">
-  <h3 class = "bkrework">Rework</h3>
-  <p class = "aurework">Jason Fried</p>
-  <!---->
-  <img class = "bghabits" alt="Background habits" src="@/assets/bgmba.png">
-  <h3 class = "bkhabits">Atomic Habits</h3>
-  <p class = "auhabits">James Clear</p>
-  <!---->
-  <img class = "bgartist" alt="Background artist" src="@/assets/bgartist.png">
-  <h3 class = "bkartist">Steal Like an Artist</h3>
-  <p class = "auartist">Austin Kleon</p>
-  <!---->
-  <img class = "bgwork" alt="Background work" src="@/assets/bgwork.png">
-  <h3 class = "bkwork">Show Your Work!</h3>
-  <p class = "auwork">Austin Kleon</p>
-  <!--stars-->
-</div>
-<router-view />
+  </div>
+  <div>
+    <img class="bgrectangle" alt="Background rectangle" src="@/assets/bgrectangle.png">
+    <h class="randombk"> #RANDOM BOOK</h>
+    <h1 class="mba">The Visual MBA</h1>
+    <h2 class="upperau">by Jason Barron</h2>
+    <img class="bgellipse" alt="Background ellipse" src="@/assets/bgellipse.png">
+    <img class="bgdwnellipse" alt="Background down ellipse" src="@/assets/bgdwnellipse.png">
+    <img class="bgmba" alt="Background mba text" src="@/assets/bgmba.png">
+    <h1 class="mba2">The Visual MBA</h1>
+    <h2 class="jason"> Jason Barron</h2>
+    <button class="readmore">
+      <router-link to="/"> Read more</router-link>
+    </button>
+  </div>
+  <div>
+    <h class="reviewboard"> Books</h>
+    <img class="bgstartup" alt="Background startup" src="@/assets/bgstartup.png">
+    <h3 class="bkstartup">The Lean Startup</h3>
+    <p class="austartup">Eric Ries</p>
+    <!---->
+    <img class="bgrework" alt="Background rework" src="@/assets/bgrework.png">
+    <h3 class="bkrework">Rework</h3>
+    <p class="aurework">Jason Fried</p>
+    <!---->
+    <img class="bghabits" alt="Background habits" src="@/assets/bgmba.png">
+    <h3 class="bkhabits">Atomic Habits</h3>
+    <p class="auhabits">James Clear</p>
+    <!---->
+    <img class="bgartist" alt="Background artist" src="@/assets/bgartist.png">
+    <h3 class="bkartist">Steal Like an Artist</h3>
+    <p class="auartist">Austin Kleon</p>
+    <!---->
+    <img class="bgwork" alt="Background work" src="@/assets/bgwork.png">
+    <h3 class="bkwork">Show Your Work!</h3>
+    <p class="auwork">Austin Kleon</p>
+    <!--stars-->
+  </div>
+  <router-view/>
 </template>
 
-<script >
-    export default {
-        data() {
-            return {
-                // tasks
-                tasks: ['']
-            }
-        },
-        methods: {
-            async getData() {
-                try {
-                    // fetch tasks
-                    const response = this.get('http://localhost:8000/data/book');
-                    // set the data returned as tasks
-                    console.log(response.data);
-                } catch (error) {
-                    // log the error
-                    console.log(error);
-                }
-            },
-        },
-        created() {
-            // Fetch tasks on page load
-            this.getData();
-        }
+<script>
+
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      // tasks
+      tasks: ['']
     }
+  },
+  methods: {
+    async register() {
+      try {
+        let data = {
+          "username": "qwerty",
+          "password": "qwerty123#",
+          "password2": "qwerty123#",
+          "email": "admin4@gmail.com",
+          "first_name": "Viktor",
+          "last_name": "Moustafa",
+        }
+        const response = await axios.post('http://localhost:8000/authentication/register/', data);
+        console.log(response.data);
+      } catch (error) {
+        // log the error
+        console.log(error);
+      }
+    },
+    async login() {
+      try {
+        let data = {
+          "username": "root",
+          "password": "root",
+        }
+        const response = await axios.post('http://localhost:8000/authentication/login/', data);
+        console.log(response.data["access"]);
+        const headers = {"Authorization": "Bearer "+response.data["access"]} // Token should be in data, access token is required
+        await this.whatever(headers); // Send access token to all further requests
+        // return response.data["access"];
+      } catch (error) {
+        // log the error
+        console.log(error);
+      }
+    },
+    async whatever(headers) {
+      console.log("whatever");
+      const response = await axios.get('http://localhost:8000/data/shelf/wanted', {headers});
+      console.log(response.data);
+    },
+  },
+  created() {
+    this.whatever();
+  }
+};
 </script>
 
 <style>
@@ -89,6 +118,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .logo {
   position: absolute;
   height: 45px;
@@ -97,6 +127,7 @@
   top: 33px;
   border-radius: 0px;
 }
+
 .navbar {
   position: absolute;
   width: 1920px;
@@ -104,6 +135,7 @@
   left: 0px;
   top: 0px;
 }
+
 .signboard {
   position: absolute;
   width: 117px;
@@ -117,6 +149,7 @@
   line-height: 44px;
   color: #04040D;
 }
+
 .undertext {
   position: absolute;
   width: 135px;
@@ -130,11 +163,13 @@
   line-height: 17px;
   color: #5C5969;
 }
+
 .search {
   width: 100%;
   position: absolute;
   display: flex;
 }
+
 .searchTerm {
   width: 879px;
   height: 34px;
@@ -146,9 +181,11 @@
   border-radius: 10px;
   outline: none;
 }
-.searchTerm:focus{
+
+.searchTerm:focus {
   color: #380136;
 }
+
 .searchButton {
   width: 40px;
   height: 59px;
@@ -159,13 +196,15 @@
   cursor: pointer;
   font-size: 20px;
 }
-.wrap{
+
+.wrap {
   width: 30%;
   position: absolute;
   top: 31%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .searchlogo {
   height: 29px;
   width: 30.07px;
@@ -173,6 +212,7 @@
   top: 39px;
   border-radius: 0px;
 }
+
 .button {
   position: absolute;
   width: 139px;
@@ -196,10 +236,12 @@
   line-height: 9px;
   align-items: center;
 }
+
 .button a {
   text-decoration: none;
   color: #695AC9;
 }
+
 .readmore {
   position: absolute;
   border: 0;
@@ -217,12 +259,14 @@
   display: flex;
   align-items: center;
   display: block;
-  text-align:center;
+  text-align: center;
 }
+
 .readmore a {
   text-decoration: none;
   color: #F2F0FE;
 }
+
 .register {
   position: absolute;
   background-color: #695AC9;
@@ -242,10 +286,12 @@
   border: 0;
   font-family: 'Segoe UI';
 }
+
 .register a {
   text-decoration: none;
   color: #F2F0FE;
 }
+
 .bgrectangle {
   position: absolute;
   width: 1614px;
@@ -254,6 +300,7 @@
   top: 144px;
   border-radius: 30px;
 }
+
 .bgellipse {
   position: absolute;
   width: 575px;
@@ -262,6 +309,7 @@
   top: 146px;
   border-top-right-radius: 30px;
 }
+
 .bgdwnellipse {
   position: absolute;
   width: 402px;
@@ -269,6 +317,7 @@
   left: 1044px;
   top: 633px;
 }
+
 .randombk {
   position: absolute;
   width: 379px;
@@ -282,6 +331,7 @@
   line-height: 29px;
   color: #493F8E;
 }
+
 .mba {
   position: absolute;
   width: 379px;
@@ -295,6 +345,7 @@
   line-height: 60px;
   color: #04040D;
 }
+
 .mba2 {
   position: absolute;
   width: 225.98px;
@@ -308,6 +359,7 @@
   line-height: 68px;
   color: #04040D;
 }
+
 .bgmba {
   position: absolute;
   width: 293.89px;
@@ -318,6 +370,7 @@
   box-shadow: 3.33962px 8.90566px 44.5283px 4.45283px rgba(99, 87, 176, 0.35);
   border-radius: 18.9245px;
 }
+
 .jason {
   position: absolute;
   width: 225.98px;
@@ -331,6 +384,7 @@
   line-height: 1px;
   color: #5A5A5A;
 }
+
 .upperau {
   position: absolute;
   width: 379px;
@@ -344,6 +398,7 @@
   line-height: 37px;
   color: #5C5969;
 }
+
 .reviewboard {
   position: absolute;
   width: 379px;
@@ -357,6 +412,7 @@
   line-height: 53px;
   color: #04040D;
 }
+
 .bgstartup {
   position: absolute;
   width: 217px;
@@ -366,6 +422,7 @@
   box-shadow: 0px 5px 30px 1px rgba(99, 87, 176, 0.25);
   border-radius: 13.9735px;
 }
+
 .bkstartup {
   position: absolute;
   width: 166.86px;
@@ -379,6 +436,7 @@
   line-height: 50px;
   color: #FFFFFF;
 }
+
 .austartup {
   position: absolute;
   width: 166.86px;
@@ -392,6 +450,7 @@
   line-height: 33px;
   color: #FFFFFF;
 }
+
 .bgrework {
   position: absolute;
   width: 217px;
@@ -401,6 +460,7 @@
   box-shadow: 0px 5px 30px 1px rgba(99, 87, 176, 0.25);
   border-radius: 13.9735px;
 }
+
 .bkrework {
   position: absolute;
   width: 166.86px;
@@ -414,6 +474,7 @@
   line-height: 50px;
   color: #FFFFFF;
 }
+
 .aurework {
   position: absolute;
   width: 166.86px;
@@ -427,6 +488,7 @@
   line-height: 33px;
   color: #FFFFFF;
 }
+
 .bghabits {
   position: absolute;
   width: 217px;
@@ -436,6 +498,7 @@
   box-shadow: 0px 5px 30px 1px rgba(99, 87, 176, 0.25);
   border-radius: 13.9735px;
 }
+
 .bkhabits {
   position: absolute;
   width: 166.86px;
@@ -449,6 +512,7 @@
   line-height: 50px;
   color: #04040D;
 }
+
 .auhabits {
   position: absolute;
   width: 166.86px;
@@ -462,6 +526,7 @@
   line-height: 33px;
   color: #5A5A5A;
 }
+
 .bgartist {
   position: absolute;
   width: 217px;
@@ -471,6 +536,7 @@
   box-shadow: 0px 5px 30px 1px rgba(99, 87, 176, 0.25);
   border-radius: 13.9735px;
 }
+
 .bkartist {
   position: absolute;
   width: 166.86px;
@@ -484,6 +550,7 @@
   line-height: 50px;
   color: #FFFFFF;
 }
+
 .auartist {
   position: absolute;
   width: 166.86px;
@@ -497,6 +564,7 @@
   line-height: 33px;
   color: #FFFFFF;
 }
+
 .bgwork {
   position: absolute;
   width: 217px;
@@ -506,6 +574,7 @@
   box-shadow: 0px 5px 30px 1px rgba(99, 87, 176, 0.25);
   border-radius: 13.9735px;
 }
+
 .bkwork {
   position: absolute;
   width: 166.86px;
@@ -519,6 +588,7 @@
   line-height: 50px;
   color: #FFFFFF;
 }
+
 .auwork {
   position: absolute;
   width: 166.86px;
