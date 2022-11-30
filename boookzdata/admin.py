@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Book, Category, Author, BookCondition, BookSite, Comment, Image, BookGiveawayShelf, BookShelf, \
-    BookWantedShelf
+from .models import Book, Category, Author, BookCondition, BookSite, Comment, Image, GiveawayBookshelf, BookShelf, \
+    WantedBookshelf
 from django.contrib.auth.models import Group
 
 # Register your models here.
@@ -9,8 +9,8 @@ from django.contrib.auth.models import Group
 admin.site.register(Image)
 admin.site.register(Book)
 admin.site.register(BookShelf)
-admin.site.register(BookWantedShelf)
-admin.site.register(BookGiveawayShelf)
+admin.site.register(WantedBookshelf)
+admin.site.register(GiveawayBookshelf)
 admin.site.register(Category)
 admin.site.register(Author)
 admin.site.register(BookCondition)

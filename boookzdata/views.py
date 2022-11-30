@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from authentication.models import BookReader
-from .serializers import BookSerializer, ImageSerializer, BookUploadSerializer
-from .models import Book, Image, BookGiveawayShelf, BookWantedShelf
+from .serializers import BookSerializer, ImageSerializer, BookUploadSerializer, GiveawayBookshelfSerializer
+from .models import Book, Image, GiveawayBookshelf, WantedBookshelf
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
@@ -49,6 +49,21 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
         return queryset
 
 
+class BooksFromGiveawayBookshelfViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
+    serializer_class = GiveawayBookshelfSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        queryset = Book.objects.all()
+        if queryset:
+            giveaway_bookshelves = GiveawayBookshelf.objects.all()
+            book_reader = BookReader.objects.get(user=self.request.user)
+            users_bookshelf = giveaway_bookshelves.filter(book_reader=book_reader)
+            users_books = queryset.filter(book_shelf=users_bookshelf)
+            return users_books
+        return queryset
+
+
 class BookUploadView(generics.CreateAPIView):
     queryset = Book.objects.all()
     permission_classes = (IsAuthenticated,)
@@ -57,10 +72,10 @@ class BookUploadView(generics.CreateAPIView):
     def perform_create(self, serializer):
         book_reader = BookReader.objects.get(user=self.request.user)
         if self.kwargs['bookshelf'] == "giveaway":
-            giveaway_bookshelf = BookGiveawayShelf.objects.get(book_reader=book_reader)
+            giveaway_bookshelf = GiveawayBookshelf.objects.get(book_reader=book_reader)
             serializer.save(book_shelf=giveaway_bookshelf)
         elif self.kwargs['bookshelf'] == "wanted":
-            wanted_bookshelf = BookWantedShelf.objects.get(book_reader=book_reader)
+            wanted_bookshelf = WantedBookshelf.objects.get(book_reader=book_reader)
             serializer.save(book_shelf=wanted_bookshelf)
         else:
             raise NotCorrectUrlProvided()

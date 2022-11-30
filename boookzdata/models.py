@@ -47,8 +47,7 @@ class Book(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     image = models.ManyToManyField('boookzdata.Image', related_name='books', null=True)
-    # book_owner = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='books',
-    #                                related_query_name='book')
+
     book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, related_name='books',
                                    related_query_name='book')
 
@@ -64,14 +63,14 @@ class BookShelf(PolymorphicModel):
                                     related_query_name='book_shelfs')
 
 
-class BookGiveawayShelf(BookShelf):
+class GiveawayBookshelf(BookShelf):
     pass
 
     def __str__(self):
         return f"{self.book_reader.user}'s give-away shelf"
 
 
-class BookWantedShelf(BookShelf):
+class WantedBookshelf(BookShelf):
     pass
 
     def __str__(self):

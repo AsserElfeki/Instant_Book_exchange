@@ -3,7 +3,7 @@ from rest_flex_fields import FlexFieldsModelSerializer
 
 from authentication.models import BookReader
 from authentication.serializers import BookReaderSerializer
-from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, BookGiveawayShelf, BookShelf
+from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, BookShelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -41,8 +41,25 @@ class BookConditionSerializer(FlexFieldsModelSerializer):
 
 class BookShelfSerializer(FlexFieldsModelSerializer):
     shelf_owner = BookReaderSerializer(read_only=True)
+
     class Meta:
-        model = BookGiveawayShelf
+        model = GiveawayBookshelf
+        fields = '__all__'
+
+
+class WantedBookShelfSerializer(FlexFieldsModelSerializer):
+    shelf_owner = BookReaderSerializer(read_only=True)
+
+    class Meta:
+        model = GiveawayBookshelf
+        fields = '__all__'
+
+
+class GiveawayBookshelfSerializer(FlexFieldsModelSerializer):
+    shelf_owner = BookReaderSerializer(read_only=True)
+
+    class Meta:
+        model = GiveawayBookshelf
         fields = '__all__'
 
 
@@ -70,7 +87,7 @@ class BookSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['pk', 'name', 'content', 'created', 'updated', 'book_owner']
+        fields = ['pk', 'name', 'content', 'created', 'updated']
         expandable_fields = {
             'category': ('boookzdata.CategorySerializer', {'many': True}),
             'sites': ('boookzdata.BookSiteSerializer', {'many': True}),
