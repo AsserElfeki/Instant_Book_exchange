@@ -5,11 +5,6 @@ from django.contrib.auth.models import Group
 
 # Register your models here.
 
-@admin.register(Book)
-class BookAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'content', 'book_owner', 'book_shelf' )
-    list_filter = ('category', 'book_owner', )
-
 
 admin.site.register(Image)
 admin.site.register(BookShelf)

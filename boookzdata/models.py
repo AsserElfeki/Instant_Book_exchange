@@ -47,8 +47,8 @@ class Book(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     image = models.ManyToManyField('boookzdata.Image', related_name='books', null=True)
-    book_owner = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='books',
-                                   related_query_name='book')
+    # book_owner = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='books',
+    #                                related_query_name='book')
     book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, related_name='books',
                                    related_query_name='book')
 

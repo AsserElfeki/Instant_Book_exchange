@@ -3,7 +3,7 @@ from rest_flex_fields import FlexFieldsModelSerializer
 
 from authentication.models import BookReader
 from authentication.serializers import BookReaderSerializer
-from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, BookGiveawayShelf
+from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, BookGiveawayShelf, BookShelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -17,6 +17,7 @@ class ImageSerializer(FlexFieldsModelSerializer):
         model = Image
         fields = ['pk', 'name', 'image']
 
+
 class AuthorSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = Author
@@ -28,7 +29,7 @@ class CategorySerializer(FlexFieldsModelSerializer):
         model = Category
         fields = ['pk', 'name']
         expandable_fields = {
-          'products': ('boookzdata.BookSerializer', {'many': True})
+            'products': ('boookzdata.BookSerializer', {'many': True})
         }
 
 
@@ -37,31 +38,31 @@ class BookConditionSerializer(FlexFieldsModelSerializer):
         model = BookCondition
         fields = ['pk', 'name']
 
-class BookGiveawayShelfSerializer(FlexFieldsModelSerializer):
-    shelf_owner = BookReaderSerializer(read_only=True)
 
+class BookShelfSerializer(FlexFieldsModelSerializer):
+    shelf_owner = BookReaderSerializer(read_only=True)
     class Meta:
         model = BookGiveawayShelf
         fields = '__all__'
 
+
 class BookUploadSerializer(FlexFieldsModelSerializer):
     name = serializers.CharField(required=True)
     content = serializers.CharField(required=True)
-    #TODO: image
-    #TODO: category
-    book_owner = BookReaderSerializer(required=False)
-    book_shelf = BookGiveawayShelfSerializer(required=False)
+    # TODO: image
+    # TODO: category
+    book_shelf = BookShelfSerializer(required=False)
 
     class Meta:
         model = Book
-        fields = ['pk', 'name', 'content', 'created', 'updated', 'book_owner', 'book_shelf']
+        fields = ['pk', 'name', 'content', 'created', 'updated', 'book_shelf']
         expandable_fields = {
             'category': ('boookzdata.CategorySerializer', {'many': True}),
             'sites': ('boookzdata.BookSiteSerializer', {'many': True}),
             'comments': ('boookzdata.CommentSerializer', {'many': True}),
             'image': ('boookzdata.ImageSerializer', {'many': True}),
         }
-    
+
 
 class BookSerializer(FlexFieldsModelSerializer):
     name = serializers.CharField(required=False)
@@ -76,8 +77,6 @@ class BookSerializer(FlexFieldsModelSerializer):
             'comments': ('boookzdata.CommentSerializer', {'many': True}),
             'image': ('boookzdata.ImageSerializer', {'many': True}),
         }
-
-    
 
 
 class BookSiteSerializer(FlexFieldsModelSerializer):

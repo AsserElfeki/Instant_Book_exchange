@@ -48,5 +48,5 @@ class BookUploadView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         book_reader = BookReader.objects.get(user=self.request.user)
-        book_shelf = BookGiveawayShelf.objects.get(shelf_owner=book_reader)
-        serializer.save(book_owner=book_reader, book_shelf=book_shelf)
+        book_shelf = BookGiveawayShelf.objects.get(book_reader=book_reader)
+        serializer.save(book_shelf=book_shelf)
