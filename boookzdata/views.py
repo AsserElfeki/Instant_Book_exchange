@@ -1,6 +1,7 @@
 from rest_flex_fields.views import FlexFieldsMixin, FlexFieldsModelViewSet
 from rest_framework import generics, status
 from rest_framework.exceptions import APIException
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
@@ -49,18 +50,26 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
         return queryset
 
 
-class BooksFromGiveawayBookshelfViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
+class BooksFromChosenBookshelfView(ListAPIView):
     serializer_class = BookSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         queryset = Book.objects.all()
         if queryset:
-            giveaway_bookshelves = GiveawayBookshelf.objects.all()
             book_reader = BookReader.objects.get(user=self.request.user)
-            users_bookshelf = giveaway_bookshelves.filter(book_reader=book_reader)
-            users_books = queryset.filter(book_shelf_id__in=users_bookshelf)
-            return users_books
+            if self.kwargs['bookshelf'] == "giveaway":
+                giveaway_bookshelves = GiveawayBookshelf.objects.all()
+                users_bookshelf = giveaway_bookshelves.filter(book_reader=book_reader)
+                users_books = queryset.filter(book_shelf_id__in=users_bookshelf)
+                return users_books
+            elif self.kwargs['bookshelf'] == "wanted":
+                wanted_bookshelves = WantedBookshelf.objects.all()
+                users_bookshelf = wanted_bookshelves.filter(book_reader=book_reader)
+                users_books = queryset.filter(book_shelf_id__in=users_bookshelf)
+                return users_books
+            else:
+                raise NotCorrectUrlProvided()
         return queryset
 
 
