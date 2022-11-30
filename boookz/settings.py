@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-gdb608)8)99kwx4iq!f_y7so7dvu=8h^k9f-cncx1mya*s9#wl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'boookzdata',
     'frontend',
+    'authentication',
     'rest_framework',
     'django_filters',
     'versatileimagefield',
     'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -76,12 +78,17 @@ VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8000',
+)
 
 ROOT_URLCONF = 'boookz.urls'
 
@@ -117,19 +124,19 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
-
+AUTH_PWD_MODULE="django.contrib.auth.password_validation."
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': f'{AUTH_PWD_MODULE}UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': f'{AUTH_PWD_MODULE}MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': f'{AUTH_PWD_MODULE}CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': f'{AUTH_PWD_MODULE}NumericPasswordValidator',
     },
 ]
 

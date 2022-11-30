@@ -1,9 +1,12 @@
 from django.urls import path
-from auth.views import RegisterView, ChangePasswordView, UpdateProfileView, LogoutView, LogoutAllView
+
+from authentication.views import RegisterView, ChangePasswordView, UpdateProfileView, LogoutView, LogoutAllView, \
+    ListBookReaderBooks
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 
 
 urlpatterns = [
+    path('list/', ListBookReaderBooks.as_view({'get':'list'}), name='list_book_reader'),
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view(), name='auth_register'),

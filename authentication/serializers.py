@@ -1,7 +1,37 @@
+from django.core.serializers import serialize
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+
+from authentication.models import BookReader
+from boookzdata.models import Book
+
+
+class BookReaderSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(
+        default=serializers.CurrentUserDefault(),
+        queryset=serializers.CurrentUserDefault()
+    )
+    class Meta:
+        model = BookReader
+        fields = ['user']
+
+
+class ListBookReaderSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(
+        default=serializers.CurrentUserDefault(),
+        queryset=serializers.CurrentUserDefault()
+    )
+    books = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = BookReader
+        fields = ('user','books')
+
+    def get_books(self, instance):
+        books = Book.objects.all().filter(book_owner=instance)
+        return serialize('json', books)
 
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
@@ -36,6 +66,7 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
 
 class UpdateUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
@@ -74,11 +105,12 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
-            required=True,
-            validators=[UniqueValidator(queryset=User.objects.all())]
-            )
+        required=True,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
 
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
@@ -105,7 +137,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name']
         )
 
-        
         user.set_password(validated_data['password'])
         user.save()
 
