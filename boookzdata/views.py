@@ -50,7 +50,7 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
 
 class BooksFromGiveawayBookshelfViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
-    serializer_class = GiveawayBookshelfSerializer
+    serializer_class = BookSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
@@ -59,7 +59,7 @@ class BooksFromGiveawayBookshelfViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
             giveaway_bookshelves = GiveawayBookshelf.objects.all()
             book_reader = BookReader.objects.get(user=self.request.user)
             users_bookshelf = giveaway_bookshelves.filter(book_reader=book_reader)
-            users_books = queryset.filter(book_shelf=users_bookshelf)
+            users_books = queryset.filter(book_shelf_id__in=users_bookshelf)
             return users_books
         return queryset
 
