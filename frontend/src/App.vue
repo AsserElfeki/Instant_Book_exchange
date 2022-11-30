@@ -107,9 +107,6 @@ export default {
       console.log(response.data);
     },
   },
-  created() {
-    this.whatever();
-  }
 };
 </script>
 
