@@ -60,22 +60,22 @@ class Book(models.Model):
 
 
 class BookShelf(PolymorphicModel):
-    book_shelf = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='book_shelfs',
-                                   related_query_name='book_shelfs')
+    book_reader = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='book_shelfs',
+                                    related_query_name='book_shelfs')
 
 
 class BookGiveawayShelf(BookShelf):
     pass
 
     def __str__(self):
-        return f"{self.book_shelf.user}'s give-away shelf"
+        return f"{self.book_reader.user}'s give-away shelf"
 
 
 class BookWantedShelf(BookShelf):
     pass
 
     def __str__(self):
-        return f"{self.book_shelf.user}'s wanted shelf"
+        return f"{self.book_reader.user}'s wanted shelf"
 
 
 class BookSite(models.Model):
