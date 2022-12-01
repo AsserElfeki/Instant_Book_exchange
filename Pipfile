@@ -13,7 +13,8 @@ drf-flex-fields = "*"
 djangorestframework-simplejwt = "*"
 shell = "*"
 python-magic = "*"
-python-magic-bin = "*"
+django-cors-headers = "*"
+django-polymorphic = "*"
 
 [dev-packages]
 
