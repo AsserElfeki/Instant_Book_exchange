@@ -5,8 +5,8 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 
 from authentication.models import BookReader
-from boookzdata.models import Book
-
+from boookzdata.models import Book, Image
+from versatileimagefield.serializers import VersatileImageFieldSerializer
 
 class BookReaderSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(
@@ -17,6 +17,26 @@ class BookReaderSerializer(serializers.ModelSerializer):
         model = BookReader
         fields = ['user']
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['pk', 'username', 'first_name', 'last_name', 'email',]
+
+class ImageSerializer(serializers.ModelSerializer):
+    image = VersatileImageFieldSerializer(
+        sizes='product_headshot'
+    )
+
+    class Meta:
+        model = Image
+        fields = ['name', 'image']
+
+class ProfileInfoSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    profile_image = ImageSerializer(read_only=True)
+    class Meta:
+        model = BookReader
+        fields = ['user', 'profile_image']
 
 class ListBookReaderSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(

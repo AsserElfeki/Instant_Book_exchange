@@ -8,6 +8,9 @@ from boookzdata.models import WantedBookshelf, GiveawayBookshelf
 
 class BookReader(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_image = models.OneToOneField('boookzdata.Image', on_delete=models.CASCADE, null=True)
+    # rating
+    # transaction_history
 
     def __str__(self):
         return f"{self.user}'s profile"

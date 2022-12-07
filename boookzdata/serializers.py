@@ -3,7 +3,7 @@ from rest_flex_fields import FlexFieldsModelSerializer
 
 from authentication.models import BookReader
 from authentication.serializers import BookReaderSerializer
-from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, BookShelf
+from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, BookShelf, WantedBookshelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -51,7 +51,7 @@ class WantedBookShelfSerializer(FlexFieldsModelSerializer):
     shelf_owner = BookReaderSerializer(read_only=True)
 
     class Meta:
-        model = GiveawayBookshelf
+        model = WantedBookshelf
         fields = '__all__'
 
 
