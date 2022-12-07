@@ -8,16 +8,6 @@ from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
 
-class ImageSerializer(FlexFieldsModelSerializer):
-    image = VersatileImageFieldSerializer(
-        sizes='product_headshot'
-    )
-
-    class Meta:
-        model = Image
-        fields = ['pk', 'name', 'image']
-
-
 class AuthorSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = Author
@@ -92,7 +82,7 @@ class BookSerializer(FlexFieldsModelSerializer):
             'category': ('boookzdata.CategorySerializer', {'many': True}),
             'sites': ('boookzdata.BookSiteSerializer', {'many': True}),
             'comments': ('boookzdata.CommentSerializer', {'many': True}),
-            'image': ('boookzdata.ImageSerializer', {'many': True}),
+            'image': ('authentication.ImageSerializer', {'many': True}),
         }
 
 

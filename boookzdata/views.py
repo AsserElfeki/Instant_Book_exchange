@@ -6,7 +6,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from authentication.models import BookReader
-from .serializers import BookSerializer, ImageSerializer, BookUploadSerializer, GiveawayBookshelfSerializer
+from authentication.serializers import ImageSerializer
+from .serializers import BookSerializer, BookUploadSerializer, GiveawayBookshelfSerializer
 from .models import Book, Image, GiveawayBookshelf, WantedBookshelf
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
