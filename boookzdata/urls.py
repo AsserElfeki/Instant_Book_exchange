@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import BookViewSet, ImageViewSet, BookUploadView, BooksFromChosenBookshelfView
+from .views import BookViewSet, ImageViewSet, BookUploadView, BooksFromChosenBookshelfView, SearchGiveAwayBooksView
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -11,5 +11,6 @@ router.register('image', ImageViewSet, basename='Image')
 urlpatterns = [
     path('', include(router.urls)),
     path('upload/<str:bookshelf>', BookUploadView.as_view(), name='upload'),
-    path('shelf/<str:bookshelf>', BooksFromChosenBookshelfView.as_view(), name='GiveawayBookshelf')
+    path('shelf/<str:bookshelf>', BooksFromChosenBookshelfView.as_view(), name='GiveawayBookshelf'),
+    path('search', SearchGiveAwayBooksView.as_view(), name=' SearchGiveAwayBooks')
 ]

@@ -18,6 +18,17 @@ class NotCorrectUrlProvided(APIException):
     default_detail = 'Not correct url is provided, expected data/upload/wanted or data/upload/giveaway'
     default_code = 'service_unavailable'
 
+class SearchGiveAwayBooksView(ListAPIView):
+    serializer_class = BookSerializer
+    permit_list_expands = ['category', 'sites', 'comments', 'sites.company', 'sites.productsize']
+    search_fields = ('name',)
+    def get_queryset(self):
+        giveaway_shelves = GiveawayBookshelf.objects.all()
+        queryset = Book.objects.all().filter(book_shelf__in=giveaway_shelves)
+        return queryset
+
+
+
 
 class ImageViewSet(FlexFieldsModelViewSet):
     serializer_class = ImageSerializer
@@ -75,7 +86,6 @@ class BooksFromChosenBookshelfView(ListAPIView):
 
 
 class BookUploadView(generics.CreateAPIView):
-    queryset = Book.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = BookUploadSerializer
 
