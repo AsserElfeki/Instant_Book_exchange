@@ -1,5 +1,5 @@
 from rest_flex_fields.views import FlexFieldsMixin, FlexFieldsModelViewSet
-from rest_framework import generics, status
+from rest_framework import generics, status, filters
 from rest_framework.exceptions import APIException
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
@@ -18,16 +18,17 @@ class NotCorrectUrlProvided(APIException):
     default_detail = 'Not correct url is provided, expected data/upload/wanted or data/upload/giveaway'
     default_code = 'service_unavailable'
 
+
 class SearchGiveAwayBooksView(ListAPIView):
     serializer_class = BookSerializer
     permit_list_expands = ['category', 'sites', 'comments', 'sites.company', 'sites.productsize']
-    search_fields = ('name',)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ("^name",) #TODO search by author, category, etc
+
     def get_queryset(self):
         giveaway_shelves = GiveawayBookshelf.objects.all()
         queryset = Book.objects.all().filter(book_shelf__in=giveaway_shelves)
         return queryset
-
-
 
 
 class ImageViewSet(FlexFieldsModelViewSet):
