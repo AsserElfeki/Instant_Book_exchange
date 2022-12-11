@@ -1,15 +1,23 @@
 // store/filters.js
 import { defineStore } from 'pinia'
 
-export const useFiltersStore = defineStore({
-  id: 'filter-store',
-  state: () => {
-    return {
-      filtersList: ['youtube', 'twitch'],
+export const useStore = defineStore({
+  id: 'store',
+  state: () => ({
+      books: [],
+  }),
+  actions: {
+    async retrieveBook() {
+      //Todo : change link
+      const data = await $fetch('http://localhost:4000/books')
+      this.books = data
+      console.log(this.books)
     }
   },
-  actions: {},
   getters: {
-    filtersList: state => state.filtersList,
+   
   },
 })
+
+
+// ToDo user and token in data ? 
