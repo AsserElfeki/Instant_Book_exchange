@@ -42,8 +42,7 @@ h4 {
   font-weight: 600;
 }
 
-.router-link-exact-active{
-}
+
 
 .wrapper{
   max-width: 1200px;

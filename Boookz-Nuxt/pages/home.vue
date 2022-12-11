@@ -1,8 +1,6 @@
 <template>
     <div class="container">
-        <div class="searchbar">
-            <h1 class="text-6xl text-blue-700 ">HIIIIIII</h1>
-        </div>
+       
         <div class="hero max-w-full">
             <HeroBg></HeroBg>
             <RandomBook />
@@ -31,11 +29,15 @@
 </script>
 
 <style scoped>
-
-.hero{
+.hero {
     border: 2px solid blue;
     overflow: hidden;
 }
+
+
+
+
+
 </style>
 
 

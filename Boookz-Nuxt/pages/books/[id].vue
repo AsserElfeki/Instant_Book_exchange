@@ -7,7 +7,7 @@
 <script setup>
 const { id } = useRoute().params
 definePageMeta({
-        layout: 'books'
+        // layout: 'books'
     })
 </script>
 
