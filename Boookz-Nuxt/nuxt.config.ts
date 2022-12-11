@@ -37,9 +37,10 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     ['@pinia/nuxt',
-    {
-    autoImports: ['defineStore', 'acceptHMRUpdate'],
-    }],
+      {
+        autoImports: ['defineStore', 'acceptHMRUpdate'],
+      }],
+    'nuxt-icon'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -47,6 +48,6 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
     configPath: '~/config/tailwind.js',
-    
+
   },
 });
