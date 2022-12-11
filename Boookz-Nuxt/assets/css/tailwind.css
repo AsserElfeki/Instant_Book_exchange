@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* 
+add extra classes as following
+
+<tag-selector>{
+    @apply tailwind-class1 tailwind-class2 ....;
+*/
+
+/* 
+add extra components :
+
+@layer components {
+    <tag-selector>{
+        @apply tailwind-class1 tailwind-class2 ....;
+    }
+}
+*/
