@@ -1,14 +1,11 @@
 <template>
-  <div>
+  <div class="wrapper">
+  <Nav-bar />
     <div class="content">
-      <Nav-bar />
-
       <!-- this where the page components go -->
       <slot />
-
-
     </div>
-    <AppFooter />
+    <AppFooter></AppFooter> 
   </div>
 </template>
 
@@ -46,9 +43,13 @@ h4 {
 }
 
 .router-link-exact-active{
-  color: red;
 }
 
+.wrapper{
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 2px solid red;
+}
 </style>
 
 

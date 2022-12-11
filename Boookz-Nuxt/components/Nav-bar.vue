@@ -1,18 +1,20 @@
 <template>
   <nav>
-    <ul>
-      <li>
-        <NuxtLink to="/home">
-          <AppLogo />
-        </NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="/signin">Sign in</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="/register">Sign up</NuxtLink>
-      </li>
-    </ul>
+    <div class="navBar">
+      <NuxtLink to="/home">
+        <AppLogo />
+      </NuxtLink>
+
+      <ul class="flex flex-row ">
+        <li class="mr-7 btn">
+          <NuxtLink to="/signin">Sign in</NuxtLink>
+        </li>
+        <li class="btn">
+          <NuxtLink to="/register">Sign up</NuxtLink>
+        </li>
+      </ul>
+    </div>
+
   </nav>
 </template>
 
@@ -22,6 +24,6 @@
 
 <style  scoped>
 a:hover {
-  color: green;
+ 
 }
 </style>

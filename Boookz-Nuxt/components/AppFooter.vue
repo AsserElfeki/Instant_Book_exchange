@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class=" block text-center h-16">
     <p>footer</p>
   </footer>
 </template>
