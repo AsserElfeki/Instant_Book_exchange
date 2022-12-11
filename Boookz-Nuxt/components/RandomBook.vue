@@ -2,18 +2,18 @@
     <div class="container">
         <div class="book">
             <div class="book-img">
-                <img :src="bookImg" alt="book image">
+                <!-- <img :src="bookImg" alt="book image"> -->
             </div>
             <div class="book-info">
-                <h2>{{ bookTitle }}</h2>
-                <h3>{{ bookAuthor }}</h3>
-                <h4>{{ bookGenre }}</h4>
-                <p>{{ bookDescription }}</p>
+                <h2>{{ book.Title }}</h2>
+                <h3>{{ book.Author }}</h3>
+                <h4>{{ book.Genre }}</h4>
+                <p>{{ book.Description }}</p>
                 <div class="book-rating">
-                    <p>{{ bookRating }}</p>
+                    <!-- <p>{{ bookRating }}</p> -->
                 </div>
                 <div class="book-price  ">
-                    <p>{{ bookPrice }}</p>
+                    <!-- <p>{{ bookPrice }}</p> -->
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-
+const { book } = defineProps(['book'])
 </script>
 
 <style scoped>
