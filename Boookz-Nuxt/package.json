@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.6",
+    "pinia": "^2.0.28",
     "uuid": "^9.0.0"
   }
 }
