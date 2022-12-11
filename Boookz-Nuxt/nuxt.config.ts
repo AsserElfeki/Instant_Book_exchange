@@ -24,7 +24,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  css: ['~/assets/main.scss'],
+  css: [],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
@@ -36,4 +36,8 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css',
+    configPath: '~/config/tailwind.js',
+  },
 });
