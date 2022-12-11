@@ -1,12 +1,15 @@
 <template>
   <div class="wrapper">
-  <Nav-bar />
-    <div class="content">
-      <!-- this where the page components go -->
-      <slot />
+    <div class="content-wrapper">
+      <Nav-bar />
+      <div class="content">
+        <!-- this where the page components go -->
+        <slot />
+      </div>
+      <AppFooter></AppFooter>
     </div>
-    <AppFooter></AppFooter> 
   </div>
+  
 </template>
 
 <script setup>
@@ -44,7 +47,7 @@ h4 {
 
 
 
-.wrapper{
+.content-wrapper{
   max-width: 1200px;
   margin: 0 auto;
   border: 2px solid red;

@@ -29,7 +29,7 @@ add extra components :
 }
 
 .content {
-    @apply h-10 bg-blue-100 min-h-screen;
+    @apply h-10  min-h-screen;
 }
 
 .search-bar {

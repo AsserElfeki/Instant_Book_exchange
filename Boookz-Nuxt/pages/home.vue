@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-       
-        <div class="hero max-w-full">
+
+        <div class="hero ">
             <HeroBg></HeroBg>
             <RandomBook />
         </div>
@@ -30,14 +30,10 @@
 
 <style scoped>
 .hero {
-    border: 2px solid blue;
     overflow: hidden;
+    margin:0;
+    border: 3px solid blue;
 }
-
-
-
-
-
 </style>
 
 
