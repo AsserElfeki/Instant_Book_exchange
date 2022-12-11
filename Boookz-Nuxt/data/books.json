@@ -1,0 +1,40 @@
+{
+  "books": [
+    {
+      "title": "harry potter",
+      "author": "jk rowling",
+      "points": 10.99,
+      "category": "fiction",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnAgWmbyO22JXlqGx3lJ_0t4_mWe62huqoKdWq6cHmDtNHyh1CErPoMpnVGPTpWTHW-1U&usqp=CAU",
+      "description": "Harry Potter is a series of fantasy novels written by British author J. K. Rowling. The novels chronicle the life of a young wizard, Harry Potter, and his friends Hermione Granger and Ron Weasley, all of whom are students at Hogwarts School of Witchcraft and Wizardry. The main story arc concerns Harry's struggle against Lord Voldemort, a dark wizard who intends to become immortal, overthrow the wizard governing body known as the Ministry of Magic, and subjugate all wizards and muggles, a reference term that means non-magical people.",
+      "owner": "person 1"
+    },
+    {
+      "title": "Lord of The Rings",
+      "author": "JRR Tolkien",
+      "points": 10.99,
+      "category": "fiction",
+      "image": "https://www.denofgeek.com/wp-content/uploads/2022/08/The-Lord-of-the-Rings-Fellowship-movie-poster.jpg?resize=768%2C432",
+      "description": "The Lord of the Rings is an epic high fantasy novel written by English author and scholar J. R. R. Tolkien. The story began as a sequel to Tolkien's 1937 fantasy novel The Hobbit, but eventually developed into a much larger work. Written in stages between 1937 and 1949, The Lord of the Rings is one of the best-selling novels ever written, with over 150 million copies sold.",
+      "owner": "person 2"
+    },
+    {
+      "title": "The Hobbit",
+      "author": "JRR Tolkien",
+      "points": 10.99,
+      "category": "fiction",
+      "image": "https://m.media-amazon.com/images/M/MV5BMTcwNTE4MTUxMl5BMl5BanBnXkFtZTcwMDIyODM4OA@@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
+      "description": "The Hobbit is a children's fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in children's literature.",
+      "owner": "person 3"
+    },
+    {
+      "title": "The Da Vinci Code",
+      "author": "Dan Brown",
+      "points": 10.99,
+      "category": "fiction",
+      "image": "https://m.media-amazon.com/images/M/MV5BMjIxMjQyMTc3Nl5BMl5BanBnXkFtZTcwMTA1MDUzMw@@._V1_UY1200_CR88,0,630,1200_AL_.jpg",
+      "description": "The Da Vinci Code is a 2003 mystery-detective novel by Dan Brown. It follows symbologist Robert Langdon and cryptologist Sophie",
+      "owner": "person 4"
+    }
+  ]
+}
