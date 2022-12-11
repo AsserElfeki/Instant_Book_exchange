@@ -1,3 +1,5 @@
+
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
@@ -32,12 +34,19 @@ export default defineNuxtConfig({
   components: true,
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    ['@pinia/nuxt',
+    {
+    autoImports: ['defineStore', 'acceptHMRUpdate'],
+    }],
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
     configPath: '~/config/tailwind.js',
+    
   },
 });
