@@ -8,14 +8,14 @@
         <div class="allgiveaways">
             <h2 class="flex justify-center text-2xl text-primary">Offered by our users in your area</h2>
             <div class="showcase">
-                <div class="book" v-for="book in booksData" :key="book.id">
+                <div class="book" v-for="book in booksData.books" :key="book.id">
                     <BookCard :book="book" />
                 </div>
 
             </div>
         </div>
         <div class="allwanted">
-            <h2>Wanted by users in your area</h2>
+            <h2 class="flex justify-center text-2xl text-primary">Wanted by users in your area</h2>
             <div class="book-info">
 
             </div>
@@ -29,10 +29,12 @@
 <script setup>
 import { useStore } from '~/stores/store'
 
-const { data: booksData } = await useFetch('http://localhost:4000/books')
-// const store = useStore()
+const booksData = useStore()
+
+// const { data: booksData } = await useFetch('http://localhost:4000/books')
 // const books = store.books
 // const book = books
+
 </script>
 
 <style scoped>
@@ -44,4 +46,6 @@ const { data: booksData } = await useFetch('http://localhost:4000/books')
 </style>
 
 
-
+//ToDO: 
+// 1. get data from store.js (loggedIn, books[]) ✅
+// 2. process the data and render 

@@ -44,3 +44,10 @@ export default {
 <style  scoped>
 
 </style>
+
+// ToDO : 
+// 1. Add a search bar ✅
+// 2. Add a search button ✅
+// 3. Add a search function ✅
+// 6. Add a search result component to the home page
+// 7. get authentication status and display nav bar accordingly

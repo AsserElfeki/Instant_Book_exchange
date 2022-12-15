@@ -23,7 +23,7 @@ const { book } = defineProps(['book'])
 .cover {
     display:block;
     width: 10rem;
-    height: 20rem;
+    height: 2 0rem;
     object-fit:cover;
 }
 </style>
