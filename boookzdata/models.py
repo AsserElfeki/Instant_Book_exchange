@@ -41,13 +41,12 @@ class Category(models.Model):
 
 
 class Book(models.Model):
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     content = models.TextField()
     category = models.ManyToManyField(Category, related_name='books')
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     image = models.ManyToManyField('boookzdata.Image', related_name='books')
-
     book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, related_name='books',
                                    related_query_name='book')
 
@@ -55,7 +54,10 @@ class Book(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return self.name
+        return self.title
+
+    def get_book_reader(self):
+        return self.book_shelf.book_reader
 
 
 class BookShelf(PolymorphicModel):

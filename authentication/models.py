@@ -9,6 +9,8 @@ from boookzdata.models import WantedBookshelf, GiveawayBookshelf
 class BookReader(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_image = models.OneToOneField('boookzdata.Image', on_delete=models.CASCADE, null=True)
+    is_verified = models.BooleanField(default=False)
+
     # rating
     # transaction_history
 
