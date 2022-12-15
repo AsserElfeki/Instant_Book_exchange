@@ -6,9 +6,9 @@
             <RandomBook book="`${book}`" />
         </div>
         <div class="allgiveaways">
-            <h2>Offered by our users in your area</h2>
+            <h2 class="flex justify-center text-2xl text-primary">Offered by our users in your area</h2>
             <div class="showcase">
-                <div class="book" v-for="book in booksData">
+                <div class="book" v-for="book in booksData" :key="book.id">
                     <BookCard :book="book" />
                 </div>
 
@@ -39,7 +39,7 @@ const { data: booksData } = await useFetch('http://localhost:4000/books')
 .hero {
     overflow: hidden;
     margin: 0;
-    border: 3px solid blue;
+    /* border: 3px solid blue; */
 }
 </style>
 

@@ -26,7 +26,14 @@ export default defineNuxtConfig({
       ],
     },
   },
-  css: ['@fortawesome/fontawesome-svg-core/styles.css'],
+  css: ['@fortawesome/fontawesome-svg-core/styles.css',
+    '~/assets/css/tailwind.css',],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
@@ -40,17 +47,20 @@ export default defineNuxtConfig({
       {
         autoImports: ['defineStore', 'acceptHMRUpdate'],
       }],
-    
+
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [
+      '@nuxtjs/tailwindcss',
+      'nuxt/postcss8',
       '@fortawesome/fontawesome-svg-core',
       '@fortawesome/pro-solid-svg-icons',
       '@fortawesome/pro-regular-svg-icons',
       '@fortawesome/pro-light-svg-icons',
-      '@fortawesome/free-brands-svg-icons'
+      '@fortawesome/free-brands-svg-icons',
+
     ]
   },
   tailwindcss: {
@@ -58,4 +68,6 @@ export default defineNuxtConfig({
     configPath: '~/config/tailwind.js',
 
   },
+  
+
 });
