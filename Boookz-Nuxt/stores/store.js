@@ -7,7 +7,6 @@ export const useStore = defineStore({
     userIsSearching: false,
     userIsLoggedIn: false,
   }),
-  //this is done automatically when the store is called 
   actions: {
     async retrieveBook() {
       //Todo : change link
@@ -25,3 +24,4 @@ export const useStore = defineStore({
 });
 
 // ToDo user and token in data ?
+

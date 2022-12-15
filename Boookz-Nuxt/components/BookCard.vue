@@ -1,6 +1,6 @@
 <template>
     <div class="book-card ">
-        <div class="overflow-hidden border-green-500 border-2 border-solid">
+        <div class="overflow-hidden border-2 border-solid">
             <img :src="book.image" :alt="book.title" class="cover">
         </div>
         <div>

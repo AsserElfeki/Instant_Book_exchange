@@ -17,3 +17,7 @@ export const useGoogleAPIStore = defineStore({
   },
   getters: {},
 });
+
+//ToDo: 
+// 1. set language of search in google api 
+// 2. set max results in google api
