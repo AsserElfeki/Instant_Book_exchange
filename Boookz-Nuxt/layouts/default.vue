@@ -6,7 +6,7 @@
         <!-- this where the page components go -->
         <slot />
       </div>
-      <AppFooter></AppFooter>
+      <AppFooter />
     </div>
   </div>
 

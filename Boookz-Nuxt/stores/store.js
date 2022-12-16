@@ -12,16 +12,12 @@ export const useStore = defineStore({
       //Todo : change link
       const data = await $fetch('http://localhost:4000/books');
       this.books = data;
-      console.log(this.books);
+      // console.log(this.books);
     },
   },
 
-  
   //to get specific parts of data, like select <items> from <container> WHERE <condition>
-  getters: {
-
-  },
+  getters: {},
 });
 
 // ToDo user and token in data ?
-

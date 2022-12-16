@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <h1>hello from sign in</h1>
+  <div class="container">
+    <div class="img">
+      <img src="../assets/img/sign-in-img.png" alt="photo of a lady looking from her window">
+    </div>
+    <div class="content">
+  
+    </div>
   </div>
 </template>
 
