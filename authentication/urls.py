@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from authentication.views import ProfileInfoView, RegisterView, ChangePasswordView, UpdateProfileView, LogoutView, \
-    LogoutAllView, ListBookReaderBooks, EmailVerify
+    LogoutAllView, ListBookReaderBooks, EmailVerify, LoginView
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from rest_framework.routers import DefaultRouter
 
@@ -10,7 +10,7 @@ router.register('profile', ProfileInfoView, basename='Profile')
 
 urlpatterns = [
     path('list/', ListBookReaderBooks.as_view({'get':'list'}), name='list_book_reader'),
-    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/', LoginView.as_view(), name='token_obtain_pair'),
     path('email-verify/', EmailVerify.as_view(), name='email-verify'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view(), name='auth_register'),

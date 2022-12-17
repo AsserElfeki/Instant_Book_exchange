@@ -10,10 +10,11 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, OutstandingToken, BlacklistedToken
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import BookReader
 from .serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer, ListBookReaderSerializer, \
-    ProfileInfoSerializer
+    ProfileInfoSerializer, LoginSerializer
 from rest_framework import generics, status
 from django.contrib.auth.models import User
 
@@ -49,6 +50,9 @@ class ChangePasswordView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
+
+class LoginView(TokenObtainPairView):
+    serializer_class = LoginSerializer
 
 
 class RegisterView(generics.CreateAPIView):

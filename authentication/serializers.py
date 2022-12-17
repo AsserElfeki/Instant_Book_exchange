@@ -1,8 +1,10 @@
 from django.core.serializers import serialize
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from authentication.models import BookReader
 from boookzdata.models import Book, Image
@@ -131,6 +133,18 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+
+class LoginSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+
+        data = super().validate(attrs)
+        book_reader = BookReader.objects.get(user=self.user)
+        if not book_reader.is_verified:
+            error_message = "This profile wasn't activated"
+            error_name = "inactive_profile"
+            raise AuthenticationFailed(error_message, error_name)
+        return data
 
 
 class RegisterSerializer(serializers.ModelSerializer):
