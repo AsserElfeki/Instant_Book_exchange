@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="content-wrapper">
-      <Nav-bar />
+      <NavigationBar />
       <div class="content">
         <!-- this where the page components go -->
         <slot />
@@ -16,7 +16,7 @@
 import { useStore } from '~/stores/store'
 const store = useStore()
 //running it here so it always runs and I dont have to call it inside each component/page
-store.retrieveBook()
+store.getBooksFromDB()
 </script>
 
 <style>
@@ -37,6 +37,14 @@ html {
   max-width: 1200px;
   margin: 0 auto;
   /* border: 2px solid red; */
+}
+
+
+/* exact link will show the primary color for only the exact matching link */
+.router-link-exact-active {
+  background-color: rgba(59, 130, 246);
+  color: white;
+  box-shadow: 3px 3px 3px rgb(114, 114, 114);
 }
 </style>
 
