@@ -120,6 +120,18 @@
       "email": "assooorqqq@hotmail.com",
       "password": "dfhd",
       "remember": false
+    },
+    {
+      "id": "25c96d38-1928-4587-b698-2d8956aaa0ca",
+      "email": "asd@sad",
+      "password": "asd",
+      "remember": false
+    },
+    {
+      "id": "1a330335-793b-4ca4-b459-a217304f79df",
+      "email": "root@root.com",
+      "password": "ksldfjsdf ",
+      "remember": false
     }
   ]
 }

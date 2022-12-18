@@ -1,5 +1,5 @@
 ### ToDOs: 
-- [ ] 1. signup function in store 
+- [√] 1. signup function in store 
 - [ ] 2. data in store
 - [ ] 3. login token in store 
 - [ ] 4. profile page 
@@ -11,4 +11,9 @@
 - [ ] 10. random book data fetching and rendering
 - [ ] 11. [id] page template 
 - [ ] 12. [id] page data fetching and rendering
+
+
+## Parts to do : 
+- [ ] 1. urls of post request in store. 
+- [ ] 2. 
 

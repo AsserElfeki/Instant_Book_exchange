@@ -15,9 +15,9 @@
             </button>
         </div>
         <ul class="flex flex-row gap-6 lg:gap-2 ">
-            <NuxtLink class="btn" to="/signin">Sign in</NuxtLink>
-            <NuxtLink class="btn" to="/register">Sign up</NuxtLink>
-            <NuxtLink class="btn" to="/profile">Profile</NuxtLink>
+            <NuxtLink class="btn" to="/signin" v-if="!userIsLoggedIn">Sign in</NuxtLink>
+            <NuxtLink class="btn" to="/register" v-if="!userIsLoggedIn">Sign up</NuxtLink>
+            <NuxtLink class="btn" to="/profile" v-if="userIsLoggedIn">Profile</NuxtLink>
         </ul>
     </div>
 
@@ -25,17 +25,24 @@
 
 <script>
 import { useGoogleAPIStore } from '~/stores/googleAPIStore';
+import { useStore } from '~/stores/store';
 
+//here I am using the setup function explicitly, but you can also use the composition API
+//if you need to access so state, remember to add it to the return object
+//I Love github copilot <3 
 export default {
     setup() {
-        const searchQuery = ref('')
         const googleAPIStore = useGoogleAPIStore()
+        const store = useStore()
+
+        const searchQuery = ref('')
+        const userIsLoggedIn = store.userIsLoggedIn
 
         const search = () => {
             googleAPIStore.searchForBook(searchQuery.value)
         }
 
-        return { searchQuery, googleAPIStore, search }
+        return { searchQuery, googleAPIStore, search, userIsLoggedIn }
     }
 }
 

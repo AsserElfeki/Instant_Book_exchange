@@ -7,7 +7,7 @@ export const useStore = defineStore({
     userName: '',
     userPassword: '',
     userIsSearching: false,
-    userIsLoggedIn: false,
+    userIsLoggedIn: true,
   }),
   actions: {
     async getBooksFromDB() {
@@ -46,7 +46,9 @@ export const useStore = defineStore({
   },
 
   //to get specific parts of data, like select <items> from <container> WHERE <condition>
-  getters: {},
+  getters: {
+
+  },
 });
 
 
