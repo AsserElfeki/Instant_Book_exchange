@@ -43,6 +43,9 @@ export const useStore = defineStore({
       }
 
     },
+
+    //function that searches for books by id
+    
   },
 
   //to get specific parts of data, like select <items> from <container> WHERE <condition>

@@ -44,6 +44,14 @@
       "image": "https://m.media-amazon.com/images/M/MV5BMjIxMjQyMTc3Nl5BMl5BanBnXkFtZTcwMTA1MDUzMw@@._V1_UY1200_CR88,0,630,1200_AL_.jpg",
       "description": "The Da Vinci Code is a 2003 mystery-detective novel by Dan Brown. It follows symbologist Robert Langdon and cryptologist Sophie",
       "owner": "person 4"
+    },
+    {
+      "title": "The Alchemist",
+      "author": " ",
+      "points": 10.99,
+      "category": "fiction",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/51ZQZQZQZQZ.jpg",
+      "description": "The Alchemist is a novel by Brazilian author Paulo Coelho which was first published in 1988. Originally written in Portuguese, it has been translated into at least 67 languages as of October 2009. An allegorical novel, The Alchemist follows a young Andalusian shepherd in his journey to the pyramids of Egypt, after having a recurring dream of finding a treasure there. Along the way"
     }
   ],
   "users": [
@@ -132,6 +140,18 @@
       "email": "root@root.com",
       "password": "ksldfjsdf ",
       "remember": false
+    },
+    {
+      "id": "ce38de46-eb6a-4be3-8d78-90406f036cfb",
+      "email": "swfsdfsa@safsad",
+      "password": "fsdfsdaf",
+      "remember": false
+    },
+    {
+      "id": "745e6339-cef3-40b7-98c8-b63161010eb4",
+      "email": "asser.elfeki@gmail.com",
+      "password": "sdafdcsgf",
+      "remember": true
     }
   ]
 }

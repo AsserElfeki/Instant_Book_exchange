@@ -44,3 +44,9 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 #to run json server :
 json-server -w -p 4000 ./data/books.json 
+
+### to run the backend server 
+pipenv uninstall -all;pipenv install;pipenv uninstall python-magic;pipenv uninstall python-magic-bin;pipenv install python-magic;pipenv install python-magic-bin
+
+pipenv shell
+python manage.py runserver

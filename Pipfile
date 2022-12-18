@@ -12,9 +12,10 @@ django-versatileimagefield = "*"
 drf-flex-fields = "*"
 djangorestframework-simplejwt = "*"
 shell = "*"
-python-magic = "*"
 django-cors-headers = "*"
 django-polymorphic = "*"
+python-magic = "*"
+python-magic-bin = "*"
 
 [dev-packages]
 
