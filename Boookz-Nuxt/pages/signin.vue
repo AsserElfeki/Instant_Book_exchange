@@ -22,7 +22,7 @@
         </div>
 
         <div class="">
-          <input type="checkbox" name="remember" id="remember">
+          <input type="checkbox" name="remember" id="remember" v-model="form.remember">
           <label for="remember"> Remember me</label>
         </div>
         <div class="">
@@ -41,15 +41,21 @@
 </template>
 
 <script setup>
+import { v4 as uuidv4 } from "uuid"
 import { useStore } from '~/stores/store'
-const store = useStore()
 
+//data 
+const store = useStore()
+const remember = ref(false)
+const id = uuidv4()
 const form = reactive({
-  id: '50',
+  id: id,
   email: '',
-  password: ''
+  password: '',
+  remember: remember
 })
 
+//functions
 async function signIn() {
   store.signIn(form)
 }

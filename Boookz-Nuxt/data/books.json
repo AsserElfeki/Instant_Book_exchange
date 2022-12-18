@@ -46,6 +46,23 @@
       "id": "50",
       "email": "sdf",
       "password": "sdfsd"
+    },
+    {
+      "id": "11d4e813-1ab1-4a51-9843-a6bc1b354569",
+      "email": "asdasd",
+      "password": "sadasd"
+    },
+    {
+      "id": "668ac676-6f24-44c8-b613-b86817dc896a",
+      "email": "sadasd",
+      "password": "sadasd",
+      "remember": false
+    },
+    {
+      "id": "2fbfd44d-b762-4419-bfe2-c00b2b7d987a",
+      "email": "asdasser",
+      "password": "sdfsdf",
+      "remember": true
     }
   ]
 }
