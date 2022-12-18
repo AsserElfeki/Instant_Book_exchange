@@ -1,7 +1,7 @@
 {
   "books": [
     {
-      "title": "harry potter",
+      "title": "asser potter",
       "author": "jk rowling",
       "points": 10.99,
       "category": "fiction",
@@ -36,5 +36,12 @@
       "description": "The Da Vinci Code is a 2003 mystery-detective novel by Dan Brown. It follows symbologist Robert Langdon and cryptologist Sophie",
       "owner": "person 4"
     }
+  ],
+  "users": [
+    {
+      "name": "person 1",
+      "password": "hjgf"
+    }
+
   ]
 }

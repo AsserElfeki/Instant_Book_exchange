@@ -16,7 +16,7 @@
 import { useStore } from '~/stores/store'
 const store = useStore()
 //running it here so it always runs and I dont have to call it inside each component/page
-store.retrieveBook()
+store.getBooksFromDB()
 </script>
 
 <style>

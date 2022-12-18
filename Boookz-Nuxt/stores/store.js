@@ -10,14 +10,29 @@ export const useStore = defineStore({
     userIsLoggedIn: false,
   }),
   actions: {
-    async retrieveBook() {
-      //Todo : change link
-      const data = await $fetch('http://localhost:4000/books');
-      this.books = data;
+    async getBooksFromDB() {
+      //Todo 1
+      const res = await $fetch('http://localhost:4000/books');
+      // const data = await res.json();
+      this.books = res;
       // console.log(this.books);
     },
-    async signIng(userName, userPassword) {
-      this.userIsLoggedIn = true;
+
+    async signIn(userName, userPassword) {
+      try {
+        return await $fetch('http://localhost:4000/users', {
+          // headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+          body: {
+            "name": userName,
+            "password": userPassword,
+          }
+        })
+      } catch (error) {
+        console.log(error);
+      }
+
+      console.log('name: ' + userName + ' password: ' + userPassword);
       //ToDO 2
     },
   },
@@ -27,5 +42,5 @@ export const useStore = defineStore({
 });
 
 // ToDo :
-//1. user and token in data ?
+//1. change link
 //2. Post request to backend with user name and password
