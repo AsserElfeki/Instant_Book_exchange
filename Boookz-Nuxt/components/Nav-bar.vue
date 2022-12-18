@@ -1,7 +1,7 @@
 <template>
 
   <div class="navBar">
-    <NuxtLink to="/home" class="flex gap-2 justify-start self-start">
+    <NuxtLink to="/home" class="flex gap-2 justify-start self-start" >
       <AppLogo />
       <div class="app-name gap-8">
         <h1 class="hi">Boookz</h1>
@@ -15,9 +15,9 @@
       </button>
     </div>
     <ul class="flex flex-row gap-11 lg:gap-2 ">
-        <NuxtLink class="btn" to="/signin">Sign in</NuxtLink>
-        <NuxtLink class="btn" to="/register">Sign up</NuxtLink>
-        <NuxtLink class="btn" to="/profile">Profile</NuxtLink>
+      <NuxtLink class="btn" to="/signin">Sign in</NuxtLink>
+      <NuxtLink class="btn" to="/register">Sign up</NuxtLink>
+      <NuxtLink class="btn" to="/profile">Profile</NuxtLink>
     </ul>
   </div>
 
@@ -58,14 +58,7 @@ export default {
   line-height: 44px;
 }
 
-a.nuxt-link-active {
-  font-weight: bold;
-}
 
-/* exact link will show the primary color for only the exact matching link */
-a.nuxt-link-exact-active {
-  color: #00c58e;
-}
 </style>
 
 // ToDO : 

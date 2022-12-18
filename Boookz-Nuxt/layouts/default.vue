@@ -40,6 +40,12 @@ html {
 }
 
 
+/* exact link will show the primary color for only the exact matching link */
+.router-link-exact-active {
+  background-color: rgba(59, 130, 246);
+  color: white;
+  box-shadow: 3px 3px 3px rgb(114, 114, 114);
+}
 </style>
 
 

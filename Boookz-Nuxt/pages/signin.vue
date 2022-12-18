@@ -1,6 +1,6 @@
 <template>
 
-  <div class=" flex mt-32 mx-auto  justify-center items-center gap-40 ">
+  <div class=" flex mt-32 mx-auto  justify-around items-center gap-1">
     <div class="img ">
       <img src="../assets/img/sign-in-img.png" alt="photo of a lady looking from her window">
     </div>
@@ -68,6 +68,4 @@ async function signIn() {
   border-radius: 7px;
   padding: 10px;
 }
-
-
 </style>
