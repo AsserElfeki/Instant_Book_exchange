@@ -6,19 +6,19 @@
     </div>
 
     <div class="">
-      <div action="" class="flex flex-col justify-between gap-4">
+      <form action="" class="flex flex-col justify-between gap-4">
         <h1 class="text-3xl font-black ">Sign in</h1>
         <div class="">
           <label for="email"></label>
           <input class="input" size="28" type="email" name="email" id="email" placeholder="Enter your email"
-            v-model="email">
-          <p>username: {{ email }}</p>
+            v-model="form.email">
+          <p>username: {{ form.email }}</p>
         </div>
 
         <div class="">
           <label for="password"></label>
-          <input class="input" size="28" type="password" placeholder="Enter your password" v-model="password">
-          <p>password {{ password }}</p>
+          <input class="input" size="28" type="password" placeholder="Enter your password" v-model="form.password">
+          <p>password {{ form.password }}</p>
         </div>
 
         <div class="">
@@ -35,7 +35,7 @@
             <NuxtLink to="/register">Don't have an account? Sign up</NuxtLink>
           </p>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -44,11 +44,14 @@
 import { useStore } from '~/stores/store'
 const store = useStore()
 
-const email = ref('')
-const password = ref('')
+const form = reactive({
+  id: '50',
+  email: '',
+  password: ''
+})
 
-const signIn = () => {
-  store.signIn(email.value, password.value)
+async function signIn() {
+  store.signIn(form)
 }
 
 </script>

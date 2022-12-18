@@ -18,15 +18,12 @@ export const useStore = defineStore({
       // console.log(this.books);
     },
 
-    async signIn(userName, userPassword) {
+    async signIn(form) {
       try {
         return await $fetch('http://localhost:4000/users', {
-          // headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           method: 'POST',
-          body: {
-            "name": userName,
-            "password": userPassword,
-          }
+          body: form
         })
       } catch (error) {
         console.log(error);
