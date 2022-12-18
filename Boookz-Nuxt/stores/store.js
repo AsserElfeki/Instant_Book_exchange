@@ -8,6 +8,11 @@ export const useStore = defineStore({
     userPassword: '',
     userIsSearching: false,
     userIsLoggedIn: true,
+    wantedBooke: [],
+    giveAwayBooks: [],
+    userWantedBooks: [],
+    userGiveAwayBooks: [],
+
   }),
   actions: {
     async getBooksFromDB() {

@@ -1,7 +1,7 @@
 ### ToDOs: 
 - [√] 1. signup function in store 
 - [ ] 2. data in store
-- [ ] 3. login token in store 
+- [ ] 3. login token in store (youssef)
 - [ ] 4. profile page 
 - [√] 5. v-if in nav bar for different buttons
 - [ ] 6. footer
