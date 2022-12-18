@@ -25,7 +25,7 @@
           <input type="checkbox" name="remember" id="remember" v-model="form.remember">
           <label for="remember"> Remember me</label>
         </div>
-        <div class="">
+        <div class="flex justify-center">
           <button type="" class="btn" @click="signIn">Sign in</button>
         </div>
 
@@ -68,4 +68,6 @@ async function signIn() {
   border-radius: 7px;
   padding: 10px;
 }
+
+
 </style>

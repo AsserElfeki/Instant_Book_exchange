@@ -1,9 +1,9 @@
 <template>
 
   <div class="navBar">
-    <NuxtLink to="/home" class="flex gap-2">
+    <NuxtLink to="/home" class="flex gap-2 justify-start self-start">
       <AppLogo />
-      <div class="app-name">
+      <div class="app-name gap-8">
         <h1 class="hi">Boookz</h1>
         <p class="text-xs">Book xchange website</p>
       </div>
@@ -14,16 +14,10 @@
         <img src="/MagnifyingGlass.png" alt="search icon" class="absolute top-0 right-2 ">
       </button>
     </div>
-    <ul class="flex flex-row gap-2">
-      <li class=" btn">
-        <NuxtLink to="/signin">Sign in</NuxtLink>
-      </li>
-      <li class=" btn">
-        <NuxtLink to="/register">Sign up</NuxtLink>
-      </li>
-      <li class="btn">
-        <NuxtLink to="/profile">Profile</NuxtLink>
-      </li>
+    <ul class="flex flex-row gap-11 lg:gap-2 ">
+        <NuxtLink class="btn" to="/signin">Sign in</NuxtLink>
+        <NuxtLink class="btn" to="/register">Sign up</NuxtLink>
+        <NuxtLink class="btn" to="/profile">Profile</NuxtLink>
     </ul>
   </div>
 
@@ -62,6 +56,15 @@ export default {
   font-weight: 700;
   font-size: 33px;
   line-height: 44px;
+}
+
+a.nuxt-link-active {
+  font-weight: bold;
+}
+
+/* exact link will show the primary color for only the exact matching link */
+a.nuxt-link-exact-active {
+  color: #00c58e;
 }
 </style>
 
