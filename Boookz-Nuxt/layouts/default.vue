@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="content-wrapper">
-      <Nav-bar />
+      <NavigationBar />
       <div class="content">
         <!-- this where the page components go -->
         <slot />

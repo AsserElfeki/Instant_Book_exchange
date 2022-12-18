@@ -6,7 +6,7 @@
     </div>
 
     <div class="">
-      <form action="" class="flex flex-col justify-between gap-4">
+      <form @submit.prevent="signIn" class="flex flex-col justify-between gap-4">
         <h1 class="text-3xl font-black ">Sign in</h1>
         <div class="">
           <label for="email"></label>
@@ -26,7 +26,7 @@
           <label for="remember"> Remember me</label>
         </div>
         <div class="flex justify-center">
-          <button type="" class="btn" @click="signIn">Sign in</button>
+          <button type="" class="btn">Sign in</button>
         </div>
 
         <div
@@ -47,7 +47,7 @@ import { useStore } from '~/stores/store'
 //data 
 const store = useStore()
 const remember = ref(false)
-const id = uuidv4()
+let id = uuidv4()
 const form = reactive({
   id: id,
   email: '',
@@ -57,6 +57,8 @@ const form = reactive({
 
 //functions
 async function signIn() {
+  id = uuidv4()
+  console.log(form)
   store.signIn(form)
 }
 

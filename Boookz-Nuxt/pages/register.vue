@@ -5,7 +5,7 @@
         </div>
 
         <div class="">
-            <form action="" class="flex flex-col justify-between gap-3">
+            <form @submit.prevent="register" class="flex flex-col justify-between gap-3">
                 <h1 class="text-3xl font-black ">Register</h1>
                 <div class="">
                     <label for="email"></label>
@@ -23,7 +23,7 @@
 
                 <div class="">
                     <label for="password"></label>
-                    <input class="input" size="28" type="password" placeholder="repeat password" >
+                    <input class="input" size="28" type="password" placeholder="repeat password">
                 </div>
 
                 <div class="">
@@ -31,10 +31,10 @@
                     <label for="remember"> Remember me</label>
                 </div>
                 <div class="flex justify-center">
-                    <button type="" class="btn" @click="signIn">Register</button>
+                    <button type="submit" class="btn">Register</button>
                 </div>
 
-                
+
             </form>
         </div>
     </div>
@@ -56,8 +56,8 @@ const form = reactive({
 })
 
 //functions
-async function signIn() {
-    store.signIn(form)
+async function register() {
+    store.register(form)
 }
 </script>
 

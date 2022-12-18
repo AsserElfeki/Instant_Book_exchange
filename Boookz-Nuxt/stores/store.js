@@ -29,8 +29,19 @@ export const useStore = defineStore({
         console.log(error);
       }
 
-      console.log('name: ' + userName + ' password: ' + userPassword);
-      //ToDO 2
+    },
+
+    async register(form) {
+      try {
+        return await $fetch('http://localhost:4000/users', {
+          headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+          body: form
+        })
+      } catch (error) {
+        console.log(error);
+      }
+
     },
   },
 
@@ -38,6 +49,4 @@ export const useStore = defineStore({
   getters: {},
 });
 
-// ToDo :
-//1. change link
-//2. Post request to backend with user name and password
+

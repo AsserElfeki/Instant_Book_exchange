@@ -1,12 +1,21 @@
 {
   "books": [
     {
-      "title": "asser potter",
+      "title": "Harry potter",
       "author": "jk rowling",
       "points": 10.99,
       "category": "fiction",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnAgWmbyO22JXlqGx3lJ_0t4_mWe62huqoKdWq6cHmDtNHyh1CErPoMpnVGPTpWTHW-1U&usqp=CAU",
       "description": "Harry Potter is a series of fantasy novels written by British author J. K. Rowling. The novels chronicle the life of a young wizard, Harry Potter, and his friends Hermione Granger and Ron Weasley, all of whom are students at Hogwarts School of Witchcraft and Wizardry. The main story arc concerns Harry's struggle against Lord Voldemort, a dark wizard who intends to become immortal, overthrow the wizard governing body known as the Ministry of Magic, and subjugate all wizards and muggles, a reference term that means non-magical people.",
+      "owner": "person 1"
+    },
+    {
+      "title": "Harry potter and the chamber of secrets",
+      "author": "jk rowling",
+      "points": 10.99,
+      "category": "fiction",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnAgWmby",
+      "description": "Harry Potter and the Chamber of Secrets is a fantasy novel written by British author J. K. Rowling and the second novel in the Harry Potter series. The plot follows Harry's second year at Hogwarts School of Witchcraft and Wizardry, during which a series of messages on the walls of the school's corridors warn that the \"Chamber of Secrets\" has been opened and that the \"heir of Slytherin\" would kill all pupils who do not come from all-magical families. These threats are found after attacks which leave residents of the school petrified. Throughout the year, Harry and his friends Ron and Hermione investigate the attacks.",
       "owner": "person 1"
     },
     {
@@ -63,6 +72,54 @@
       "email": "asdasser",
       "password": "sdfsdf",
       "remember": true
+    },
+    {
+      "id": "c1b6f44a-a647-4dec-9c74-0c4cd2047428",
+      "email": "asd",
+      "password": "asd",
+      "remember": false
+    },
+    {
+      "id": "a40c04d4-2e11-4b4d-b50b-c4fc69c1bccb",
+      "email": "asd",
+      "password": "asd",
+      "remember": false
+    },
+    {
+      "id": "563df3e1-ebdd-4773-a937-0b123b19d19c",
+      "email": "asd",
+      "password": "asd",
+      "remember": false
+    },
+    {
+      "id": "c8ff7b49-6181-41ff-989f-cbf687eb001f",
+      "email": "asser",
+      "password": "asser",
+      "remember": false
+    },
+    {
+      "id": "45966acf-9a7e-438e-a773-05d9c37092a1",
+      "email": "sad@sdfdsfsdfdsfdsfsdfdsf",
+      "password": "asd",
+      "remember": false
+    },
+    {
+      "id": "28485acc-cde9-4740-a669-01a35414b4ab",
+      "email": "Asser.elfeki@gmail.com",
+      "password": "asd",
+      "remember": false
+    },
+    {
+      "id": "296c0504-4b81-46b6-a045-c702f1999658",
+      "email": "Asser.elfeki@gmail.com",
+      "password": "gdfnbm",
+      "remember": false
+    },
+    {
+      "id": "201f78ff-dcdf-45dc-bb65-51f0d2824809",
+      "email": "assooorqqq@hotmail.com",
+      "password": "dfhd",
+      "remember": false
     }
   ]
 }
