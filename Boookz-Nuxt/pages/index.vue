@@ -28,7 +28,6 @@
 import { useStore } from '~/stores/store'
 
 const store = useStore()
-const { data: randomBook } = store.randomBook
 </script>
 
 <style scoped>
