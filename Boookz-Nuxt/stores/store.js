@@ -7,20 +7,18 @@ export const useStore = defineStore({
     userName: '',
     userPassword: '',
     userIsSearching: false,
-    userIsLoggedIn: true,
+    userIsLoggedIn: false,
     wantedBooke: [],
     giveAwayBooks: [],
     userWantedBooks: [],
     userGiveAwayBooks: [],
-
+    randomBook: {}
   }),
   actions: {
     async getBooksFromDB() {
-      //Todo 1
       const res = await $fetch('http://localhost:4000/books');
       // const data = await res.json();
       this.books = res;
-      // console.log(this.books);
     },
 
     async signIn(form) {
@@ -48,9 +46,6 @@ export const useStore = defineStore({
       }
 
     },
-
-    //function that searches for books by id
-    
   },
 
   //to get specific parts of data, like select <items> from <container> WHERE <condition>

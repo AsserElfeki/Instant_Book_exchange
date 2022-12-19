@@ -42,7 +42,7 @@ export default {
             googleAPIStore.searchForBook(searchQuery.value)
         }
 
-        
+
 
         return { searchQuery, googleAPIStore, search, userIsLoggedIn }
     }
