@@ -10,9 +10,9 @@
         <h1 class="text-3xl font-black ">Sign in</h1>
         <div class="">
           <label for="email"></label>
-          <input class="input" size="28" type="email" name="email" id="email" placeholder="Enter your email"
-            v-model="form.email">
-          <p>username: {{ form.email }}</p>
+          <input class="input" size="28" type="text" name="email" id="email" placeholder="Enter your email"
+            v-model="form.username">
+          <p>username: {{ form.username }}</p>
         </div>
 
         <div class="">
@@ -50,7 +50,7 @@ const remember = ref(false)
 let id = uuidv4()
 const form = reactive({
   id: id,
-  email: '',
+  username: '',
   password: '',
   remember: remember
 })
