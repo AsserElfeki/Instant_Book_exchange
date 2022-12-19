@@ -1,12 +1,12 @@
 ### ToDOs: 
 - [√] 1. signup function in store 
 - [√] 2. data in store
-- [ ] 3. login token in store (youssef)
-- [ ] 4. profile page 
+- [√] 3. login token in store (youssef)
+- [ ] 4. profile page markup (Andrii)
 - [√] 5. v-if in nav bar for different buttons
-- [ ] 6. footer
+- [ ] 6. footer (Andrii)
 - [ ] 7. book card enhancements
-- [ ] 8. Hero section bg
+- [ ] 8. Hero section bg (Andrii)
 - [√] 9. hero section content 
 - [√] 10. random book data fetching and rendering (youssef)
 - [ ] 11. [id] page template 

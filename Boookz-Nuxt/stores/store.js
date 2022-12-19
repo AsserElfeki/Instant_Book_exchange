@@ -7,7 +7,7 @@ export const useStore = defineStore({
     userName: '',
     userPassword: '',
     userIsSearching: false,
-    userIsLoggedIn: false,
+    userIsLoggedIn: true,
     wantedBooke: [],
     giveAwayBooks: [],
     userWantedBooks: [],
@@ -25,8 +25,8 @@ export const useStore = defineStore({
 
     async signIn(form) {
       try {
-        const res = await $fetch('http://localhost:8000/authentication/login/', {
-          // headers: { 'Content-Type': 'application/json' },
+        return await $fetch('http://localhost:4000/users', {
+          headers: { 'Content-Type': 'application/json' },
           method: 'POST',
           body: form
         })
