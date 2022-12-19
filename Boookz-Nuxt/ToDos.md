@@ -12,6 +12,7 @@
 - [ ] 11. [id] page template 
 - [ ] 12. [id] page data fetching and rendering
 - [ ] 13. control the search of the g. API language and see why it's only 10 results. 
+- [ ] 14. random book styles
 
 
 ## Parts to do : 
