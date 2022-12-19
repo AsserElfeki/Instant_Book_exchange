@@ -3,12 +3,13 @@
         <div class="book">
             <div class="book-img">
                 <!-- <img :src="bookImg" alt="book image"> -->
+                <h1>random book</h1>
             </div>
             <div class="book-info">
-                <h2>{{ book.Title }}</h2>
-                <h3>{{ book.Author }}</h3>
-                <h4>{{ book.Genre }}</h4>
-                <p>{{ book.Description }}</p>
+                <h2>{{ book.title }}</h2>
+                <h3>{{ book.author }}</h3>
+                <h4>{{ book.category }}</h4>
+                <p>{{ book.description }}</p>
                 <div class="book-rating">
                     <!-- <p>{{ bookRating }}</p> -->
                 </div>
@@ -22,6 +23,8 @@
 
 <script setup>
 const { book } = defineProps(['book'])
+
+console.log("random book:", book)
 </script>
 
 <style scoped>

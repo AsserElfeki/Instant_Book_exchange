@@ -1,5 +1,5 @@
 <template>
-  <footer class="  h-16">
+  <footer class="mt-5">
     <ul class="footer">
 
       <li class="footer-element">

@@ -1,26 +1,24 @@
 <template>
   <div class="container">
 
-    <div class="hero ">
-      <HeroBg></HeroBg>
-      <RandomBook book="`${booksData.books[1]}`" />
+    <div class="border border-solid border-red-500 border-3">
+      <RandomBook :book="store.randomBook" />
     </div>
     <div class="allgiveaways">
-      <h2 class="flex justify-center text-2xl text-primary">Offered by our users in your area</h2>
+      <h2 class="flex justify-center text-3xl m-8 text-primary">Offered by our users in your area</h2>
       <div class="showcase">
-        <div class="book" v-for="book in booksData.books" :key="book.title">
+        <div class="book" v-for="book in store.books" :key="book.title">
           <BookCard :book="book" />
         </div>
 
       </div>
     </div>
     <div class="allwanted">
-      <h2 class="flex justify-center text-2xl text-primary">Wanted by users in your area</h2>
-      <div class="book-info">
-
-      </div>
+      <h2 class="flex justify-center text-3xl m-8">Wanted by users in your area</h2>
       <div class="showcase">
-        <!-- books -->
+        <div class="book" v-for="book in store.books" :key="book.title">
+          <BookCard :book="book" />
+        </div>
       </div>
     </div>
   </div>
@@ -29,12 +27,8 @@
 <script setup>
 import { useStore } from '~/stores/store'
 
-const booksData = useStore()
-
-// const { data: booksData } = await useFetch('http://localhost:4000/books')
-// const books = store.books
-// const book = books
-
+const store = useStore()
+const { data: randomBook } = store.randomBook
 </script>
 
 <style scoped>

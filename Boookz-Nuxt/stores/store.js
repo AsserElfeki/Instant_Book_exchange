@@ -17,8 +17,9 @@ export const useStore = defineStore({
   actions: {
     async getBooksFromDB() {
       const res = await $fetch('http://localhost:4000/books');
-      // const data = await res.json();
       this.books = res;
+      this.randomBook = this.books[Math.floor(Math.random() * this.books.length)];
+      // console.log("books:" + this.books.at(1).title);
     },
 
     async signIn(form) {
