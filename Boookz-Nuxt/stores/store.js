@@ -25,7 +25,7 @@ export const useStore = defineStore({
 
     async signIn(form) {
       try {
-        return await $fetch('http://localhost:4000/users', {
+        const res = $fetch('http://localhost:4000/users', {
           headers: { 'Content-Type': 'application/json' },
           method: 'POST',
           body: form
