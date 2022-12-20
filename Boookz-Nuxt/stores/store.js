@@ -7,7 +7,7 @@ export const useStore = defineStore({
     userName: '',
     userPassword: '',
     userIsSearching: false,
-    userIsLoggedIn: true,
+    userIsLoggedIn: false,
     wantedBooks: [],
     giveAwayBooks: [],
     userWantedBooks: [],
@@ -25,12 +25,13 @@ export const useStore = defineStore({
 
     async signIn(form) {
       try {
-        const res = $fetch('http://localhost:4000/users', {
-          headers: { 'Content-Type': 'application/json' },
+        const res = $fetch('http://localhost:8000/authentication/login/', {
+          // headers: { 'Content-Type': 'application/json' },
           method: 'POST',
           body: form
         })
-        this.token = res.access
+        console.log(await res.access);
+        this.token = await res.access;
         if (this.token) {
           this.userIsLoggedIn = true;
         }
