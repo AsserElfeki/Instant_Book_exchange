@@ -28,9 +28,9 @@
                           res.email : email is taken
                           res.password: weak 
                           res.password2: no match
-- [ ] 25. Toats for last task
-- [ ] 26. redirect after register
-- [ ] 27. redirect after sign in
+- [ ] 25. Toasts for last task
+- [x] 26. redirect after register
+- [x] 27. redirect after sign in
 - [x] 28. logout to endpoint 
 
 
