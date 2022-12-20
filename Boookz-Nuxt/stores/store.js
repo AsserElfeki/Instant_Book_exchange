@@ -8,7 +8,7 @@ export const useStore = defineStore({
     userPassword: '',
     userIsSearching: false,
     userIsLoggedIn: true,
-    wantedBooke: [],
+    wantedBooks: [],
     giveAwayBooks: [],
     userWantedBooks: [],
     userGiveAwayBooks: [],

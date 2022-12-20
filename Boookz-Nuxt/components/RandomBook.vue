@@ -28,7 +28,10 @@ console.log("random book:", book)
 </script>
 
 <style scoped>
-
+.container {
+    background-image: "../assets/img/heroBackground.jpg";
+    
+}
 </style>
 
 

@@ -5,8 +5,8 @@
 - [ ] 4. profile page markup (Andrii)
 - [√] 5. v-if in nav bar for different buttons
 - [ ] 6. footer (Andrii)
-- [ ] 7. book card enhancements
-- [ ] 8. Hero section bg (Andrii)
+- [ ] 7. book card enhancements (Youssef)
+- [ ] 8. Hero section bg (Asser)
 - [√] 9. hero section content 
 - [√] 10. random book data fetching and rendering (youssef)
 - [ ] 11. [id] page template 
