@@ -15,7 +15,7 @@ shell = "*"
 django-cors-headers = "*"
 django-polymorphic = "*"
 python-magic = "*"
-python-magic-bin = "*"
+#python-magic-bin = "*"
 
 [dev-packages]
 

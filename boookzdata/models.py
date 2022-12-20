@@ -13,6 +13,7 @@ class Image(models.Model):
         ppoi_field='image_ppoi'
     )
     image_ppoi = PPOIField()
+    book = models.ForeignKey('boookzdata.Book', related_name='images', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -42,11 +43,11 @@ class Category(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField()
+    description = models.TextField()
     category = models.ManyToManyField(Category, related_name='books')
+    condition = models.ForeignKey('boookzdata.BookCondition', related_name='books',on_delete=models.CASCADE, blank=True, null=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
-    image = models.ManyToManyField('boookzdata.Image', related_name='books')
     book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, related_name='books',
                                    related_query_name='book')
 

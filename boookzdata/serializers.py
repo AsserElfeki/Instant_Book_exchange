@@ -1,11 +1,13 @@
 from django.core.serializers import serialize
 from rest_flex_fields import FlexFieldsModelSerializer
+from rest_framework_simplejwt.authentication import authentication
 
 from authentication.models import BookReader
 from authentication.serializers import BookReaderSerializer
 from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, BookShelf, WantedBookshelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
+
 
 
 class AuthorSerializer(FlexFieldsModelSerializer):
@@ -70,19 +72,27 @@ class BookUploadSerializer(FlexFieldsModelSerializer):
             'image': ('boookzdata.ImageSerializer', {'many': True}),
         }
 
+class ImageSerializer(FlexFieldsModelSerializer):
+    image = VersatileImageFieldSerializer(
+        sizes='product_headshot'
+    )
+
+    class Meta:
+        model = Image
+        fields = ['name', 'image',]
+
 
 class BookSerializer(FlexFieldsModelSerializer):
-    name = serializers.CharField(required=False)
-    content = serializers.CharField(required=False)
+    title = serializers.CharField(required=False)
+    description = serializers.CharField(required=False)
+    condition = BookConditionSerializer(required=False)
+    images = ImageSerializer(many=True)
 
     class Meta:
         model = Book
-        fields = ['pk', 'name', 'content', 'created', 'updated']
+        fields = ['pk', 'title', 'description', 'created', 'updated', 'condition', 'images']
         expandable_fields = {
             'category': ('boookzdata.CategorySerializer', {'many': True}),
-            'sites': ('boookzdata.BookSiteSerializer', {'many': True}),
-            'comments': ('boookzdata.CommentSerializer', {'many': True}),
-            'image': ('authentication.ImageSerializer', {'many': True}),
         }
 
 

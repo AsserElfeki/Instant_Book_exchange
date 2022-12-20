@@ -63,7 +63,7 @@ export const useStore = defineStore({
   },
 
   persist: {
-    storage: persistedState.localStorage,
+    storage: persistedState.sessionStorage,
   },
 });
 
