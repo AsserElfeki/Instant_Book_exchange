@@ -25,13 +25,13 @@ export const useStore = defineStore({
 
     async signIn(form) {
       try {
-        const res = $fetch('http://localhost:8000/authentication/login/', {
+        const res = await $fetch('http://localhost:8000/authentication/login/', {
           // headers: { 'Content-Type': 'application/json' },
           method: 'POST',
           body: form
         })
-        console.log(await res.access);
-        this.token = await res.access;
+        console.log(res.access);
+        this.token = res.access;
         if (this.token) {
           this.userIsLoggedIn = true;
         }
