@@ -6,10 +6,10 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from authentication.models import BookReader
-from .serializers import BookSerializer, BookUploadSerializer, GiveawayBookshelfSerializer, ImageSerializer
+from .serializers import BookSerializer, BookUploadSerializer, GiveawayBookshelfSerializer, ImageSerializer, WantedBookShelfSerializer
 from .models import Book, Image, GiveawayBookshelf, WantedBookshelf
 from rest_flex_fields import is_expanded
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated 
 
 
 class NotCorrectUrlProvided(APIException):
@@ -50,11 +50,16 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
         return queryset
 
-#TODO(drago): 2 views for all wanted and all giveaway
-class AllGiveawayView(FlexFieldsModelViewSet):
-    serializer_class = BookSerializer
-    queryset = GiveawayBookshelf
+#TODO(drago): Think about this piece of shit, how to create long ass array of books
+class AllGiveawayView(ListAPIView):
+    serializer_class = GiveawayBookshelfSerializer
+    queryset = GiveawayBookshelf.objects.all()
 
+class AllWantedView(ListAPIView):
+    serializer_class = WantedBookShelfSerializer
+    queryset = WantedBookshelf.objects.all()
+
+#TODO(Victor): Think about code below xD
 class BooksFromChosenBookshelfView(ListAPIView):
     serializer_class = BookSerializer
     permission_classes = (IsAuthenticated,)

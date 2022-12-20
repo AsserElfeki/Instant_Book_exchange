@@ -13,8 +13,8 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import BookReader
-from .serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer, ListBookReaderSerializer, \
-    ProfileInfoSerializer, LoginSerializer
+from .serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer, ListBookReaderSerializer, LoginSerializer
+from boookzdata.serializers import ProfileInfoSerializer
 from rest_framework import generics, status
 from django.contrib.auth.models import User
 
@@ -23,13 +23,9 @@ from .utils import Util
 
 # Create your views here.
 
-class ProfileInfoView(ReadOnlyModelViewSet):
+class ProfileInfoView(ListAPIView):
     serializer_class = ProfileInfoSerializer
-
-    def get_queryset(self):
-        queryset = BookReader.objects.all()
-        return queryset
-
+    queryset = BookReader.objects.all()
 
 class ListBookReaderBooks(FlexFieldsModelViewSet):
     permission_classes = [IsAuthenticated]
