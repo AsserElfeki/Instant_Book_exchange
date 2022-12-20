@@ -11,10 +11,11 @@
 - [√] 10. random book data fetching and rendering (youssef)
 - [ ] 11. [id] page template 
 - [ ] 12. [id] page data fetching and rendering
-- [ ] 13. control the search of the g. API language and see why it's only 10 results. 
+- [ ] 13. control the search of the g. API language and see why it's only 10 results. (asser)
 - [ ] 14. random book styles
-- [ ] solve token issue in store
-- [ ] split data store from user store 
+- [√] solve token issue in store
+- [ ] split data store from user store (asser)
+- [ ] fix the post request to send the token also (as header) check old frontend (asser)
 
 
 ## Parts to do : 
