@@ -152,6 +152,15 @@
       "email": "asser.elfeki@gmail.com",
       "password": "sdafdcsgf",
       "remember": true
+    },
+    {
+      "id": "e2d1ebaf-1a17-4daa-acda-dbcf6b9272c4",
+      "username": "",
+      "firstname": "Asser",
+      "lastname": "Moustafa",
+      "email": "asser.elfeki@gmail.com",
+      "password": "esf",
+      "remember": false
     }
   ]
 }

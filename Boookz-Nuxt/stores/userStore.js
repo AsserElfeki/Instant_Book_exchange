@@ -33,7 +33,6 @@ export const useUserStore = defineStore({
         async register(form) {
             try {
                 return await $fetch('http://localhost:4000/users', {
-                    headers: { 'Content-Type': 'application/json' },
                     method: 'POST',
                     body: form
                 })
@@ -43,9 +42,18 @@ export const useUserStore = defineStore({
             }
 
         },
+
+        logOut() {
+            this.userIsLoggedIn = false;
+            this.token = '';
+        }
     },
 
     //to get specific parts of data, like select <items> from <container> WHERE <condition>
     getters: {
     },
+    persist: {
+        storage: persistedState.localStorage,
+    },
+
 });

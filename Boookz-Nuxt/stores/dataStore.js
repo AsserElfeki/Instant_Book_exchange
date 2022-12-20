@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 export const useDataStore = defineStore({
-  id: 'store',
+  id: 'dataStore',
   state: () => ({
     books: [],
     wantedBooks: [],
@@ -20,7 +20,7 @@ export const useDataStore = defineStore({
 
   //to get specific parts of data, like select <items> from <container> WHERE <condition>
   getters: {
-    
+
   },
 
   persist: {

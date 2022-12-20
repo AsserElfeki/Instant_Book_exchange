@@ -18,6 +18,7 @@
             <NuxtLink class="btn" to="/signin" v-if="!store.userIsLoggedIn">Sign in</NuxtLink>
             <NuxtLink class="btn" to="/register" v-if="!store.userIsLoggedIn">Sign up</NuxtLink>
             <NuxtLink class="btn" to="/profile" v-if="store.userIsLoggedIn">Profile</NuxtLink>
+            <NuxtLink to="/" v-if="store.userIsLoggedIn" @click="logOut" class="btn">Log Out</NuxtLink>
         </ul>
     </div>
 
@@ -25,7 +26,7 @@
 
 <script>
 import { useGoogleAPIStore } from '~/stores/googleAPIStore';
-import { useDataStore } from '~/stores/dataStore';
+import { useUserStore } from '~/stores/userStore';
 
 //here I am using the setup function explicitly, but you can also use the composition API
 //if you need to access so state, remember to add it to the return object
@@ -33,7 +34,7 @@ import { useDataStore } from '~/stores/dataStore';
 export default {
     setup() {
         const googleAPIStore = useGoogleAPIStore()
-        const store = useDataStore()
+        const store = useUserStore()
 
         const searchQuery = ref('')
         // const userIsLoggedIn = store.userIsLoggedIn
@@ -42,9 +43,12 @@ export default {
             googleAPIStore.searchForBook(searchQuery.value)
         }
 
+        const logOut = () => {
+            store.logOut()
+        }
 
 
-        return { searchQuery, googleAPIStore, search, store }
+        return { searchQuery, googleAPIStore, search, store, logOut }
     }
 }
 
