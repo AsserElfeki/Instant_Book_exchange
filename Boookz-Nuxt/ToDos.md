@@ -13,9 +13,16 @@
 - [ ] 12. [id] page data fetching and rendering
 - [ ] 13. control the search of the g. API language and see why it's only 10 results. (asser)
 - [ ] 14. random book styles
-- [√] solve token issue in store
-- [ ] split data store from user store (asser)
-- [ ] fix the post request to send the token also (as header) check old frontend (asser)
+- [√] 15. solve token issue in store
+- [ ] 16. split data store from user store (asser)
+- [x] 17. fix the post request to send the token also (as header) check old frontend (asser)
+- [x] 18. fgure out how to redirect after login and data refresh and kinda data save !?
+- [√] 19. figure out how to save session (I am not a front end dev anymore. FM)
+- [ ] 20. figure out a "loading state" importance : 3
+- [x] 21. register form (kinda done) but with double password check and (username, first, last, email)
+- [x] 22. @change of the username field I send to an endpoint that tells me if this user name is taken or not 
+- OR display response in a Toast
+- 
 
 
 ## Parts to do : 

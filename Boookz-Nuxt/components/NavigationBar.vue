@@ -15,9 +15,9 @@
             </button>
         </div>
         <ul class="flex flex-row gap-6 lg:gap-2 ">
-            <NuxtLink class="btn" to="/signin" v-if="!userIsLoggedIn">Sign in</NuxtLink>
-            <NuxtLink class="btn" to="/register" v-if="!userIsLoggedIn">Sign up</NuxtLink>
-            <NuxtLink class="btn" to="/profile" v-if="userIsLoggedIn">Profile</NuxtLink>
+            <NuxtLink class="btn" to="/signin" v-if="!store.userIsLoggedIn">Sign in</NuxtLink>
+            <NuxtLink class="btn" to="/register" v-if="!store.userIsLoggedIn">Sign up</NuxtLink>
+            <NuxtLink class="btn" to="/profile" v-if="store.userIsLoggedIn">Profile</NuxtLink>
         </ul>
     </div>
 
@@ -36,7 +36,7 @@ export default {
         const store = useStore()
 
         const searchQuery = ref('')
-        const userIsLoggedIn = store.userIsLoggedIn
+        // const userIsLoggedIn = store.userIsLoggedIn
 
         const search = () => {
             googleAPIStore.searchForBook(searchQuery.value)
@@ -44,7 +44,7 @@ export default {
 
 
 
-        return { searchQuery, googleAPIStore, search, userIsLoggedIn }
+        return { searchQuery, googleAPIStore, search, store }
     }
 }
 

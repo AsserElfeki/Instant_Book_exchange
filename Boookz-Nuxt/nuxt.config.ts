@@ -47,6 +47,7 @@ export default defineNuxtConfig({
       {
         autoImports: ['defineStore', 'acceptHMRUpdate'],
       }],
+    '@pinia-plugin-persistedstate/nuxt',
 
   ],
 
@@ -68,6 +69,6 @@ export default defineNuxtConfig({
     configPath: '~/config/tailwind.js',
 
   },
-  
+
 
 });

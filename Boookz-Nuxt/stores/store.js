@@ -61,6 +61,10 @@ export const useStore = defineStore({
     //   return this.books[Math.floor(Math.random() * this.books.length)];
     // }
   },
+
+  persist: {
+    storage: persistedState.localStorage,
+  },
 });
 
 
