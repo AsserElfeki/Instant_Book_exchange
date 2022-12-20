@@ -50,6 +50,10 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
         return queryset
 
+#TODO(drago): 2 views for all wanted and all giveaway
+class AllGiveawayView(FlexFieldsModelViewSet):
+    serializer_class = BookSerializer
+    queryset = GiveawayBookshelf
 
 class BooksFromChosenBookshelfView(ListAPIView):
     serializer_class = BookSerializer
