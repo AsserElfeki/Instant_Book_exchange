@@ -161,6 +161,15 @@
       "email": "asser.elfeki@gmail.com",
       "password": "esf",
       "remember": false
+    },
+    {
+      "username": "",
+      "firstname": "Asser",
+      "lastname": "Moustafa",
+      "email": "asser.elfeki@gmail.com",
+      "password": "asserishappy@$A",
+      "password2": "",
+      "id": "MEaeCA4"
     }
   ]
 }
