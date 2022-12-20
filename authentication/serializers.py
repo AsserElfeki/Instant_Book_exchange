@@ -1,4 +1,5 @@
 from django.core.serializers import serialize
+from rest_flex_fields import FlexFieldsModelSerializer
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.exceptions import AuthenticationFailed
@@ -6,8 +7,8 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from authentication.models import BookReader
-from boookzdata.models import Book, Image
+from authentication.models import BookReader, ProfileImage
+from boookzdata.models import Book
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 
 
@@ -28,13 +29,13 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['pk', 'username', 'first_name', 'last_name', 'email', ]
 
 
-class ImageSerializer(serializers.ModelSerializer):
+class ImageSerializer(FlexFieldsModelSerializer):
     image = VersatileImageFieldSerializer(
         sizes='product_headshot'
     )
 
     class Meta:
-        model = Image
+        model = ProfileImage
         fields = ['name', 'image']
 
 
