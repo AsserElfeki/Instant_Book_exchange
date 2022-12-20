@@ -2,7 +2,7 @@
   <div class="container">
 
     <div class="border border-solid border-red-500 border-3">
-      <HeroBg />
+      <!-- <HeroBg /> -->
       <RandomBook :book="store.randomBook" />
     </div>
     <div class="allgiveaways">

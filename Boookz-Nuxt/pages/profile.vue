@@ -1,11 +1,15 @@
 <template>
+    <!-- html tags  -->
     
 </template>
 
-<script setup>
 
+
+
+<script setup>
+    // data part of the component
 </script>
 
-<style lang="scss" scoped>
+<style  scoped>
 
 </style>
