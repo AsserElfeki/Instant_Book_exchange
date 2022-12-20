@@ -23,6 +23,7 @@ from .utils import Util
 
 # Create your views here.
 
+#TODO(drago): REDO this piece of shit 
 class ProfileInfoView(ReadOnlyModelViewSet):
     serializer_class = ProfileInfoSerializer
 
