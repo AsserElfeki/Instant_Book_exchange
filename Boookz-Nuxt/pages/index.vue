@@ -26,9 +26,9 @@
 </template>
 
 <script setup>
-import { useStore } from '~/stores/store'
+import { useDataStore } from '~/stores/dataStore'
 
-const store = useStore()
+const store = useDataStore()
 </script>
 
 <style scoped>
@@ -40,6 +40,7 @@ const store = useStore()
   justify-content: space-between;
   /* border: 3px solid blue; */
 }
+
 .showcase {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));

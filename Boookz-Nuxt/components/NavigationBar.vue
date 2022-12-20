@@ -25,7 +25,7 @@
 
 <script>
 import { useGoogleAPIStore } from '~/stores/googleAPIStore';
-import { useStore } from '~/stores/store';
+import { useDataStore } from '~/stores/dataStore';
 
 //here I am using the setup function explicitly, but you can also use the composition API
 //if you need to access so state, remember to add it to the return object
@@ -33,7 +33,7 @@ import { useStore } from '~/stores/store';
 export default {
     setup() {
         const googleAPIStore = useGoogleAPIStore()
-        const store = useStore()
+        const store = useDataStore()
 
         const searchQuery = ref('')
         // const userIsLoggedIn = store.userIsLoggedIn

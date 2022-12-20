@@ -13,8 +13,8 @@
 </template>
 
 <script setup>
-import { useStore } from '~/stores/store'
-const store = useStore()
+import { useDataStore } from '~~/stores/dataStore'
+const store = useDataStore()
 //running it here so it always runs and I dont have to call it inside each component/page
 store.getBooksFromDB()
 </script>

@@ -5,7 +5,7 @@
 - [ ] 4. profile page markup (Andrii)
 - [√] 5. v-if in nav bar for different buttons
 - [ ] 6. footer (Andrii)
-- [ ] 7. book card enhancements (Youssef)
+- [√] 7. book card enhancements (Youssef)
 - [ ] 8. Hero section bg (Asser)
 - [√] 9. hero section content 
 - [√] 10. random book data fetching and rendering (youssef)
@@ -14,7 +14,7 @@
 - [ ] 13. control the search of the g. API language and see why it's only 10 results. (asser)
 - [ ] 14. random book styles
 - [√] 15. solve token issue in store
-- [ ] 16. split data store from user store (asser)
+- [√] 16. split data store from user store (asser)
 - [x] 17. fix the post request to send the token also (as header) check old frontend (asser)
 - [x] 18. figure out how to redirect after login and data refresh and kinda data save !?
 - [√] 19. figure out how to save session (I am not a front end dev anymore. FM)

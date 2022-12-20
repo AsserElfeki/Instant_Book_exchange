@@ -42,10 +42,10 @@
 
 <script setup>
 import { v4 as uuidv4 } from "uuid"
-import { useStore } from '~/stores/store'
+import { useUserStore } from '~/stores/userStore'
 
 //data 
-const store = useStore()
+const store = useUserStore()
 const remember = ref(false)
 let id = uuidv4()
 const form = reactive({
