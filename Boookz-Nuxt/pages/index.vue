@@ -35,7 +35,17 @@ const store = useStore()
 .hero {
   overflow: hidden;
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   /* border: 3px solid blue; */
+}
+.showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-gap: 1rem;
+  margin: 1rem;
+  /* border: 3px solid red; */
 }
 </style>
 
