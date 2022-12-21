@@ -115,7 +115,7 @@ class ProfileInfoSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = BookReader
-        fields = ['user', 'profile_image', 'wanted_shelf', 'giveaway_shelf']
+        fields = ['user', 'country', 'profile_image', 'wanted_shelf', 'giveaway_shelf']
 
     def get_wanted_shelf(self, obj):
         book_shelves = WantedBookshelf.objects.get(book_reader=obj)

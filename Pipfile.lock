@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b40fd40103b480c92e9b907a3056ebbf72588b047f4105477624c70cda73203d"
+            "sha256": "ba284a9fba2432dabecc8202c9750e055c3a495ea9b68dd2944e5663e75df6f8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -60,6 +60,14 @@
             ],
             "index": "pypi",
             "version": "==3.13.0"
+        },
+        "django-countries": {
+            "hashes": [
+                "sha256:5097d9c16eb5f8a8c195f55e647a1cf1ce8a88fdeb27b104de089424013845a6",
+                "sha256:979676b1147ebbc10e8cdd67857ffffbcba8d7a92abf7ca70696ecd57d8f3d4f"
+            ],
+            "index": "pypi",
+            "version": "==7.5"
         },
         "django-filter": {
             "hashes": [
@@ -226,6 +234,13 @@
                 "sha256:69ca804846bb114d2ec380e4360a8a340db83f0ccf3afceeb1404df028f57268"
             ],
             "version": "==0.4.3"
+        },
+        "typing-extensions": {
+            "hashes": [
+                "sha256:1511434bb92bf8dd198c12b1cc812e800d4181cfcb867674e0f8279cc93087aa",
+                "sha256:16fa4864408f655d35ec496218b85f79b3437c829e93320c7c9215ccfd92489e"
+            ],
+            "version": "==4.4.0"
         },
         "zipp": {
             "hashes": [

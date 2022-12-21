@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'versatileimagefield',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+    'django_countries',
 ]
 
 REST_FRAMEWORK = {
