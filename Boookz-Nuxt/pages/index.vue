@@ -2,7 +2,6 @@
   <div class="container">
 
     <div class="">
-      <!-- <HeroBg /> -->
       <RandomBook :book="store.randomBook" />
     </div>
     <div class="allgiveaways">

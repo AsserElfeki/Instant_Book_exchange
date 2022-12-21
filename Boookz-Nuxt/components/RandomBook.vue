@@ -3,13 +3,16 @@
 
         <h3 class="self-start ml-3 text-[#695AC9]">#suggested for YOU</h3>
 
-        <div class="flex justify-center items-center mx-16 ">
+        <div class="flex justify-center items-center gap-10 px-16 w-11/12">
+            <div class="w-3/12 rounded-md  ">
+                <img class="rounded-md h-full w-full" src="../assets/img/book-cover.jpg" alt="cover of the book">
+            </div>
 
             <div class="">
                 <h3 class="text-xl text-black text-center">{{ book.title }}</h3>
-                <h3 class="text-center text-lg">By: {{ book.author }}</h3>
+                <!-- <h3 class="text-center text-lg">By: {{ book.author }}</h3> -->
                 <!-- <h4>{{ book.category }}</h4> -->
-                <p class="mt-4">{{ book.description }}</p>
+                <!-- <p class="mt-4">{{ book.owner }}</p> -->
                 <div class="book-rating">
                     <!-- <p>{{ bookRating }}</p> -->
                 </div>
@@ -17,11 +20,6 @@
                     <!-- <p>{{ bookPrice }}</p> -->
                 </div>
             </div>
-
-            <div class="w-full ml-4 rounded-md  ">
-                <img class="rounded-md h-full w-full" src="../assets/img/book-cover.jpg" alt="cover of the book">
-            </div>
-
         </div>
     </div>
 </template>

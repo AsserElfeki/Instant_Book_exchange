@@ -33,7 +33,7 @@
 - [x] 27. redirect after sign in
 - [x] 28. logout to endpoint 
 - [ ] 29. route guards 
-- [ ] 30. active tabs 
+- [ ] 30. active tabs (dynamic components)
 - [ ] 31. transactions page
 - [ ] 32. 
 
