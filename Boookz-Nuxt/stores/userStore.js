@@ -22,7 +22,7 @@ export const useUserStore = defineStore({
                 this.token = res.access;
                 if (this.token) {
                     this.userIsLoggedIn = true;
-                    await navigateTo('/')
+                    await navigateTo('/profile')
 
                 }
             }
