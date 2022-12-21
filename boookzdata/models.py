@@ -48,8 +48,7 @@ class Book(models.Model):
     condition = models.ForeignKey('boookzdata.BookCondition', related_name='books',on_delete=models.CASCADE, blank=True, null=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
-    book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, related_name='books',
-                                   related_query_name='book')
+    book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, blank=True, null=True, related_name='books', related_query_name='book')
 
     class Meta:
         ordering = ['-created']
@@ -62,8 +61,7 @@ class Book(models.Model):
 
 
 class BookShelf(PolymorphicModel):
-    book_reader = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='book_shelfs',
-                                    related_query_name='book_shelfs')
+    book_reader = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='book_shelfs', related_query_name='book_shelfs')
 
 
 class GiveawayBookshelf(BookShelf):

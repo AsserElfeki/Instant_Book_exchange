@@ -50,14 +50,19 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
         return queryset
 
-#TODO(drago): Think about this piece of shit, how to create long ass array of books
 class AllGiveawayView(ListAPIView):
-    serializer_class = GiveawayBookshelfSerializer
-    queryset = GiveawayBookshelf.objects.all()
+    serializer_class = BookSerializer
+    def get_queryset(self):
+        giveaway_shelves = GiveawayBookshelf.objects.all()
+        giveaway_books = Book.objects.filter(book_shelf_id__in=giveaway_shelves)
+        return giveaway_books
 
 class AllWantedView(ListAPIView):
-    serializer_class = WantedBookShelfSerializer
-    queryset = WantedBookshelf.objects.all()
+    serializer_class = BookSerializer
+    def get_queryset(self):
+        wanted_shelves = WantedBookshelf.objects.all()
+        wanted_books = Book.objects.filter(book_shelf_id__in=wanted_shelves)
+        return wanted_books
 
 #TODO(Victor): Think about code below xD
 class BooksFromChosenBookshelfView(ListAPIView):
