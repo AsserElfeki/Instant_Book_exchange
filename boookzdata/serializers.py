@@ -12,13 +12,13 @@ from rest_framework import serializers
 class AuthorSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = Author
-        fields = ['pk', 'name', 'url']
+        fields = ['name', ]
 
 
 class CategorySerializer(FlexFieldsModelSerializer):
     class Meta:
         model = Category
-        fields = ['pk', 'name']
+        fields = ['name']
         expandable_fields = {
             'products': ('boookzdata.BookSerializer', {'many': True})
         }
@@ -26,7 +26,7 @@ class CategorySerializer(FlexFieldsModelSerializer):
 class BookConditionSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = BookCondition
-        fields = ['pk', 'name']
+        fields = ['name']
 
 class BookShelfSerializer(FlexFieldsModelSerializer):
     shelf_owner = BookReaderSerializer(read_only=True)
@@ -63,14 +63,15 @@ class BookSerializer(FlexFieldsModelSerializer):
     description = serializers.CharField(required=False)
     condition = BookConditionSerializer(required=False)
     images = ImageSerializer(many=True)
-
+    author = AuthorSerializer(many=True) 
+    category = CategorySerializer(many=True)
 #TODO(Victor/drago): Give me book_owner of this book
     class Meta:
         model = Book
-        fields = ['pk', 'title', 'description', 'created', 'updated', 'condition', 'images', 'book_shelf']
-        expandable_fields = {
-            'category': ('boookzdata.CategorySerializer', {'many': True}),
-        }
+        fields = ['pk', 'title', 'author', 'description', 'category', 'created', 'updated', 'condition', 'images', 'book_shelf']
+        # expandable_fields = {
+            # 'category': ('boookzdata.CategorySerializer', {'many': True}),
+        # }
 
 class GiveawayBookshelfSerializer(FlexFieldsModelSerializer):
     shelf_owner = BookReaderSerializer(read_only=True)

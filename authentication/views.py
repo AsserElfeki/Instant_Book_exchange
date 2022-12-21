@@ -27,6 +27,18 @@ class ProfileInfoView(ListAPIView):
     serializer_class = ProfileInfoSerializer
     queryset = BookReader.objects.all()
 
+# class SingleProfileView(ListAPIView):
+    # serializer_class=ProfileInfoSerializer
+    # permission_classes = (IsAuthenticated,)
+
+    # def get_queryset(self):
+        # queryset = BookReader.objects.all()
+        # book_reader = BookReader.objects.get(user=self.request.user) 
+        # user = User.objects.get(bookreader=book_reader)
+        # profile = queryset.filter(user__in=user)
+        # return profile
+
+
 class ListBookReaderBooks(FlexFieldsModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = ListBookReaderSerializer
