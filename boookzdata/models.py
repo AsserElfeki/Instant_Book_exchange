@@ -43,7 +43,7 @@ class Category(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    author = models.ManyToManyField(Author, related_name='books')
+    # author = models.ManyToManyField(Author, related_name='books')
     category = models.ManyToManyField(Category, related_name='books')
     condition = models.ForeignKey('boookzdata.BookCondition', related_name='books',on_delete=models.CASCADE, blank=True, null=True)
     created = models.DateField(auto_now_add=True)
@@ -62,6 +62,10 @@ class Book(models.Model):
 
 class BookShelf(PolymorphicModel):
     book_reader = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='book_shelfs', related_query_name='book_shelfs')
+    non_polymorphic = models.Manager()
+
+    class Meta():
+        base_manager_name = 'non_polymorphic'
 
 
 class GiveawayBookshelf(BookShelf):

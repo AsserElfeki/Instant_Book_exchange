@@ -63,12 +63,12 @@ class BookSerializer(FlexFieldsModelSerializer):
     description = serializers.CharField(required=False)
     condition = BookConditionSerializer(required=False)
     images = ImageSerializer(many=True)
-    author = AuthorSerializer(many=True) 
+    # author = AuthorSerializer(many=True) 
     category = CategorySerializer(many=True)
 #TODO(Victor/drago): Give me book_owner of this book
     class Meta:
         model = Book
-        fields = ['pk', 'title', 'author', 'description', 'category', 'created', 'updated', 'condition', 'images', 'book_shelf']
+        fields = ['pk', 'title', 'description', 'category', 'created', 'updated', 'condition', 'images', 'book_shelf']
         # expandable_fields = {
             # 'category': ('boookzdata.CategorySerializer', {'many': True}),
         # }
