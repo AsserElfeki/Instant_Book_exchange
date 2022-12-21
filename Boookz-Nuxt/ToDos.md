@@ -23,7 +23,7 @@
 - [x] 22. @change of the username field I send to an endpoint that tells me if this user name is taken or not 
 - OR display response in a Toast
 - [x] 23. sign out
-- [x] 24. in register: res.response : happy 
+- [ ] 24. in register: res.response : happy 
                        res.username : username is taken
                           res.email : email is taken
                           res.password: weak 
@@ -33,6 +33,9 @@
 - [x] 27. redirect after sign in
 - [x] 28. logout to endpoint 
 - [ ] 29. route guards 
+- [ ] 30. active tabs 
+- [ ] 31. transactions page
+- [ ] 32. 
 
 
 

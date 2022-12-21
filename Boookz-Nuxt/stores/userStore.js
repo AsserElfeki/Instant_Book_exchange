@@ -8,8 +8,10 @@ export const useUserStore = defineStore({
         userIsLoggedIn: false,
         userWantedBooks: [],
         userGiveAwayBooks: [],
-        token: '',
         region: 'Poland',
+        userTransactions: [],
+        userRatings : [],
+        token: '',
 
     }),
     actions: {
@@ -70,7 +72,20 @@ export const useUserStore = defineStore({
             })
             this.userIsLoggedIn = false;
             this.token = '';
+        }, 
 
+        async getUserWantedBooks() {
+            const res = await $fetch('http://localhost:8000/data/wanted/', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userWantedBooks = res;
+        },
+
+        async getUserGiveAwayBooks() {
+            const res = await $fetch('http://localhost:8000/data/giveaway/', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userGiveAwayBooks = res;
         }
     },
 

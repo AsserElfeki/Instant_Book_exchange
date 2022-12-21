@@ -5,11 +5,17 @@
         <h3 class="text-white font-sans font-thin"> {{ userStore.region }}</h3>
 
         <div class="tabs mt-8 bg-white rounded-md h-24 w-11/12 flex justify-around items-center ">
-            <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Giveaway Shelf</button>
-            <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Wanted Shelf</button>
+            <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Giveaway</button>
+            <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Wanted</button>
             <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Transactions</button>
             <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Ratings</button>
+        </div>
+    </div>
 
+    <div class="content">
+        <div v-if="activeTab === 'Giveaway'">
+            hi
+            <p>hi again </p>
         </div>
     </div>
 </template>
@@ -21,15 +27,19 @@
 import { useUserStore } from '~~/stores/userStore';
 const userStore = useUserStore();
 
+const activeTab = ''
 
-//a function that adds class active to the button that fired the event
 function toggleTabs(event) {
     let array = document.getElementsByClassName("tab");
     for (let i = 0; i < array.length; i++) {
         array[i].classList.remove("active");
     }
     event.target.classList.add("active")
+    this.activeTab = event.target.innerText
+
+    console.log(this.activeTab)
 }
+
 
 </script>
 
@@ -46,7 +56,4 @@ function toggleTabs(event) {
 
 
 //ToDO: 
-// 1. figure out the change in clicking 
-// 2. figure out how to make the tabs responsive
-// 3. figure out how to make the tabs active
-// 4. figure out how to make the tabs change the content
+// 1. figure out how to make the tabs change the content
