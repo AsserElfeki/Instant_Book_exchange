@@ -14,8 +14,7 @@
 
     <div class="content">
         <div v-if="activeTab === 'Giveaway'">
-            hi
-            <p>hi again </p>
+
         </div>
     </div>
 </template>
@@ -46,6 +45,7 @@ function toggleTabs(event) {
 <style  scoped>
 .header {
     height: 500px;
+    width: 100%;
     background: linear-gradient(93.97deg, #695AC9 0.68%, #925AC9 98.66%);
 }
 
@@ -53,7 +53,3 @@ function toggleTabs(event) {
     background: #D4CDFF;
 }
 </style>
-
-
-//ToDO: 
-// 1. figure out how to make the tabs change the content

@@ -35,7 +35,7 @@
 - [ ] 29. route guards 
 - [ ] 30. active tabs (dynamic components)
 - [ ] 31. transactions page
-- [ ] 32. 
+- [ ] 32. settings page
 
 
 
