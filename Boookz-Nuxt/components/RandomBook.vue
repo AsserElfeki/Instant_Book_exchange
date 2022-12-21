@@ -1,15 +1,18 @@
 <template>
-    <div class="container">
-        <div class="book">
-            <div class="book-img">
-                <!-- <img :src="bookImg" alt="book image"> -->
-                <h1>random book</h1>
+    <div class="container flex flex-col justify-center items-center rounded-2xl">
+
+        <h3 class="self-start ml-3 text-[#695AC9]">#suggested for YOU</h3>
+
+        <div class="flex justify-center items-center gap-10 px-16 w-11/12">
+            <div class="w-3/12 rounded-md  ">
+                <img class="rounded-md h-full w-full" src="../assets/img/book-cover.jpg" alt="cover of the book">
             </div>
-            <div class="book-info">
-                <h2>{{ book.title }}</h2>
-                <h3>{{ book.author }}</h3>
-                <h4>{{ book.category }}</h4>
-                <p>{{ book.description }}</p>
+
+            <div class="">
+                <h3 class="text-xl text-black text-center">{{ book.title }}</h3>
+                <!-- <h3 class="text-center text-lg">By: {{ book.author }}</h3> -->
+                <!-- <h4>{{ book.category }}</h4> -->
+                <!-- <p class="mt-4">{{ book.owner }}</p> -->
                 <div class="book-rating">
                     <!-- <p>{{ bookRating }}</p> -->
                 </div>
@@ -29,8 +32,11 @@ console.log("random book:", book)
 
 <style scoped>
 .container {
-    background-image: "../assets/img/heroBackground.jpg";
-    
+    background-image: url("../assets/img/heroBackground.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 400px;
 }
 </style>
 

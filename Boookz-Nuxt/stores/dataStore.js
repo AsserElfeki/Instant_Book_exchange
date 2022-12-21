@@ -3,19 +3,21 @@ import { defineStore } from 'pinia';
 export const useDataStore = defineStore({
   id: 'dataStore',
   state: () => ({
-    books: [],
     wantedBooks: [],
     giveAwayBooks: [],
     randomBook: {},
   }),
   actions: {
-    async getBooksFromDB() {
-      const res = await $fetch('http://localhost:4000/books');
-      this.books = res;
-      this.randomBook = this.books[Math.floor(Math.random() * this.books.length)];
-      // console.log("books:" + this.books.at(1).title);
+    async getWantedBooksFromDB() {
+      const res = await $fetch('http://127.0.0.1:8000/data/wanted/');
+      this.wantedBooks = res;
     },
 
+    async getOfferedBooksFromDB() {
+      const res = await $fetch('http://127.0.0.1:8000/data/giveaway/');
+      this.giveAwayBooks = res;
+      this.randomBook = this.giveAwayBooks[Math.floor(Math.random() * this.giveAwayBooks.length)];
+    }
   },
 
   //to get specific parts of data, like select <items> from <container> WHERE <condition>
@@ -24,7 +26,7 @@ export const useDataStore = defineStore({
   },
 
   persist: {
-    storage: persistedState.localStorage,
+    storage: persistedState.sessionStorage,
   },
 });
 

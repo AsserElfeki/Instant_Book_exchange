@@ -2,12 +2,15 @@ import { defineStore } from 'pinia';
 export const useUserStore = defineStore({
     id: 'userStore',
     state: () => ({
-        userName: '',
+        userName: 'Leonardo Davinci',
         userPassword: '',
         userIsSearching: false,
         userIsLoggedIn: false,
         userWantedBooks: [],
         userGiveAwayBooks: [],
+        region: 'Poland',
+        userTransactions: [],
+        userRatings : [],
         token: '',
 
     }),
@@ -69,6 +72,20 @@ export const useUserStore = defineStore({
             })
             this.userIsLoggedIn = false;
             this.token = '';
+        }, 
+
+        async getUserWantedBooks() {
+            const res = await $fetch('http://localhost:8000/data/wanted/', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userWantedBooks = res;
+        },
+
+        async getUserGiveAwayBooks() {
+            const res = await $fetch('http://localhost:8000/data/giveaway/', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userGiveAwayBooks = res;
         }
     },
 
