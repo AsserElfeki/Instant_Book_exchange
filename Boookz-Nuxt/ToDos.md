@@ -2,13 +2,13 @@
 - [x] 1. signup function in store 
 - [x] 2. data in store
 - [x] 3. login token in store (youssef)
-- [ ] 4. profile page markup (Andrii)
+- [ ] 4. profile page markup (Asser)
 - [x] 5. v-if in nav bar for different buttons
 - [ ] 6. footer (Andrii)
 - [x] 7. book card enhancements (Youssef)
 - [ ] 8. Hero section bg (Asser)
 - [x] 9. hero section content 
-- [x] 10. random book data fetching and rendering (youssef)
+- [ ] 10. random book data fetching and rendering (youssef)
 - [ ] 11. [id] page template 
 - [ ] 12. [id] page data fetching and rendering
 - [ ] 13. control the search of the g. API language and see why it's only 10 results. (asser)
@@ -37,12 +37,10 @@
 
 ###will DO: 
 25
-profile page template 
-homepage data fetching 
+profile page template (get request with token)
+random book styles
 
-## Parts to do : 
-- [ ] 1. urls of post request in store. 
-- [ ] 2. 
+
 
 #Notes: 
 put is used for updating data (i.e updating user profile)

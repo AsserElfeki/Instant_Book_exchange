@@ -1,7 +1,7 @@
 <template>
 
     <div class="navBar">
-        <NuxtLink to="/" class="flex gap-2 justify-start self-start">
+        <NuxtLink to="/" class="app-name flex gap-2 justify-start self-start">
             <AppLogo />
             <div class="app-name gap-8">
                 <h1 class="hi">Boookz</h1>
@@ -72,10 +72,4 @@ export default {
 }
 </style>
 
-// ToDO : 
-// 1. Add a search bar ✅
-// 2. Add a search button ✅
-// 3. Add a search function ✅
-// 6. Add a search result component to the home page
-// 7. get authentication status and display nav bar accordingly
 
