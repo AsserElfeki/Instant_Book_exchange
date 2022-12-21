@@ -2,11 +2,11 @@
 - [x] 1. signup function in store 
 - [x] 2. data in store
 - [x] 3. login token in store (youssef)
-- [ ] 4. profile page markup (Asser)
+- [x] 4. profile page markup (Asser)
 - [x] 5. v-if in nav bar for different buttons
 - [ ] 6. footer (Andrii)
 - [x] 7. book card enhancements (Youssef)
-- [ ] 8. Hero section bg (Asser)
+- [x] 8. Hero section bg (Asser)
 - [x] 9. hero section content 
 - [ ] 10. random book data fetching and rendering (youssef)
 - [ ] 11. [id] page template 
@@ -33,7 +33,7 @@
 - [x] 27. redirect after sign in
 - [x] 28. logout to endpoint 
 - [ ] 29. route guards 
-- [ ] 30. active tabs (dynamic components)
+- [ ] 30. **active tabs (dynamic components)**
 - [ ] 31. transactions page
 - [ ] 32. settings page
 
