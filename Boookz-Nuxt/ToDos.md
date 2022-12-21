@@ -36,7 +36,7 @@
 
 
 ###will DO: 
-25, 26, 27
+25
 profile page template 
 homepage data fetching 
 
