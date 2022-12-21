@@ -47,12 +47,9 @@ export default {
             store.logOut()
 
         }
-
-
         return { searchQuery, googleAPIStore, search, store, logOut }
     }
 }
-
 
 </script>
 
