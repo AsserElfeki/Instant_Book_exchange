@@ -110,8 +110,19 @@ class CommentSerializer(FlexFieldsModelSerializer):
 class ProfileInfoSerializer(FlexFieldsModelSerializer):
     user = UserSerializer(read_only=True)
     profile_image = ImageSerializer(read_only=True)
+    wanted_shelf = serializers.SerializerMethodField()
+    giveaway_shelf = serializers.SerializerMethodField()
 
     class Meta:
         model = BookReader
-        fields = ['user', 'profile_image',]
+        fields = ['user', 'profile_image', 'wanted_shelf', 'giveaway_shelf']
 
+    def get_wanted_shelf(self, obj):
+        book_shelves = WantedBookshelf.objects.get(book_reader=obj)
+        serializer = WantedBookShelfSerializer(book_shelves, context = self.context)
+        return serializer.data 
+
+    def get_giveaway_shelf(self, obj):
+        book_shelves = GiveawayBookshelf.objects.get(book_reader=obj)
+        serializer = GiveawayBookshelfSerializer(book_shelves, context = self.context)
+        return serializer.data 
