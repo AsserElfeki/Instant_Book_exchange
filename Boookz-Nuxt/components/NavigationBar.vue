@@ -1,7 +1,7 @@
 <template>
 
     <div class="navBar">
-        <NuxtLink to="/" class="app-name flex gap-2 justify-start self-start">
+        <NuxtLink to="/" class="flex gap-2 justify-start self-start">
             <AppLogo />
             <div class="app-name gap-8">
                 <h1 class="hi">Boookz</h1>
@@ -18,7 +18,7 @@
             <NuxtLink class="btn" to="/signin" v-if="!store.userIsLoggedIn">Sign in</NuxtLink>
             <NuxtLink class="btn" to="/register" v-if="!store.userIsLoggedIn">Sign up</NuxtLink>
             <NuxtLink class="btn" to="/profile" v-if="store.userIsLoggedIn">Profile</NuxtLink>
-            <NuxtLink to="/" v-if="store.userIsLoggedIn" @click="logOut" class="btn">Log Out</NuxtLink>
+            <NuxtLink to="/signIn" v-if="store.userIsLoggedIn" @click="logOut" class="btn">Log Out</NuxtLink>
         </ul>
     </div>
 
@@ -45,6 +45,7 @@ export default {
 
         const logOut = () => {
             store.logOut()
+
         }
 
 

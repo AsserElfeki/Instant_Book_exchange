@@ -12,7 +12,7 @@
 - [ ] 11. [id] page template 
 - [ ] 12. [id] page data fetching and rendering
 - [ ] 13. control the search of the g. API language and see why it's only 10 results. (asser)
-- [ ] 14. random book styles
+- [x] 14. random book styles
 - [x] 15. solve token issue in store
 - [x] 16. split data store from user store (asser)
 - [x] 17. fix the post request to send the token also (as header) check old frontend (asser)
@@ -32,13 +32,13 @@
 - [x] 26. redirect after register
 - [x] 27. redirect after sign in
 - [x] 28. logout to endpoint 
+- [ ] 29. route guards 
 
 
 
 ###will DO: 
 25
 profile page template (get request with token)
-random book styles
 
 
 

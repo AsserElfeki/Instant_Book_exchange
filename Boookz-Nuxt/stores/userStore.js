@@ -2,13 +2,14 @@ import { defineStore } from 'pinia';
 export const useUserStore = defineStore({
     id: 'userStore',
     state: () => ({
-        userName: '',
+        userName: 'Leonardo Davinci',
         userPassword: '',
         userIsSearching: false,
         userIsLoggedIn: false,
         userWantedBooks: [],
         userGiveAwayBooks: [],
         token: '',
+        region: 'Poland',
 
     }),
     actions: {
@@ -69,6 +70,7 @@ export const useUserStore = defineStore({
             })
             this.userIsLoggedIn = false;
             this.token = '';
+
         }
     },
 
