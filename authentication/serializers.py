@@ -1,4 +1,5 @@
 from django.core.serializers import serialize
+from django_countries.serializer_fields import CountryField
 from rest_flex_fields import FlexFieldsModelSerializer
 from rest_framework import serializers
 from django.contrib.auth.models import User
@@ -21,7 +22,6 @@ class BookReaderSerializer(serializers.ModelSerializer):
         model = BookReader
         fields = ['user']
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -35,7 +35,7 @@ class ImageSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = ProfileImage
-        fields = ['name', 'image']
+        fields = ['image']
 
 
 class ListBookReaderSerializer(serializers.ModelSerializer):
@@ -136,7 +136,6 @@ class LoginSerializer(TokenObtainPairSerializer):
             error_name = "inactive_profile"
             raise AuthenticationFailed(error_message, error_name)
         return data
-
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
