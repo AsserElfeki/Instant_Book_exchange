@@ -48,6 +48,9 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
         if is_expanded(self.request, 'condition'):
             queryset = queryset.prefetch_related('condition')
 
+        if is_expanded(self.request, 'author'):
+            queryset = queryset.prefetch_related('author')
+
         return queryset
 
 class AllGiveawayView(ListAPIView):
