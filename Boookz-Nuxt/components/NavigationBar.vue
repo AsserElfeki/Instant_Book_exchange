@@ -18,7 +18,7 @@
             <NuxtLink class="btn" to="/signin" v-if="!store.userIsLoggedIn">Sign in</NuxtLink>
             <NuxtLink class="btn" to="/register" v-if="!store.userIsLoggedIn">Sign up</NuxtLink>
             <NuxtLink class="btn" to="/profile" v-if="store.userIsLoggedIn">Profile</NuxtLink>
-            <NuxtLink to="/" v-if="store.userIsLoggedIn" @click="logOut" class="btn">Log Out</NuxtLink>
+            <NuxtLink to="/signIn" v-if="store.userIsLoggedIn" @click="logOut" class="btn">Log Out</NuxtLink>
         </ul>
     </div>
 
@@ -45,13 +45,11 @@ export default {
 
         const logOut = () => {
             store.logOut()
+
         }
-
-
         return { searchQuery, googleAPIStore, search, store, logOut }
     }
 }
-
 
 </script>
 
@@ -72,10 +70,4 @@ export default {
 }
 </style>
 
-// ToDO : 
-// 1. Add a search bar ✅
-// 2. Add a search button ✅
-// 3. Add a search function ✅
-// 6. Add a search result component to the home page
-// 7. get authentication status and display nav bar accordingly
 

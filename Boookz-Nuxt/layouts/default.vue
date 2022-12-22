@@ -16,7 +16,8 @@
 import { useDataStore } from '~~/stores/dataStore'
 const store = useDataStore()
 //running it here so it always runs and I dont have to call it inside each component/page
-store.getBooksFromDB()
+store.getOfferedBooksFromDB();
+store.getWantedBooksFromDB();
 </script>
 
 <style>
@@ -42,9 +43,13 @@ html {
 
 /* exact link will show the primary color for only the exact matching link */
 .router-link-exact-active {
-  background-color: rgba(59, 130, 246);
+  background-color: #695AC9;
   color: white;
   box-shadow: 3px 3px 3px rgb(114, 114, 114);
+}
+
+.app-name {
+  /* background-color: transparent; */
 }
 </style>
 

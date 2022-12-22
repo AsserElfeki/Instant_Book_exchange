@@ -2,17 +2,17 @@
 - [x] 1. signup function in store 
 - [x] 2. data in store
 - [x] 3. login token in store (youssef)
-- [ ] 4. profile page markup (Andrii)
+- [x] 4. profile page markup (Asser)
 - [x] 5. v-if in nav bar for different buttons
 - [ ] 6. footer (Andrii)
 - [x] 7. book card enhancements (Youssef)
-- [ ] 8. Hero section bg (Asser)
+- [x] 8. Hero section bg (Asser)
 - [x] 9. hero section content 
-- [x] 10. random book data fetching and rendering (youssef)
+- [ ] 10. random book data fetching and rendering (youssef)
 - [ ] 11. [id] page template 
 - [ ] 12. [id] page data fetching and rendering
-- [ ] 13. control the search of the g. API language and see why it's only 10 results. (asser)
-- [ ] 14. random book styles
+- [ ] 13. **profile components** 
+- [x] 14. random book styles
 - [x] 15. solve token issue in store
 - [x] 16. split data store from user store (asser)
 - [x] 17. fix the post request to send the token also (as header) check old frontend (asser)
@@ -23,26 +23,28 @@
 - [x] 22. @change of the username field I send to an endpoint that tells me if this user name is taken or not 
 - OR display response in a Toast
 - [x] 23. sign out
-- [x] 24. in register: res.response : happy 
+- [ ] 24. in register: res.response : happy 
                        res.username : username is taken
                           res.email : email is taken
                           res.password: weak 
                           res.password2: no match
-- [ ] 25. Toats for last task
-- [ ] 26. redirect after register
-- [ ] 27. redirect after sign in
+- [ ] 25. Toasts for last task
+- [x] 26. redirect after register
+- [x] 27. redirect after sign in
 - [x] 28. logout to endpoint 
+- [ ] 29. route guards 
+- [x] 30. active tabs (dynamic components)
+- [ ] 31. transactions page
+- [ ] 32. settings page
+- [ ] 33. user shelves from the correct endpoints 
 
 
 
 ###will DO: 
-25, 26, 27
-profile page template 
-homepage data fetching 
+25
+profile page template (get request with token)
 
-## Parts to do : 
-- [ ] 1. urls of post request in store. 
-- [ ] 2. 
+
 
 #Notes: 
 put is used for updating data (i.e updating user profile)

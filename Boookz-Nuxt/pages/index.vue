@@ -1,15 +1,17 @@
 <template>
   <div class="container">
 
-    <div class="border border-solid border-red-500 border-3">
-      <!-- <HeroBg /> -->
+    <div class="">
       <RandomBook :book="store.randomBook" />
     </div>
     <div class="allgiveaways">
       <h2 class="flex justify-center text-3xl m-8 text-primary">Offered by our users in your area</h2>
       <div class="showcase">
-        <div class="book" v-for="book in store.books" :key="book.title">
-          <BookCard :book="book" />
+        <div class="book" v-for="book in store.giveAwayBooks" :key="book.title">
+          <NuxtLink :to="`/books/${book.title.replaceAll(' ', '-')}`">
+            <BookCard :book="book" />
+          </NuxtLink>
+
         </div>
 
       </div>
@@ -17,8 +19,10 @@
     <div class="allwanted">
       <h2 class="flex justify-center text-3xl m-8">Wanted by users in your area</h2>
       <div class="showcase">
-        <div class="book" v-for="book in store.books" :key="book.title">
-          <BookCard :book="book" />
+        <div class="book" v-for="book in store.wantedBooks" :key="book.title">
+          <NuxtLink :to="`/books/${book.title.replaceAll(' ', '-')}`">
+            <BookCard :book="book" />
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -50,7 +54,3 @@ const store = useDataStore()
 }
 </style>
 
-
-//ToDO: 
-// 1. get data from store.js (loggedIn, books[]) ✅
-// 2. process the data and render 

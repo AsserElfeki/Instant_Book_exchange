@@ -2,14 +2,18 @@ import { defineStore } from 'pinia';
 export const useUserStore = defineStore({
     id: 'userStore',
     state: () => ({
-        userName: '',
+        userName: 'Leonardo Davinci',
         userPassword: '',
         userIsSearching: false,
         userIsLoggedIn: false,
         userWantedBooks: [],
         userGiveAwayBooks: [],
+        region: 'Poland',
+        userTransactions: [],
+        userRatings: [],
         token: '',
-
+        registerError: {},
+        loginError: "",
     }),
     actions: {
         async signIn(form) {
@@ -22,8 +26,7 @@ export const useUserStore = defineStore({
                 this.token = res.access;
                 if (this.token) {
                     this.userIsLoggedIn = true;
-                    await navigateTo('/')
-
+                    await navigateTo('/profile')
                 }
             }
             catch (error) {
@@ -41,23 +44,25 @@ export const useUserStore = defineStore({
                 if (res.response) {
                     //display a toast that says register successful 
                 }
-                else {
-                    if (res.username) {
-                        //display a toast that says username already exists
-                    }
-                    else if (res.email) {
-                        //display a toast that says email already exists
-                    }
-                    else if (res.password) {
-                        //display a toast that says password is too short
-                    }
-                    else if (res.password2) {
-                        //display a toast that says passwords do not match
-                    }
-                }
+                // else {
+                //     if (res.username) {
+                //         //display a toast that says username already exists
+                //         // this.registerError = res.username.value
+                //     }
+                //     else if (res.email) {
+                //         //display a toast that says email already exists
+                //     }
+                //     else if (res.password) {
+                //         //display a toast that says password is too short
+                //     }
+                //     else if (res.password2) {
+                //         //display a toast that says passwords do not match
+                //     }
+                // }
             }
             catch (error) {
-                console.log(error);
+                console.log(error.data);
+                this.registerError = error.data.username;
             }
 
         },
@@ -67,8 +72,23 @@ export const useUserStore = defineStore({
                 method: 'POST',
                 headers: { "authorization": "Bearer " + this.token }
             })
-            this.userIsLoggedIn = false;
-            this.token = '';
+            // this.userIsLoggedIn = false;
+            // this.token = '';
+            this.$reset();
+        },
+
+        async getUserWantedBooks() {
+            const res = await $fetch('http://localhost:8000/data/wanted/', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userWantedBooks = res;
+        },
+
+        async getUserGiveAwayBooks() {
+            const res = await $fetch('http://localhost:8000/data/giveaway/', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userGiveAwayBooks = res;
         }
     },
 
@@ -76,7 +96,7 @@ export const useUserStore = defineStore({
     getters: {
     },
     persist: {
-        storage: persistedState.localStorage,
+        storage: persistedState.sessionStorage,
     },
 
 });
