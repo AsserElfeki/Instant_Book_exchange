@@ -1,20 +1,20 @@
 <template>
   <div class="wrapper">
     <div class="content-wrapper">
-      <NavigationBar />
+      <NavigationBar class="" />
+
       <div class="content">
         <!-- this where the page components go -->
         <slot />
       </div>
-      <AppFooter />
     </div>
   </div>
-
+  <AppFooter />
 </template>
 
 <script setup>
-import { useDataStore } from '~~/stores/dataStore'
-const store = useDataStore()
+import { useDataStore } from "~~/stores/dataStore";
+const store = useDataStore();
 //running it here so it always runs and I dont have to call it inside each component/page
 store.getOfferedBooksFromDB();
 store.getWantedBooksFromDB();
@@ -40,10 +40,9 @@ html {
   /* border: 2px solid red; */
 }
 
-
 /* exact link will show the primary color for only the exact matching link */
 .router-link-exact-active {
-  background-color: #695AC9;
+  background-color: #695ac9;
   color: white;
   box-shadow: 3px 3px 3px rgb(114, 114, 114);
 }
@@ -52,8 +51,3 @@ html {
   /* background-color: transparent; */
 }
 </style>
-
-
-
-
-
