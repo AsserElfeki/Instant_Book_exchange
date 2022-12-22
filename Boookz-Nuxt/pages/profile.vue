@@ -1,59 +1,62 @@
 <template>
-    <div class="header flex flex-col justify-between items-center py-8">
-        <img src="../assets/img/avatar.png" alt="profile avatar" class="">
-        <h2 class="text-white font-sans text-2xl font-bold">{{ userStore.userName }}</h2>
-        <h3 class="text-white font-sans font-thin"> {{ userStore.region }}</h3>
+  <div class="header flex flex-col justify-between items-center py-8 rounded-md">
+    <img src="../assets/img/avatar.png" alt="profile avatar" class="" />
+    <h2 class="text-white font-sans text-2xl font-bold">{{ userStore.userName }}</h2>
+    <h3 class="text-white font-sans font-thin">{{ userStore.region }}</h3>
 
-        <div class="tabs mt-8 bg-white rounded-md h-24 w-11/12 flex justify-around items-center ">
-            <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Giveaway</button>
-            <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Wanted</button>
-            <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Transactions</button>
-            <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">Ratings</button>
-        </div>
+    <div
+      class="tabs mt-8 bg-white rounded-md h-24 w-11/12 flex justify-around items-center"
+    >
+      <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">
+        Giveaway
+      </button>
+      <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">
+        Wanted
+      </button>
+      <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">
+        Transactions
+      </button>
+      <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">
+        Ratings
+      </button>
     </div>
+  </div>
 
-    <div class="content">
-        <LazyProfileGiveaway v-if="activeTab === 'Giveaway'" />
-        <LazyProfileWanted v-if="activeTab === 'Wanted'" />
-        <LazyProfileTransactions v-if="activeTab === 'Transactions'" />
-        <LazyProfileRatings v-if="activeTab === 'Ratings'" />
-
-
-    </div>
+  <div class="content">
+    <LazyProfileGiveaway v-if="activeTab === 'Giveaway'" />
+    <LazyProfileWanted v-if="activeTab === 'Wanted'" />
+    <LazyProfileTransactions v-if="activeTab === 'Transactions'" />
+    <LazyProfileRatings v-if="activeTab === 'Ratings'" />
+  </div>
 </template>
-
-
-
 
 <script setup>
 // import { LazyProfileRatings, LazyProfileTransactions } from '~/.nuxt/components';
-import { useUserStore } from '~~/stores/userStore';
+import { useUserStore } from "~~/stores/userStore";
 const userStore = useUserStore();
 
-const activeTab = ref('')
+const activeTab = ref("");
 
 function toggleTabs(event) {
-    let array = document.getElementsByClassName("tab");
-    for (let i = 0; i < array.length; i++) {
-        array[i].classList.remove("active");
-    }
-    event.target.classList.add("active")
-    this.activeTab = event.target.innerText
+  let array = document.getElementsByClassName("tab");
+  for (let i = 0; i < array.length; i++) {
+    array[i].classList.remove("active");
+  }
+  event.target.classList.add("active");
+  this.activeTab = event.target.innerText;
 
-    console.log(this.activeTab)
+  console.log(this.activeTab);
 }
-
-
 </script>
 
-<style  scoped>
+<style scoped>
 .header {
-    height: 500px;
-    width: 100%;
-    background: linear-gradient(93.97deg, #695AC9 0.68%, #925AC9 98.66%);
+  height: 500px;
+  width: 100%;
+  background: linear-gradient(93.97deg, #695ac9 0.68%, #925ac9 98.66%);
 }
 
 .active {
-    background: #D4CDFF;
+  background: #d4cdff;
 }
 </style>
