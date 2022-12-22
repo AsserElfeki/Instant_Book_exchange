@@ -25,6 +25,8 @@
                     <input required class="input" size="28" type="name" name="username" id="username"
                         placeholder="username" v-model="form.username" />
                     <p>username: {{ form.username }}</p>
+                    <p v-if="store.registerError.username"> error: {{ store.registerError.username.value }}</p>
+
                 </div>
 
                 <div class="">
@@ -74,6 +76,7 @@ const form = reactive({
     email: "",
     password: "",
     password2: "",
+    country: "PL"
 });
 
 //functions

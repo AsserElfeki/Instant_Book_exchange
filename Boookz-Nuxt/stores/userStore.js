@@ -12,7 +12,8 @@ export const useUserStore = defineStore({
         userTransactions: [],
         userRatings: [],
         token: '',
-
+        registerError: {},
+        loginError: "",
     }),
     actions: {
         async signIn(form) {
@@ -43,23 +44,25 @@ export const useUserStore = defineStore({
                 if (res.response) {
                     //display a toast that says register successful 
                 }
-                else {
-                    if (res.username) {
-                        //display a toast that says username already exists
-                    }
-                    else if (res.email) {
-                        //display a toast that says email already exists
-                    }
-                    else if (res.password) {
-                        //display a toast that says password is too short
-                    }
-                    else if (res.password2) {
-                        //display a toast that says passwords do not match
-                    }
-                }
+                // else {
+                //     if (res.username) {
+                //         //display a toast that says username already exists
+                //         // this.registerError = res.username.value
+                //     }
+                //     else if (res.email) {
+                //         //display a toast that says email already exists
+                //     }
+                //     else if (res.password) {
+                //         //display a toast that says password is too short
+                //     }
+                //     else if (res.password2) {
+                //         //display a toast that says passwords do not match
+                //     }
+                // }
             }
             catch (error) {
-                console.log(error);
+                console.log(error.data);
+                this.registerError = error.data.username;
             }
 
         },

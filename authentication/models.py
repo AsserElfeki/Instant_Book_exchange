@@ -23,7 +23,7 @@ class BookReader(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_image = models.OneToOneField(ProfileImage, on_delete=models.CASCADE, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
-    country = CountryField(blank=True, null=True)
+    # country = CountryField(blank=True, null=True)
 
     # rating
     # transaction_history
