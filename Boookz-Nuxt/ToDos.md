@@ -11,7 +11,7 @@
 - [ ] 10. random book data fetching and rendering (youssef)
 - [ ] 11. [id] page template 
 - [ ] 12. [id] page data fetching and rendering
-- [ ] 13. control the search of the g. API language and see why it's only 10 results. (asser)
+- [ ] 13. **profile components** 
 - [x] 14. random book styles
 - [x] 15. solve token issue in store
 - [x] 16. split data store from user store (asser)
@@ -33,7 +33,7 @@
 - [x] 27. redirect after sign in
 - [x] 28. logout to endpoint 
 - [ ] 29. route guards 
-- [ ] 30. **active tabs (dynamic components)**
+- [x] 30. **active tabs (dynamic components)**
 - [ ] 31. transactions page
 - [ ] 32. settings page
 

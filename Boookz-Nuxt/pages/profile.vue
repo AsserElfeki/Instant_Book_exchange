@@ -13,9 +13,12 @@
     </div>
 
     <div class="content">
-        <div v-if="activeTab === 'Giveaway'">
+        <LazyProfileGiveaway v-if="activeTab === 'Giveaway'" />
+        <LazyProfileWanted v-if="activeTab === 'Wanted'" />
+        <LazyProfileTransactions v-if="activeTab === 'Transactions'" />
+        <LazyProfileRatings v-if="activeTab === 'Ratings'" />
 
-        </div>
+
     </div>
 </template>
 
@@ -23,10 +26,11 @@
 
 
 <script setup>
+// import { LazyProfileRatings, LazyProfileTransactions } from '~/.nuxt/components';
 import { useUserStore } from '~~/stores/userStore';
 const userStore = useUserStore();
 
-const activeTab = ''
+const activeTab = ref('')
 
 function toggleTabs(event) {
     let array = document.getElementsByClassName("tab");

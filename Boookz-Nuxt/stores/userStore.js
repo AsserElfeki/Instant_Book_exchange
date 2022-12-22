@@ -10,7 +10,7 @@ export const useUserStore = defineStore({
         userGiveAwayBooks: [],
         region: 'Poland',
         userTransactions: [],
-        userRatings : [],
+        userRatings: [],
         token: '',
 
     }),
@@ -70,9 +70,10 @@ export const useUserStore = defineStore({
                 method: 'POST',
                 headers: { "authorization": "Bearer " + this.token }
             })
-            this.userIsLoggedIn = false;
-            this.token = '';
-        }, 
+            // this.userIsLoggedIn = false;
+            // this.token = '';
+            this.$reset();
+        },
 
         async getUserWantedBooks() {
             const res = await $fetch('http://localhost:8000/data/wanted/', {
