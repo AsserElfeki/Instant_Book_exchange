@@ -43,7 +43,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 
 ### to run the backend server 
-
+cd to the root directory of the whole project, then:
 - pipenv install --python 3.10 (or 3.8)
 - *if it was successfull: * 
 - pipenv shell
