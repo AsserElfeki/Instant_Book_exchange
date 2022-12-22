@@ -7,6 +7,7 @@ from django_countries.fields import CountryField
 
 from boookzdata.models import WantedBookshelf, GiveawayBookshelf
 
+
 class ProfileImage(models.Model):
     name = models.CharField(max_length=255)
     image = VersatileImageField(
@@ -19,15 +20,13 @@ class ProfileImage(models.Model):
     def __str__(self):
         return self.name
 
+
 class BookReader(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = models.OneToOneField(ProfileImage, on_delete=models.CASCADE, blank=True, null=True)
+    profile_image = models.OneToOneField(
+        ProfileImage, on_delete=models.CASCADE, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
-<<<<<<< HEAD
-    # country = CountryField(blank=True, null=True)
-=======
     country = CountryField(blank=True, null=True, default='PL')
->>>>>>> drago
 
     # rating
     # transaction_history
@@ -39,8 +38,10 @@ class BookReader(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         book_reader, created = BookReader.objects.get_or_create(user=instance)
-        wanted_shelf, created = WantedBookshelf.objects.get_or_create(book_reader=book_reader)
-        giveaway_shelf, created = GiveawayBookshelf.objects.get_or_create(book_reader=book_reader)
+        wanted_shelf, created = WantedBookshelf.objects.get_or_create(
+            book_reader=book_reader)
+        giveaway_shelf, created = GiveawayBookshelf.objects.get_or_create(
+            book_reader=book_reader)
 
 
 post_save.connect(create_user_profile, sender=User)
