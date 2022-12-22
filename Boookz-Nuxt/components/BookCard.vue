@@ -37,7 +37,7 @@ const { book } = defineProps(['book'])
 }
 
 .user-image {
-    top: 450px;
+    top: 550px;
     transform: translateX(-50%);
 }
 </style>
