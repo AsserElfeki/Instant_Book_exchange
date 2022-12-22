@@ -36,6 +36,7 @@
 - [x] 30. active tabs (dynamic components)
 - [ ] 31. transactions page
 - [ ] 32. settings page
+- [ ] 33. user shelves from the correct endpoints 
 
 
 
