@@ -9,9 +9,9 @@
 - [x] 8. Hero section bg (Asser)
 - [x] 9. hero section content 
 - [ ] 10. random book data fetching and rendering (youssef)
-- [ ] 11. [id] page template 
-- [ ] 12. [id] page data fetching and rendering
-- [ ] 13. **profile components** 
+- [ ] 11. [id] page template (Youssef)
+- [ ] 12. [id] page data fetching and rendering (Youssef)
+- [x] 13. profile components
 - [x] 14. random book styles
 - [x] 15. solve token issue in store
 - [x] 16. split data store from user store (asser)
@@ -36,13 +36,9 @@
 - [x] 30. active tabs (dynamic components)
 - [ ] 31. transactions page
 - [ ] 32. settings page
-- [ ] 33. user shelves from the correct endpoints 
+- [x] 33. user shelves from the correct endpoints 
 
 
-
-###will DO: 
-25
-profile page template (get request with token)
 
 
 
