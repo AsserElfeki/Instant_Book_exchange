@@ -42,11 +42,31 @@ npm run preview
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
 
-#to run json server :
-json-server -w -p 4000 ./data/books.json 
-
 ### to run the backend server 
-pipenv uninstall -all;pipenv install;pipenv uninstall python-magic;pipenv uninstall python-magic-bin;pipenv install python-magic;pipenv install python-magic-bin
 
-pipenv shell
-python manage.py runserver
+- pipenv install --python 3.10 (or 3.8)
+- *if it was successfull: * 
+- pipenv shell
+- python manage.py makemigrations
+- python manage.py migrate 
+- *delete the db.sqlite3 file from the root directory of the whole project, then download the correct one (shared on dis)
+- to the same place*
+- python manage.py runserver
+
+*if errors:* send on discord with a screenshot 
+
+
+#### then: you can sign in on the website using : 
+
+|username | password|
+|---|---|
+|root | toor|
+|dina | password!@#|
+|yaroslav | password!@#|
+|asser | password!@#|
+|youssef | password!@#|
+|andrii | password!@#|
+
+#### and now you have data to work with like books in shelves and stuff 
+
+GOOD LUCK 
