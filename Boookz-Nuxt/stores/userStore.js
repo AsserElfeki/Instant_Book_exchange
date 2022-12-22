@@ -12,7 +12,8 @@ export const useUserStore = defineStore({
         userTransactions: [],
         userRatings: [],
         token: '',
-
+        registerError: [],
+        loginError: "",
     }),
     actions: {
         async signIn(form) {
