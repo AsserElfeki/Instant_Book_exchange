@@ -41,6 +41,8 @@ so whenever you need containers, don't be shy to add div or section
 
 2- Tailwind : https://www.youtube.com/watch?v=bxmDnn7lrnk&list=PL4cUxeGkcC9gpXORlEHjc5bgnIi5HEGhw&index=1
 
+3- tailwind cheatsheet: https://nerdcave.com/tailwind-cheat-sheet
+
 
 ### Be Aware
 folders/files that you **SHOULD NOT** touch:
