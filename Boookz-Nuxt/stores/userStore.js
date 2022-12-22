@@ -78,14 +78,14 @@ export const useUserStore = defineStore({
         },
 
         async getUserWantedBooks() {
-            const res = await $fetch('http://localhost:8000/data/wanted/', {
+            const res = await $fetch('http://localhost:8000/data/shelf/wanted', {
                 headers: { "authorization": "Bearer " + this.token }
             })
             this.userWantedBooks = res;
         },
 
         async getUserGiveAwayBooks() {
-            const res = await $fetch('http://localhost:8000/data/giveaway/', {
+            const res = await $fetch('http://localhost:8000/data/shelf/giveaway', {
                 headers: { "authorization": "Bearer " + this.token }
             })
             this.userGiveAwayBooks = res;
