@@ -6,6 +6,7 @@ export const useDataStore = defineStore({
     wantedBooks: [],
     giveAwayBooks: [],
     randomBook: {},
+    clickedBook: {},
   }),
   actions: {
     async getWantedBooksFromDB() {
@@ -17,7 +18,12 @@ export const useDataStore = defineStore({
       const res = await $fetch('http://127.0.0.1:8000/data/giveaway/');
       this.giveAwayBooks = res;
       this.randomBook = this.giveAwayBooks[Math.floor(Math.random() * this.giveAwayBooks.length)];
+    },
+    //update clicked book by id
+    async getClickedBook(book) {
+      this.clickedBook = book;
     }
+      
   },
 
   //to get specific parts of data, like select <items> from <container> WHERE <condition>

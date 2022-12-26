@@ -7,7 +7,7 @@
             <p class="text-[#e76f51] text-2xl h-20">{{ book.title }}</p>
             <p class="text-secondary text-lg my-3">{{ book.points }} point</p>
             <p>Offered by: {{ book.owner }}</p>
-            <button class="btn">Get it</button>
+            <button class="btn" >Get it</button>
         </div>
     </div>
 </template>

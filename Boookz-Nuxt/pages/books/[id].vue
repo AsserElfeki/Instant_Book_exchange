@@ -1,11 +1,14 @@
 <template>
     <div>
-        <h1>Book {{ id }}</h1>
+      <BookCard :book="store.clickedBook" />
     </div>
 </template>
 
 <script setup>
+import { useDataStore } from '~/stores/dataStore'
 const { id } = useRoute().params
+
+const store = useDataStore()
 definePageMeta({
         // layout: 'books'
     })

@@ -8,7 +8,7 @@
       <h2 class="flex justify-center text-3xl m-8 text-primary">Offered by our users in your area</h2>
       <div class="showcase">
         <div class="book" v-for="book in store.giveAwayBooks" :key="book.title">
-          <NuxtLink :to="`/books/${book.title.replaceAll(' ', '-')}`">
+          <NuxtLink v-on:click = "store.getClickedBook(book)" :to="`/books/${book.title.replaceAll(' ', '-')}`">
             <BookCard :book="book" />
           </NuxtLink>
 
@@ -20,7 +20,7 @@
       <h2 class="flex justify-center text-3xl m-8">Wanted by users in your area</h2>
       <div class="showcase">
         <div class="book" v-for="book in store.wantedBooks" :key="book.title">
-          <NuxtLink :to="`/books/${book.title.replaceAll(' ', '-')}`">
+          <NuxtLink v-on:click = "store.getClickedBook(book)" :to="`/books/${book.title.replaceAll(' ', '-')}`">
             <BookCard :book="book" />
           </NuxtLink>
         </div>
