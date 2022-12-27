@@ -29,6 +29,9 @@
     "json-server": "^0.17.1",
     "ofetch": "^1.0.0",
     "pinia": "^2.0.28",
-    "uuid": "^9.0.0"
+    "swiper": "^8.4.5",
+    "uuid": "^9.0.0",
+    "vue-carousel": "0.18.0",
+    "vue3-carousel": "^0.2.9"
   }
 }
