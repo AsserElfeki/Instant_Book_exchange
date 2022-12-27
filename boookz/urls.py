@@ -23,6 +23,8 @@ urlpatterns = [
     path('authentication/', include('authentication.urls')),
     # path('', include('frontend.urls')),
     path('data/', include('boookzdata.urls')),
+    path('transaction/', include('transactions.urls')),
+
 ]
 
 if settings.DEBUG:

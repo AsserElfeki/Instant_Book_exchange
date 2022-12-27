@@ -25,13 +25,8 @@ RUN apt-get install -y \
 COPY . .
 
 #install dependencies
-RUN python -m pip install --upgrade pip
-RUN pip install pipenv && pipenv install --system --deploy --ignore-pipfile
+RUN python -m pip install --upgrade pip && pip install pipenv && pipenv install --system --deploy --ignore-pipfile && pip install importlib-metadata
 
-# make entrypoint.sh executable
-RUN chmod +x ./entrypoint.sh
-RUN sed -i 's/\r$//g' ./entrypoint.sh
+RUN chmod +x docker-entrypoint.sh
 
-
-
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
