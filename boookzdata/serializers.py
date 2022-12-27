@@ -50,12 +50,14 @@ class BookUploadSerializer(FlexFieldsModelSerializer):
 
 class ImageSerializer(FlexFieldsModelSerializer):
     image = VersatileImageFieldSerializer(
-        sizes='product_headshot'
+        sizes=[
+            ('full_size', 'url'),
+            ]
     )
 
     class Meta:
         model = Image
-        fields = ['name', 'image',]
+        fields = ['image',]
 
 
 class BookSerializer(FlexFieldsModelSerializer):
@@ -65,10 +67,11 @@ class BookSerializer(FlexFieldsModelSerializer):
     images = ImageSerializer(many=True)
     # author = AuthorSerializer(many=True) 
     category = CategorySerializer(many=True)
+    shelves = BookShelfSerializer()
 #TODO(Victor/drago): Give me book_owner of this book
     class Meta:
         model = Book
-        fields = ['pk', 'title', 'description', 'category', 'created', 'updated', 'condition', 'images', 'book_shelf']
+        fields = ['pk', 'title', 'description', 'category', 'created', 'updated', 'condition', 'images', 'shelves']
         # expandable_fields = {
             # 'category': ('boookzdata.CategorySerializer', {'many': True}),
         # }

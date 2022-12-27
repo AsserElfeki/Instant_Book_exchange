@@ -43,7 +43,7 @@ class Category(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    # author = models.ManyToManyField(Author, related_name='books')
+    # author = models.ManyToManyField(Author, related_name='books', null=True)
     category = models.ManyToManyField(Category, related_name='books')
     condition = models.ForeignKey('boookzdata.BookCondition', related_name='books',on_delete=models.CASCADE, blank=True, null=True)
     created = models.DateField(auto_now_add=True)
