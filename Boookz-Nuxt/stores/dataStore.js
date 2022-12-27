@@ -22,7 +22,7 @@ export const useDataStore = defineStore({
     getClickedBook(book) {
       this.clickedBook = book;
     }
-      
+
   },
 
   //to get specific parts of data, like select <items> from <container> WHERE <condition>
