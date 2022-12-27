@@ -29,11 +29,11 @@ class BookConditionSerializer(FlexFieldsModelSerializer):
         fields = ['name']
 
 class BookShelfSerializer(FlexFieldsModelSerializer):
-    shelf_owner = BookReaderSerializer(read_only=True)
+    book_reader = BookReaderSerializer()
 
     class Meta:
         model = GiveawayBookshelf
-        fields = '__all__'
+        fields = ['book_reader', ]
 
 class BookUploadSerializer(FlexFieldsModelSerializer):
     name = serializers.CharField(required=True)
@@ -59,7 +59,6 @@ class ImageSerializer(FlexFieldsModelSerializer):
         model = Image
         fields = ['image',]
 
-
 class BookSerializer(FlexFieldsModelSerializer):
     title = serializers.CharField(required=False)
     description = serializers.CharField(required=False)
@@ -67,14 +66,23 @@ class BookSerializer(FlexFieldsModelSerializer):
     images = ImageSerializer(many=True)
     # author = AuthorSerializer(many=True) 
     category = CategorySerializer(many=True)
-    shelves = BookShelfSerializer()
+    book_owner = serializers.SerializerMethodField() 
 #TODO(Victor/drago): Give me book_owner of this book
     class Meta:
         model = Book
-        fields = ['pk', 'title', 'description', 'category', 'created', 'updated', 'condition', 'images', 'shelves']
+        fields = ['pk', 'title', 'description', 'category', 'created', 'updated', 'condition', 'images', 'book_owner',]
+
+    def get_book_owner(self, obj):
+        return obj.get_book_reader().user.username
+
+
         # expandable_fields = {
             # 'category': ('boookzdata.CategorySerializer', {'many': True}),
         # }
+    # def get_images(self, obj):
+        # images = Image.objects.all().filter(book=obj)
+        # serializer = ImageSerializer(images, context = self.context)
+        # return serializer.data 
 
 class GiveawayBookshelfSerializer(FlexFieldsModelSerializer):
     shelf_owner = BookReaderSerializer(read_only=True)

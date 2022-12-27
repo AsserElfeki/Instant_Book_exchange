@@ -17,10 +17,15 @@ class BookReaderSerializer(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault(),
         queryset=serializers.CurrentUserDefault()
     )
+    username = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = BookReader
-        fields = ['user']
+        fields = ['user', 'username']
+
+
+    def get_username(self, obj):
+        return obj.user.username
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

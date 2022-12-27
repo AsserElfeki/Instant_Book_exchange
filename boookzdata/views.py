@@ -36,6 +36,7 @@ class ImageViewSet(FlexFieldsModelViewSet):
 
 class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
     serializer_class = BookSerializer
+    permit_list_expands = ['category', 'condition',]
     filterset_fields = ('category',)
 
     def get_queryset(self):
