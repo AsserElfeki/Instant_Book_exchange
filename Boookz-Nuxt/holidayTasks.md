@@ -5,18 +5,18 @@
 ## Tasks:
 
 - [ ] 1. "~/components/profile/(transactions.vue and ratings.vue)" : HTML , TailwindCSS 
---> Dina & Yaroslav 
-- [ ] 2. "~/pages/books/[id].vue" : HTML , TailwindCSS, datafetching and rendering --> Youssef 
+--> **Dina & Yaroslav** 
+- [ ] 2. "~/pages/books/[id].vue" : HTML , TailwindCSS, datafetching and rendering --> **Youssef** 
           it should display the cover of the book (by default) and ability to view other images 
           and all info on the book including owener and condition and bla bla bla.
           below the info, there should be a form where the user chooses a book from HIS OWN giveaway shelf to exchange with the book we are seeing. and then a button "trade" that submits the form with a post request to an endpoint that is yet to be done with some info that we yet to determine. 
 - [ ] 3. navar should be sticky at the top of the page without overlapping the content. 
-         its background should span the full width of the screen while the elements can not span more than 1200 px (like footer) note: this might need editing the >template> part in the "~/layouts/default.vue"--> Andrii 
-- [ ] 4. settings page (simple) design and according html and tailwindCSS --> andrii         
-- [ ] 5. Nuxt error and warnings --> Asser & Michał
-- [ ] 6. settings page data fetching --> Asser
-- [ ] 7. route guarding --> asser 
-- [ ] 8. settings page data fetching --> me / youssef 
+         its background should span the full width of the screen while the elements can not span more than 1200 px (like footer) note: this might need editing the >template> part in the "~/layouts/default.vue"--> **Andrii** 
+- [ ] 4. settings page (simple) design and according html and tailwindCSS --> **andrii**         
+- [ ] 5. Nuxt error and warnings --> **Asser & Michał**
+- [ ] 6. settings page data fetching --> **Asser**
+- [ ] 7. route guarding --> **asser** 
+- [ ] 8. settings page data fetching --> **me / youssef **
 
 *backend guys : break a leg!*
 

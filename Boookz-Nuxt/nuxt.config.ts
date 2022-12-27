@@ -1,3 +1,4 @@
+import { MiddlewareKey } from './.nuxt/types/middleware.d';
 
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -72,6 +73,7 @@ export default defineNuxtConfig({
     configPath: '~/config/tailwind.js',
 
   },
+  
 
 
 });

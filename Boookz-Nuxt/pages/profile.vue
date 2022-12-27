@@ -32,7 +32,10 @@
 
 <script setup>
 // import { LazyProfileRatings, LazyProfileTransactions } from '~/.nuxt/components';
-import { useUserStore } from "~~/stores/userStore";
+import { useUserStore } from "~/stores/userStore";
+definePageMeta({
+  middleware: "auth",
+});
 const userStore = useUserStore();
 
 const activeTab = ref("");
