@@ -19,8 +19,7 @@ export const useDataStore = defineStore({
       this.giveAwayBooks = res;
       this.randomBook = this.giveAwayBooks[Math.floor(Math.random() * this.giveAwayBooks.length)];
     },
-    //update clicked book by id
-    async getClickedBook(book) {
+    getClickedBook(book) {
       this.clickedBook = book;
     }
       
