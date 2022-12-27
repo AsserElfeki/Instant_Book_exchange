@@ -10,6 +10,7 @@ from .serializers import BookSerializer, BookUploadSerializer, GiveawayBookshelf
 from .models import Book, Image, GiveawayBookshelf, WantedBookshelf
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated 
+from django.shortcuts import get_object_or_404
 
 
 class NotCorrectUrlProvided(APIException):
@@ -39,6 +40,19 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
     permit_list_expands = ['category', 'condition',]
     filterset_fields = ('category',)
 
+    def list(self, request):
+        queryset = Book.objects.all()
+        serializer = BookSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+    def retrieve(self, request, pk=None):
+        queryset = Book.objects.all()
+        book = get_object_or_404(queryset, pk=pk)
+        serializer = BookSerializer(book)
+        return Response(serializer.data)
+
+
     def get_queryset(self):
         queryset = Book.objects.all()
 
@@ -67,6 +81,7 @@ class AllWantedView(ListAPIView):
         wanted_books = Book.objects.filter(book_shelf_id__in=wanted_shelves)
         return wanted_books
 
+#TODO(Victor): Think about code below xD
 class BooksFromChosenBookshelfView(ListAPIView):
     serializer_class = BookSerializer
     permission_classes = (IsAuthenticated,)
