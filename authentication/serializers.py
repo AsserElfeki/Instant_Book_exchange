@@ -27,12 +27,6 @@ class BookReaderSerializer(serializers.ModelSerializer):
     def get_username(self, obj):
         return obj.user.username
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['pk', 'username', 'first_name', 'last_name', 'email', ]
-
-
 class ImageSerializer(FlexFieldsModelSerializer):
     image = VersatileImageFieldSerializer(
         sizes='product_headshot'

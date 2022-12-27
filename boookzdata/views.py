@@ -46,9 +46,9 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
         return Response(serializer.data)
 
 
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request, title=None):
         queryset = Book.objects.all()
-        book = get_object_or_404(queryset, pk=pk)
+        book = get_object_or_404(queryset, title=title)
         serializer = BookSerializer(book)
         return Response(serializer.data)
 

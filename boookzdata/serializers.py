@@ -3,8 +3,8 @@ from rest_flex_fields import FlexFieldsModelSerializer
 from rest_framework_simplejwt.authentication import authentication
 
 from authentication.models import BookReader
-from authentication.serializers import BookReaderSerializer, UserSerializer
-from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, BookShelf, WantedBookshelf
+from authentication.serializers import BookReaderSerializer
+from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, WantedBookshelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -120,15 +120,25 @@ class CommentSerializer(FlexFieldsModelSerializer):
             'user': 'boookzdata.UserSerializer'
         }
 
+class UserSerializer(serializers.ModelSerializer):
+    book_reader = serializers.SerializerMethodField(read_only=True)
+    class Meta:
+        model = User
+        fields = ['pk', 'username', 'first_name', 'last_name', 'email', 'book_reader']
+
+    def get_book_reader(self, obj):
+        book_reader = BookReader.objects.get(user=obj)
+        serializer = ProfileInfoSerializer(book_reader, context= self.context)
+        return serializer.data
+
 class ProfileInfoSerializer(FlexFieldsModelSerializer):
-    user = UserSerializer(read_only=True)
     profile_image = ImageSerializer(read_only=True)
     wanted_shelf = serializers.SerializerMethodField()
     giveaway_shelf = serializers.SerializerMethodField()
 
     class Meta:
         model = BookReader
-        fields = ['user', 'country', 'profile_image', 'wanted_shelf', 'giveaway_shelf']
+        fields = ['country', 'profile_image', 'wanted_shelf', 'giveaway_shelf']
 
     def get_wanted_shelf(self, obj):
         book_shelves = WantedBookshelf.objects.get(book_reader=obj)
