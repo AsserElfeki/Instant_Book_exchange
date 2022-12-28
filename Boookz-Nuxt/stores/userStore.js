@@ -96,7 +96,7 @@ export const useUserStore = defineStore({
     getters: {
     },
     persist: {
-        storage: persistedState.sessionStorage,
+        // storage: persistedState.sessionStorage,
     },
 
 });

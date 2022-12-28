@@ -5,7 +5,7 @@ import { MiddlewareKey } from './.nuxt/types/middleware.d';
 export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
-    
+
     head: {
       title: 'BoookZ',
       meta: [
@@ -53,8 +53,13 @@ export default defineNuxtConfig({
         autoImports: ['defineStore', 'acceptHMRUpdate'],
       }],
     '@pinia-plugin-persistedstate/nuxt',
-
   ],
+  // piniaPersistedstate: {
+  //   cookieOptions: {
+  //     sameSite: 'strict',
+  //   },
+  //   storage: 'localStorage'
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -74,7 +79,7 @@ export default defineNuxtConfig({
     configPath: '~/config/tailwind.js',
 
   },
-  
+
 
 
 });

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+// import { storeToRefs } from 'pinia'
 
 export const useDataStore = defineStore({
   id: 'dataStore',
@@ -21,6 +22,7 @@ export const useDataStore = defineStore({
     },
     getClickedBook(book) {
       this.clickedBook = book;
+      this.persist
     }
 
   },
@@ -31,7 +33,8 @@ export const useDataStore = defineStore({
   },
 
   persist: {
-    storage: persistedState.sessionStorage,
+    enabled: true,
+    // storage: persistedState.sessionStorage
   },
 });
 
