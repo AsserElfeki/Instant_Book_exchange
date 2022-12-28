@@ -14,7 +14,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import BookReader
 from .serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer, ListBookReaderSerializer, LoginSerializer
-from boookzdata.serializers import ProfileInfoSerializer, UserSerializer
+from boookzdata.serializers import UserSerializer
 from rest_framework import generics, status
 from django.contrib.auth.models import User
 
@@ -25,7 +25,7 @@ from .utils import Util
 
 class ProfileInfoView(ReadOnlyModelViewSet):
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     lookup_field = 'username'
 

@@ -40,19 +40,6 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
     permit_list_expands = ['category', 'condition',]
     filterset_fields = ('category',)
 
-    def list(self, request):
-        queryset = Book.objects.all()
-        serializer = BookSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-
-    def retrieve(self, request, title=None):
-        queryset = Book.objects.all()
-        book = get_object_or_404(queryset, title=title)
-        serializer = BookSerializer(book)
-        return Response(serializer.data)
-
-
     def get_queryset(self):
         queryset = Book.objects.all()
 
