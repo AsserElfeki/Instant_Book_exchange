@@ -60,9 +60,8 @@ class BookSerializer(FlexFieldsModelSerializer):
     title = serializers.CharField(required=False)
     description = serializers.CharField(required=False)
     condition = serializers.SerializerMethodField()
-    # images = ImageSerializer(many=True)
     images = serializers.SerializerMethodField()
-    # author = AuthorSerializer(many=True) 
+    author = AuthorSerializer(many=True) 
     category = serializers.SerializerMethodField()
     book_owner = serializers.SerializerMethodField() 
 
