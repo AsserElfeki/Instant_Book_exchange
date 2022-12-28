@@ -27,8 +27,9 @@
         <div class="book-info flex-1">
            <p class="book-title">{{ store.clickedBook.title }}</p>
           <p class="book-condition">Condition: {{ store.clickedBook.condition }}</p>
-          <p class="book-condition">Category: {{ store.clickedBook.category }}</p>
-          <button class="btn">Trade</button>
+          <p class="book-condition inline">Category: </p>
+          <p v-for="category in store.clickedBook.category" :key="category" class ="inline">{{category}}, </p>
+          <button class="btn block">Trade</button>
         </div>
       </div>
     </div>

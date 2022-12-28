@@ -1,9 +1,9 @@
 <template>
     <div class="book-card flex items-center justify-between overflow-visible">
         <div class="overflow-visible">
-            <img :src="book.image" :alt="book.title" class="cover">
-            <img :src="book.image" :alt="book.title"
-                class="user-image w-16 h-16 rounded-full object-cover absolute left-1/2">
+            <img :src="book.images.at(0)" :alt="book.title" class="cover">
+            <img :src="book.book_owner.at(1)" :alt="book.title"
+                class="user-image w-16 h-16 rounded-full object-cover absolute left-1/2 border-black border">
             <p class="text-[#e76f51] text-2xl h-20">{{ book.title }}</p>
             <p class="text-secondary text-lg my-3">{{ book.points }} point</p>
             <p>Offered by: {{ book.owner }}</p>
@@ -37,7 +37,7 @@ const { book } = defineProps(['book'])
 }
 
 .user-image {
-    top: 550px;
+    top: 450px;
     transform: translateX(-50%);
 }
 </style>
