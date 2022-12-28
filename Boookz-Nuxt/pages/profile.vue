@@ -1,48 +1,50 @@
 <template>
-  <div class="header flex flex-col justify-between items-center py-8 rounded-md">
-    <img src="../assets/img/avatar.png" alt="profile avatar" class="" />
-    <h2 class="text-white font-sans text-2xl font-bold">{{ userStore.userName }}</h2>
-    <h3 class="text-white font-sans font-thin">{{ userStore.region }}</h3>
+  <div class="container">
+    <div class="header flex flex-col justify-between items-center py-8 rounded-md">
+      <img src="../assets/img/avatar.png" alt="profile avatar" class="" />
+      <h2 class="text-white font-sans text-2xl font-bold">{{ userStore.userName }}</h2>
+      <h3 class="text-white font-sans font-thin">{{ userStore.region }}</h3>
 
-    <div
-      class="tabs mt-8 bg-white rounded-md h-24 w-11/12 flex justify-around items-center"
-    >
-      <button
-        class="tab mx-7 w-18 h-20 px-2 rounded-md"
-        :class="{ active: activeTab === 'Giveaway' }"
-        @click="toggleTabs($event)"
+      <div
+        class="tabs mt-8 bg-white rounded-md h-24 w-11/12 flex justify-around items-center"
       >
-        Giveaway
-      </button>
-      <button
-        class="tab mx-7 w-18 h-20 px-2 rounded-md"
-        :class="{ active: activeTab === 'Wanted' }"
-        @click="toggleTabs($event)"
-      >
-        Wanted
-      </button>
-      <button
-        class="tab mx-7 w-18 h-20 px-2 rounded-md"
-        :class="{ active: activeTab === 'Transactions' }"
-        @click="toggleTabs($event)"
-      >
-        Transactions
-      </button>
-      <button
-        class="tab mx-7 w-18 h-20 px-2 rounded-md"
-        :class="{ active: activeTab === 'Ratings' }"
-        @click="toggleTabs($event)"
-      >
-        Ratings
-      </button>
+        <button
+          class="tab mx-7 w-18 h-20 px-2 rounded-md"
+          :class="{ active: activeTab === 'Giveaway' }"
+          @click="toggleTabs($event)"
+        >
+          Giveaway
+        </button>
+        <button
+          class="tab mx-7 w-18 h-20 px-2 rounded-md"
+          :class="{ active: activeTab === 'Wanted' }"
+          @click="toggleTabs($event)"
+        >
+          Wanted
+        </button>
+        <button
+          class="tab mx-7 w-18 h-20 px-2 rounded-md"
+          :class="{ active: activeTab === 'Transactions' }"
+          @click="toggleTabs($event)"
+        >
+          Transactions
+        </button>
+        <button
+          class="tab mx-7 w-18 h-20 px-2 rounded-md"
+          :class="{ active: activeTab === 'Ratings' }"
+          @click="toggleTabs($event)"
+        >
+          Ratings
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="content">
-    <LazyProfileGiveaway v-if="activeTab === 'Giveaway'" />
-    <LazyProfileWanted v-if="activeTab === 'Wanted'" />
-    <LazyProfileTransactions v-if="activeTab === 'Transactions'" />
-    <LazyProfileRatings v-if="activeTab === 'Ratings'" />
+    <div class="content">
+      <LazyProfileGiveaway v-if="activeTab === 'Giveaway'" />
+      <LazyProfileWanted v-if="activeTab === 'Wanted'" />
+      <LazyProfileTransactions v-if="activeTab === 'Transactions'" />
+      <LazyProfileRatings v-if="activeTab === 'Ratings'" />
+    </div>
   </div>
 </template>
 
