@@ -47,9 +47,7 @@ class BookUploadSerializer(FlexFieldsModelSerializer):
 
 class ImageSerializer(FlexFieldsModelSerializer):
     image = VersatileImageFieldSerializer(
-        sizes=[
-            ('full_size', 'url'),
-            ]
+        sizes='product_headshot'
     )
 
     class Meta:
@@ -61,17 +59,17 @@ class BookSerializer(FlexFieldsModelSerializer):
     description = serializers.CharField(required=False)
     condition = serializers.SerializerMethodField()
     images = serializers.SerializerMethodField()
-    author = AuthorSerializer(many=True) 
+    author = serializers.SerializerMethodField() 
     category = serializers.SerializerMethodField()
     book_owner = serializers.SerializerMethodField() 
 
     class Meta:
         model = Book
-        fields = ['pk', 'title', 'description', 'category', 'created', 'updated', 'condition', 'images', 'book_owner',]
+        fields = ['pk', 'title', 'author', 'description', 'category', 'condition', 'images', 'book_owner', 'created',]
 
     def get_images(self, obj):
         images = Image.objects.filter(book=obj)
-        serializer = ImageSerializer(images, many=True).data
+        serializer = ImageSerializer(images, context=self.context, many=True).data
         return [item['image']['full_size'] for item in serializer]
 
     def get_condition(self, obj):
@@ -83,9 +81,15 @@ class BookSerializer(FlexFieldsModelSerializer):
         serializer = CategorySerializer(category, many=True).data
         return [item['name'] for item in serializer]
 
+    def get_author(self, obj):
+        author = Author.objects.filter(books=obj)
+        serializer = AuthorSerializer(author, many=True).data
+        return [item['name'] for item in serializer]
+
     def get_book_owner(self, obj):
-        profile_image = ImageSerializer(obj.get_book_reader().profile_image, read_only=True).data
-        return [obj.get_book_reader().user.username, profile_image['image']['full_size']]
+        profile_image = ImageSerializer(obj.get_book_reader().profile_image, context=self.context).data['image']
+        url = (profile_image if profile_image is None else profile_image['full_size'])
+        return [obj.get_book_reader().user.username, url]
 
        # def get_images(self, obj):
         # images = Image.objects.all().filter(book=obj)
@@ -149,15 +153,16 @@ class ProfileInfoSerializer(FlexFieldsModelSerializer):
         fields = ['country', 'profile_image', 'wanted_shelf', 'giveaway_shelf']
     
     def get_profile_image(self, obj):
-        image = ImageSerializer(obj.profile_image, read_only=True).data
-        return image['image']['full_size']
+        image = ImageSerializer(obj.profile_image, read_only=True, context=self.context).data['image']
+        image = image if image is None else image['full_size']
+        return image
 
     def get_wanted_shelf(self, obj):
         book_shelves = WantedBookshelf.objects.get(book_reader=obj)
-        serializer = WantedBookShelfSerializer(book_shelves)
+        serializer = WantedBookShelfSerializer(book_shelves, context=self.context)
         return serializer.data
 
     def get_giveaway_shelf(self, obj):
         book_shelves = GiveawayBookshelf.objects.get(book_reader=obj)
-        serializer = GiveawayBookshelfSerializer(book_shelves)
+        serializer = GiveawayBookshelfSerializer(book_shelves, context=self.context)
         return serializer.data
