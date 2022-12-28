@@ -10,7 +10,7 @@
       <div class="showcase">
         <div class="book" v-for="book in store.giveAwayBooks" :key="book.title">
           <NuxtLink
-            v-on:click="store.getClickedBook(book)"
+            v-on:click="store.setClickedBook(book)"
             :to="`/books/${book.title.replaceAll(' ', '-')}`"
           >
             <BookCard :book="book" />
@@ -23,7 +23,7 @@
       <div class="showcase">
         <div class="book" v-for="book in store.wantedBooks" :key="book.title">
           <NuxtLink
-            @click="store.getClickedBook(book)"
+            @click="store.setClickedBook(book)"
             :to="`/books/${book.title.replaceAll(' ', '-')}`"
           >
             <BookCard :book="book" />
