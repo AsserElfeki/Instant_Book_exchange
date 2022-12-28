@@ -7,16 +7,32 @@
     <div
       class="tabs mt-8 bg-white rounded-md h-24 w-11/12 flex justify-around items-center"
     >
-      <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">
+      <button
+        class="tab mx-7 w-18 h-20 px-2 rounded-md"
+        :class="{ active: activeTab === 'Giveaway' }"
+        @click="toggleTabs($event)"
+      >
         Giveaway
       </button>
-      <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">
+      <button
+        class="tab mx-7 w-18 h-20 px-2 rounded-md"
+        :class="{ active: activeTab === 'Wanted' }"
+        @click="toggleTabs($event)"
+      >
         Wanted
       </button>
-      <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">
+      <button
+        class="tab mx-7 w-18 h-20 px-2 rounded-md"
+        :class="{ active: activeTab === 'Transactions' }"
+        @click="toggleTabs($event)"
+      >
         Transactions
       </button>
-      <button class="tab mx-7 w-18 h-20 px-2 rounded-md" @click="toggleTabs($event)">
+      <button
+        class="tab mx-7 w-18 h-20 px-2 rounded-md"
+        :class="{ active: activeTab === 'Ratings' }"
+        @click="toggleTabs($event)"
+      >
         Ratings
       </button>
     </div>
@@ -41,14 +57,7 @@ const userStore = useUserStore();
 const activeTab = ref("");
 
 function toggleTabs(event) {
-  let array = document.getElementsByClassName("tab");
-  for (let i = 0; i < array.length; i++) {
-    array[i].classList.remove("active");
-  }
-  event.target.classList.add("active");
   this.activeTab = event.target.innerText;
-
-  console.log(this.activeTab);
 }
 </script>
 

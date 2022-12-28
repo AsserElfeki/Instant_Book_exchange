@@ -49,8 +49,7 @@ cd to the root directory of the whole project, then:
 - pipenv shell
 - python manage.py makemigrations
 - python manage.py migrate 
-- *delete the db.sqlite3 file from the root directory of the whole project, then download the correct one (shared on dis)
-- to the same place*
+- *delete the db.sqlite3 file from the root directory of the whole project, then download the correct one (shared on dis) to the same place*
 - python manage.py runserver
 
 *if errors:* send on discord with a screenshot 
@@ -59,7 +58,7 @@ cd to the root directory of the whole project, then:
 #### then: you can sign in on the website using : 
 
 |username | password|
-|---|---|
+|-------|-------|
 |root | toor|
 |dina | password!@#|
 |yaroslav | password!@#|

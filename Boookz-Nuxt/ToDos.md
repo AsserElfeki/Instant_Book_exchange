@@ -4,13 +4,13 @@
 - [x] 3. login token in store (youssef)
 - [x] 4. profile page markup (Asser)
 - [x] 5. v-if in nav bar for different buttons
-- [ ] 6. footer (Andrii)
+- [x] 6. footer (Andrii)
 - [x] 7. book card enhancements (Youssef)
 - [x] 8. Hero section bg (Asser)
 - [x] 9. hero section content 
-- [ ] 10. random book data fetching and rendering (youssef)
-- [ ] 11. [id] page template (Youssef)
-- [ ] 12. [id] page data fetching and rendering (Youssef)
+- [x] 10. random book data fetching and rendering (youssef)
+- [x] 11. [id] page template (Youssef)
+- [x] 12. [id] page data fetching and rendering (Youssef)
 - [x] 13. profile components
 - [x] 14. random book styles
 - [x] 15. solve token issue in store
@@ -37,11 +37,20 @@
 - [ ] 31. transactions page
 - [ ] 32. settings page
 - [x] 33. user shelves from the correct endpoints 
+- [ ] 34. page transitions 
+- [ ] 35. reactive tabs in nuxt 
+- [ ] 36. addBook page 
 
-
-
-
+### Today: 
+- [ ] 35
+- [ ] 25
+- [ ] 32
+- [ ] 
 
 #Notes: 
 put is used for updating data (i.e updating user profile)
 post is used for creating data (i.e creating a new user)
+
+
+### to learn: 
+- [ ] 1. make it full stack with node.js 

@@ -16,7 +16,7 @@
 - [ ] 5. Nuxt error and warnings --> **Asser & Michał**
 - [ ] 6. settings page data fetching --> **Asser**
 - [ ] 7. route guarding --> **asser** 
-- [ ] 8. settings page data fetching --> **me / youssef **
+- [ ] 8. settings page data fetching --> **me / youssef**
 
 *backend guys : break a leg!*
 
