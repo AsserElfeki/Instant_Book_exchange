@@ -38,13 +38,15 @@
 - [ ] 32. settings page
 - [x] 33. user shelves from the correct endpoints 
 - [ ] 34. page transitions 
-- [ ] 35. reactive tabs in nuxt 
+- [x] 35. reactive tabs in nuxt 
 - [ ] 36. addBook page 
 
 ### Today: 
-- [ ] 35
+- [x] 35
 - [ ] 25
 - [ ] 32
+- [ ] addBook page (think of structure)
+- [ ] fix endpoints
 - [ ] 
 
 #Notes: 
