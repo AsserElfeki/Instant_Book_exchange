@@ -122,10 +122,21 @@ WSGI_APPLICATION = 'boookz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+    # 'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'boookz',
+        'USER': 'mikeadmin',
+        'PASSWORD': 'YWoz7G3CTvn$',
+        'HOST': '146.59.87.108',
+        'PORT': '3000',
     }
 }
 

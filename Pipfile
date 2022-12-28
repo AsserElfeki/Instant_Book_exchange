@@ -16,6 +16,7 @@ django-cors-headers = "*"
 django-polymorphic = "*"
 python-magic = "*"
 django-countries = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
