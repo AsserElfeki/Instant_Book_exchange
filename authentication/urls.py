@@ -12,7 +12,7 @@ class CustomReadOnlyRouter(SimpleRouter):
     """
     routes = [
         Route(
-            url=r'^{prefix}$',
+            url=r'^{prefix}s/$',
             mapping={'get': 'list'},
             name='{basename}-list',
             detail=False,

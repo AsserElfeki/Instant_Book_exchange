@@ -16,18 +16,21 @@
       </swiper-slide>
       <swiper-slide>Slide 3</swiper-slide>
       ...
-    </swiper>
-    <div class="book-display flex items-center flex-wrap">
+    </swiper>   
+     <br /><br />
+    <hr class ="separator w-4/5"/>
+    <br /><br />
+    <div class="book-display flex items-start flex-wrap flex-col">
       <div class="book-container flex items-center">
         <img class="book-cover rounded-md w-48 h-64 mr-5" src="../../assets/img/book-cover.jpg"
           alt="cover of the book" />
         <div class="book-info flex-1">
-          <h2 class="book-title">{{ store.clickedBook.title }}</h2>
-          <p class="book-condition">Owner: {{ store.clickedBook.book_owner }}</p>
+           <p class="book-title">{{ store.clickedBook.title }}</p>
           <p class="book-condition">Condition: {{ store.clickedBook.condition }}</p>
-          <p class="book-condition">Category: {{ store.clickedBook.category }}</p>
+          <p class="book-condition inline">Category: </p>
+          <p v-for="category in store.clickedBook.category" :key="category" class ="inline">{{category}}, </p>
+          <button class="btn block">Trade</button>
         </div>
-        <button class="btn">Trade</button>
       </div>
     </div>
   </div>
@@ -37,23 +40,14 @@
 import { useDataStore } from "~/stores/dataStore";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
-const store = useDataStore();
 export default {
   components: {
     Swiper,
     SwiperSlide,
   },
-
   setup() {
-    const onSwiper = (swiper) => {
-      console.log(swiper);
-    };
-    const onSlideChange = () => {
-      console.log("slide change");
-    };
+    const store = useDataStore();
     return {
-      onSwiper,
-      onSlideChange,
       store,
     };
   },

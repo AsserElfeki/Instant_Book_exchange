@@ -18,7 +18,7 @@ export const useUserStore = defineStore({
     actions: {
         async signIn(form) {
             try {
-                const res = await $fetch('http://127.0.0.1:8000/authentication/login/', {
+                const res = await $fetch('http://146.59.87.108:8000/authentication/login/', {
                     method: 'POST',
                     body: form
                 })
@@ -37,7 +37,7 @@ export const useUserStore = defineStore({
 
         async register(form) {
             try {
-                const res = await $fetch('http://127.0.0.1:8000/authentication/register/', {
+                const res = await $fetch('http://146.59.87.108:8000/authentication/register/', {
                     method: 'POST',
                     body: form
                 })
@@ -68,7 +68,7 @@ export const useUserStore = defineStore({
         },
 
         async logOut() {
-            const res = await $fetch('http://127.0.0.1:8000/authentication/logout_all/', {
+            const res = await $fetch('http://146.59.87.108:8000/authentication/logout_all/', {
                 method: 'POST',
                 headers: { "authorization": "Bearer " + this.token }
             })
@@ -78,14 +78,14 @@ export const useUserStore = defineStore({
         },
 
         async getUserWantedBooks() {
-            const res = await $fetch('http://127.0.0.1:8000/data/shelf/wanted', {
+            const res = await $fetch('http://146.59.87.108:8000/data/shelf/wanted', {
                 headers: { "authorization": "Bearer " + this.token }
             })
             this.userWantedBooks = res;
         },
 
         async getUserGiveAwayBooks() {
-            const res = await $fetch('http://127.0.0.1:8000/data/shelf/giveaway', {
+            const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
                 headers: { "authorization": "Bearer " + this.token }
             })
             this.userGiveAwayBooks = res;
