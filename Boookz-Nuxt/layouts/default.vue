@@ -47,7 +47,14 @@ html {
   box-shadow: 3px 3px 3px rgb(114, 114, 114);
 }
 
-.app-name {
-  /* background-color: transparent; */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
 }
 </style>
