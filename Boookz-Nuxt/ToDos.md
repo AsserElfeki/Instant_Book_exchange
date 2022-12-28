@@ -46,8 +46,7 @@
 - [ ] 25
 - [ ] 32
 - [ ] addBook page (think of structure)
-- [ ] fix endpoints
-- [ ] 
+- [x] fix endpoints
 
 #Notes: 
 put is used for updating data (i.e updating user profile)
