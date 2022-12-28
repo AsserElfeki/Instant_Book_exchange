@@ -1,6 +1,6 @@
 <template>
     <swiper
-    :slides-per-view="1"
+    :slides-per-view="3"
     :space-between="50"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
@@ -12,55 +12,57 @@
     <swiper-slide>
         <img class="rounded-md " src="../../assets/img/book-cover.jpg" alt="cover of the book">
     </swiper-slide>
+    <swiper-slide>
+        <img class="rounded-md " src="../../assets/img/book-cover.jpg" alt="cover of the book">
+    </swiper-slide>
+    <swiper-slide>
+        <img class="rounded-md " src="../../assets/img/book-cover.jpg" alt="cover of the book">
+    </swiper-slide>
     <swiper-slide>Slide 3</swiper-slide>
     ...
   </swiper>
-    <div class="container flex flex-col items-center rounded-2xl">
-        <div class="w-3/12 rounded-md  ">
-        <img class="rounded-md h-full w-full" src="../../assets/img/book-cover.jpg" alt="cover of the book">
-        </div>
-      <h2 class="book-title">{{ book.title}}</h2>
-      <p class="book-condition">Condition: {{ book.condition }}</p>
-      <p class="book-condition">Category: {{ book.category }}</p>
-
+  <div class="book-display flex items-center flex-wrap">
+    <div class="book-container flex items-center">
+      <img class="book-cover rounded-md w-48 h-64 mr-5" src="../../assets/img/book-cover.jpg" alt="cover of the book">
+      <div class="book-info flex-1">
+      <h2 class="book-title">{{ store.clickedBook.title }}</h2>
+      <p class="book-condition">Owner: {{ store.clickedBook.book_owner }}</p>
+      <p class="book-condition">Condition: {{ store.clickedBook.condition }}</p>
+      <p class="book-condition">Category: {{ store.clickedBook.category }}</p>
+      </div>
       <button class="btn" >Trade</button>
+    </div>
     </div>
 </template>
 
 
 <script>
 import { useDataStore } from '~/stores/dataStore'
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
 const store = useDataStore()
-const book  = shallowRef (store.clickedBook)
-  // Import Swiper Vue.js components
-  import { Swiper, SwiperSlide } from 'swiper/vue';
+export default {
+components: {
+    Swiper,
+    SwiperSlide,
+},
 
-  // Import Swiper styles
-  import 'swiper/css';
-
-  export default {
-    components: {
-      Swiper,
-      SwiperSlide,
-    },
-    setup() {
-      const onSwiper = (swiper) => {
-        console.log(swiper);
-      };
-      const onSlideChange = () => {
-        console.log('slide change');
-      };
-      return {
-        onSwiper,
-        onSlideChange,
-        store,
-        book,
-      };
-    },
-  };
+setup() {
+    const onSwiper = (swiper) => {
+    console.log(swiper);
+    };
+    const onSlideChange = () => {
+    console.log('slide change');
+    };
+    return {
+    onSwiper,
+    onSlideChange,
+    store,
+    };
+},
+};
 </script>
-<style lang = 'scss' scoped>
 
+<style scoped>
 
 </style>
-
