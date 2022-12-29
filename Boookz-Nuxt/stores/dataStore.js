@@ -19,8 +19,9 @@ export const useDataStore = defineStore({
       this.giveAwayBooks = res;
       this.randomBook = this.giveAwayBooks[Math.floor(Math.random() * this.giveAwayBooks.length)];
     },
-    getClickedBook(book) {
+    setClickedBook(book) {
       this.clickedBook = book;
+      this.persist
     }
 
   },
@@ -31,7 +32,8 @@ export const useDataStore = defineStore({
   },
 
   persist: {
-    storage: persistedState.localStorage,
+    enabled: true,
+  storage: persistedState.localStorage,
   },
 });
 
