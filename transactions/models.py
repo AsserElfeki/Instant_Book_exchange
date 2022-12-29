@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 
@@ -9,8 +11,10 @@ class Transaction(models.Model):
     book_reader_receiver = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE,
                                              related_name='transaction_receiver',
                                              related_query_name='transaction_receiver')
-    books = models.ForeignKey('boookzdata.Book', on_delete=models.CASCADE, related_name='transaction_book',
-                              related_query_name='transaction_book')
+    wanted_book = models.ForeignKey('boookzdata.Book', on_delete=models.CASCADE, related_name='wanted_book',
+                                    related_query_name='wanted_book', default="", null=True)
+    giveaway_book = models.ForeignKey('boookzdata.Book', on_delete=models.CASCADE, related_name='giveaway_book',
+                                      related_query_name='giveaway_book', default="", null=True)
 
     def __str__(self):
-        return self.token
+        return str(self.token)
