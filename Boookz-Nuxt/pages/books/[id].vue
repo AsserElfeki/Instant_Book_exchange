@@ -15,14 +15,14 @@
     </div>
   </div>
   <br /><br />
-    <hr class ="separator w-4/5"/>
+    <hr class ="separator"/>
     <br /><br />
   <div class=" book-description-section">
     <h1 class = "font-bold font-serif text-3xl" >Description:</h1>
     <br />
     <p class="book-description text-xl"> {{ store.clickedBook.description }}</p>
     <br /><br />
-    <hr class ="separator w-4/5"/>
+    <hr class ="separator"/>
     <br /><br />
     </div>
   <div>
@@ -46,12 +46,12 @@
       ...
     </swiper>   
      <br /><br />
-    <hr class ="separator w-full"/>
+    <hr class ="separator"/>
     <br /><br />
 </div>
 <div>
     <h1 class = "font-bold font-serif text-3xl inline mr-3" >Offered By: </h1>
-    <p class ="inline mr-3">{{store.clickedBook.book_owner.at(0)}}</p>
+    <p class ="inline mr-3 text-xl">{{store.clickedBook.book_owner.at(0)}}</p>
     <img class="user-image w-16 h-16 rounded-full border-black border inline" :src="store.clickedBook.book_owner.at(1)" alt="user profile picture" >
 </div>
 </template>
@@ -89,6 +89,9 @@ export default {
     transform: translateY(-100%);
     text-align: left; 
     width: 50%;
+}
+.separator{
+    width: 100%;
 }
 
 </style>
