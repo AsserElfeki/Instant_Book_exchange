@@ -2,14 +2,14 @@
   <div class="container">
     <div class="book-display flex items-center flex-wrap flex-col">
       <div class="book-container">
-        <img class="book-cover rounded-md w-48 h-64 mr-5 static" :src="store.clickedBook.images.at(0)"
+        <img class="book-cover rounded-md w-48 h-64 mr-5 static" :src="book.images.at(0)"
           alt="cover of the book" style="left: -100%; transform: translateY(30%);"/>
           <div class="book-info-container">
-            <h1 class = "book-title font-bold font-serif text-xl" >{{store.clickedBook.title}}</h1>
-            <p class="book-authors">By: {{ store.clickedBook.author.join(', ')}}</p>
+            <h1 class = "book-title font-bold font-serif text-xl inline" >{{store.clickedBook.title}}</h1>
+            <p class="book-authors">By: {{ book.author.join(', ')}}</p>
             <p class="book-condition inline">Category: </p>
-            <p class = "inline" >{{store.clickedBook.category.join(', ')}}</p>
-             <p class="book-condition">Condition: {{ store.clickedBook.condition }}</p>
+            <p class = "inline" >{{book.category.join(', ')}}</p>
+             <p class="book-condition">Condition: {{ book.condition }}</p>
            </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
   <div class=" book-description-section">
     <h1 class = "font-bold font-serif text-3xl" >Description:</h1>
     <br />
-    <p class="book-description text-xl"> {{ store.clickedBook.description }}</p>
+    <p class="book-description text-xl"> {{ book.description }}</p>
     <br /><br />
     <hr class ="separator"/>
     <br /><br />
@@ -51,8 +51,8 @@
 </div>
 <div>
     <h1 class = "font-bold font-serif text-3xl inline mr-3" >Offered By: </h1>
-    <p class ="inline mr-3 text-xl">{{store.clickedBook.book_owner.at(0)}}</p>
-    <img class="user-image w-16 h-16 rounded-full border-black border inline" :src="store.clickedBook.book_owner.at(1)" alt="user profile picture" >
+    <p class ="inline mr-3 text-xl">{{book.book_owner.at(0)}}</p>
+    <img class="user-image w-16 h-16 rounded-full border-black border inline" :src="book.book_owner.at(1)" alt="user profile picture" >
 </div>
 </template>
 
@@ -68,11 +68,14 @@ export default {
   },
   setup() {
     const store = useDataStore();
+    const book= store.clickedBook;
     return {
       store,
+      book,
     };
   },
 };
+
 </script>
 
 <style scoped>
