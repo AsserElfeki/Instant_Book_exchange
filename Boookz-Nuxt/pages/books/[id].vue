@@ -6,6 +6,7 @@
           alt="cover of the book" style="left: -100%; transform: translateY(30%);"/>
           <div class="title-author-container">
            <p class="book-title">{{ store.clickedBook.title }}</p>
+           <p class="book-authors">By: {{authors }}</p>
            </div>
           <!-- <p class="book-condition">Condition: {{ store.clickedBook.condition }}</p>
           <p class="book-condition inline">Category: </p>
@@ -50,6 +51,8 @@ export default {
   },
   setup() {
     const store = useDataStore();
+    const authors = store.clickedBook.author.join(", ");
+    console.log("authors", authors);
     return {
       store,
     };
