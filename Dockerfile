@@ -25,8 +25,7 @@ RUN apt-get install -y \
 COPY . .
 
 #install dependencies
-RUN python -m pip install --upgrade pip && pip install pipenv && pipenv install --system --deploy --ignore-pipfile && pip install importlib-metadata
-
+RUN python -m pip install --upgrade pip && pip install pipenv && pipenv install --system --deploy --ignore-pipfile && pip install importlib-metadata && pip install django-environ && pip install environ
 RUN chmod +x docker-entrypoint.sh
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
