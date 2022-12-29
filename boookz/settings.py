@@ -184,9 +184,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "bookexchangerdjango@gmail.com"
-EMAIL_HOST_PASSWORD = "jvjpyksbasuunqii"
+EMAIL_HOST_USER = env("GMAIL_EMAIL")
+EMAIL_HOST_PASSWORD = env("GMAIL_PASSWORD")
