@@ -17,9 +17,12 @@ module.exports = {
       'body': ['"Open Sans"',],
       'segoe': ["Segoe", "sans"],
     },
+    colors: {
+      'primary': '#00ff00',
+
+    },
     extend: {
       colors: {
-        primary: '#00ff00',
       },
     },
   },

@@ -48,6 +48,4 @@ add extra components :
   @apply flex flex-row gap-5 justify-around items-center;
 }
 
-/* .book-card {
-  @apply shadow-xl rounded-md p-4 overflow-hidden  flex items-center gap-8;
-} */
+

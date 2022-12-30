@@ -15,10 +15,10 @@
             </button>
         </div>
         <ul class="flex flex-row gap-6 lg:gap-2 ">
-            <NuxtLink class="btn" to="/signin" v-if="!store.userIsLoggedIn">Sign in</NuxtLink>
-            <NuxtLink class="btn" to="/register" v-if="!store.userIsLoggedIn">Sign up</NuxtLink>
-            <NuxtLink class="btn" to="/profile" v-if="store.userIsLoggedIn">Profile</NuxtLink>
-            <NuxtLink to="/signIn" v-if="store.userIsLoggedIn" @click="logOut" class="btn">Log Out</NuxtLink>
+            <NuxtLink class="btn-sm lg:btn" to="/signin" v-if="!store.userIsLoggedIn">Sign in</NuxtLink>
+            <NuxtLink class="btn-sm lg:btn" to="/register" v-if="!store.userIsLoggedIn">Sign up</NuxtLink>
+            <NuxtLink class="btn-sm lg:btn" to="/profile" v-if="store.userIsLoggedIn">Profile</NuxtLink>
+            <NuxtLink class="btn-sm lg:btn" to="/signIn" v-if="store.userIsLoggedIn" @click="logOut" >Log Out</NuxtLink>
         </ul>
     </div>
 

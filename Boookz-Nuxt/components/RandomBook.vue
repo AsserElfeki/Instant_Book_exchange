@@ -5,7 +5,7 @@
 
         <div class="flex justify-between items-center gap-3 md:gap-20">
             <div class="rounded-md  ">
-                <img v-if="book.images" class="rounded-md h-full w-full" :src="book.images.at(0)"
+                <img v-if="book.images" class="rounded-md w-full min-w-[200px]" :src="book.images.at(0)"
                     alt="cover of the book">
             </div>
 
