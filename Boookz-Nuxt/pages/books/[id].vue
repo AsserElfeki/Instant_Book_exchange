@@ -16,16 +16,12 @@
       </div>
     </div>
   </div>
-  <br /><br />
     <hr class ="separator"/>
-    <br /><br />
   <div class=" book-description-section">
     <h1 class = "font-bold font-serif text-3xl" >Description:</h1>
     <br />
     <p class="book-description text-xl"> {{ book.description }}</p>
-    <br /><br />
     <hr class ="separator"/>
-    <br /><br />
     </div>
   <div>
     <h1 class = "font-bold font-serif text-3xl" >Images:</h1>
@@ -47,9 +43,7 @@
       <swiper-slide>Slide 3</swiper-slide>
       ...
     </swiper>   
-     <br /><br />
     <hr class ="separator"/>
-    <br /><br />
 </div>
 <div>
     <h1 class = "font-bold font-serif text-3xl inline mr-3" >Offered By: </h1>
@@ -97,8 +91,4 @@ export default {
     text-align: left; 
     width: 50%;
 }
-.separator{
-    width: 100%;
-}
-
 </style>
