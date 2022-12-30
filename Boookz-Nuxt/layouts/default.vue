@@ -1,6 +1,6 @@
-<template>
-  <div class="wrapper">
-    <div class="content-wrapper">
+<template >
+  <div class="flex justify-center">
+    <div class="content-wrapper max-w-[1200px] my-0 mx-auto">
       <NavigationBar class="" />
 
       <div class="content">
@@ -34,11 +34,7 @@ html {
   margin: 0;
 }
 
-.content-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  /* border: 2px solid red; */
-}
+
 
 /* exact link will show the primary color for only the exact matching link */
 .router-link-exact-active {
