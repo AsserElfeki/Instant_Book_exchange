@@ -1,11 +1,13 @@
 <template>
+<div>
+<div v-if="book">
   <div class="container">
     <div class="book-display flex items-center flex-wrap flex-col">
       <div class="book-container">
         <img class="book-cover rounded-md w-48 h-64 mr-5 static" :src="book.images.at(0)"
           alt="cover of the book" style="left: -100%; transform: translateY(30%);"/>
           <div class="book-info-container">
-            <h1 class = "book-title font-bold font-serif text-xl inline" >{{store.clickedBook.title}}</h1>
+            <h1 class = "book-title font-bold font-serif text-xl inline" >{{book.title}}</h1>
             <p class="book-authors">By: {{ book.author.join(', ')}}</p>
             <p class="book-condition inline">Category: </p>
             <p class = "inline" >{{book.category.join(', ')}}</p>
@@ -54,6 +56,9 @@
     <p class ="inline mr-3 text-xl">{{book.book_owner.at(0)}}</p>
     <img class="user-image w-16 h-16 rounded-full border-black border inline" :src="book.book_owner.at(1)" alt="user profile picture" >
 </div>
+</div>
+</div>
+
 </template>
 
 
@@ -66,13 +71,12 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  setup() {
+  data(){
+   return{ book : '' }
+  },
+  mounted() {
     const store = useDataStore();
-    const book= store.clickedBook;
-    return {
-      store,
-      book,
-    };
+    this.book= store.clickedBook
   },
 };
 
