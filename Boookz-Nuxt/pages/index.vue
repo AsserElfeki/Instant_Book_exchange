@@ -5,7 +5,7 @@
     </div>
     <div class="allgiveaways">
       <h2 class="flex justify-center text-3xl m-8 text-primary">
-        Offered by our users in your area
+        Offered by users in your area
       </h2>
       <div class="showcase">
         <div class="book" v-for="book in store.giveAwayBooks" :key="book.title">
@@ -41,20 +41,12 @@ const store = useDataStore();
 </script>
 
 <style scoped>
-.hero {
-  overflow: hidden;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  /* border: 3px solid blue; */
-}
 
 .showcase {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 1rem;
-  margin: 1rem;
+  /* margin: 1rem; */
   /* border: 3px solid red; */
 }
 </style>

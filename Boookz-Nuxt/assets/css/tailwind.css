@@ -23,6 +23,10 @@ add extra components :
   @apply border-blue-500 border-2 text-black font-bold text-xl py-2 px-4 rounded-lg hover:text-white hover:bg-[#695AC9];
 }
 
+.btn-sm{
+  @apply border-blue-500 border-2 text-black font-bold text-xl py-1 px-2 rounded-lg hover:text-white hover:bg-[#695AC9];
+
+}
 
 .content {
   @apply min-h-screen;
@@ -37,6 +41,6 @@ add extra components :
   @apply flex flex-row gap-5 justify-around items-center;
 }
 
-.book-card {
+/* .book-card {
   @apply shadow-xl rounded-md p-4 overflow-hidden  flex items-center gap-8;
-}
+} */
