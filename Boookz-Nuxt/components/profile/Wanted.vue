@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <p>Hi from Wanted Shelf</p>
+    <div class="w-full md:w-1/3">
         <div v-for="book in store.userWantedBooks">
             <BookCard :book="book" />
         </div>

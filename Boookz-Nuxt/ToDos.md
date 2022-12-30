@@ -44,6 +44,7 @@
 - [ ] 38. improving ux 
 - [ ] 39. fixing errors and warnings 
 - [ ] 40. notifications 
+- [ ] 41. issue: profile page refresh goes to signin
 
 
 

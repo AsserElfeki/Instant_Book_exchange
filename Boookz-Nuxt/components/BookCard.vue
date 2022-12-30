@@ -4,7 +4,7 @@
         <div class="rounded-3xl w-full max-h-[800px]">
             <img :src="book.images.at(0)" :alt="book.title" class="cover rounded-3xl w-full max-h-40 object-contain">
 
-            <p class="text-[#e76f51] text-sm md:text-xl h-20">{{ truncate(book.title, 50) }}</p>
+            <p class="text-[#e76f51] text-sm md:text-xl h-20">{{ truncate(book.title, 30) }}</p>
             <div class="flex justify-between my-2 min-w-full ">
                 <p class="text-sm md:text-lg"> by: {{ book.book_owner.at(0) }}</p>
                 <button class="btn-sm">Trade</button>
