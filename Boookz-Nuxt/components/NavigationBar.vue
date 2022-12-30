@@ -4,12 +4,12 @@
         <NuxtLink to="/" class="flex gap-2 justify-start self-start">
             <AppLogo />
             <div class="app-name gap-8">
-                <h1 class="hi">Boookz</h1>
+                <h1 class="hi font-bold text-[33px] leading-10 h-9 font-segoe">Boookz</h1>
                 <p class="text-xs">Book xchange website</p>
             </div>
         </NuxtLink>
-        <div class="search-box">
-            <input placeholder="Search" type="text" class="search-bar" v-model="searchQuery">
+        <div class="flex my-auto items-center relative">
+            <input placeholder="Search" type="text" class="bg-gray-100 rounded-lg px-3 w-60 md:w-96 h-8" v-model="searchQuery">
             <button class="" @click="search">
                 <img src="/MagnifyingGlass.png" alt="search icon" class="absolute top-0 right-2 ">
             </button>
@@ -60,13 +60,9 @@ export default {
 }
 
 .hi {
-    width: 117px;
-    height: 35px;
-    font-family: 'Segoe UI';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 33px;
-    line-height: 44px;
+    
+    font-family: 'Segoe';
+    
 }
 </style>
 

@@ -31,13 +31,6 @@ add extra components :
   @apply min-h-screen;
 }
 
-.search-bar {
-  @apply bg-gray-100 rounded-lg px-3 w-96 h-8;
-}
-
-.search-box {
-  @apply flex my-auto items-center relative;
-}
 
 .footer-element a {
   @apply flex flex-col-reverse gap-2 justify-between items-center;
