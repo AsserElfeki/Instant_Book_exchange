@@ -1,9 +1,9 @@
 <template>
 
-    <div class="navBar">
+    <div class="flex flex-col gap-3 mx-5 my-9 justify-between items-center lg:flex-row">
         <NuxtLink to="/" class="flex gap-2 justify-start self-start">
             <AppLogo />
-            <div class="app-name gap-8">
+            <div class="gap-8">
                 <h1 class="hi font-bold text-[33px] leading-10 h-9 font-segoe">Boookz</h1>
                 <p class="text-xs">Book xchange website</p>
             </div>
@@ -54,10 +54,7 @@ export default {
 </script>
 
 <style scoped>
-.appname h1 {
-    font-size: 3.5rem;
-    font-weight: 100;
-}
+
 
 .hi {
     

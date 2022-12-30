@@ -1,23 +1,19 @@
 <template>
-    <div class="container flex flex-col justify-center items-center rounded-2xl">
+    <div class="container flex flex-col justify-center items-center rounded-2xl p-3 gap-3 ">
 
-        <h3 class="self-start ml-3 text-[#695AC9]">#suggested for YOU</h3>
+        <h3 class="self-start text-[#695AC9]">#suggested for YOU</h3>
 
-        <div class="flex justify-center items-center gap-10 px-16 w-11/12">
-            <div class="w-3/12 rounded-md  ">
-                <img class="rounded-md h-full w-full" src="../assets/img/book-cover.jpg" alt="cover of the book">
+        <div class="flex justify-between items-center gap-3 md:gap-20">
+            <div class="rounded-md  ">
+                <img v-if="book.images" class="rounded-md h-full w-full" :src="book.images.at(0)"
+                    alt="cover of the book">
             </div>
 
-            <div class="">
+            <div class="flex flex-col gap-4">
                 <h3 class="text-xl text-black text-center">{{ book.title }}</h3>
-                <!-- <h3 class="text-center text-lg">By: {{ book.author }}</h3> -->
-                <!-- <h4>{{ book.category }}</h4> -->
-                <!-- <p class="mt-4">{{ book.owner }}</p> -->
-                <div class="book-rating">
-                    <!-- <p>{{ bookRating }}</p> -->
-                </div>
-                <div class="book-price  ">
-                    <!-- <p>{{ bookPrice }}</p> -->
+                <h3 class="text-left text-md">By:</h3>
+                <div>
+                    <p v-for="author in book.author" :key="author" class=""> {{ author }}</p>
                 </div>
             </div>
         </div>
@@ -36,7 +32,7 @@ console.log("random book:", book)
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 400px;
+    /* height: 400px; */
 }
 </style>
 

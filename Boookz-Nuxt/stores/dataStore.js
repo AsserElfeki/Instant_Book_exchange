@@ -17,7 +17,7 @@ export const useDataStore = defineStore({
     async getOfferedBooksFromDB() {
       const res = await $fetch('http://146.59.87.108:8000/data/giveaway/');
       this.giveAwayBooks = res;
-      this.randomBook = this.giveAwayBooks[Math.floor(Math.random() * this.giveAwayBooks.length)];
+      this.randomBook = this.giveAwayBooks[Math.floor(Math.random(1) * this.giveAwayBooks.length)];
     },
     setClickedBook(book) {
       this.clickedBook = book;
@@ -33,7 +33,7 @@ export const useDataStore = defineStore({
 
   persist: {
     enabled: true,
-  storage: persistedState.localStorage,
+    storage: persistedState.localStorage,
   },
 });
 
