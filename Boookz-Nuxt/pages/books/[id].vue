@@ -43,7 +43,7 @@
         <swiper-slide v-for="n in book.images.length">
           <img class="rounded-md" :src="book.images.at(n - 1)" alt="cover of the book" />
         </swiper-slide>
-        
+
         <swiper-slide v-for="n in book.images.length">
           <img class="rounded-md" :src="book.images.at(n - 1)" alt="cover of the book" />
         </swiper-slide>
@@ -62,6 +62,7 @@
         alt="user profile picture"
       />
     </div>
+    <button class="btn-sm">Trade</button>
   </div>
 </template>
 

@@ -7,7 +7,6 @@
             <p class="text-[#e76f51] text-sm md:text-xl h-20">{{ truncate(book.title, 30) }}</p>
             <div class="flex justify-between my-2 min-w-full ">
                 <p class="text-sm md:text-lg"> by: {{ book.book_owner.at(0) }}</p>
-                <button class="btn-sm">Trade</button>
             </div>
         </div>
         <img :src="book.book_owner.at(1)" :alt="book.title"
