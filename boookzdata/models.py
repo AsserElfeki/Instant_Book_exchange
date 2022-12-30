@@ -54,7 +54,7 @@ class Book(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return self.title
+        return f"id-{self.pk} {self.title}"
 
     def get_book_reader(self):
         return self.book_shelf.book_reader

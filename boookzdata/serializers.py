@@ -2,9 +2,11 @@ from django.core.serializers import serialize
 from rest_flex_fields import FlexFieldsModelSerializer
 from rest_framework_simplejwt.authentication import authentication
 
+import boookzdata.serializers
 from authentication.models import BookReader
 from authentication.serializers import BookReaderSerializer
-from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, WantedBookshelf
+from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, \
+    WantedBookshelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -23,10 +25,12 @@ class CategorySerializer(FlexFieldsModelSerializer):
             'products': ('boookzdata.BookSerializer', {'many': True})
         }
 
+
 class BookConditionSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = BookCondition
         fields = ['name']
+
 
 class BookShelfSerializer(FlexFieldsModelSerializer):
     book_reader = BookReaderSerializer()
@@ -35,54 +39,60 @@ class BookShelfSerializer(FlexFieldsModelSerializer):
         model = GiveawayBookshelf
         fields = ['book_reader', ]
 
-class BookUploadSerializer(FlexFieldsModelSerializer):
-    name = serializers.CharField(required=True)
-    content = serializers.CharField(required=True)
-    book_shelf = BookShelfSerializer(required=False)
-
-    class Meta:
-        model = Book
-        fields = ['pk', 'name', 'content', 'created', 'updated', 'book_shelf']
-        expandable_fields = {
-            'category': ('boookzdata.CategorySerializer', {'many': True}),
-            'comments': ('boookzdata.CommentSerializer', {'many': True}),
-        }
 
 class ImageSerializer(FlexFieldsModelSerializer):
     image = VersatileImageFieldSerializer(
         sizes=[
             ('full_size', 'url'),
-            ]
+        ]
     )
 
     class Meta:
         model = Image
-        fields = ['image',]
+        fields = ['image', ]
+
 
 class BookSerializer(FlexFieldsModelSerializer):
     title = serializers.CharField(required=False)
     description = serializers.CharField(required=False)
     condition = BookConditionSerializer(required=False)
     images = ImageSerializer(many=True)
-    # author = AuthorSerializer(many=True) 
+    # author = AuthorSerializer(many=True)
     category = CategorySerializer(many=True)
-    book_owner = serializers.SerializerMethodField() 
-#TODO(Victor/drago): Give me book_owner of this book
+    book_owner = serializers.SerializerMethodField()
+
     class Meta:
         model = Book
-        fields = ['pk', 'title', 'description', 'category', 'created', 'updated', 'condition', 'images', 'book_owner',]
+        fields = ['pk', 'title', 'description', 'category', 'created', 'updated', 'condition', 'images', 'book_owner', ]
 
     def get_book_owner(self, obj):
         return obj.get_book_reader().user.username
 
-
         # expandable_fields = {
-            # 'category': ('boookzdata.CategorySerializer', {'many': True}),
+        # 'category': ('boookzdata.CategorySerializer', {'many': True}),
         # }
     # def get_images(self, obj):
-        # images = Image.objects.all().filter(book=obj)
-        # serializer = ImageSerializer(images, context = self.context)
-        # return serializer.data 
+    # images = Image.objects.all().filter(book=obj)
+    # serializer = ImageSerializer(images, context = self.context)
+    # return serializer.data
+
+
+class BookUploadSerializer(FlexFieldsModelSerializer):
+    book_shelf = BookShelfSerializer(required=False)
+
+    class Meta:
+        model = Book
+        fields = ['pk', 'book_shelf', 'title', 'description']
+        expandable_fields = {
+            'condition': ('boookzdata.BookConditionSerializer', {'mane': False}),
+            'category': ('boookzdata.CategorySerializer', {'many': True}),
+            'comments': ('boookzdata.CommentSerializer', {'many': True}),
+        }
+
+    def create(self, validated_data):
+        instance = Book.objects.create(book_shelf=validated_data['book_shelf'],title=validated_data['title'],description=validated_data['description'], condition=validated_data['condition'])
+        [instance.category.add(category) for category in validated_data['category']]
+        return instance
 
 class GiveawayBookshelfSerializer(FlexFieldsModelSerializer):
     shelf_owner = BookReaderSerializer(read_only=True)
@@ -92,6 +102,7 @@ class GiveawayBookshelfSerializer(FlexFieldsModelSerializer):
         model = GiveawayBookshelf
         fields = ['shelf_owner', 'books']
 
+
 class WantedBookShelfSerializer(FlexFieldsModelSerializer):
     shelf_owner = BookReaderSerializer(read_only=True)
     books = BookSerializer(many=True)
@@ -99,6 +110,7 @@ class WantedBookShelfSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = WantedBookshelf
         fields = ['shelf_owner', 'books']
+
 
 class BookSiteSerializer(FlexFieldsModelSerializer):
     class Meta:
@@ -120,16 +132,19 @@ class CommentSerializer(FlexFieldsModelSerializer):
             'user': 'boookzdata.UserSerializer'
         }
 
+
 class UserSerializer(serializers.ModelSerializer):
     book_reader = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = User
         fields = ['pk', 'username', 'first_name', 'last_name', 'email', 'book_reader']
 
     def get_book_reader(self, obj):
         book_reader = BookReader.objects.get(user=obj)
-        serializer = ProfileInfoSerializer(book_reader, context= self.context)
+        serializer = ProfileInfoSerializer(book_reader, context=self.context)
         return serializer.data
+
 
 class ProfileInfoSerializer(FlexFieldsModelSerializer):
     profile_image = ImageSerializer(read_only=True)
@@ -142,10 +157,10 @@ class ProfileInfoSerializer(FlexFieldsModelSerializer):
 
     def get_wanted_shelf(self, obj):
         book_shelves = WantedBookshelf.objects.get(book_reader=obj)
-        serializer = WantedBookShelfSerializer(book_shelves, context = self.context)
-        return serializer.data 
+        serializer = WantedBookShelfSerializer(book_shelves, context=self.context)
+        return serializer.data
 
     def get_giveaway_shelf(self, obj):
         book_shelves = GiveawayBookshelf.objects.get(book_reader=obj)
-        serializer = GiveawayBookshelfSerializer(book_shelves, context = self.context)
-        return serializer.data 
+        serializer = GiveawayBookshelfSerializer(book_shelves, context=self.context)
+        return serializer.data
