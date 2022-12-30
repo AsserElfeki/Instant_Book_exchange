@@ -17,7 +17,7 @@
 <script setup>
 const { book } = defineProps(['book'])
 function truncate(string, value) {
-    if (string.length > 50)
+    if (string.length > value)
         return string.substring(0, value) + '…';
     else
         return string;
