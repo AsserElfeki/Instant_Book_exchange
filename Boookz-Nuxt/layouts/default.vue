@@ -1,5 +1,5 @@
-<template >
-  <div class="flex justify-center">
+<template>
+  <div class="wrapper">
     <div class="content-wrapper max-w-[1200px] my-0 mx-auto">
       <NavigationBar class="" />
 

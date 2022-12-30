@@ -9,7 +9,8 @@
             </div>
         </NuxtLink>
         <div class="flex my-auto items-center relative">
-            <input placeholder="Search" type="text" class="bg-gray-100 rounded-lg px-3 w-60 md:w-96 h-8" v-model="searchQuery">
+            <input placeholder="Search" type="text" class="bg-gray-100 rounded-lg px-3 w-60 md:w-96 h-8"
+                v-model="searchQuery">
             <button class="" @click="search">
                 <img src="/MagnifyingGlass.png" alt="search icon" class="absolute top-0 right-2 ">
             </button>
@@ -18,7 +19,7 @@
             <NuxtLink class="btn-sm lg:btn" to="/signin" v-if="!store.userIsLoggedIn">Sign in</NuxtLink>
             <NuxtLink class="btn-sm lg:btn" to="/register" v-if="!store.userIsLoggedIn">Sign up</NuxtLink>
             <NuxtLink class="btn-sm lg:btn" to="/profile" v-if="store.userIsLoggedIn">Profile</NuxtLink>
-            <NuxtLink class="btn-sm lg:btn" to="/signIn" v-if="store.userIsLoggedIn" @click="logOut" >Log Out</NuxtLink>
+            <NuxtLink class="btn-sm lg:btn" to="/signIn" v-if="store.userIsLoggedIn" @click="logOut">Log Out</NuxtLink>
         </ul>
     </div>
 
@@ -54,12 +55,10 @@ export default {
 </script>
 
 <style scoped>
-
-
 .hi {
-    
+
     font-family: 'Segoe';
-    
+
 }
 </style>
 

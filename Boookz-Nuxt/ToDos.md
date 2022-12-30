@@ -45,6 +45,9 @@
 - [ ] 39. fixing errors and warnings 
 - [ ] 40. notifications 
 - [ ] 41. issue: profile page refresh goes to signin
+- [ ] 42. issue : opening a book in a new tab gives the last "clicked" book
+- [ ] 43. enhance swiper: add zoom option and pagination
+- [ ] 44. redo css for transactions and ratings (and their data)
 
 
 
