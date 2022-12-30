@@ -32,21 +32,20 @@
 - [x] 26. redirect after register
 - [x] 27. redirect after sign in
 - [x] 28. logout to endpoint 
-- [ ] 29. route guards 
+- [x] 29. route guards 
 - [x] 30. active tabs (dynamic components)
 - [ ] 31. transactions page
-- [ ] 32. settings page
+- [ ] 32. settings page 
 - [x] 33. user shelves from the correct endpoints 
 - [ ] 34. page transitions 
 - [x] 35. reactive tabs in nuxt 
-- [ ] 36. addBook page 
+- [ ] 36. addBook page / toast
+- [ ] 37. fix styles of all existing pages/components to be responsive and looking good
+- [ ] 38. improving ux 
+- [ ] 39. fixing errors and warnings 
+- [ ] 40. notifications 
 
-### Today: 
-- [x] 35
-- [ ] 25
-- [ ] 32
-- [ ] addBook page (think of structure)
-- [x] fix endpoints
+
 
 #Notes: 
 put is used for updating data (i.e updating user profile)
