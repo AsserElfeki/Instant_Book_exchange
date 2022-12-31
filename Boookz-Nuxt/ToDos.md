@@ -49,6 +49,7 @@
 - [x] 43. enhance swiper: add zoom option and pagination
 - [ ] 44. Have pop-up zoomed gallery funct...
 - [ ] 45. redo css for transactions and ratings (and their data)
+- [ ] 46. the email verification page 
 
 
 

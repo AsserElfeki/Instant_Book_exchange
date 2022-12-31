@@ -13,7 +13,6 @@
         <h2 class="Ben Franklin"><br>&nbsp;I am not really satisfied with Leonardo, he sent me a box of c****** instead of my desired book, but as a man I am still grateful. Thank you Leonardo.<br>&nbsp;June 24th, 2022</h2>
         <h2 class="Descryptt">&nbsp;<strong>Ben Franklin</strong> rated whith 5 stars</h2>
     </div>
-
 </template>
 
 <script setup>
