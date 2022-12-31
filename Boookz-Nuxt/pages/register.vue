@@ -24,29 +24,31 @@
                     <label for="username"></label>
                     <input required class="input" size="28" type="name" name="username" id="username"
                         placeholder="username" v-model="form.username" />
-                    <p>username: {{ form.username }}</p>
-                    <p v-if="store.registerError.username"> error: {{ store.registerError.username.value }}</p>
-
+                    <p v-if="store.registerError.username" v-for="error in store.registerError.username" class="error-message">{{error}}</p>
                 </div>
 
                 <div class="">
                     <label for="email"></label>
                     <input required class="input" size="28" type="email" name="email" id="email"
                         placeholder="email address" v-model="form.email" />
-                    <p>{{ form.email }}</p>
+                    <p v-if="store.registerError.email" v-for="error in store.registerError.email" class="error-message">
+                        {{ error}}</p>
                 </div>
 
                 <div class="">
                     <label for="password"></label>
                     <input required class="input" size="28" type="password" placeholder="password"
                         v-model="form.password" />
-                    <p>password {{ form.password }}</p>
+                    <p>{{ form.password }}</p>
+                    <p v-if="store.registerError.password" v-for="error in store.registerError.password"  class="error-message">
+                         {{error}}</p>
                 </div>
 
                 <div class="">
                     <label for="password2"></label>
                     <input required class="input" size="28" type="password" placeholder="repeat password"
                         v-model="form.password2" />
+                        <p v-if="store.registerError.password2" v-for="error in store.registerError.password2" class="error-message"> {{error}}</p>
                 </div>
 
                 <div class="">
@@ -55,6 +57,9 @@
                 </div>
                 <div class="flex justify-center">
                     <button type="submit" class="btn">Register</button>
+                </div>
+                <div>
+
                 </div>
             </form>
         </div>
@@ -78,6 +83,8 @@ const form = reactive({
     password2: "",
     country: "PL"
 });
+store.registerError = {};
+
 
 //functions
 async function register() {
