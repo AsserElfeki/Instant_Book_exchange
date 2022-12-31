@@ -1,5 +1,6 @@
 <template>
-  <div class="flex flex-col gap-4 justify-center">
+  <div v-if="store.userTransactions.length"
+  class="flex flex-col gap-4 justify-center">
   <h2 class="font-bold text-xl font-sans m-2">My History</h2>
     <div
       v-for="transaction in store.userTransactions"
@@ -32,6 +33,10 @@
       </div>
     </div>
     
+  </div>
+
+   <div v-else class="mt-16">
+    <ProfilePlaceHolder />
   </div>
 </template>
 
