@@ -40,7 +40,7 @@
 - [x] 34. page transitions 
 - [x] 35. reactive tabs in nuxt 
 - [ ] 36. addBook page / toast
-- [ ] 37. fix styles of all existing pages/components to be responsive and looking good
+- [x] 37. fix styles of all existing pages/components to be responsive and looking good
 - [ ] 38. improving ux 
 - [ ] 39. fixing errors and warnings 
 - [ ] 40. notifications 
@@ -49,7 +49,7 @@
 - [x] 43. enhance swiper: add zoom option and pagination
 - [ ] 44. Have pop-up zoomed gallery funct...
 - [x] 45. redo css for transactions and ratings (and their data)
-- [ ] 46. the email verification page 
+- [x] 46. the email verification page 
 
 
 

@@ -1,4 +1,7 @@
 <template>
+  <div class="flex justify-center items-center my-8">
+    <NuxtLink to="/user/addbook" class="btn"> add more </NuxtLink>
+  </div>
   <div v-if="store.userWantedBooks.length" class="w-full md:w-1/3">
     <h2 class="font-bold text-xl font-sans m-2">My Wanted Books</h2>
 
@@ -15,6 +18,8 @@
   <div v-else class="mt-16">
     <LazyProfilePlaceHolder />
   </div>
+
+  
 </template>
 
 <script setup>

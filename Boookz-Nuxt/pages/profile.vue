@@ -44,10 +44,10 @@
     </div>
 
     <div class="content">
-      <ProfileGiveaway v-if="activeTab === 'Giveaway'" />
-      <ProfileWanted v-if="activeTab === 'Wanted'" />
-      <ProfileTransactions v-if="activeTab === 'Transactions'" />
-      <ProfileRatings v-if="activeTab === 'Ratings'" />
+      <LazyProfileGiveaway v-if="activeTab === 'Giveaway'" />
+      <LazyProfileWanted v-if="activeTab === 'Wanted'" />
+      <LazyProfileTransactions v-if="activeTab === 'Transactions'" />
+      <LazyProfileRatings v-if="activeTab === 'Ratings'" />
     </div>
   </div>
 </template>
