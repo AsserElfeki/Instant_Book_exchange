@@ -1,20 +1,31 @@
 <template>
-    <div class="w-full md:w-1/3">
-        <div v-for="book in store.userWantedBooks">
-        <NuxtLink @click="store.setClickedBook(book)" :to="`/books/${book.title.replaceAll(' ', '-')}`">
-            <BookCard :book="book" />
-        </NuxtLink>
-        </div>
+  <div class="flex justify-center items-center my-8">
+    <NuxtLink to="/user/addbook" class="btn"> add more </NuxtLink>
+  </div>
+  <div v-if="store.userWantedBooks.length" class="w-full md:w-1/3">
+    <h2 class="font-bold text-xl font-sans m-2">My Wanted Books</h2>
+
+    <div v-for="book in store.userWantedBooks">
+      <NuxtLink
+        @click="store.setClickedBook(book)"
+        :to="`/books/${book.title.replaceAll(' ', '-')}`"
+      >
+        <BookCard :book="book" />
+      </NuxtLink>
     </div>
+  </div>
+
+  <div v-else class="mt-16">
+    <LazyProfilePlaceHolder />
+  </div>
+
+  
 </template>
 
 <script setup>
-import { useUserStore } from '~/stores/userStore';
+import { useUserStore } from "~/stores/userStore";
 const store = useUserStore();
-store.getUserWantedBooks();
-
+await store.getUserWantedBooks();
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

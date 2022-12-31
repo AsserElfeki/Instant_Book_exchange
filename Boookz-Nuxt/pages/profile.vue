@@ -1,12 +1,16 @@
 <template>
   <div class="">
-    <div class="header flex flex-col justify-between items-center py-1 md:py-8 rounded-md border-4 border-red-700">
-      <img src="../assets/img/avatar (1).png" alt="profile avatar" class="" />
-      <h2 class="text-white font-sans md:text-2xl md:font-bold">{{ userStore.userName }}</h2>
+    <div
+      class="header flex flex-col justify-between items-center py-1 md:py-8 rounded-md border-4 border-red-700"
+    >
+      <img src="../assets/img/avatar.png" alt="profile avatar" class="" />
+      <h2 class="text-white font-sans md:text-2xl md:font-bold">
+        {{ userStore.userName }}
+      </h2>
       <h3 class="text-white font-sans font-thin">{{ userStore.region }}</h3>
 
       <div
-        class=" md:mt-8 md:bg-white rounded-md h-24  flex flex-col md:flex-row justify-around items-center"
+        class="md:mt-8 md:bg-white rounded-md h-24 flex flex-col md:flex-row justify-around items-center"
       >
         <button
           class="md:mx-7 md:w-18 md:h-20 px-2 rounded-md"

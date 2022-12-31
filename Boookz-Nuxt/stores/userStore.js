@@ -13,10 +13,6 @@ export const useUserStore = defineStore({
         userRatings: [],
         token: '',
         registerError: {
-            username: 'some',
-            email: 'sss',
-            password: 'sss',
-            password2: 'sss',
         },
         loginError: "",
     }),
@@ -51,8 +47,8 @@ export const useUserStore = defineStore({
                 }
             }
             catch (error) {
-                console.log(error.data);
-                this.registerError = error.data;
+                console.log("error: " +error.data);
+                this.registerError = error.data.username;
             }
 
         },
@@ -79,8 +75,23 @@ export const useUserStore = defineStore({
                 headers: { "authorization": "Bearer " + this.token }
             })
             this.userGiveAwayBooks = res;
-        }
+        },
+        //ToDo : change endpoints and request maybe 
+        async getUserHistory() {
+            const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userTransactions = res;
+        },
+        async getUserRatings() {
+            const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userRatings = res;
+        },
     },
+
+
 
     //to get specific parts of data, like select <items> from <container> WHERE <condition>
     getters: {
