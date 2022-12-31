@@ -1,7 +1,6 @@
 <template>
-  <div v-if="store.userTransactions.length"
-  class="flex flex-col gap-4 justify-center">
-  <h2 class="font-bold text-xl font-sans m-2">My History</h2>
+  <div v-if="store.userTransactions.length" class="flex flex-col gap-4 justify-center">
+    <h2 class="font-bold text-xl font-sans m-2">My History</h2>
     <div
       v-for="transaction in store.userTransactions"
       :key="transaction.id"
@@ -23,7 +22,7 @@
         <div
           class="flex flex-col md:flex-row justify-between bg-white border border-dashed border-black rounded-xl p-4 gap-2 items-center"
         >
-          <h3 class="font-bold text-lg font-segoe" >{{ transaction.title }}</h3>
+          <h3 class="font-bold text-lg font-segoe">{{ transaction.title }}</h3>
           <h3>{{ transaction.author.at() }}</h3>
           <font-awesome-icon
             icon="fa-solid fa-arrow-right-from-bracket"
@@ -32,20 +31,17 @@
         </div>
       </div>
     </div>
-    
   </div>
 
-   <div v-else class="mt-16">
-    <ProfilePlaceHolder />
+  <div v-else class="mt-16">
+    <LazyProfilePlaceHolder />
   </div>
 </template>
 
 <script setup>
 import { useUserStore } from "~/stores/userStore";
 const store = useUserStore();
-store.getUserHistory();
+await store.getUserHistory();
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

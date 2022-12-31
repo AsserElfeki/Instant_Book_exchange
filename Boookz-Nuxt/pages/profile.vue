@@ -1,12 +1,16 @@
 <template>
   <div class="">
-    <div class="header flex flex-col justify-between items-center py-1 md:py-8 rounded-md border-4 border-red-700">
+    <div
+      class="header flex flex-col justify-between items-center py-1 md:py-8 rounded-md border-4 border-red-700"
+    >
       <img src="../assets/img/avatar.png" alt="profile avatar" class="" />
-      <h2 class="text-white font-sans md:text-2xl md:font-bold">{{ userStore.userName }}</h2>
+      <h2 class="text-white font-sans md:text-2xl md:font-bold">
+        {{ userStore.userName }}
+      </h2>
       <h3 class="text-white font-sans font-thin">{{ userStore.region }}</h3>
 
       <div
-        class=" md:mt-8 md:bg-white rounded-md h-24  flex flex-col md:flex-row justify-around items-center"
+        class="md:mt-8 md:bg-white rounded-md h-24 flex flex-col md:flex-row justify-around items-center"
       >
         <button
           class="md:mx-7 md:w-18 md:h-20 px-2 rounded-md"
@@ -40,10 +44,10 @@
     </div>
 
     <div class="content">
-      <LazyProfileGiveaway v-if="activeTab === 'Giveaway'" />
-      <LazyProfileWanted v-if="activeTab === 'Wanted'" />
-      <LazyProfileTransactions v-if="activeTab === 'Transactions'" />
-      <LazyProfileRatings v-if="activeTab === 'Ratings'" />
+      <ProfileGiveaway v-if="activeTab === 'Giveaway'" />
+      <ProfileWanted v-if="activeTab === 'Wanted'" />
+      <ProfileTransactions v-if="activeTab === 'Transactions'" />
+      <ProfileRatings v-if="activeTab === 'Ratings'" />
     </div>
   </div>
 </template>

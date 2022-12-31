@@ -17,12 +17,12 @@
   </div>
 
   <div v-else class="mt-16">
-    <ProfilePlaceHolder />
+    <LazyProfilePlaceHolder />
   </div>
 </template>
 
 <script setup>
 import { useUserStore } from "~/stores/userStore";
 const store = useUserStore();
-store.getUserRatings();
+await store.getUserRatings();
 </script>

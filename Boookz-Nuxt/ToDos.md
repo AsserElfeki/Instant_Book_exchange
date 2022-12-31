@@ -37,7 +37,7 @@
 - [ ] 31. transactions page
 - [ ] 32. settings page 
 - [x] 33. user shelves from the correct endpoints 
-- [ ] 34. page transitions 
+- [x] 34. page transitions 
 - [x] 35. reactive tabs in nuxt 
 - [ ] 36. addBook page / toast
 - [ ] 37. fix styles of all existing pages/components to be responsive and looking good
@@ -48,7 +48,7 @@
 - [ ] 42. issue : opening a book in a new tab gives the last "clicked" book
 - [x] 43. enhance swiper: add zoom option and pagination
 - [ ] 44. Have pop-up zoomed gallery funct...
-- [ ] 45. redo css for transactions and ratings (and their data)
+- [x] 45. redo css for transactions and ratings (and their data)
 - [ ] 46. the email verification page 
 
 
