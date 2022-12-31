@@ -31,7 +31,8 @@ export const useUserStore = defineStore({
                 }
             }
             catch (error) {
-                console.log(error);
+                console.log("login error" + JSON.stringify(error.data));
+                this.loginError = error.data;
             }
 
         },
@@ -47,8 +48,8 @@ export const useUserStore = defineStore({
                 }
             }
             catch (error) {
-                console.log("error: " +error.data);
-                this.registerError = error.data.username;
+                console.log("error: " + JSON.stringify(error.data));
+                this.registerError = error.data;
             }
 
         },
@@ -89,6 +90,11 @@ export const useUserStore = defineStore({
             })
             this.userRatings = res;
         },
+
+        resetErrors() {
+            this.registerError = {};
+            this.loginError = "";
+        }
     },
 
 
