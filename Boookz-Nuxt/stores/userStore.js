@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 export const useUserStore = defineStore({
     id: 'userStore',
     state: () => ({
-        userName: 'unknown', //Just to test
+        userName: 'Leonardo Davinci',
         userPassword: '',
         userIsSearching: false,
         userIsLoggedIn: false,
@@ -13,12 +13,9 @@ export const useUserStore = defineStore({
         userRatings: [],
         token: '',
         registerError: {
-            username: '',
-            email: '',
-            password: '',
-            password2: '',
         },
         loginError: "",
+        callingComponent: null
     }),
     actions: {
         async signIn(form) {
@@ -27,7 +24,6 @@ export const useUserStore = defineStore({
                     method: 'POST',
                     body: form
                 })
-                console.log(form.username);
                 console.log(res.access);
                 this.token = res.access;
                 if (this.token) {
@@ -36,7 +32,8 @@ export const useUserStore = defineStore({
                 }
             }
             catch (error) {
-                console.log(error);
+                console.log("login error" + JSON.stringify(error.data));
+                this.loginError = error.data;
             }
 
         },
@@ -47,13 +44,12 @@ export const useUserStore = defineStore({
                     method: 'POST',
                     body: form
                 })
+                console.log(res);
                 if (res.response) {
-                    //here a toast for successful registration
-                    this.userName = form.username;
                 }
             }
             catch (error) {
-                console.log(error.data);
+                console.log("error: " + JSON.stringify(error.data));
                 this.registerError = error.data;
             }
 
@@ -81,8 +77,33 @@ export const useUserStore = defineStore({
                 headers: { "authorization": "Bearer " + this.token }
             })
             this.userGiveAwayBooks = res;
+        },
+        //ToDo : change endpoints and request maybe 
+        async getUserHistory() {
+            const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userTransactions = res;
+        },
+        async getUserRatings() {
+            const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            this.userRatings = res;
+        },
+
+        resetErrors() {
+            this.registerError = {};
+            this.loginError = "";
+        },
+
+        getRoute(event) {
+            console.log(event.target.value);
+            // this.callingComponent=event.target 
         }
     },
+
+
 
     //to get specific parts of data, like select <items> from <container> WHERE <condition>
     getters: {
