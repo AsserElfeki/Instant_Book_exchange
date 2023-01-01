@@ -5,8 +5,9 @@
   
   <div v-if="store.userGiveAwayBooks.length" class="w-full md:w-1/3">
     <h2 class="font-bold text-xl font-sans m-2">My Giveaway Books</h2>
+    <div class="flex flex-row gap-5">
 
-    <div v-for="book in store.userGiveAwayBooks">
+    <div class="w-1/2 my-2 md:w-1/2" v-for="book in store.userGiveAwayBooks">
       <NuxtLink
         @click="store.setClickedBook(book)"
         :to="`/books/${book.title.replaceAll(' ', '-')}`"
@@ -14,6 +15,8 @@
         <BookCard :book="book" />
       </NuxtLink>
     </div>
+   </div>
+
   </div>
 
   <div v-else class="mt-16">

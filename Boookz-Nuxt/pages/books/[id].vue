@@ -56,38 +56,45 @@
       <div v-if="showModal" class="modal-overlay" @click="hideModal">
         <img :src="modalImage" class="modal-image" />
       </div>
-      <hr class="separator" />
     </div>
 
-    <div>
+    <div v-if="username!=book.book_owner.at(0)">
+      <hr class="separator" />
       <h1 class="font-bold font-serif md:text-3xl inline mr-3 ml-3">Offered By:</h1>
       <p class="inline mr-3 md:text-xl">{{ book.book_owner.at(0) }}</p>
       <img
         class="user-image w-16 h-16 rounded-full border-black border inline"
         :src="book.book_owner.at(1)"
-        alt="user profile "
+        alt="user profile"
       />
-    </div>
+      <div>
     <button class="btn-sm w-28 mb-4 m-auto">Trade</button>
+    </div>
+  </div>
+
+
   </div>
 </template>
 
 <script>
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { useDataStore } from "~/stores/dataStore";
+import { useUserStore } from "~/stores/userStore";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-
 export default {
   components: {
     Swiper,
     SwiperSlide,
   },
   data() {
-    return { book: "" };
+    return { book: "",
+    username: "",
+  };
+
   },
   methods: {
     showImage(image) {
@@ -102,7 +109,9 @@ export default {
   },
   mounted() {
     const store = useDataStore();
+    const userStore = useUserStore();
     this.book = store.clickedBook;
+    this.username = userStore.userName;
   },
   setup() {
     const showModal = false;

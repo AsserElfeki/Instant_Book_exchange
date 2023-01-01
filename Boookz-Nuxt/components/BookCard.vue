@@ -10,21 +10,25 @@
       />
 
       <p class="text-[#e76f51] text-sm md:text-xl h-20">{{ truncate(book.title, 30) }}</p>
-      <div class="flex justify-between my-2 min-w-full">
-        <p class="text-sm md:text-lg">by: {{ book.book_owner.at(0) }}</p>
-      </div>
+   
     </div>
+    <div v-if="store.userName!=book.book_owner.at(0)" >
+    <div class="flex justify-between my-2 min-w-full">
+        <p class="text-sm md:text-lg mb-1">by: {{ book.book_owner.at(0) }}</p>
+      </div>
     <img
       :src="book.book_owner.at(1)"
       :alt="book.title"
       class="user-image w-16 h-16 rounded-full object-cover absolute bottom-[-40px] left-1/2 -translate-x-1/2 border-black border"
     />
-  </div>
+    </div>
+    </div>
 </template>
 
 <script setup>
+import { useUserStore } from "~/stores/userStore";
 const { book } = defineProps(["book"]);
-
+const store = useUserStore();
 function truncate(string, value) {
   if (string.length > value) return string.substring(0, value) + "…";
   else return string;

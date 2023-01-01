@@ -23,7 +23,7 @@
 - [x] 22. @change of the username field I send to an endpoint that tells me if this user name is taken or not 
 - OR display response in a Toast
 - [x] 23. sign out
-- [ ] 24. in register: res.response : happy 
+- [x] 24. in register: res.response : happy 
                        res.username : username is taken
                           res.email : email is taken
                           res.password: weak 
@@ -52,7 +52,7 @@
 - [x] 46. the email verification page 
 - [ ] 47. if condition for the profile tabs 
 - [ ] 48. edit the tabs to not talk to the api, instead the profile will handle all the fetching in one function.
-- [ ] 49. remove "by" in the bookcard inside the profile 
+- [x] 49. remove "by" in the bookcard inside the profile 
 - [x] 50. max size of book image in index
 - [ ] 51. uploading images not workinggggggg
 
