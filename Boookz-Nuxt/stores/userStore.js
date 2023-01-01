@@ -15,6 +15,7 @@ export const useUserStore = defineStore({
         registerError: {
         },
         loginError: "",
+        callingComponent: null
     }),
     actions: {
         async signIn(form) {
@@ -94,6 +95,11 @@ export const useUserStore = defineStore({
         resetErrors() {
             this.registerError = {};
             this.loginError = "";
+        },
+
+        getRoute(event) {
+            console.log(event.target.value);
+            // this.callingComponent=event.target 
         }
     },
 

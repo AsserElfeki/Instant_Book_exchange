@@ -18,8 +18,6 @@
   <div v-else class="mt-16">
     <LazyProfilePlaceHolder />
   </div>
-
-  
 </template>
 
 <script setup>

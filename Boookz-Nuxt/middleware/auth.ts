@@ -10,7 +10,5 @@ export default defineNuxtRouteMiddleware(() => {
     if (process.client && isAuthenticated === false) {
         return navigateTo('signIn')
     }
-    // else {
-    //     return navigateTo('about')
-    // }
+    
 })

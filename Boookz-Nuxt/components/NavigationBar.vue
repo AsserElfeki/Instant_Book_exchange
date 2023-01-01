@@ -1,7 +1,8 @@
 <template>
 
     <div class="flex flex-col gap-3 mx-5 my-9 justify-between items-center lg:flex-row">
-        <NuxtLink to="/" class="flex gap-2 justify-start self-start">
+        <NuxtLink to="/" class="flex gap-2 justify-start self-start"
+        active-class="inactive">
             <AppLogo />
             <div class="gap-8">
                 <h1 class="hi font-bold text-[33px] leading-10 h-9 font-segoe">Boookz</h1>
@@ -30,7 +31,7 @@ import { useGoogleAPIStore } from '~/stores/googleAPIStore';
 import { useUserStore } from '~/stores/userStore';
 
 //here I am using the setup function explicitly, but you can also use the composition API
-//if you need to access so state, remember to add it to the return object
+//if you need to access some part of state, remember to add it to the return object
 //I Love github copilot <3 
 export default {
     setup() {
