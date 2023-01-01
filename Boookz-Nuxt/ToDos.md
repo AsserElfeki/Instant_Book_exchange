@@ -50,7 +50,7 @@
 - [ ] 44. Have pop-up zoomed gallery funct...
 - [x] 45. redo css for transactions and ratings (and their data)
 - [x] 46. the email verification page 
-- [ ] 47. if condition for the profile tabs 
+- [ ] 47. if condition for the profile tabs data fetching
 - [ ] 48. edit the tabs to not talk to the api, instead the profile will handle all the fetching in one function.
 - [ ] 49. remove "by" in the bookcard inside the profile 
 - [x] 50. max size of book image in index

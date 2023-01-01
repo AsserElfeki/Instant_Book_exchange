@@ -79,7 +79,7 @@
         required
         id="book-images"
         type="file"
-        ref="file"
+        ref="imageInput"
         multiple
         accept="image/*"
         class="border-2 border-black p-2 rounded-md"
