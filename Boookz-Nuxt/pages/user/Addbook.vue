@@ -2,6 +2,7 @@
   <div class="flex flex-col justify-center items-center border-2 border-red-500">
     <form
       @submit.prevent="addBook"
+      enctype="multipart/form-data"
       class="flex flex-col justify-start gap-3 border-2 w-full md:w-1/2 items-start mx-auto p-2"
     >
       <div class="flex justify-between gap-6">
@@ -44,6 +45,21 @@
       />
 
       <div class="flex justify-between gap-6">
+        <label for="category">Category(s):</label>
+        <select
+          id="category"
+          v-model="bookForm.category"
+          size="1"
+          class="overflow-y-scroll h-auto border-2 rounded-md w-44 text-center"
+        >
+          <option value="" disabled>-Select category-</option>
+          <option v-for="category in categories" :key="category" :value="category">
+            {{ category }}
+          </option>
+        </select>
+      </div>
+
+      <div class="flex justify-between gap-6">
         <label for="condition">Condition:</label>
         <select
           id="condition"
@@ -58,19 +74,18 @@
         </select>
       </div>
 
-      <label for="book-images" class="self-start">images:</label>
+      <label for="book-images" class="self-start">upload images:</label>
       <input
         required
-        size="40"
         id="book-images"
         type="file"
-        ref="fileInput"
-        accept="image/*"
+        ref="file"
         multiple
+        accept="image/*"
         class="border-2 border-black p-2 rounded-md"
       />
 
-      <button type="submit" class="btn-sm self-center">  submit </button>
+      <button type="submit" class="btn-sm self-center">submit</button>
     </form>
 
     <p>{{ bookForm }}</p>
@@ -85,8 +100,10 @@ const langStore = useLangAPIStore();
 const Languages = langStore.getAllLanguages();
 
 const conditions = ["poor", "fair", "good", "excellent"];
+const categories = ["fiction", "romance", "science"];
 
-const images = []
+const images = [];
+const file = ref(null);
 
 const chosenLanguage = ref("");
 function getLangCode() {
@@ -97,22 +114,14 @@ const bookForm = reactive({
   // token: store.token,
   title: "",
   author: "",
-  image: "",
+  // image: "",
   condition: "",
   category: "",
   language: "",
 });
 
 function addBook() {
-  // const files = this.toRefs.fileInput.files;
-
-      // Iterate over the files and read them as data URLs using the File API
-      // for (const file of files) {
-      //   const reader = new FileReader();
-      //   reader.readAsDataURL(file);
-      //   reader.onload = () => {
-      //     // Save the image as a data URL in the component's data
-      //     this.images.push(reader.result);
+  
 }
 </script>
 
