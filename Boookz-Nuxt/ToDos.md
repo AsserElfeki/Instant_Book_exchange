@@ -50,7 +50,8 @@
 - [ ] 44. Have pop-up zoomed gallery funct...
 - [x] 45. redo css for transactions and ratings (and their data)
 - [x] 46. the email verification page 
-
+- [ ] 47. if condition for the profile tabs 
+- [ ] 48. edit the tabs to not talk to the api, instead the profile will handle all the fetching in one function 
 
 
 
