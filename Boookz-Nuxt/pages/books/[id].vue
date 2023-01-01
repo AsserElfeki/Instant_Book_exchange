@@ -1,5 +1,5 @@
 <template>
-  <div v-if="book" class="flex flex-col justify-center border-2 border-red-400">
+  <div v-if="book" class="flex flex-col justify-center">
     <div
       class="hero bg-gradient-to-r from-violet-100 to-violet-700 h-auto rounded-2xl p-2"
     >
@@ -7,11 +7,11 @@
         class="flex flex-col md:flex-row md:flex-nowrap justify-center md:justify-around items-center gap-8"
       >
         <img
-          class="rounded-2xl h-60 md:h-auto border-2 border-blue-500"
+          class="rounded-2xl h-60 md:h-96"
           :src="book.images.at(0)"
           alt="cover of the book"
         />
-        <div class="flex flex-col gap-2 border-2 border-blue-500">
+        <div class="flex flex-col gap-2">
           <h1 class="font-bold font-serif text-xl leading-none">{{ book.title }}</h1>
           <p class="">By: {{ book.author.join(", ") }}.</p>
           <div>
@@ -45,16 +45,17 @@
       >
         >
         <swiper-slide v-for="n in book.images.length">
-          <img class="rounded-md" :src="book.images.at(n - 1)" alt="cover of the book" @click="showImage(book.images.at(n - 1))" />
-        </swiper-slide>
-
-        <swiper-slide v-for="n in book.images.length">
-          <img class="rounded-md" :src="book.images.at(n - 1)" alt="cover of the book" @click="showImage(book.images.at(n - 1))"/>
+          <img
+            class="rounded-md"
+            :src="book.images.at(n - 1)"
+            alt="cover of the book"
+            @click="showImage(book.images.at(n - 1))"
+          />
         </swiper-slide>
       </swiper>
       <div v-if="showModal" class="modal-overlay" @click="hideModal">
-         <img :src="modalImage" class="modal-image" />
-        </div>
+        <img :src="modalImage" class="modal-image" />
+      </div>
       <hr class="separator" />
     </div>
 
@@ -72,13 +73,13 @@
 </template>
 
 <script>
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { useDataStore } from "~/stores/dataStore";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 export default {
   components: {
@@ -90,25 +91,22 @@ export default {
   },
   methods: {
     showImage(image) {
-      this.showModal = true
-      this.modalImage = image
+      this.showModal = true;
+      this.modalImage = image;
       console.log("Show Image");
-
     },
     hideModal() {
-      this.showModal = false
+      this.showModal = false;
       console.log("Hide Image");
-    }
-
+    },
   },
   mounted() {
     const store = useDataStore();
     this.book = store.clickedBook;
-    
   },
   setup() {
-    const showModal = false
-    const modalImage = ''
+    const showModal = false;
+    const modalImage = "";
     const onSwiper = (swiper) => {
       console.log(swiper);
     };
@@ -120,7 +118,7 @@ export default {
       onSlideChange,
       modules: [Navigation, Pagination, Scrollbar, A11y],
       showModal,
-     modalImage
+      modalImage,
     };
   },
 };
@@ -135,14 +133,14 @@ export default {
   /* height: 400px; */
 }
 .swiper-pagination {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-  }
-  .modal-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;

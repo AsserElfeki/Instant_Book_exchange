@@ -39,7 +39,7 @@ add extra components :
 }
 
 .content {
-  @apply min-h-screen;
+  @apply min-h-screen overflow-hidden;
 }
 
 .footer-element a {

@@ -154,7 +154,6 @@ const form = reactive({
   password2: "",
   country: "PL",
 });
-store.registerError = {};
 
 //functions
 async function register() {

@@ -53,6 +53,8 @@
 - [ ] 47. if condition for the profile tabs 
 - [ ] 48. edit the tabs to not talk to the api, instead the profile will handle all the fetching in one function.
 - [ ] 49. remove "by" in the bookcard inside the profile 
+- [x] 50. max size of book image in index
+- [ ] 51. uploading images not workinggggggg
 
 
 
