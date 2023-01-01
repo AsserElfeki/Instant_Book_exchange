@@ -5,9 +5,9 @@ const isAuthenticated = store.userIsLoggedIn
 console.log(isAuthenticated)
 export default defineNuxtRouteMiddleware(() => {
     // isAuthenticated() is an example method verifying if an user is authenticated
-    console.log("state: " + isAuthenticated)
+    // console.log("state: " + isAuthenticated)
     // console.log({ to, from })
-    if (isAuthenticated === false) {
+    if (process.client && isAuthenticated === false) {
         return navigateTo('signIn')
     }
     // else {

@@ -33,6 +33,11 @@ import { useDataStore } from "~/stores/dataStore";
 
 const store = useDataStore();
 
+onBeforeRouteLeave(to, from, next) {
+    this.doSomething();
+    next();
+}
+  
 </script>
 
 <style scoped>
