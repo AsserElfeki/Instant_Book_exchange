@@ -2,9 +2,11 @@ from django.core.serializers import serialize
 from rest_flex_fields import FlexFieldsModelSerializer
 from rest_framework_simplejwt.authentication import authentication
 
+import boookzdata.serializers
 from authentication.models import BookReader
 from authentication.serializers import BookReaderSerializer
-from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, WantedBookshelf
+from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, \
+    WantedBookshelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -20,10 +22,12 @@ class CategorySerializer(FlexFieldsModelSerializer):
         model = Category
         fields = ['name']
 
+
 class BookConditionSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = BookCondition
         fields = ['name']
+
 
 class BookShelfSerializer(FlexFieldsModelSerializer):
     book_reader = BookReaderSerializer()
@@ -32,40 +36,27 @@ class BookShelfSerializer(FlexFieldsModelSerializer):
         model = GiveawayBookshelf
         fields = ['book_reader', ]
 
-class BookUploadSerializer(FlexFieldsModelSerializer):
-    name = serializers.CharField(required=True)
-    content = serializers.CharField(required=True)
-    book_shelf = BookShelfSerializer(required=False)
-
-    class Meta:
-        model = Book
-        fields = ['pk', 'name', 'content', 'created', 'updated', 'book_shelf']
-        expandable_fields = {
-            'category': ('boookzdata.CategorySerializer', {'many': True}),
-            'comments': ('boookzdata.CommentSerializer', {'many': True}),
-        }
 
 class ImageSerializer(FlexFieldsModelSerializer):
-    image = VersatileImageFieldSerializer(
-        sizes='product_headshot'
-    )
+    image = VersatileImageFieldSerializer(sizes='product_headshot')
 
     class Meta:
         model = Image
-        fields = ['image',]
+        fields = ['image', ]
+
 
 class BookSerializer(FlexFieldsModelSerializer):
     title = serializers.CharField(required=False)
     description = serializers.CharField(required=False)
     condition = serializers.SerializerMethodField()
     images = serializers.SerializerMethodField()
-    author = serializers.SerializerMethodField() 
+    author = serializers.SerializerMethodField()
     category = serializers.SerializerMethodField()
-    book_owner = serializers.SerializerMethodField() 
+    book_owner = serializers.SerializerMethodField()
 
     class Meta:
         model = Book
-        fields = ['pk', 'title', 'author', 'description', 'category', 'condition', 'images', 'book_owner', 'created',]
+        fields = ['pk', 'title', 'author', 'description', 'category', 'condition', 'images', 'book_owner', 'created', ]
 
     def get_images(self, obj):
         images = Image.objects.filter(book=obj)
@@ -86,15 +77,25 @@ class BookSerializer(FlexFieldsModelSerializer):
         serializer = AuthorSerializer(author, many=True).data
         return [item['name'] for item in serializer]
 
-    def get_book_owner(self, obj):
-        profile_image = ImageSerializer(obj.get_book_reader().profile_image, context=self.context).data['image']
-        url = (profile_image if profile_image is None else profile_image['full_size'])
-        return [obj.get_book_reader().user.username, url]
 
-       # def get_images(self, obj):
-        # images = Image.objects.all().filter(book=obj)
-        # serializer = ImageSerializer(images, context = self.context)
-        # return serializer.data 
+class BookUploadSerializer(FlexFieldsModelSerializer):
+    book_shelf = BookShelfSerializer(required=False)
+
+    class Meta:
+        model = Book
+        fields = ['pk', 'book_shelf', 'title', 'description']
+        expandable_fields = {
+            'condition': ('boookzdata.BookConditionSerializer', {'mane': False}),
+            'category': ('boookzdata.CategorySerializer', {'many': True}),
+            'comments': ('boookzdata.CommentSerializer', {'many': True}),
+        }
+
+    def create(self, validated_data):
+        instance = Book.objects.create(book_shelf=validated_data['book_shelf'], title=validated_data['title'],
+                                       description=validated_data['description'], condition=validated_data['condition'])
+        [instance.category.add(category) for category in validated_data['category']]
+        return instance
+
 
 class GiveawayBookshelfSerializer(FlexFieldsModelSerializer):
     shelf_owner = BookReaderSerializer(read_only=True)
@@ -104,6 +105,7 @@ class GiveawayBookshelfSerializer(FlexFieldsModelSerializer):
         model = GiveawayBookshelf
         fields = ['shelf_owner', 'books']
 
+
 class WantedBookShelfSerializer(FlexFieldsModelSerializer):
     shelf_owner = BookReaderSerializer(read_only=True)
     books = BookSerializer(many=True)
@@ -111,6 +113,7 @@ class WantedBookShelfSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = WantedBookshelf
         fields = ['shelf_owner', 'books']
+
 
 class BookSiteSerializer(FlexFieldsModelSerializer):
     class Meta:
@@ -132,16 +135,19 @@ class CommentSerializer(FlexFieldsModelSerializer):
             'user': 'boookzdata.UserSerializer'
         }
 
+
 class UserSerializer(serializers.ModelSerializer):
     book_reader = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = User
         fields = ['pk', 'username', 'first_name', 'last_name', 'email', 'book_reader']
 
     def get_book_reader(self, obj):
         book_reader = BookReader.objects.get(user=obj)
-        serializer = ProfileInfoSerializer(book_reader, context= self.context)
+        serializer = ProfileInfoSerializer(book_reader, context=self.context)
         return serializer.data
+
 
 class ProfileInfoSerializer(FlexFieldsModelSerializer):
     profile_image = serializers.SerializerMethodField()
@@ -151,7 +157,7 @@ class ProfileInfoSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = BookReader
         fields = ['country', 'profile_image', 'wanted_shelf', 'giveaway_shelf']
-    
+
     def get_profile_image(self, obj):
         image = ImageSerializer(obj.profile_image, read_only=True, context=self.context).data['image']
         image = image if image is None else image['full_size']
