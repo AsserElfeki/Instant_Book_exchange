@@ -1,25 +1,26 @@
 <template>
-  <div class="flex flex-col justify-center items-center gap-4 border-2">
+  <div class="flex justify-center container mx-auto">
     <form
       @submit.prevent="updateUser"
-      class="flex flex-col justify-center items-center gap-4"
+      class="flex flex-col justify-center items-center gap-4  px-2"
     >
       <h2 class="font-sans font-extrabold text-xl self-start my-8">Public Profile</h2>
 
-      <div class="flex gap-12 w-full">
+      <div class="flex flex-row justify-around gap-12 md:w-full">
         <img
           src="../../assets/img/avatar.png"
           alt="avatar"
           class="w-32 h-32 rounded-full object-cover border-4 border-violet-500"
         />
         <div class="flex flex-col gap-4">
-          <button class="btn-dark" @click="changePicture">
+          <button type="button" class="btn-dark" @click="changePicture">
             Change Picture
           </button>
-          <button class="btn-light" @click="removePicture">Remove Picture</button>
+          <button type="button" class="btn-light" @click="removePicture">Remove Picture</button>
         </div>
       </div>
-      <div class="flex gap-4">
+
+      <div class="flex flex-col w-full sm:flex-row justify-between gap-4 ">
         <div class="flex flex-col">
           <label for="name">name</label>
           <input
@@ -41,14 +42,15 @@
       </div>
 
       <div class="w-full flex flex-col">
-        <label for="country">country:</label>
+        <label class="flex-auto" for="country">country:</label>
         <input
           id="country"
           type="country"
           v-model="userForm.country"
-          class="border-2 border-black p-2 rounded-lg"
+          class="border-2 border-black p-2 rounded-lg flex-auto"
         />
       </div>
+
       <div class="w-full flex flex-col">
         <label for="Genre">Genre:</label>
         <input
@@ -80,7 +82,7 @@
             class="border-2 border-black p-2 rounded-lg"
           />
         </div>
-         <div class="w-full flex flex-col">
+        <div class="w-full flex flex-col">
           <label for="passwordConfirm">Confirm password</label>
           <input
             id="passwordConfirm"
@@ -91,7 +93,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn-dark w-full ">SAVE</button>
+      <button type="submit" class="btn-dark w-full">SAVE</button>
     </form>
   </div>
 </template>
@@ -111,7 +113,13 @@ const userForm = reactive({
 function updateUser() {
   console.log(userForm);
 }
+function removePicture() {
+  console.log("remove picture");
+}
 
+function changePicture() {
+  console.log("change picture");
+}
 // await userStore.getUserData();
 </script>
 
