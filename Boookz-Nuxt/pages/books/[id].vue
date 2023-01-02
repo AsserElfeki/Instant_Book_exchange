@@ -44,12 +44,13 @@
         class="border-2 border-black flex justify-center items-center w-1/3"
       >
         >
-        <swiper-slide v-for="n in book.images.length">
+        <swiper-slide v-for="n in book.images.length" style="display: flex; align-items: center;">
           <img
             class="rounded-md"
             :src="book.images.at(n - 1)"
             alt="cover of the book"
             @click="showImage(book.images.at(n - 1))"
+            style="margin: auto; object-fit: contain; width: 300px; height: 500px;"
           />
         </swiper-slide>
       </swiper>
@@ -93,6 +94,7 @@ export default {
   data() {
     return { book: "",
     username: "",
+    showModal: false,
   };
 
   },
