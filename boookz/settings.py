@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import json
 import os
+
+with open("/etc/config.json") as config_file:
+    config = json.load(config_file)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,18 +27,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gdb608)8)99kwx4iq!f_y7so7dvu=8h^k9f-cncx1mya*s9#wl'
+SECRET_KEY = config["SECRET_KEY"] 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
-
-CORS_ORIGIN_WHITELIST = (
-    "localhost:3000",
-)
+ALLOWED_HOSTS = ['146.59.87.108']
 
 CORS_ALLOW_ALL_ORIGINS = True
+#CORS_ALLOWED_ORIGINS = ['146.59.87.108:800']
 
 # Application definition
 
@@ -92,10 +93,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000',
-)
-
 ROOT_URLCONF = 'boookz.urls'
 
 TEMPLATES = [
@@ -126,18 +123,12 @@ WSGI_APPLICATION = 'boookz.wsgi.application'
 # }
 # }
 
-
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'localdb',
-        'USER': "victor",
-        'PASSWORD': env("PASSWORD"),
+        'NAME': 'boookz',
+        'USER': config["DB_USER"],
+        'PASSWORD': config["DB_PASS"],
         'HOST': '146.59.87.108',
         'PORT': '3000',
     }
@@ -186,5 +177,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env("GMAIL_EMAIL")
-EMAIL_HOST_PASSWORD = env("GMAIL_PASSWORD")
+EMAIL_HOST_USER = config["EMAIL_USER"]
+EMAIL_HOST_PASSWORD = config["EMAIL_PASS"] 
