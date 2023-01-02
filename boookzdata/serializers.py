@@ -77,6 +77,11 @@ class BookSerializer(FlexFieldsModelSerializer):
         serializer = AuthorSerializer(author, many=True).data
         return [item['name'] for item in serializer]
 
+    def get_book_owner(self, obj):
+        profile_image = ImageSerializer(obj.get_book_reader().profile_image, context=self.context).data['image']
+        url = (profile_image if profile_image is None else profile_image['full_size'])
+        return [obj.get_book_reader().user.username, url]
+    
 
 class BookUploadSerializer(FlexFieldsModelSerializer):
     book_shelf = BookShelfSerializer(required=False)
