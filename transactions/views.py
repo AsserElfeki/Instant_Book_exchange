@@ -69,6 +69,24 @@ class StartTransactionView(generics.CreateAPIView):
         return uuid.uuid4()
 
 
+class DeclineTransactionView(RetrieveUpdateAPIView):
+    serializer_class = TransactionSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Transaction.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        transaction_token = self.kwargs['transaction_token']
+        transaction = self.queryset.get(token=transaction_token)
+        if transaction:
+            transaction_status, created = TransactionStatus.objects.get_or_create(name="Declined")
+            transaction.transaction_status = transaction_status
+            transaction.save()
+            serializer = self.get_serializer(transaction, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_update(serializer)
+            return Response(serializer.data)
+
+
 class ConfirmTransactionView(RetrieveUpdateAPIView):
     serializer_class = TransactionSerializer
     permission_classes = (IsAuthenticated,)
@@ -87,7 +105,7 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                 serializer.is_valid(raise_exception=True)
                 self.perform_update(serializer)
                 return Response(serializer.data)
-        return Response("Wait until the transaction is accepted by receiver")
+            return Response("Wait until the transaction is accepted by receiver")
 
 
 class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
@@ -106,6 +124,10 @@ class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
             serializer = self.get_serializer(transaction, data=request.data)
             serializer.is_valid(raise_exception=True)
             self.perform_update(serializer)
+            if transaction_status.name == "Completed":
+                receiver_book, initiator_book = transaction.receiver_book, transaction.initiator_book
+                #TODO what to do with book? delete? remove from shelves?
+
             return Response(serializer.data)
 
         return Response("Wait until the transaction is accepted by receiver")

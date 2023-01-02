@@ -19,7 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -36,7 +35,6 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 CORS_ALLOW_ALL_ORIGINS = True
-
 
 # Application definition
 
@@ -71,7 +69,7 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=45),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
     'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION':False,
+    'BLACKLIST_AFTER_ROTATION': False,
 }
 
 VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
@@ -118,37 +116,36 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'boookz.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 # DATABASES = {
-    # 'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+# 'default': {
+# 'ENGINE': 'django.db.backends.sqlite3',
+# 'NAME': BASE_DIR / 'db.sqlite3',
+# }
 # }
 
 
-
 import environ
+
 env = environ.Env()
 environ.Env.read_env()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'USER': env("USER"),
+        'NAME': 'localdb',
+        'USER': "victor",
         'PASSWORD': env("PASSWORD"),
         'HOST': '146.59.87.108',
         'PORT': '3000',
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
-AUTH_PWD_MODULE="django.contrib.auth.password_validation."
+AUTH_PWD_MODULE = "django.contrib.auth.password_validation."
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': f'{AUTH_PWD_MODULE}UserAttributeSimilarityValidator',
@@ -164,7 +161,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -176,19 +172,16 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
