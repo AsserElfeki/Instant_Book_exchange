@@ -1,4 +1,5 @@
 import uuid
+from itertools import chain
 
 from django.http import QueryDict
 from django.shortcuts import render
@@ -32,6 +33,15 @@ class ExternalUserInterfer(APIException):
     default_code = 'service_unavailable'
 
 
+class TransactionsView(ListAPIView):
+    serializer_class = TransactionSerializer
+
+    def get_queryset(self):
+        book_reader = BookReader.objects.get(user=self.request.user)
+        user_transactions_as_initiator = Transaction.objects.filter(book_reader_initiator=book_reader)
+        user_transactions_as_receiver = Transaction.objects.filter(book_reader_receiver=book_reader)
+        return list(chain(user_transactions_as_initiator, user_transactions_as_receiver))
+
 # View should save these books in serializer and get book_reder_receiver
 # token
 # book that wants to be received <pk>
@@ -53,7 +63,7 @@ class StartTransactionView(generics.CreateAPIView):
         transaction_status, created = TransactionStatus.objects.get_or_create(name="Initiated")
         serializer.save(token=self.get_token(), book_reader_initiator=book_reader_initiator,
                         book_reader_receiver=book_reader_receiver, transaction_status=transaction_status,
-                        giveaway_book=initiator_book, wanted_book=receiver_book)
+                        initiator_book=initiator_book, receiver_book=receiver_book)
 
     def get_token(self):
         return uuid.uuid4()
