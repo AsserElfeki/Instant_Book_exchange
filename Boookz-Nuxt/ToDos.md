@@ -47,7 +47,7 @@
 - [x] 41. issue: profile page refresh goes to signin
 - [ ] 42. issue : opening a book in a new tab gives the last "clicked" book
 - [x] 43. enhance swiper: add zoom option and pagination
-- [ ] 44. Have pop-up zoomed gallery funct...
+- [x] 44. Have pop-up zoomed gallery funct...
 - [x] 45. redo css for transactions and ratings (and their data)
 - [x] 46. the email verification page 
 - [ ] 47. if condition for the profile tabs data fetching
