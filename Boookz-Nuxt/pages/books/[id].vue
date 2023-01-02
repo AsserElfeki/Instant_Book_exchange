@@ -128,7 +128,6 @@ export default {
       onSwiper,
       onSlideChange,
       modules: [Navigation, Pagination, Scrollbar, A11y],
-      showModal,
       modalImage,
     };
   },
