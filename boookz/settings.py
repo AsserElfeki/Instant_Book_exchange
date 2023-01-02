@@ -129,12 +129,17 @@ WSGI_APPLICATION = 'boookz.wsgi.application'
     # }
 # }
 
+
+
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'boookz',
-        'USER': 'mikeadmin',
-        'PASSWORD': 'YWoz7G3CTvn$',
+        'USER': env("USER"),
+        'PASSWORD': env("PASSWORD"),
         'HOST': '146.59.87.108',
         'PORT': '3000',
     }
@@ -184,9 +189,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import environ
-env = environ.Env()
-environ.Env.read_env()
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
