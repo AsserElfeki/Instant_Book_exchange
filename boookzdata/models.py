@@ -67,6 +67,10 @@ class BookShelf(PolymorphicModel):
     class Meta():
         base_manager_name = 'non_polymorphic'
 
+    def __str__(self):
+        return f"{self.book_reader.user}'s shelf"
+
+
 
 class GiveawayBookshelf(BookShelf):
     pass
