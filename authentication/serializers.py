@@ -125,6 +125,7 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         return instance
 
 
+# TODO return user info
 class LoginSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
 

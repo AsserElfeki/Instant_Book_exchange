@@ -1,6 +1,9 @@
 import jwt
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
+from django.shortcuts import redirect
+
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from rest_flex_fields import FlexFieldsModelViewSet
@@ -80,9 +83,11 @@ class RegisterView(generics.CreateAPIView):
         return data
 
 
+
 class EmailVerify(generics.GenericAPIView):
     def get(self, request):
         token = request.GET.get('token')
+        frontend_ip = f"http://{request.get_host()}:3000/profileactivated"
         try:
             payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
             user = User.objects.get(id=payload['user_id'])
@@ -90,9 +95,9 @@ class EmailVerify(generics.GenericAPIView):
             if not book_reader.is_verified:
                 book_reader.is_verified = True
                 book_reader.save()
-            return Response({"response": "Successfully activated"}, status=status.HTTP_200_OK)
+            return redirect(frontend_ip)
         except jwt.ExpiredSignatureError as ex:
-            return Response({"response": "Activation expired"}, status=status.HTTP_400_BAD_REQUEST)
+            return redirect(reverse(frontend_ip))
         # except jwt.DecodeError as ex:
         #     return Response({"response": f"Invalid token{token}"}, status=status.HTTP_400_BAD_REQUEST)
 

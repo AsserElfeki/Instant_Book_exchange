@@ -54,7 +54,7 @@ class Book(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return self.title
+        return f"id-{self.pk} {self.title}"
 
     def get_book_reader(self):
         return self.book_shelf.book_reader
@@ -66,6 +66,10 @@ class BookShelf(PolymorphicModel):
 
     class Meta():
         base_manager_name = 'non_polymorphic'
+
+    def __str__(self):
+        return f"{self.book_reader.user}'s shelf"
+
 
 
 class GiveawayBookshelf(BookShelf):

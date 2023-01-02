@@ -1,7 +1,11 @@
 from django.urls import path, include
 
-from transactions.views import StartTransactionView
+from transactions.views import StartTransactionView, ConfirmTransactionView, ConfirmReceiveTransactionView
+
+
 
 urlpatterns = [
-    path('startTransaction/', StartTransactionView.as_view(), name='list_book_reader'),
+    path('confirm/<str:transaction_token>', ConfirmTransactionView.as_view(), name='confirm_transaction'),
+    path('confirmReceive/<str:transaction_token>', ConfirmReceiveTransactionView.as_view(), name='confirm_transaction'),
+    path('startTransaction/', StartTransactionView.as_view(), name='start_transaction'),
 ]
