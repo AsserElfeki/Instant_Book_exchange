@@ -24,5 +24,5 @@
 <script setup>
 import { useUserStore } from "~/stores/userStore";
 const store = useUserStore();
-await store.getUserRatings();
+// await store.getUserRatings();
 </script>

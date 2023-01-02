@@ -100,6 +100,13 @@ export const useUserStore = defineStore({
         getRoute(event) {
             console.log(event.target.value);
             // this.callingComponent=event.target 
+        },
+
+        async getUserInfo() {
+            const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
+                headers: { "authorization": "Bearer " + this.token }
+            })
+            //ToDO
         }
     },
 
