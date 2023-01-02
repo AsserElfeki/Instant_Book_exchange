@@ -28,14 +28,14 @@
                           res.email : email is taken
                           res.password: weak 
                           res.password2: no match
-- [ ] 25. Toasts for last task
+- [x] 25. Toasts for last task
 - [x] 26. redirect after register
 - [x] 27. redirect after sign in
 - [x] 28. logout to endpoint 
 - [x] 29. route guards 
 - [x] 30. active tabs (dynamic components)
 - [ ] 31. transactions page
-- [ ] 32. settings page 
+- [x] 32. settings page 
 - [x] 33. user shelves from the correct endpoints 
 - [x] 34. page transitions 
 - [x] 35. reactive tabs in nuxt 
@@ -51,7 +51,7 @@
 - [x] 45. redo css for transactions and ratings (and their data)
 - [x] 46. the email verification page 
 - [ ] 47. if condition for the profile tabs data fetching
-- [ ] 48. edit the tabs to not talk to the api, instead the profile will handle all the fetching in one function.
+- [x] 48. edit the tabs to not talk to the api, instead the profile will handle all the fetching in one function.
 - [x] 49. remove "by" in the bookcard inside the profile 
 - [x] 50. max size of book image in index
 - [ ] 51. uploading images not workinggggggg
