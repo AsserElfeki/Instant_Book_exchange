@@ -88,17 +88,18 @@ class BookUploadSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['pk', 'book_shelf', 'title', 'description']
-        expandable_fields = {
-            'condition': ('boookzdata.BookConditionSerializer', {'mane': False}),
-            'category': ('boookzdata.CategorySerializer', {'many': True}),
-            'comments': ('boookzdata.CommentSerializer', {'many': True}),
-        }
+        fields = ['pk', 'book_shelf', 'title', 'description',] 
 
     def create(self, validated_data):
+        
         instance = Book.objects.create(book_shelf=validated_data['book_shelf'], title=validated_data['title'],
-                                       description=validated_data['description'], condition=validated_data['condition'])
-        [instance.category.add(category) for category in validated_data['category']]
+                                       description=validated_data['description'], condition=validated_data['condition']) 
+
+        for author in validated_data['author']:
+            instance.author.add(aut.pk) 
+
+        for category in validated_data['category']:
+            instance.category.add(cat.pk) 
         return instance
 
 

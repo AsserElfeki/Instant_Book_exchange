@@ -4,11 +4,12 @@ from rest_framework.exceptions import APIException
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.decorators import action
 
 from authentication.models import BookReader
 from .serializers import BookSerializer, BookUploadSerializer, GiveawayBookshelfSerializer, ImageSerializer, \
     WantedBookShelfSerializer
-from .models import Book, Image, GiveawayBookshelf, WantedBookshelf, BookCondition, Category
+from .models import Book, Image, GiveawayBookshelf, WantedBookshelf, BookCondition, Category, Author
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
@@ -34,7 +35,16 @@ class SearchGiveAwayBooksView(ListAPIView):
 
 class ImageViewSet(FlexFieldsModelViewSet):
     serializer_class = ImageSerializer
+    # permission_classes = (IsAuthenticated,)
     queryset = Image.objects.all()
+
+    @action(detail=False, methods=['post'])
+    def upload(request):
+        try:
+            file=request.data['image']
+        except KeyError:
+            raise ParseError('Request has no resource file attached')
+        product=Image.objects.create(image=file)
 
 
 class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
@@ -59,6 +69,7 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
 class AllGiveawayView(ListAPIView):
     serializer_class = BookSerializer
+    
 
     def get_queryset(self):
         giveaway_shelves = GiveawayBookshelf.objects.all()
@@ -105,8 +116,11 @@ class BookUploadView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         book_condition = BookCondition.objects.get(name=self.request.data.get("condition"))
+        # author, created = Author.objects.get_or_create(name__in=self.request.data.getlist("author"))
         book_reader = BookReader.objects.get(user=self.request.user)
         book_categories = Category.objects.filter(name__in=self.request.data.getlist("category"))
+        for category in book_categories:
+            cat, created = Category.objects.get_or_create(name=category)
         if self.kwargs['bookshelf'] == "giveaway":
             giveaway_bookshelf = GiveawayBookshelf.objects.get(book_reader=book_reader)
             serializer.save(category=book_categories, condition=book_condition, book_shelf=giveaway_bookshelf)
