@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from versatileimagefield.fields import VersatileImageField, PPOIField
 from django_countries.fields import CountryField
 
-from boookzdata.models import WantedBookshelf, GiveawayBookshelf
+from boookzdata.models import BookShelf
 
 
 class ProfileImage(models.Model):
@@ -38,10 +38,5 @@ class BookReader(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         book_reader, created = BookReader.objects.get_or_create(user=instance)
-        wanted_shelf, created = WantedBookshelf.objects.get_or_create(
-            book_reader=book_reader)
-        giveaway_shelf, created = GiveawayBookshelf.objects.get_or_create(
-            book_reader=book_reader)
-
 
 post_save.connect(create_user_profile, sender=User)

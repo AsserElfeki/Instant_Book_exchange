@@ -7,9 +7,8 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.decorators import APIView, action
 
 from authentication.models import BookReader
-from .serializers import BookSerializer, BookUploadSerializer, GiveawayBookshelfSerializer, ImageSerializer, \
-    WantedBookShelfSerializer
-from .models import Book, Image, GiveawayBookshelf, WantedBookshelf, BookCondition, Category, Author
+from .serializers import BookSerializer, BookUploadSerializer, BookShelfSerializer, ImageSerializer
+from .models import Book, Image, BookShelf, BookCondition, Category, Author
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
@@ -28,7 +27,7 @@ class SearchGiveAwayBooksView(ListAPIView):
     search_fields = ("^name",)  # TODO search by author, category, etc
 
     def get_queryset(self):
-        giveaway_shelves = GiveawayBookshelf.objects.all()
+        giveaway_shelves = BookShelf.objects.filter(shelf_name="giveaway")
         queryset = Book.objects.all().filter(book_shelf__in=giveaway_shelves)
         return queryset
 
@@ -69,10 +68,9 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
 class AllGiveawayView(ListAPIView):
     serializer_class = BookSerializer
-    
 
     def get_queryset(self):
-        giveaway_shelves = GiveawayBookshelf.objects.all()
+        giveaway_shelves = BookShelf.objects.filter(shelf_name="giveaway")
         giveaway_books = Book.objects.filter(book_shelf_id__in=giveaway_shelves)
         return giveaway_books
 
@@ -81,7 +79,7 @@ class AllWantedView(ListAPIView):
     serializer_class = BookSerializer
 
     def get_queryset(self):
-        wanted_shelves = WantedBookshelf.objects.all()
+        wanted_shelves = BookShelf.objects.filter(shelf_name="wanted")
         wanted_books = Book.objects.filter(book_shelf_id__in=wanted_shelves)
         return wanted_books
 
@@ -93,16 +91,12 @@ class BooksFromChosenBookshelfView(ListAPIView):
 
     def get_queryset(self):
         queryset = Book.objects.all()
+        book_shelf = self.kwargs["bookshelf"]
         if queryset:
-            book_reader = queryset.get(user=self.request.user)
-            if self.kwargs['bookshelf'] == "giveaway":
-                giveaway_bookshelves = GiveawayBookshelf.objects.all()
+            if book_shelf == "wanted" or book_shelf == "giveaway":
+                book_reader = queryset.get(user=self.request.user)
+                giveaway_bookshelves = BookShelf.objects.filter(shelf_name=book_shelf)
                 users_bookshelf = giveaway_bookshelves.filter(book_reader=book_reader)
-                users_books = queryset.filter(book_shelf_id__in=users_bookshelf)
-                return users_books
-            elif self.kwargs['bookshelf'] == "wanted":
-                wanted_bookshelves = WantedBookshelf.objects.all()
-                users_bookshelf = wanted_bookshelves.filter(book_reader=book_reader)
                 users_books = queryset.filter(book_shelf_id__in=users_bookshelf)
                 return users_books
             else:
@@ -130,10 +124,8 @@ class BookUploadView(APIView):
         categoriesList = {"category": categories}
         condition = {"condition": BookCondition.objects.get(name=request.data.get("condition")).pk}
         book_reader = {"book_reader": BookReader.objects.get(user=request.user).pk}
-        if bookshelf_param == "giveaway":
-            bookshelf = {"book_shelf": GiveawayBookshelf.objects.get(book_reader=book_reader["book_reader"]).pk}
-        elif bookshelf_param == "wanted":
-            bookshelf = {"book_shelf": WantedBookshelf.objects.get(book_reader=book_reader["book_reader"]).pk}
+        if bookshelf_param == "wanted" or bookshelf_param == "giveaway":
+            bookshelf = {"book_shelf": BookShelf.objects.get(shelf_name=bookshelf_param).pk}
         else:
             raise NotCorrectUrlProvided()
 
