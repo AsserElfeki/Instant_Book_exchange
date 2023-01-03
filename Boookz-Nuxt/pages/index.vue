@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center">
+  <div class="flex flex-col justify-center mb-4">
     <div class="self-center w-full">
       <RandomBook :book="store.randomBook" />
     </div>

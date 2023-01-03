@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex flex-col justify-center items-center rounded-2xl p-3 gap-3">
+  <div class="container flex flex-col justify-center items-center rounded-2xl p-3 gap-3 mx-auto">
     <h3 class="self-start text-[#695AC9]">#suggested for YOU</h3>
 
     <div class="flex justify-around items-center flex-row gap-3 md:gap-20 ">
