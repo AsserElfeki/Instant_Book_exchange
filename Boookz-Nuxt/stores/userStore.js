@@ -105,7 +105,9 @@ export const useUserStore = defineStore({
         async getUserInfo() {
             try {
                 const res = await $fetch('http://146.59.87.108:8000/authentication/profile/', {
-                    headers: { "authorization": "Bearer " + this.token, }
+                    headers: {
+                        "authorization": "Bearer " + this.token,
+                    }
                 })
 
                 if (res) {
