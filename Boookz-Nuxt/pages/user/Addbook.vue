@@ -76,52 +76,93 @@
 
       <label for="book-images" class="self-start">upload images:</label>
       <input
-        required
         id="book-images"
         type="file"
         multiple
         accept="image/*"
+        @change="updateFiles($event.target.files)"
         class="border-2 border-black p-2 rounded-md"
       />
 
       <button type="submit" class="btn-sm self-center">submit</button>
     </form>
 
-    <p>{{ bookForm }}</p>
+    <p>auth: {{ bookForm.author }}</p>
+    <p>title: {{ bookForm.title }}</p>
+    <p>image: {{ bookForm.images }}</p>
+    <p>categ: {{ bookForm.category }}</p>
+    <p>cond: {{ bookForm.condition }}</p>
+    <p>lang: {{ bookForm.language }}</p>
   </div>
 </template>
 
-<script setup>
+<script>
 import { useUserStore } from "~/stores/userStore";
 import { useLangAPIStore } from "~/stores/languagesStore";
-const store = useUserStore();
-const langStore = useLangAPIStore();
-const Languages = langStore.getAllLanguages();
 
-const conditions = ["poor", "fair", "good", "excellent"];
-const categories = ["fiction", "romance", "science"];
+export default {
+  setup() {
+    const userStore = useUserStore();
+    const langStore = useLangAPIStore();
+    const Languages = langStore.getAllLanguages();
 
-const images = [];
-const file = ref(null);
+    const conditions = ["poor", "fair", "good", "excellent"];
+    const categories = ["fiction", "romance", "science"];
 
-const chosenLanguage = ref("");
-function getLangCode() {
-  console.log(chosenLanguage.value);
-  bookForm.language = langStore.getLanguageCode(chosenLanguage.value);
-}
-const bookForm = reactive({
-  // token: store.token,
-  title: "",
-  author: "",
-  // image: "",
-  condition: "",
-  category: "",
-  language: "",
-});
+    // const route = useRoute();
+    // const shelf = route;
+    // console.log("shelf:", route.params.id);
+    // const images = [];
+    // const file = ref(null);
 
-async function addBook() {
-  store.addBook(bookForm);
-}
+    const chosenLanguage = ref("");
+
+    const images = null;
+
+    const bookForm = reactive({
+      title: "",
+      author: [],
+      category: "",
+      condition: "",
+      language: "",
+      image: null,
+    });
+
+    function getLangCode() {
+      console.log(chosenLanguage.value);
+      bookForm.language = langStore.getLanguageCode(chosenLanguage.value);
+    }
+
+    function updateFiles(files) {
+      this.images = files[0];
+      bookForm.image = this.images;
+
+      // const formData = new formData();
+      // if (!files.length) return;
+      // for (let i = 0; i < files.length; i++) {
+      //   let file = files[i];
+      //   formData.append("files[" + i + "]", file);
+      // }
+    }
+
+    async function addBook() {
+      userStore.addBook(bookForm);
+    }
+
+    return {
+      chosenLanguage,
+      conditions,
+      categories,
+      Languages,
+      bookForm,
+      updateFiles,
+      getLangCode,
+      addBook,
+    };
+  },
+
+  methods: {},
+};
 </script>
 
 <style scoped></style>

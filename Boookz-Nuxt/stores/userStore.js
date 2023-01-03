@@ -109,14 +109,12 @@ export const useUserStore = defineStore({
             //ToDO
         },
 
-        async addBook() {
+        async addBook(form) {
             const res = await $fetch('http://146.59.87.108:8000/data/upload/giveaway', {
                 method: 'POST',
                 headers: { "authorization": "Bearer " + this.token },
                 body: {
-                    "title": "test",
-                    "author": "test",
-                    "description": "test",
+                   form
                 }
             })
             }

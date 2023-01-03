@@ -55,6 +55,8 @@
 - [x] 49. remove "by" in the bookcard inside the profile 
 - [x] 50. max size of book image in index
 - [ ] 51. uploading images not workinggggggg
+- [ ] 52. dropdown menu for settings and logout ? 
+- [ ] 
 
 
 
