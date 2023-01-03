@@ -2,8 +2,7 @@ from rest_flex_fields import FlexFieldsModelSerializer
 
 from authentication.models import BookReader
 from authentication.serializers import BookReaderSerializer
-from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, GiveawayBookshelf, \
-    WantedBookshelf,BookShelf
+from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, BookShelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -24,14 +23,6 @@ class BookConditionSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = BookCondition
         fields = ['name']
-
-
-class BookShelfSerializer(FlexFieldsModelSerializer):
-    book_reader = BookReaderSerializer()
-
-    class Meta:
-        model = GiveawayBookshelf
-        fields = ['book_reader', ]
 
 
 class ImageSerializer(FlexFieldsModelSerializer):
@@ -78,57 +69,51 @@ class BookSerializer(FlexFieldsModelSerializer):
         profile_image = ImageSerializer(obj.get_book_reader().profile_image, context=self.context).data['image']
         url = (profile_image if profile_image is None else profile_image['full_size'])
         return [obj.get_book_reader().user.username, url]
-    
+
+
 class BookUploadSerializer(serializers.Serializer):
-    title=serializers.CharField(max_length=255)
+    title = serializers.CharField(max_length=255)
     description = serializers.CharField()
-    category=serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
-    author=serializers.PrimaryKeyRelatedField(queryset=Author.objects.all(), many=True)
-    condition=serializers.PrimaryKeyRelatedField(queryset=BookCondition.objects.all())
-    book_shelf=serializers.PrimaryKeyRelatedField(queryset=BookShelf.objects.all())
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
+    author = serializers.PrimaryKeyRelatedField(queryset=Author.objects.all(), many=True)
+    condition = serializers.PrimaryKeyRelatedField(queryset=BookCondition.objects.all())
+    book_shelf = serializers.PrimaryKeyRelatedField(queryset=BookShelf.objects.all())
 
     def create(self, validated_data):
-        book_instance = Book.objects.create(title=validated_data["title"],description=validated_data["description"],condition=validated_data["condition"], book_shelf=validated_data["book_shelf"])
+        book_instance = Book.objects.create(title=validated_data["title"], description=validated_data["description"],
+                                            condition=validated_data["condition"],
+                                            book_shelf=validated_data["book_shelf"])
         [book_instance.category.add(category) for category in validated_data['category']]
         [book_instance.author.add(author) for author in validated_data['author']]
         return book_instance
 
 
 # class BookUploadSerializer(FlexFieldsModelSerializer):
-    # book_shelf = BookShelfSerializer(required=False)
+# book_shelf = BookShelfSerializer(required=False)
 
-    # class Meta:
-        # model = Book
-        # fields = ['pk', 'book_shelf', 'title', 'description']
-        # expandable_fields = {
-            # 'condition': ('boookzdata.BookConditionSerializer', {'mane': False}),
-            # 'category': ('boookzdata.CategorySerializer', {'many': True}),
-            # 'comments': ('boookzdata.CommentSerializer', {'many': True}),
-        # }
+# class Meta:
+# model = Book
+# fields = ['pk', 'book_shelf', 'title', 'description']
+# expandable_fields = {
+# 'condition': ('boookzdata.BookConditionSerializer', {'mane': False}),
+# 'category': ('boookzdata.CategorySerializer', {'many': True}),
+# 'comments': ('boookzdata.CommentSerializer', {'many': True}),
+# }
 
-    # def create(self, validated_data):
-        # instance = Book.objects.create(book_shelf=validated_data['book_shelf'], title=validated_data['title'],
-                                       # description=validated_data['description'], condition=validated_data['condition'])
-        # [instance.category.add(category) for category in validated_data['category']]
-        # return instance
+# def create(self, validated_data):
+# instance = Book.objects.create(book_shelf=validated_data['book_shelf'], title=validated_data['title'],
+# description=validated_data['description'], condition=validated_data['condition'])
+# [instance.category.add(category) for category in validated_data['category']]
+# return instance
 
 
-class GiveawayBookshelfSerializer(FlexFieldsModelSerializer):
-    shelf_owner = BookReaderSerializer(read_only=True)
+class BookShelfSerializer(FlexFieldsModelSerializer):
+    book_reader = BookReaderSerializer(read_only=True)
     books = BookSerializer(many=True)
 
     class Meta:
-        model = GiveawayBookshelf
-        fields = ['shelf_owner', 'books']
-
-
-class WantedBookShelfSerializer(FlexFieldsModelSerializer):
-    shelf_owner = BookReaderSerializer(read_only=True)
-    books = BookSerializer(many=True)
-
-    class Meta:
-        model = WantedBookshelf
-        fields = ['shelf_owner', 'books']
+        model = BookShelf
+        fields = ['book_reader', 'books', ]
 
 
 class BookSiteSerializer(FlexFieldsModelSerializer):
@@ -180,11 +165,11 @@ class ProfileInfoSerializer(FlexFieldsModelSerializer):
         return image
 
     def get_wanted_shelf(self, obj):
-        book_shelves = WantedBookshelf.objects.get(book_reader=obj)
-        serializer = WantedBookShelfSerializer(book_shelves, context=self.context)
+        book_shelf = BookShelf.objects.get(book_reader=obj, shelf_name="wanted")
+        serializer = BookShelfSerializer(book_shelf, context=self.context)
         return serializer.data
 
     def get_giveaway_shelf(self, obj):
-        book_shelves = GiveawayBookshelf.objects.get(book_reader=obj)
-        serializer = GiveawayBookshelfSerializer(book_shelves, context=self.context)
+        book_shelf = BookShelf.objects.get(book_reader=obj, shelf_name="giveaway")
+        serializer = BookShelfSerializer(book_shelf, context=self.context)
         return serializer.data

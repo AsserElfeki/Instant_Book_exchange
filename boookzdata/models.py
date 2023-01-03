@@ -40,15 +40,33 @@ class Category(models.Model):
         return self.name
 
 
+class BookShelf(PolymorphicModel):
+    shelf_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.shelf_name} shelf"
+
+    @classmethod
+    def get_default_pk(cls):
+        book_shelf, created = cls.objects.get_or_create(
+            shelf_name='wanted',
+        )
+        return book_shelf.pk
+
+
 class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     author = models.ManyToManyField(Author, related_name='books')
     category = models.ManyToManyField(Category, related_name='books')
-    condition = models.ForeignKey('boookzdata.BookCondition', related_name='books',on_delete=models.CASCADE, blank=True, null=True)
+    condition = models.ForeignKey('boookzdata.BookCondition', related_name='books', on_delete=models.CASCADE,
+                                  blank=True, null=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
-    book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, blank=True, null=True, related_name='books', related_query_name='book')
+    book_reader = models.ForeignKey("authentication.BookReader", on_delete=models.CASCADE, blank=True, null=True,
+                                    related_name='book', related_query_name='book')
+    book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, default=BookShelf.get_default_pk(),
+                                   blank=True, null=True, related_name='book', related_query_name='book')
 
     class Meta:
         ordering = ['-created']
@@ -57,33 +75,7 @@ class Book(models.Model):
         return f"id-{self.pk} {self.title}"
 
     def get_book_reader(self):
-        return self.book_shelf.book_reader
-
-
-class BookShelf(PolymorphicModel):
-    book_reader = models.ForeignKey('authentication.BookReader', on_delete=models.CASCADE, related_name='book_shelfs', related_query_name='book_shelfs')
-    non_polymorphic = models.Manager()
-
-    class Meta():
-        base_manager_name = 'non_polymorphic'
-
-    def __str__(self):
-        return f"{self.book_reader.user}'s shelf"
-
-
-
-class GiveawayBookshelf(BookShelf):
-    pass
-
-    def __str__(self):
-        return f"{self.book_reader.user}'s give-away shelf"
-
-
-class WantedBookshelf(BookShelf):
-    pass
-
-    def __str__(self):
-        return f"{self.book_reader.user}'s wanted shelf"
+        return self.book_reader
 
 
 class BookSite(models.Model):

@@ -26,7 +26,7 @@ class Transaction(models.Model):
                                        related_query_name='initiator_book', default="", null=True)
     receiver_book = models.ForeignKey('boookzdata.Book', on_delete=models.CASCADE, related_name='receiver_book',
                                       related_query_name='receiver_book', default="", null=True)
-    transaction_status = models.ForeignKey(TransactionStatus, on_delete=models.SET_NULL,
+    transaction_status = models.ManyToManyField(TransactionStatus,
                                            related_name='transaction_status', related_query_name='transaction_status',
                                            default="", null=True)
 
