@@ -41,7 +41,7 @@
 <script setup>
 import { useUserStore } from "~/stores/userStore";
 const store = useUserStore();
-await store.getUserHistory();
+// await store.getUserHistory();
 </script>
 
 <style scoped></style>
