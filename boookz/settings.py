@@ -122,10 +122,16 @@ WSGI_APPLICATION = 'boookz.wsgi.application'
 # 'NAME': BASE_DIR / 'db.sqlite3',
 # }
 # }
+DATABASE_POOL_CLASS = 'sqlalchemy.pool.QueuePool'
 
+DATABASE_POOL_ARGS = {
+    'max_overflow': 10,
+    'pool_size': 20,
+    'recycle': 300,
+}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django_postgrespool2',
         'NAME': 'boookz',
         'USER': config["DB_USER"],
         'PASSWORD': config["DB_PASS"],
