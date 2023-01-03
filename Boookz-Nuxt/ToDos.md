@@ -55,6 +55,13 @@
 - [x] 49. remove "by" in the bookcard inside the profile 
 - [x] 50. max size of book image in index
 - [ ] 51. uploading images not workinggggggg
+- [ ] 52. dropdown menu for settings and logout ? 
+- [ ] 53. figure a way to decide which shelf the book is added to (might be another input, or the smart way)
+- [ ] 54. check on each redirect if the token is still valid and update state 
+- [ ] 55. change the navbar 
+- [ ] 56. send book language as english name 
+- [ ] 57. book card in my profile should not have owner 
+- [ ] 
 
 
 

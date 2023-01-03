@@ -29,7 +29,7 @@
 <script setup>
 import { useUserStore } from "~/stores/userStore";
 const store = useUserStore();
-// await store.getUserGiveAwayBooks();
+await store.getUserInfo();
 </script>
 
 <style scoped></style>

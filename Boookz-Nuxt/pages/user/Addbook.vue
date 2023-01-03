@@ -39,7 +39,7 @@
         size="40"
         id="book-author"
         type="text"
-        v-model="bookForm.author"
+        v-model="author"
         placeholder="authors"
         class="border-2 border-black p-2 rounded-md"
       />
@@ -48,7 +48,7 @@
         <label for="category">Category(s):</label>
         <select
           id="category"
-          v-model="bookForm.category"
+          v-model="category"
           size="1"
           class="overflow-y-scroll h-auto border-2 rounded-md w-44 text-center"
         >
@@ -76,52 +76,120 @@
 
       <label for="book-images" class="self-start">upload images:</label>
       <input
-        required
         id="book-images"
         type="file"
-        multiple
+        ref="images"
         accept="image/*"
+        @change="updateFiles($event.target.files)"
         class="border-2 border-black p-2 rounded-md"
       />
 
       <button type="submit" class="btn-sm self-center">submit</button>
     </form>
 
-    <p>{{ bookForm }}</p>
+    <p>author: {{ bookForm.author }}</p>
+    <p>title: {{ bookForm.title }}</p>
+    <p>image: {{ bookForm.image }}</p>
+    <p>category: {{ bookForm.category }}</p>
+    <p>condition: {{ bookForm.condition }}</p>
+    <p>language: {{ bookForm.language }}</p>
+    <p>description: {{ bookForm.description }}</p>
   </div>
 </template>
 
-<script setup>
+<script>
 import { useUserStore } from "~/stores/userStore";
 import { useLangAPIStore } from "~/stores/languagesStore";
-const store = useUserStore();
-const langStore = useLangAPIStore();
-const Languages = langStore.getAllLanguages();
 
-const conditions = ["poor", "fair", "good", "excellent"];
-const categories = ["fiction", "romance", "science"];
+export default {
+  setup() {
+    const userStore = useUserStore();
+    const langStore = useLangAPIStore();
+    const Languages = langStore.getAllLanguages();
 
-const images = [];
-const file = ref(null);
+    const conditions = ["Bad", "Perfect", "Good"];
+    const categories = ["fiction", "romance", "science"];
 
-const chosenLanguage = ref("");
-function getLangCode() {
-  console.log(chosenLanguage.value);
-  bookForm.language = langStore.getLanguageCode(chosenLanguage.value);
-}
-const bookForm = reactive({
-  // token: store.token,
-  title: "",
-  author: "",
-  // image: "",
-  condition: "",
-  category: "",
-  language: "",
-});
+    // const route = useRoute();
+    // const shelf = route;
+    // console.log("shelf:", route.params.id);
+    // const images = [];
+    // const file = ref(null);
 
-async function addBook() {
-  store.addBook(bookForm);
-}
+    const chosenLanguage = ref("");
+
+    const images  = ref(null);
+
+    const author = ref("");
+    const category = ref("");
+
+    var fd = new FormData(); 
+
+    const bookForm = reactive({
+      title: "",
+      author: [],
+      category: [],
+      condition: "",
+      language: "",
+      image: [],
+      description: "asdasdsad",
+    });
+
+    function getLangCode() {
+      console.log(chosenLanguage.value);
+      bookForm.language = langStore.getLanguageCode(chosenLanguage.value);
+    }
+
+    function updateFiles(files) {
+      // this.images = files[0];
+      // bookForm.image.push(images);
+      // fd.append("image", images)
+
+      if (!files.length) return;
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        fd.append('image' , images)
+      }
+      // console.log("images:", typeof(images));
+    }
+
+    async function addBook() {
+      // const fd = new FormData();
+      fd.append("title", bookForm.title);
+      // fd.append("author", bookForm.author);
+      // fd.append("category", bookForm.category);
+      fd.append("author", [this.author]);
+      fd.append("category", [this.category]);
+      fd.append("condition", bookForm.condition);
+      fd.append("language", bookForm.language);
+      fd.append("description", bookForm.description);
+      // fd.append("image", images);
+      // console.log("fd:", fd.entries);
+
+      // bookForm.author.push(author.value);
+      // bookForm.category.push(category.value);
+
+      console.log("fd:", fd);
+      userStore.addBook(fd);
+      // userStore.addBook(fd);
+    }
+
+    return {
+      chosenLanguage,
+      conditions,
+      categories,
+      Languages,
+      bookForm,
+      author,
+      category,
+      updateFiles,
+      getLangCode,
+      addBook,
+    };
+  },
+
+  methods: {},
+};
 </script>
 
 <style scoped></style>

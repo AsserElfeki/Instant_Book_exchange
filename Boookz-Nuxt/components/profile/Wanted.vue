@@ -24,7 +24,7 @@
 <script setup>
 import { useUserStore } from "~/stores/userStore";
 const store = useUserStore();
-// await store.getUserWantedBooks();
+await store.getUserInfo();
 </script>
 
 <style scoped></style>

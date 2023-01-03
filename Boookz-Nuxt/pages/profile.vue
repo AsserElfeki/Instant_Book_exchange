@@ -66,7 +66,7 @@ function toggleTabs(event) {
   this.activeTab = event.target.innerText;
 }
 
-// await userStore.getUserInfo();
+await userStore.getUserInfo();
 
 </script>
 
