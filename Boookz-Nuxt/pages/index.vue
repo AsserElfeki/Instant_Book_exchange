@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center">
-    <div class="self-center">
+    <div class="self-center w-full">
       <RandomBook :book="store.randomBook" />
     </div>
     <div

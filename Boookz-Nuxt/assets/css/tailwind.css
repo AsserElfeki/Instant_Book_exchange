@@ -24,11 +24,11 @@ add extra components :
 }
 
 .btn-dark {
-  @apply  text-white font-sans bg-violet-500 text-xl py-2 px-4 rounded-lg hover:bg-violet-300 hover:text-violet-500 hover:shadow-xl border-2 border-transparent hover:border-2 ;
+  @apply  text-white font-sans bg-violet-500 text-xl py-2 px-4 rounded-lg hover:bg-violet-300 hover:text-violet-500 hover:shadow-xl border-2 border-transparent;
 }
 
 .btn-light {
-  @apply  text-violet-600 font-sans bg-violet-100 text-xl py-2 px-4 rounded-lg hover:bg-violet-300 hover:text-violet-500 hover:shadow-xl border-transparent hover:border-2;
+  @apply  text-violet-600 font-sans bg-violet-100 text-xl py-2 px-4 rounded-lg hover:bg-violet-300 hover:text-violet-500 hover:shadow-xl border-2 border-transparent;
 }
 
 .btn-sm {

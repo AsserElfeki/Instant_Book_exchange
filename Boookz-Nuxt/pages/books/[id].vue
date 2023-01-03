@@ -1,16 +1,8 @@
 <template>
   <div v-if="book" class="flex flex-col justify-center">
-    <div
-      class="hero bg-gradient-to-r from-violet-100 to-violet-700 h-auto rounded-2xl p-2"
-    >
-      <div
-        class="flex flex-col md:flex-row md:flex-nowrap justify-center md:justify-around items-center gap-8"
-      >
-        <img
-          class="rounded-2xl h-60 md:h-96"
-          :src="book.images.at(0)"
-          alt="cover of the book"
-        />
+    <div class="hero bg-gradient-to-r from-violet-100 to-violet-700 h-auto rounded-2xl p-2">
+      <div class="flex flex-col md:flex-row md:flex-nowrap justify-center md:justify-around items-center gap-8">
+        <img class="rounded-2xl h-60 md:h-96" :src="book.images.at(0)" alt="cover of the book" />
         <div class="flex flex-col gap-2">
           <h1 class="font-bold font-serif text-xl leading-none">{{ book.title }}</h1>
           <p class="">By: {{ book.author.join(", ") }}.</p>
@@ -32,25 +24,13 @@
     <div class="px-4 mx-auto w-full">
       <h1 class="font-bold font-serif text-3xl">Images:</h1>
       <br />
-      <swiper
-        :modules="modules"
-        :slides-per-view="1"
-        :space-between="50"
-        navigation
-        :pagination="{ clickable: true }"
-        :scrollbar="{ draggable: true }"
-        @swiper="onSwiper"
-        @slideChange="onSlideChange"
-        class="border-2 border-black flex justify-center items-center w-1/3"
-      >
+      <swiper :modules="modules" :slides-per-view="1" :space-between="100" navigation :pagination="{ clickable: true }"
+        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
+        class="flex justify-center items-center w-1/3">
         >
-        <swiper-slide v-for="n in book.images.length">
-          <img
-            class="rounded-md"
-            :src="book.images.at(n - 1)"
-            alt="cover of the book"
-            @click="showImage(book.images.at(n - 1))"
-          />
+        <swiper-slide v-for="n in book.images.length" class="flex flex-row items-center justify-center">
+          <img class="rounded-md object-contain" :src="book.images.at(n - 1)" alt="cover of the book"
+            @click="showImage(book.images.at(n - 1))" style=" max-height: 500px; max-width: 500px;" />
         </swiper-slide>
       </swiper>
       <div v-if="showModal" class="modal-overlay" @click="hideModal">
@@ -58,19 +38,16 @@
       </div>
     </div>
 
-    <div v-if="username!=book.book_owner.at(0)">
+    <div v-if="username != book.book_owner.at(0)">
       <hr class="separator" />
       <h1 class="font-bold font-serif md:text-3xl inline mr-3 ml-3">Offered By:</h1>
       <p class="inline mr-3 md:text-xl">{{ book.book_owner.at(0) }}</p>
-      <img
-        class="user-image w-16 h-16 rounded-full border-black border inline"
-        :src="book.book_owner.at(1)"
-        alt="user profile"
-      />
+      <img class="user-image w-16 h-16 rounded-full border-black border inline" :src="book.book_owner.at(1)"
+        alt="user profile" />
       <div>
-    <button class="btn-sm w-28 mb-4 m-auto">Trade</button>
+        <button class="btn-sm w-28 mb-4 m-auto">Trade</button>
+      </div>
     </div>
-  </div>
 
 
   </div>
@@ -91,9 +68,11 @@ export default {
     SwiperSlide,
   },
   data() {
-    return { book: "",
-    username: "",
-  };
+    return {
+      book: "",
+      username: "",
+      showModal: false,
+    };
 
   },
   methods: {
@@ -126,7 +105,6 @@ export default {
       onSwiper,
       onSlideChange,
       modules: [Navigation, Pagination, Scrollbar, A11y],
-      showModal,
       modalImage,
     };
   },
@@ -141,6 +119,7 @@ export default {
   background-position: center;
   /* height: 400px; */
 }
+
 .swiper-pagination {
   position: absolute;
   bottom: 20px;
@@ -149,6 +128,7 @@ export default {
   display: flex;
   justify-content: center;
 }
+
 .modal-overlay {
   position: fixed;
   top: 0;
