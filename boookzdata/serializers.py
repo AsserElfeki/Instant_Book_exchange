@@ -164,12 +164,14 @@ class ProfileInfoSerializer(FlexFieldsModelSerializer):
         image = image if image is None else image['full_size']
         return image
 
-    def get_wanted_shelf(self, obj):
-        book_shelf = BookShelf.objects.get(book_reader=obj, shelf_name="wanted")
-        serializer = BookShelfSerializer(book_shelf, context=self.context)
+    def get_wanted_books(self, obj):
+        book_shelf = BookShelf.objects.get(shelf_name="wanted")
+        books = Book.objects.filter(book_reader=obj, book_shelf=book_shelf)
+        serializer = BookSerializer(books, context=self.context)
         return serializer.data
 
-    def get_giveaway_shelf(self, obj):
-        book_shelf = BookShelf.objects.get(book_reader=obj, shelf_name="giveaway")
-        serializer = BookShelfSerializer(book_shelf, context=self.context)
+    def get_giveaway_books(self, obj):
+        book_shelf = BookShelf.objects.get(shelf_name="giveaway")
+        books = Book.objects.filter(book_reader=obj, book_shelf=book_shelf)
+        serializer = BookSerializer(books, context=self.context)
         return serializer.data
