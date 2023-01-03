@@ -78,7 +78,7 @@
       <input
         id="book-images"
         type="file"
-        ref="images"
+        multiple
         accept=".png, .jpg, .jpeg"
         @change="updateFiles($event.target.files)"
         class="border-2 border-red-500 p-2 rounded-md"
@@ -146,7 +146,7 @@ export default {
       // fd.append("image", images)
 
       if (!files.length) return;
-      for (let i = 0; i < 1; i++) {
+      for (let i = 0; i < files.length; i++) {
         let file = files[i];
         fd.append("image", file);
       }
