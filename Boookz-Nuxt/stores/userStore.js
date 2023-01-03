@@ -8,7 +8,7 @@ export const useUserStore = defineStore({
         userIsLoggedIn: false,
         userWantedBooks: [],
         userGiveAwayBooks: [],
-        region: 'Poland',
+        region: '',
         userTransactions: [],
         userRatings: [],
         token: '',
@@ -103,16 +103,30 @@ export const useUserStore = defineStore({
         },
 
         async getUserInfo() {
-            const res = await $fetch('http://146.59.87.108:8000/authentication/profile/', {
-                headers: { "authorization": "Bearer " + this.token,}
-            })
-            this.userName = res.username;
-            this.region = res.book_reader.country;
-            this.userIsLoggedIn = true;
-            this.userGiveAwayBooks = res.book_reader.giveaway_shelf.books
-            this.userWantedBooks = res.book_reader.wanted_shelf.books
+            try {
+                const res = await $fetch('http://146.59.87.108:8000/authentication/profile/', {
+                    headers: { "authorization": "Bearer " + this.token, }
+                })
+
+                if (res) {
+                    console.log("name: ", res.at(0))
+                    this.userName = res.at(0).username;
+                    this.userIsLoggedIn = true;
+                    if (res.at(0).book_reader.giveaway_books[0]) {
+                        this.userGiveAwayBooks = res.at(0).book_reader.giveaway_books
+                    }
+                    if (res.at(0).book_reader.wanted_books[0]) {
+                        this.userWantedBooks = res.at(0).book_reader.wanted_books
+                    }
+                    this.region = res.at(0).book_reader.country;
             // this.userRatings = res.book_reader.ratings
             // this.userTransactions = res.book_reader.history
+                }
+                
+            }
+            catch (error) {
+                console.log("login error " + JSON.stringify(error.data));
+            }
 
             //ToDO
         },
@@ -122,7 +136,7 @@ export const useUserStore = defineStore({
                 method: 'POST',
                 headers: {
                     "authorization": "Bearer " + this.token,
-                        },
+                },
                 body: form
             })
         }

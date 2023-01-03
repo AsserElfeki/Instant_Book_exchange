@@ -79,9 +79,10 @@
         id="book-images"
         type="file"
         ref="images"
-        accept="image/*"
+        capture
+        accept=".png, .jpg, .jpeg"
         @change="updateFiles($event.target.files)"
-        class="border-2 border-black p-2 rounded-md"
+        class="border-2 border-red-500 p-2 rounded-md"
       />
 
       <button type="submit" class="btn-sm self-center">submit</button>
@@ -118,12 +119,12 @@ export default {
 
     const chosenLanguage = ref("");
 
-    const images  = ref(null);
+    const images = ref(null);
 
     const author = ref("");
     const category = ref("");
 
-    var fd = new FormData(); 
+    var fd = new FormData();
 
     const bookForm = reactive({
       title: "",
@@ -148,7 +149,7 @@ export default {
       if (!files.length) return;
       for (let i = 0; i < files.length; i++) {
         let file = files[i];
-        fd.append('image' , images)
+        fd.append("image", images);
       }
       // console.log("images:", typeof(images));
     }
