@@ -28,7 +28,7 @@ from .utils import Util
 
 class ProfileInfoView(ReadOnlyModelViewSet):
     serializer_class = UserSerializer
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     lookup_field = 'username'
 

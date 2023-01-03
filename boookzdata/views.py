@@ -4,11 +4,12 @@ from rest_framework.exceptions import APIException
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.decorators import APIView, action
 
 from authentication.models import BookReader
 from .serializers import BookSerializer, BookUploadSerializer, GiveawayBookshelfSerializer, ImageSerializer, \
     WantedBookShelfSerializer
-from .models import Book, Image, GiveawayBookshelf, WantedBookshelf, BookCondition, Category
+from .models import Book, Image, GiveawayBookshelf, WantedBookshelf, BookCondition, Category, Author
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
@@ -34,7 +35,16 @@ class SearchGiveAwayBooksView(ListAPIView):
 
 class ImageViewSet(FlexFieldsModelViewSet):
     serializer_class = ImageSerializer
+    # permission_classes = (IsAuthenticated,)
     queryset = Image.objects.all()
+
+    @action(detail=False, methods=['post'])
+    def upload(request):
+        try:
+            file=request.data['image']
+        except KeyError:
+            raise ParseError('Request has no resource file attached')
+        product=Image.objects.create(image=file)
 
 
 class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
@@ -59,6 +69,7 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
 class AllGiveawayView(ListAPIView):
     serializer_class = BookSerializer
+    
 
     def get_queryset(self):
         giveaway_shelves = GiveawayBookshelf.objects.all()
@@ -99,24 +110,62 @@ class BooksFromChosenBookshelfView(ListAPIView):
         return queryset
 
 
-class BookUploadView(generics.CreateAPIView):
-    permission_classes = (IsAuthenticated,)
-    serializer_class = BookUploadSerializer
+class GiveawayBookUploadView(APIView):
+    def post(self, request):
+        title = {"title": request.data.get('title')}
+        description = {"description": request.data.get('description')}
+        authors=[]
+        for reqAuth in request.data.getlist("author"):
+            aut,created = Author.objects.get_or_create(name=reqAuth)
+            authors.append(aut.pk)
 
-    def perform_create(self, serializer):
-        book_condition = BookCondition.objects.get(name=self.request.data.get("condition"))
-        book_reader = BookReader.objects.get(user=self.request.user)
-        book_categories = Category.objects.filter(name__in=self.request.data.getlist("category"))
-        if self.kwargs['bookshelf'] == "giveaway":
-            giveaway_bookshelf = GiveawayBookshelf.objects.get(book_reader=book_reader)
-            serializer.save(category=book_categories, condition=book_condition, book_shelf=giveaway_bookshelf)
-        elif self.kwargs['bookshelf'] == "wanted":
-            wanted_bookshelf = WantedBookshelf.objects.get(book_reader=book_reader)
-            serializer.save(category=book_categories, condition=book_condition, book_shelf=wanted_bookshelf)
-        else:
-            raise NotCorrectUrlProvided()
+        categories=[]
+        for reqCat in request.data.getlist("category"):
+            cat,created = Category.objects.get_or_create(name=reqCat)
+            categories.append(cat.pk)
 
-    def get_queryset(self):
-        return super().get_queryset().filter(
-            bookshelf=self.kwargs['bookshelf']
-        )
+        authorsList = {"author": authors} 
+        categoriesList = {"category": categories}
+        condition = {"condition": BookCondition.objects.get(name=request.data.get("condition")).pk}
+        book_reader = {"book_reader": BookReader.objects.get(user=request.user).pk}
+        bookshelf = {"book_shelf": GiveawayBookshelf.objects.get(book_reader=book_reader["book_reader"]).pk}
+        data= {**title, **description, **authorsList, **categoriesList, **book_reader, **bookshelf, **condition}
+
+        serializer = BookUploadSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            book_saved = serializer.save()
+
+        image_data = {"image": request.data.get("image"), "book": book_saved.pk}
+        image_serializer = ImageSerializer(data=image_data)
+        if image_serializer.is_valid(raise_exception=True):
+            image_saved = image_serializer.save()
+        return Response({"success": "Book '{}' created successfully with image '{}'".format(book_saved, image_saved)})
+
+
+class WantedBookUploadView(APIView):
+    pass
+
+# class BookUploadView(generics.CreateAPIView):
+    # permission_classes = (IsAuthenticated,)
+    # serializer_class = BookUploadSerializer
+
+    # def perform_create(self, serializer):
+        # book_condition = BookCondition.objects.get(name=self.request.data.get("condition"))
+        # author, created = Author.objects.get_or_create(name__in=self.request.data.getlist("author"))
+        # book_reader = BookReader.objects.get(user=self.request.user)
+        # book_categories = Category.objects.filter(name__in=self.request.data.getlist("category"))
+        # # for category in book_categories:
+            # # cat, created = Category.objects.get_or_create(name=category)
+        # if self.kwargs['bookshelf'] == "giveaway":
+            # giveaway_bookshelf = GiveawayBookshelf.objects.get(book_reader=book_reader)
+            # serializer.save(category=book_categories.pk, condition=book_condition.pk, book_shelf=giveaway_bookshelf)
+        # elif self.kwargs['bookshelf'] == "wanted":
+            # wanted_bookshelf = WantedBookshelf.objects.get(book_reader=book_reader)
+            # serializer.save(category=book_categories.pk, condition=book_condition.pk, book_shelf=wanted_bookshelf)
+        # else:
+            # raise NotCorrectUrlProvided()
+
+    # def get_queryset(self):
+        # return super().get_queryset().filter(
+            # bookshelf=self.kwargs['bookshelf']
+        # )

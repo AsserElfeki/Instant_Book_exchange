@@ -6,7 +6,7 @@ from polymorphic.models import PolymorphicModel
 
 
 class Image(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=True, null=True)
     image = VersatileImageField(
         'Image',
         upload_to='images/',
