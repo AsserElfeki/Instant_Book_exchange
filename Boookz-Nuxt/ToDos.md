@@ -18,7 +18,7 @@
 - [x] 17. fix the post request to send the token also (as header) check old frontend (asser)
 - [x] 18. figure out how to redirect after login and data refresh and kinda data save !?
 - [x] 19. figure out how to save session (I am not a front end dev anymore. FM)
-- [ ] 20. figure out a "loading state" importance : 3
+- [x] 20. figure out a "loading state" importance : 3
 - [x] 21. register form (kinda done) but with double password check and (username, first, last, email)
 - [x] 22. @change of the username field I send to an endpoint that tells me if this user name is taken or not 
 - OR display response in a Toast
@@ -39,7 +39,7 @@
 - [x] 33. user shelves from the correct endpoints 
 - [x] 34. page transitions 
 - [x] 35. reactive tabs in nuxt 
-- [ ] 36. addBook page / toast
+- [x] 36. addBook page / toast
 - [x] 37. fix styles of all existing pages/components to be responsive and looking good
 - [ ] 38. improving ux 
 - [ ] 39. fixing errors and warnings 

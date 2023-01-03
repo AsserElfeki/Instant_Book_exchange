@@ -79,7 +79,6 @@
         required
         id="book-images"
         type="file"
-        ref="imageInput"
         multiple
         accept="image/*"
         class="border-2 border-black p-2 rounded-md"
@@ -120,8 +119,8 @@ const bookForm = reactive({
   language: "",
 });
 
-function addBook() {
-  
+async function addBook() {
+  store.addBook(bookForm);
 }
 </script>
 
