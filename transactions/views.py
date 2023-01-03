@@ -12,7 +12,8 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from authentication.models import BookReader
-from boookzdata.models import Book
+from boookzdata.models import Book, BookShelf
+from boookzdata.serializers import BookSerializer
 from boookzdata.views import NotCorrectUrlProvided
 from .models import Transaction, TransactionStatus
 from .serializers import TransactionSerializer
@@ -126,11 +127,22 @@ class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
             self.perform_update(serializer)
             if transaction_status.name == "Completed":
                 receiver_book, initiator_book = transaction.receiver_book, transaction.initiator_book
-                #TODO what to do with book? delete? remove from shelves?
-
+                self.put_books_into_history_shelf(request, receiver_book, initiator_book)
             return Response(serializer.data)
-
         return Response("Wait until the transaction is accepted by receiver")
+
+    def put_books_into_history_shelf(self, request, receiver_book, initiator_book):
+        history_shelf, created = BookShelf.objects.get_or_create(shelf_name="history")
+        receiver_book.book_shelf = history_shelf
+        initiator_book.book_shelf = history_shelf
+        receiver_book.save()
+        initiator_book.save()
+        receiver_serializer = BookSerializer(receiver_book, data=request.data)
+        initiator_serializer = BookSerializer(initiator_book, data=request.data)
+        receiver_serializer.is_valid(raise_exception=True)
+        self.perform_update(receiver_serializer)
+        initiator_serializer.is_valid(raise_exception=True)
+        self.perform_update(initiator_serializer)
 
     def get_transaction_status_based_on_current(self, transaction, current_book_reader):
         if current_book_reader == transaction.book_reader_receiver:

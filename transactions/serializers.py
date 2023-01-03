@@ -19,9 +19,14 @@ class TransactionSerializer(serializers.ModelSerializer):
     book_reader_receiver = BookReaderSerializer(required=False)
     initiator_book = BookSerializer(required=False)
     receiver_book = BookSerializer(required=False)
-    transaction_status = TransactionStatusSerializer(required=False)
+    transaction_status = serializers.SerializerMethodField()
 
     class Meta:
         model = Transaction
         fields = (
-        'token', 'book_reader_initiator', 'book_reader_receiver', 'initiator_book', 'receiver_book', 'transaction_status')
+            'token', 'book_reader_initiator', 'book_reader_receiver', 'initiator_book', 'receiver_book',
+            'transaction_status')
+
+    def get_transaction_status(self, obj):
+        image = TransactionStatusSerializer(obj.transaction_status, read_only=True, context=self.context).data['name']
+        return image
