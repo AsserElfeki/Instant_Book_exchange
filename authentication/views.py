@@ -29,8 +29,9 @@ from .utils import Util
 class ProfileInfoView(ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
-    queryset = User.objects.all()
-    lookup_field = 'username'
+
+    def get_queryset(self):
+        return User.objects.all().filter(id=self.request.user.id)
 
 class ListBookReaderBooks(FlexFieldsModelViewSet):
     permission_classes = [IsAuthenticated]
