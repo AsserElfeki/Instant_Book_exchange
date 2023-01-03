@@ -152,12 +152,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ProfileInfoSerializer(FlexFieldsModelSerializer):
     profile_image = serializers.SerializerMethodField()
-    wanted_shelf = serializers.SerializerMethodField()
-    giveaway_shelf = serializers.SerializerMethodField()
+    wanted_books = serializers.SerializerMethodField()
+    giveaway_books = serializers.SerializerMethodField()
 
     class Meta:
         model = BookReader
-        fields = ['country', 'profile_image', 'wanted_shelf', 'giveaway_shelf']
+        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books']
 
     def get_profile_image(self, obj):
         image = ImageSerializer(obj.profile_image, read_only=True, context=self.context).data['image']
@@ -167,11 +167,11 @@ class ProfileInfoSerializer(FlexFieldsModelSerializer):
     def get_wanted_books(self, obj):
         book_shelf = BookShelf.objects.get(shelf_name="wanted")
         books = Book.objects.filter(book_reader=obj, book_shelf=book_shelf)
-        serializer = BookSerializer(books, context=self.context)
+        serializer = BookSerializer(books, context=self.context, many=True)
         return serializer.data
 
     def get_giveaway_books(self, obj):
         book_shelf = BookShelf.objects.get(shelf_name="giveaway")
         books = Book.objects.filter(book_reader=obj, book_shelf=book_shelf)
-        serializer = BookSerializer(books, context=self.context)
+        serializer = BookSerializer(books, context=self.context, many=True)
         return serializer.data
