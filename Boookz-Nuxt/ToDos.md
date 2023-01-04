@@ -54,19 +54,20 @@
 - [x] 48. edit the tabs to not talk to the api, instead the profile will handle all the fetching in one function.
 - [x] 49. remove "by" in the bookcard inside the profile 
 - [x] 50. max size of book image in index
-- [ ] 51. uploading images not workinggggggg
+- [x] 51. uploading images not workinggggggg
 - [ ] 52. dropdown menu for settings and logout ? 
-- [ ] 53. figure a way to decide which shelf the book is added to (might be another input, or the smart way)
+- [x] 53. figure a way to decide which shelf the book is added to (might be another input, or the smart way)
 - [ ] 54. check on each redirect if the token is still valid and update state 
 - [ ] 55. change the navbar 
 - [ ] 56. send book language as english name 
-- [ ] 57. book card in my profile should not have owner 
+- [x] 57. book card in my profile should not have owner 
 - [ ] 58. make the random book image clickable
-- [ ] 59. have the api call from the profile components happen only after submission of the form 
+- [x] 59. have the api call from the profile components happen only after submission of the form 
 - [ ] 60. display response of the forms
 - [ ] 61. redo all the forms ?
 - [ ] 62. (+) button for authors and category 
-
+- [x] 63. book title out pf bounds in profile wanted 
+- [ ] 64. optimize bookshelves to be 1 item
 
 
 #Notes: 

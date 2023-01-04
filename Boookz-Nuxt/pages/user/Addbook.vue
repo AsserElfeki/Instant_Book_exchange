@@ -6,6 +6,19 @@
       class="flex flex-col justify-start gap-3 border-2 w-full md:w-1/2 items-start mx-auto p-2"
     >
       <div class="flex justify-between gap-6">
+        <label for="shelf">Shelf:</label>
+        <select
+          id="shelf"
+          v-model="bookForm.shelf"
+          class="border-2 rounded-md overflow-y-scroll max-h-12 w-44 text-center"
+        >
+          <option value="" disabled>-Select Shelf-</option>
+          <option value="giveaway">Giveaway shelf</option>
+          <option value="wanted">Wanted shelf</option>
+        </select>
+      </div>
+
+      <div class="flex justify-between gap-6">
         <label for="language">Language:</label>
         <select
           id="language"
@@ -133,6 +146,7 @@ export default {
       language: "",
       image: [],
       description: "asdasdsad",
+      shelf: ""
     });
 
     function getLangCode() {
@@ -170,7 +184,7 @@ export default {
       // bookForm.category.push(category.value);
 
       console.log("fd:", fd);
-      userStore.addBook(fd);
+      userStore.addBook(fd, bookForm.shelf);
       // userStore.addBook(fd);
     }
 

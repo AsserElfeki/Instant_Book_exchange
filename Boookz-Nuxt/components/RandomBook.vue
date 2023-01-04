@@ -1,15 +1,24 @@
 <template>
-  <div class="container flex flex-col justify-center items-center rounded-2xl p-3 gap-3 mx-auto">
+  <div
+    class="container flex flex-col justify-center items-center rounded-2xl p-3 gap-3 mx-auto"
+  >
     <h3 class="self-start text-[#695AC9]">#suggested for YOU</h3>
 
-    <div class="flex justify-around items-center flex-row gap-3 md:gap-20 ">
+    <div class="flex justify-around items-center flex-row gap-3 md:gap-20">
       <div class="rounded-md max-h-[400px]">
-        <img
-          v-if="book.images"
-          class="rounded-md w-full min-w-[200px] max-w-sm max-h-[400px]"
-          :src="book.images.at(0)"
-          alt="cover of the book"
-        />
+        <NuxtLink
+          :to="`/books/${book.title}`"
+          @click.left="store.setClickedBook(book)"
+          @click.middle="store.setClickedBook(book)"
+          @click.right="store.setClickedBook(book)"
+        >
+          <img
+            v-if="book.images"
+            class="rounded-md w-full min-w-[200px] max-w-sm max-h-[400px]"
+            :src="book.images.at(0)"
+            alt="cover of the book"
+          />
+        </NuxtLink>
       </div>
 
       <div class="flex flex-col gap-4">
@@ -24,6 +33,9 @@
 </template>
 
 <script setup>
+import { useDataStore } from "~/stores/dataStore";
+const store = useDataStore();
+
 const { book } = defineProps(["book"]);
 
 console.log("random book:", book);

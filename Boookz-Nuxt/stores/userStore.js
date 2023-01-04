@@ -123,10 +123,10 @@ export const useUserStore = defineStore({
                     }
                     this.region = res.at(0).book_reader.country;
                     this.userProfileImage = res.at(0).book_reader.profile_image;
-            // this.userRatings = res.book_reader.ratings
-            // this.userTransactions = res.book_reader.history
+                    // this.userRatings = res.book_reader.ratings
+                    // this.userTransactions = res.book_reader.history
                 }
-                
+
             }
             catch (error) {
                 console.log("login error " + JSON.stringify(error.data));
@@ -135,14 +135,15 @@ export const useUserStore = defineStore({
             //ToDO
         },
 
-        async addBook(form) {
-            const res = await $fetch('http://146.59.87.108:8000/data/upload/giveaway', {
+        async addBook(form, shelf) {
+            const res = await $fetch('http://146.59.87.108:8000/data/upload/' + shelf, {
                 method: 'POST',
                 headers: {
                     "authorization": "Bearer " + this.token,
                 },
                 body: form
             })
+            await this.getUserInfo();
         }
     },
 
