@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.urls import reverse
 from rest_flex_fields import FlexFieldsModelViewSet
@@ -32,6 +32,19 @@ class ProfileInfoView(ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return User.objects.all().filter(id=self.request.user.id)
+
+class AnyProfileInfoView(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get_object(self, username):
+        try:
+            return User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get(self, request, username, format=None):
+        user = self.get_object(username)
+        serializer_class = UserSerializer(user) 
+        return Response(serializer_class.data)
 
 class ListBookReaderBooks(FlexFieldsModelViewSet):
     permission_classes = [IsAuthenticated]

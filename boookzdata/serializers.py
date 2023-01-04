@@ -1,10 +1,12 @@
 from django_countries.serializer_fields import CountryField
+from itertools import chain
 from django_countries.serializers import CountryFieldMixin
 from rest_flex_fields import FlexFieldsModelSerializer
 
 from authentication.models import BookReader, ProfileImage
 from authentication.serializers import BookReaderSerializer, ProfileImageSerializer
 from .models import Book, Category, Author, BookCondition, User, Comment, Image, BookShelf
+from transactions.models import Transaction,TransactionStatus
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -124,16 +126,48 @@ class UserSerializer(serializers.ModelSerializer):
         serializer = ProfileInfoSerializer(book_reader, context=self.context)
         return serializer.data
 
+#Not the bast code but had to be done so frontend is happy. Maybe there is other way
+class TransactionStatusSerializer(FlexFieldsModelSerializer):
+    class Meta:
+        model = TransactionStatus
+        fields = ['name', ]
+
+class TransactionForProfileSerializer(serializers.ModelSerializer):
+    token = serializers.CharField(required=False, max_length=64)
+    book_reader_initiator = BookReaderSerializer(required=False)
+    book_reader_receiver = BookReaderSerializer(required=False)
+    initiator_book = BookSerializer(required=False)
+    receiver_book = BookSerializer(required=False)
+    transaction_status = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Transaction
+        fields = (
+            'token', 'book_reader_initiator', 'book_reader_receiver', 'initiator_book', 'receiver_book', 'transaction_status')
+
+    def get_transaction_status(self, obj):
+        name = TransactionStatusSerializer(obj.transaction_status, read_only=True, context=self.context).data['name']
+        return name
 
 class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
     profile_image = serializers.SerializerMethodField()
     wanted_books = serializers.SerializerMethodField()
     giveaway_books = serializers.SerializerMethodField()
     country = CountryField(name_only=True)
+    transactions = serializers.SerializerMethodField()
 
     class Meta:
         model = BookReader
-        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books']
+        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books', 'transactions']
+
+    def get_transactions(self, obj):
+        book_reader = BookReader.objects.get(user=obj.user)
+        user_transactions_as_initiator = Transaction.objects.filter(book_reader_initiator=book_reader)
+        serializer = TransactionForProfileSerializer(user_transactions_as_initiator, context=self.context, many=True).data
+        user_transactions_as_receiver = Transaction.objects.filter(book_reader_receiver=book_reader)
+        serializer2 = TransactionForProfileSerializer(user_transactions_as_receiver, context=self.context, many=True).data
+        return list(chain(serializer, serializer2))
+
 
     def get_profile_image(self, obj):
         images = ProfileImage.objects.filter(book_reader=obj)
@@ -153,3 +187,4 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
         books = Book.objects.filter(book_reader=obj, book_shelf=book_shelf)
         serializer = BookSerializer(books, context=self.context, many=True)
         return serializer.data
+
