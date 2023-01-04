@@ -1,19 +1,19 @@
 <template>
   <div
-    class="bg-[#dddaee] my-4 max-w-xs shadow-xl relative rounded-3xl flex flex-col items-center overflow-visible p-3 "
+    class="bg-[#dddaee] max-w-xs shadow-xl relative rounded-3xl flex flex-col items-center overflow-visible p-3 h-80"
   >
     <div class="rounded-3xl w-full max-h-[800px]">
       <img
         :src="book.images.at(0)"
         :alt="book.title"
-        class="cover rounded-3xl w-full max-h-40 object-contain"
+        class="rounded-3xl w-full max-h-44  object-contain"
       />
 
-      <h4 class="text-[#e76f51] text-center text-sm md:text-xl h-20 overflow-hidden">
+      <h4 class="text-[#e76f51] text-center text-sm md:text-xl md:leading-tight">
         {{ truncate(book.title, 28) }}
       </h4>
     </div>
-    <div class="flex justify-between mb-3 min-w-full ">
+    <div class="flex flex-col  justify-end min-w-full pb-4 h-full">
       <p class="text-sm md:text-lg mb-1">by: {{ book.book_owner.username }}</p>
     </div>
     <img
