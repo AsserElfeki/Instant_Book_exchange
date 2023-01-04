@@ -69,6 +69,9 @@ class RegisterView(generics.CreateAPIView):
         serializer.save()
         user_data = serializer.data
         user = User.objects.get(email=user_data["email"])
+        book_reader = BookReader.objects.get(user=user)
+        book_reader.country = request.data.get("country")
+        book_reader.save()
         data = self.get_verification_email_data(request, user)
         Util.send_email(data=data)
         return Response({"response": f"{data}"},status=status.HTTP_200_OK)

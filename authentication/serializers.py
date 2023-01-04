@@ -124,7 +124,6 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         return instance
 
 
-# TODO return user info
 class LoginSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
 
@@ -147,7 +146,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name')
+        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name' )
         extra_kwargs = {
             'first_name': {'required': False},
             'last_name': {'required': False}

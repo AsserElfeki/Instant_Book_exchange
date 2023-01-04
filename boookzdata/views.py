@@ -33,7 +33,7 @@ class SearchGiveAwayBooksView(ListAPIView):
 
 class ImageViewSet(FlexFieldsModelViewSet):
     serializer_class = ImageSerializer
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     queryset = Image.objects.all()
 
 class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
@@ -55,9 +55,34 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
         return queryset
 
+class GiveawayInSameCountryView(ListAPIView):
+    serializer_class = BookSerializer
+    permission_classes = (IsAuthenticated,)
+    filterset_fields = ('category', 'language')
+
+    def get_queryset(self):
+        giveaway_shelves = BookShelf.objects.filter(shelf_name="giveaway")
+        book_reader = BookReader.objects.get(user=self.request.user)
+        book_readers_in_country = BookReader.objects.filter(country=book_reader.country)
+        giveaway_books = Book.objects.filter(book_shelf_id__in=giveaway_shelves, book_reader__in=book_readers_in_country)
+        return giveaway_books
+
+
+class WantedInSameCountryView(ListAPIView):
+    serializer_class = BookSerializer
+    permission_classes = (IsAuthenticated,)
+    filterset_fields = ('category', 'language')
+
+    def get_queryset(self):
+        wanted_shelves = BookShelf.objects.filter(shelf_name="wanted")
+        book_reader = BookReader.objects.get(user=self.request.user)
+        book_readers_in_country = BookReader.objects.filter(country=book_reader.country)
+        wanted_books = Book.objects.filter(book_shelf_id__in=wanted_shelves, book_reader__in=book_readers_in_country)
+        return wanted_books
 
 class AllGiveawayView(ListAPIView):
     serializer_class = BookSerializer
+    filterset_fields = ('category', 'language')
 
     def get_queryset(self):
         giveaway_shelves = BookShelf.objects.filter(shelf_name="giveaway")
@@ -67,6 +92,7 @@ class AllGiveawayView(ListAPIView):
 
 class AllWantedView(ListAPIView):
     serializer_class = BookSerializer
+    filterset_fields = ('category', 'language')
 
     def get_queryset(self):
         wanted_shelves = BookShelf.objects.filter(shelf_name="wanted")
