@@ -12,7 +12,7 @@
         @click="store.setClickedBook(book)"
         :to="`/books/${book.title.replaceAll(' ', '-')}`"
       >
-        <BookCard :book="book" />
+        <ProfileBookCard :book="book" />
       </NuxtLink>
     </div>
    </div>
