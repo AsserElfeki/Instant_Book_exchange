@@ -78,6 +78,7 @@ class BookUploadView(APIView):
 
     def post(self, request, bookshelf_param):
         title = {"title": request.data.get('title')}
+        language = {"language": request.data.get('language')}
         description = {"description": request.data.get('description')}
         authors=[]
         for reqAuth in request.data.getlist("author"):
@@ -98,7 +99,7 @@ class BookUploadView(APIView):
         else:
             raise NotCorrectUrlProvided()
 
-        data= {**title, **description, **authorsList, **categoriesList, **book_reader, **bookshelf, **condition}
+        data= {**title, **description, **authorsList, **language, **categoriesList, **book_reader, **bookshelf, **condition}
         serializer = BookUploadSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             book_saved = serializer.save()

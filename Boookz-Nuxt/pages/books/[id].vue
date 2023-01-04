@@ -38,11 +38,11 @@
       </div>
     </div>
 
-    <div v-if="username != book.book_owner.at(0)">
+    <div v-if="username != book.book_owner.username">
       <hr class="separator" />
       <h1 class="font-bold font-serif md:text-3xl inline mr-3 ml-3">Offered By:</h1>
-      <p class="inline mr-3 md:text-xl">{{ book.book_owner.at(0) }}</p>
-      <img class="user-image w-16 h-16 rounded-full border-black border inline" :src="book.book_owner.at(1)"
+      <p class="inline mr-3 md:text-xl">{{ book.book_owner.username }}</p>
+      <img class="user-image w-16 h-16 rounded-full border-black border inline" :src="book.book_owner.profile_image"
         alt="user profile" />
       <div>
         <button class="btn-sm w-28 mb-4 m-auto">Trade</button>

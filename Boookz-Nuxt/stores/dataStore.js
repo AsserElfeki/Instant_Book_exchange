@@ -10,12 +10,12 @@ export const useDataStore = defineStore({
   }),
   actions: {
     async getWantedBooksFromDB() {
-      const res = await $fetch('http://146.59.87.108:8000/data/wanted/');
+      const res = await $fetch('http://127.0.0.1:8000/data/wanted/');
       this.wantedBooks = res;
     },
 
     async getOfferedBooksFromDB() {
-      const res = await $fetch('http://146.59.87.108:8000/data/giveaway/');
+      const res = await $fetch('http://127.0.0.1:8000/data/giveaway/');
       this.giveAwayBooks = res;
       this.randomBook = this.giveAwayBooks[Math.floor(Math.random(1) * this.giveAwayBooks.length)];
     },

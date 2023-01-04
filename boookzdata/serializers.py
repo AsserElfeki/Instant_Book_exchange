@@ -73,16 +73,21 @@ class BookSerializer(FlexFieldsModelSerializer):
 
 class BookUploadSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=255)
+    language = serializers.CharField(max_length=255)
     description = serializers.CharField()
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
     author = serializers.PrimaryKeyRelatedField(queryset=Author.objects.all(), many=True)
     condition = serializers.PrimaryKeyRelatedField(queryset=BookCondition.objects.all())
+    book_reader = serializers.PrimaryKeyRelatedField(queryset=BookReader.objects.all())
     book_shelf = serializers.PrimaryKeyRelatedField(queryset=BookShelf.objects.all())
 
     def create(self, validated_data):
-        book_instance = Book.objects.create(title=validated_data["title"], description=validated_data["description"],
+        book_instance = Book.objects.create(title=validated_data["title"], 
+                                            description=validated_data["description"],
                                             condition=validated_data["condition"],
-                                            book_shelf=validated_data["book_shelf"])
+                                            book_shelf=validated_data["book_shelf"],
+                                            book_reader=validated_data["book_reader"],
+                                            language=validated_data["language"])
         [book_instance.category.add(category) for category in validated_data['category']]
         [book_instance.author.add(author) for author in validated_data['author']]
         return book_instance

@@ -12,13 +12,13 @@
       <p class="text-[#e76f51] text-sm md:text-xl h-20">{{ truncate(book.title, 30) }}</p>
    
     </div>
-    <div v-if="store.userName!=book.book_owner.at(0)" >
+    <div v-if="store.userName!=book.book_owner.username" >
     <div class="flex justify-between my-2 min-w-full">
-        <p class="text-sm md:text-lg mb-1">by: {{ book.book_owner.at(0) }}</p>
+        <p class="text-sm md:text-lg mb-1">by: {{ book.book_owner.username }}</p>
       </div>
     <img
-      :src="book.book_owner.at(1)"
-      :alt="book.title"
+      :src="book.book_owner.profile_image"
+      :alt="book.book_owner.username"
       class="user-image w-16 h-16 rounded-full object-cover absolute bottom-[-40px] left-1/2 -translate-x-1/2 border-black border"
     />
     </div>
