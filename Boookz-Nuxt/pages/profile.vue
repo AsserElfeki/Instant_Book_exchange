@@ -11,7 +11,7 @@
       />
       <img
         v-else
-        :src="/assets/gim / avatar.png"
+        src="../assets/img/avatar.png"
         alt="profile avatar"
         class="w-32 h-32 rounded-full"
       />

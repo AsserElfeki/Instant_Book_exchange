@@ -59,7 +59,7 @@
 - [x] 53. figure a way to decide which shelf the book is added to (might be another input, or the smart way)
 - [ ] 54. check on each redirect if the token is still valid and update state 
 - [ ] 55. change the navbar 
-- [ ] 56. send book language as english name 
+- [x] 56. send book language as english name 
 - [x] 57. book card in my profile should not have owner 
 - [x] 58. make the random book image clickable
 - [x] 59. have the api call from the profile components happen only after submission of the form 
@@ -68,6 +68,7 @@
 - [ ] 62. (+) button for authors and category 
 - [x] 63. book title out pf bounds in profile wanted 
 - [ ] 64. optimize bookshelves to be 1 item
+- [ ] 65. toast for uploading profile pic 
 
 
 #Notes: 

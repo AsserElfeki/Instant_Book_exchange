@@ -124,3 +124,7 @@ function changePicture() {
 </script>
 
 <style lang="scss" scoped></style>
+
+//add email 
+// split forms 
+// add validation
