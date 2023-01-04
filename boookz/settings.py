@@ -15,7 +15,7 @@ from datetime import timedelta
 import json
 import os
 
-with open("/Users/viktor/polsl/SE/true_project/Instant_Book_exchange/boookz/config.json") as config_file:
+with open("/etc/config.json") as config_file:
     config = json.load(config_file)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -131,10 +131,10 @@ DATABASE_POOL_ARGS = {
 }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'localdb',
-        'USER': "victor",
-        'PASSWORD': config["PASSWORD"],
+        'ENGINE': 'django_postgrespool2',
+        'NAME': 'boookz',
+        'USER': config["DB_USER"],
+        'PASSWORD': config["DB_PASS"],
         'HOST': '146.59.87.108',
         'PORT': '3000',
     }
