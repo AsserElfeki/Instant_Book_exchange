@@ -5,12 +5,13 @@
         <img class="rounded-2xl h-60 md:h-96" :src="book.images.at(0)" alt="cover of the book" />
         <div class="flex flex-col gap-2">
           <h1 class="font-bold font-serif text-xl leading-none">{{ book.title }}</h1>
-          <p class="">By: {{ book.author.join(", ") }}.</p>
+          <p class="">By: {{ book.author.join(", ") }}</p>
           <div>
-            <p class="inline">Category:</p>
-            <p class="inline">{{ book.category.join(", ") }}.</p>
+            <p class="inline">Category: </p>
+            <p class="inline">{{ book.category.join(", ") }}</p>
           </div>
-          <p class="">Condition: {{ book.condition }}.</p>
+          <p class="">Condition: {{ book.condition }}</p>
+          <p class="">Language: {{ book.language }}</p>
         </div>
       </div>
     </div>
@@ -27,7 +28,7 @@
       <swiper :modules="modules" :slides-per-view="1" :space-between="100" navigation :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
         class="flex justify-center items-center w-1/3">
-        >
+
         <swiper-slide v-for="n in book.images.length" class="flex flex-row items-center justify-center">
           <img class="rounded-md object-contain" :src="book.images.at(n - 1)" alt="cover of the book"
             @click="showImage(book.images.at(n - 1))" style=" max-height: 500px; max-width: 500px;" />

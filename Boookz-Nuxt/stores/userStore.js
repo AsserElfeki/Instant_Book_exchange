@@ -4,6 +4,7 @@ export const useUserStore = defineStore({
     state: () => ({
         userName: 'Leonardo Davinci',
         userPassword: '',
+        userProfileImage: "",
         userIsSearching: false,
         userIsLoggedIn: false,
         userWantedBooks: [],
@@ -111,7 +112,7 @@ export const useUserStore = defineStore({
                 })
 
                 if (res) {
-                    console.log("name: ", res.at(0))
+                    //console.log("name: ", res.at(0))
                     this.userName = res.at(0).username;
                     this.userIsLoggedIn = true;
                     if (res.at(0).book_reader.giveaway_books[0]) {
@@ -121,6 +122,7 @@ export const useUserStore = defineStore({
                         this.userWantedBooks = res.at(0).book_reader.wanted_books
                     }
                     this.region = res.at(0).book_reader.country;
+                    this.userProfileImage = res.at(0).book_reader.profile_image;
             // this.userRatings = res.book_reader.ratings
             // this.userTransactions = res.book_reader.history
                 }
