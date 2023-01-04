@@ -7,7 +7,9 @@
     <div class="flex flex-row gap-5">
     <div class="w-1/2 my-2 md:w-1/2"  v-for="book in store.userWantedBooks">
       <NuxtLink
-        @click="store.setClickedBook(book)"
+        @click.left="dataStore.setClickedBook(book)"
+        @click.middle="dataStore.setClickedBook(book)"
+        @click.right="dataStore.setClickedBook(book)"
         :to="`/books/${book.title.replaceAll(' ', '-')}`"
       >
         <ProfileBookCard :book="book" />
@@ -23,7 +25,9 @@
 
 <script setup>
 import { useUserStore } from "~/stores/userStore";
+import { useDataStore } from "~/stores/dataStore";
 const store = useUserStore();
+const dataStore = useDataStore();
 await store.getUserInfo();
 </script>
 

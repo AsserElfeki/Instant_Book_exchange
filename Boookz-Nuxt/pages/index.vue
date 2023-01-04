@@ -12,7 +12,9 @@
       <div class="flex flex-row flex-wrap gap-3 justify-center items-center">
         <div class="w-1/2 my-2 md:w-1/4" v-for="book in store.giveAwayBooks" :key="book.pk">
           <NuxtLink
-            v-on:click="store.setClickedBook(book)"
+            @click.left="store.setClickedBook(book)"
+            @click.middle="store.setClickedBook(book)"
+            @click.right="store.setClickedBook(book)"
             :to="`/books/${book.title.replaceAll(' ', '-')}`"
           >
             <BookCard :book="book" />
@@ -31,7 +33,9 @@
           :key="book.title"
         >
           <NuxtLink
-            @click="store.setClickedBook(book)"
+            @click.left="store.setClickedBook(book)"
+            @click.middle="store.setClickedBook(book)"
+            @click.right="store.setClickedBook(book)"
             :to="`/books/${book.title.replaceAll(' ', '-')}`"
           >
             <BookCard :book="book" />
