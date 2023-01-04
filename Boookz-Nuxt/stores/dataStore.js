@@ -10,7 +10,7 @@ export const useDataStore = defineStore({
   }),
   actions: {
     async getWantedBooksFromDB() {
-      const res = await $fetch('http:/146.59.87.108:8000/data/wanted/');
+      const res = await $fetch('http://146.59.87.108:8000/data/wanted/');
       this.wantedBooks = res;
     },
 
