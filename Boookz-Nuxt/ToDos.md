@@ -61,7 +61,7 @@
 - [ ] 55. change the navbar 
 - [ ] 56. send book language as english name 
 - [x] 57. book card in my profile should not have owner 
-- [ ] 58. make the random book image clickable
+- [x] 58. make the random book image clickable
 - [x] 59. have the api call from the profile components happen only after submission of the form 
 - [ ] 60. display response of the forms
 - [ ] 61. redo all the forms ?

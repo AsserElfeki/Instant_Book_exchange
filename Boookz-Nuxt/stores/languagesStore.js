@@ -17,6 +17,11 @@ export const useLangAPIStore = defineStore({
         getLanguageCode(language) {
             return ISO6391.getCode(language)
         },
+
+        getlanguageEnglishName(language) {
+            return ISO6391.getName(language)
+        },
+        
         chooseLanguage(lang) {
             this.chosenLangName = lang;
             this.chosenLangCode = this.getLanguageCode(lang)

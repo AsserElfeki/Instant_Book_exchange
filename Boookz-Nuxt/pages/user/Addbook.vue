@@ -23,7 +23,7 @@
         <select
           id="language"
           v-model="chosenLanguage"
-          @change="getLangCode"
+          @change="getLangfullName"
           size="1"
           class="border-2 rounded-md overflow-y-scroll max-h-12 w-44 text-center"
         >
@@ -149,9 +149,9 @@ export default {
       shelf: ""
     });
 
-    function getLangCode() {
+    function getLangfullName() {
       console.log(chosenLanguage.value);
-      bookForm.language = langStore.getLanguageCode(chosenLanguage.value);
+      bookForm.language = langStore.getlanguageEnglishName(chosenLanguage.value);
     }
 
     function updateFiles(files) {
@@ -197,7 +197,7 @@ export default {
       author,
       category,
       updateFiles,
-      getLangCode,
+      getLangfullName,
       addBook,
     };
   },
