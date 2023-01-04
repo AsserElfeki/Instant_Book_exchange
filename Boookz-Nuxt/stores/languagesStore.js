@@ -5,26 +5,21 @@ export const useLangAPIStore = defineStore({
     id: 'langAPIStore',
     state: () => ({
         languages: [],
-        chosenLangName: '',
+        chosenLangNativeName: '',
         chosenLangCode: '',
+        chosenLangEnglishName: ''
     }),
     actions: {
+
         getAllLanguages() {
             this.languages = ISO6391.getAllNativeNames()
             return this.languages
         },
 
-        getLanguageCode(language) {
-            return ISO6391.getCode(language)
-        },
-
-        getlanguageEnglishName(language) {
-            return ISO6391.getName(language)
-        },
-        
         chooseLanguage(lang) {
-            this.chosenLangName = lang;
-            this.chosenLangCode = this.getLanguageCode(lang)
+            this.chosenLangNativeName = lang;
+            this.chosenLangCode = ISO6391.getCode(lang)
+            this.chosenLangEnglishName = ISO6391.getName(this.chosenLangCode)
         }
     },
     getters: {},

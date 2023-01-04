@@ -146,12 +146,12 @@ export default {
       language: "",
       image: [],
       description: "asdasdsad",
-      shelf: ""
+      shelf: "",
     });
 
     function getLangfullName() {
-      console.log(chosenLanguage.value);
-      bookForm.language = langStore.getlanguageEnglishName(chosenLanguage.value);
+      langStore.chooseLanguage(chosenLanguage.value);
+      bookForm.language = langStore.chosenLangEnglishName;
     }
 
     function updateFiles(files) {
