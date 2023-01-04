@@ -53,6 +53,15 @@ class ChangePasswordView(generics.UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
 
+class DeleteAccount(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def delete(self, request, *args, **kwargs):
+        user = self.request.user
+        user.delete()
+
+        return Response({"result": "user deleted"})
+
 class LoginView(TokenObtainPairView):
     serializer_class = LoginSerializer
 

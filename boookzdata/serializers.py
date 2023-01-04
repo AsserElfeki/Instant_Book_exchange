@@ -1,7 +1,9 @@
+from django_countries.serializer_fields import CountryField
+from django_countries.serializers import CountryFieldMixin
 from rest_flex_fields import FlexFieldsModelSerializer
 
-from authentication.models import BookReader
-from authentication.serializers import BookReaderSerializer
+from authentication.models import BookReader, ProfileImage
+from authentication.serializers import BookReaderSerializer, ProfileImageSerializer
 from .models import Book, Category, Author, BookCondition, User, Comment, Image, BookShelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
@@ -123,18 +125,21 @@ class UserSerializer(serializers.ModelSerializer):
         return serializer.data
 
 
-class ProfileInfoSerializer(FlexFieldsModelSerializer):
+class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
     profile_image = serializers.SerializerMethodField()
     wanted_books = serializers.SerializerMethodField()
     giveaway_books = serializers.SerializerMethodField()
+    country = CountryField(name_only=True)
 
     class Meta:
         model = BookReader
         fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books']
 
     def get_profile_image(self, obj):
-        image = ImageSerializer(obj.profile_image, read_only=True, context=self.context).data['image']
-        image = image if image is None else image['full_size']
+        images = ProfileImage.objects.filter(book_reader=obj)
+        serializer = ProfileImageSerializer(images, context=self.context, many=True).data
+        image =next(iter(serializer or []), None) 
+        image = image if image is None else image['image']['full_size']
         return image
 
     def get_wanted_books(self, obj):

@@ -1,10 +1,10 @@
 from django.core.serializers import serialize
-from django_countries.serializer_fields import CountryField
 from rest_flex_fields import FlexFieldsModelSerializer
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.validators import UniqueValidator
+from django_countries.serializer_fields import CountryField
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -12,26 +12,30 @@ from authentication.models import BookReader, ProfileImage
 from boookzdata.models import Book
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 
-class ImageSerializer(FlexFieldsModelSerializer):
-    image = VersatileImageFieldSerializer(
-        sizes='product_headshot'
-    )
+class ProfileImageSerializer(FlexFieldsModelSerializer):
+    image = VersatileImageFieldSerializer(sizes='product_headshot')
 
     class Meta:
         model = ProfileImage
-        fields = ['image']
+        fields = ['image', ]
 
 class BookReaderSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(read_only=True)
     profile_image = serializers.SerializerMethodField()
+    country = CountryField(name_only=True)
+
     class Meta:
         model = BookReader
         fields = ['username', 'country', 'profile_image']
 
+#For some reason I had problems there when using OneToOneField
+#Also wtf I did there
     def get_profile_image(self, obj):
-        image = ImageSerializer(obj.profile_image, context=self.context).data['image']
-        url = (image if image is None else image['full_size'])
-        return url
+        images = ProfileImage.objects.filter(book_reader=obj)
+        serializer = ProfileImageSerializer(images, context=self.context, many=True).data
+        image =next(iter(serializer or []), None) 
+        image = image if image is None else image['image']['full_size']
+        return image
 
     def get_username(self, obj):
         return obj.user.username
