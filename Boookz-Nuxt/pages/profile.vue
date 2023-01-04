@@ -3,7 +3,19 @@
     <div
       class="header flex flex-col justify-between items-center py-1 md:py-8 rounded-md border-4 border-red-700"
     >
-      <img :src="userStore.userProfileImage" alt="profile avatar" class="w-32 h-32 rounded-full" />
+      <img
+        v-if="userStore.userProfileImage"
+        :src="userStore.userProfileImage"
+        alt="profile avatar"
+        class="w-32 h-32 rounded-full"
+      />
+      <img
+        v-else
+        :src="/assets/gim / avatar.png"
+        alt="profile avatar"
+        class="w-32 h-32 rounded-full"
+      />
+
       <h2 class="text-white font-sans md:text-2xl md:font-bold">
         {{ userStore.userName }}
       </h2>
@@ -67,7 +79,6 @@ function toggleTabs(event) {
 }
 
 await userStore.getUserInfo();
-
 </script>
 
 <style scoped>

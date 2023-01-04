@@ -1,16 +1,15 @@
 <template>
   <div
-    class="bg-[#dddaee] my-4 max-w-xs shadow-xl relative rounded-3xl flex flex-col items-center overflow-visible p-3"
+    class="bg-[#dddaee] max-w-xs shadow-xl relative rounded-3xl flex flex-col items-center p-1 md:p-3 h-full"
   >
-    <div class="rounded-3xl w-full max-h-[800px]">
+    <div class="rounded-3xl w-full  max-h-[800px]">
       <img
         :src="book.images.at(0)"
         :alt="book.title"
         class="cover rounded-3xl w-full max-h-40 object-contain"
       />
 
-      <p class="text-[#e76f51] text-sm md:text-xl h-20">{{ truncate(book.title, 30) }}</p>
-   
+      <p class="text-[#e76f51] text-sm md:text-lg h-20">{{ truncate(book.title, 20) }}</p>
     </div>
     </div>
 </template>
