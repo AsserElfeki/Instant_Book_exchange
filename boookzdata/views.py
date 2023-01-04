@@ -7,11 +7,10 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.decorators import APIView, action
 
 from authentication.models import BookReader
-from .serializers import BookSerializer, BookUploadSerializer, BookShelfSerializer, ImageSerializer
+from .serializers import BookSerializer, BookUploadSerializer, ImageSerializer
 from .models import Book, Image, BookShelf, BookCondition, Category, Author
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated
-from django.shortcuts import get_object_or_404
 
 
 class NotCorrectUrlProvided(APIException):
@@ -37,19 +36,10 @@ class ImageViewSet(FlexFieldsModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Image.objects.all()
 
-    @action(detail=False, methods=['post'])
-    def upload(request):
-        try:
-            file=request.data['image']
-        except KeyError:
-            raise ParseError('Request has no resource file attached')
-        product=Image.objects.create(image=file)
-
-
 class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
     serializer_class = BookSerializer
     permit_list_expands = ['category', 'condition', ]
-    filterset_fields = ('category',)
+    filterset_fields = ('category', 'language')
 
     def get_queryset(self):
         queryset = Book.objects.all()
@@ -82,27 +72,6 @@ class AllWantedView(ListAPIView):
         wanted_shelves = BookShelf.objects.filter(shelf_name="wanted")
         wanted_books = Book.objects.filter(book_shelf_id__in=wanted_shelves)
         return wanted_books
-
-
-# TODO(Victor): Think about code below xD
-class BooksFromChosenBookshelfView(ListAPIView):
-    serializer_class = BookSerializer
-    permission_classes = (IsAuthenticated,)
-
-    def get_queryset(self):
-        queryset = Book.objects.all()
-        book_shelf = self.kwargs["bookshelf"]
-        if queryset:
-            if book_shelf == "wanted" or book_shelf == "giveaway":
-                book_reader = queryset.get(user=self.request.user)
-                giveaway_bookshelves = BookShelf.objects.filter(shelf_name=book_shelf)
-                users_bookshelf = giveaway_bookshelves.filter(book_reader=book_reader)
-                users_books = queryset.filter(book_shelf_id__in=users_bookshelf)
-                return users_books
-            else:
-                raise NotCorrectUrlProvided()
-        return queryset
-
 
 class BookUploadView(APIView):
     permission_classes = (IsAuthenticated,)

@@ -76,9 +76,6 @@ SIMPLE_JWT = {
 VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
     'product_headshot': [
         ('full_size', 'url'),
-        ('thumbnail', 'thumbnail__100x100'),
-        ('medium_square_crop', 'crop__400x400'),
-        ('small_square_crop', 'crop__50x50')
     ]
 }
 
@@ -132,7 +129,7 @@ DATABASE_POOL_ARGS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django_postgrespool2',
-        'NAME': 'boookz',
+        'NAME': 'localdb',
         'USER': config["DB_USER"],
         'PASSWORD': config["DB_PASS"],
         'HOST': '146.59.87.108',

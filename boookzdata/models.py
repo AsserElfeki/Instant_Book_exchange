@@ -2,11 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from versatileimagefield.fields import VersatileImageField, PPOIField
-from polymorphic.models import PolymorphicModel
-
 
 class Image(models.Model):
-    name = models.CharField(max_length=255, blank=True, null=True)
     image = VersatileImageField(
         'Image',
         upload_to='images/',
@@ -16,7 +13,7 @@ class Image(models.Model):
     book = models.ForeignKey('boookzdata.Book', related_name='images', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return f"id-{self.pk} {self.name}"
+        return f"{self.pk}"
 
 
 class Author(models.Model):
@@ -40,33 +37,25 @@ class Category(models.Model):
         return self.name
 
 
-class BookShelf(PolymorphicModel):
+class BookShelf(models.Model):
     shelf_name = models.CharField(max_length=255)
 
     def __str__(self):
         return f"{self.shelf_name} shelf"
-
-    @classmethod
-    def get_default_pk(cls):
-        book_shelf, created = cls.objects.get_or_create(
-            shelf_name='wanted',
-        )
-        return book_shelf.pk
-
 
 class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     author = models.ManyToManyField(Author, related_name='books')
     category = models.ManyToManyField(Category, related_name='books')
+    language = models.CharField(max_length=255, default="English")
     condition = models.ForeignKey('boookzdata.BookCondition', related_name='books', on_delete=models.CASCADE,
                                   blank=True, null=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     book_reader = models.ForeignKey("authentication.BookReader", on_delete=models.CASCADE, blank=True, null=True,
                                     related_name='book', related_query_name='book')
-    book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, default=BookShelf.get_default_pk(),
-                                   blank=True, null=True, related_name='book', related_query_name='book')
+    book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, blank=True, null=True, related_name='book', related_query_name='book')
 
     class Meta:
         ordering = ['-created']
@@ -76,22 +65,6 @@ class Book(models.Model):
 
     def get_book_reader(self):
         return self.book_reader
-
-
-class BookSite(models.Model):
-    name = models.CharField(max_length=255)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='sites', related_query_name='site')
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='sites', related_query_name='site')
-    book_condition = models.ForeignKey(BookCondition, on_delete=models.CASCADE, related_name='sites',
-                                       related_query_name='site')
-    price = models.DecimalField(max_digits=9, decimal_places=2)
-    url = models.TextField()
-    created = models.DateField(auto_now_add=True)
-    updated = models.DateField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-
 
 class Comment(models.Model):
     title = models.CharField(max_length=255)

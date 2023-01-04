@@ -2,7 +2,7 @@ from rest_flex_fields import FlexFieldsModelSerializer
 
 from authentication.models import BookReader
 from authentication.serializers import BookReaderSerializer
-from .models import Book, Category, Author, BookCondition, BookSite, User, Comment, Image, BookShelf
+from .models import Book, Category, Author, BookCondition, User, Comment, Image, BookShelf
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -30,7 +30,7 @@ class ImageSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = Image
-        fields = ['name', 'image', 'book']
+        fields = ['image', 'book']
 
 
 class BookSerializer(FlexFieldsModelSerializer):
@@ -44,7 +44,7 @@ class BookSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['pk', 'title', 'author', 'description', 'category', 'condition', 'images', 'book_owner', 'created', ]
+        fields = ['pk', 'title', 'author', 'language', 'description', 'category', 'condition', 'images', 'book_owner', 'created', ]
 
     def get_images(self, obj):
         images = Image.objects.filter(book=obj)
@@ -66,9 +66,9 @@ class BookSerializer(FlexFieldsModelSerializer):
         return [item['name'] for item in serializer]
 
     def get_book_owner(self, obj):
-        profile_image = ImageSerializer(obj.get_book_reader().profile_image, context=self.context).data['image']
-        url = (profile_image if profile_image is None else profile_image['full_size'])
-        return [obj.get_book_reader().user.username, url]
+        book_owner = obj.get_book_reader()
+        book_owner_serialized = BookReaderSerializer(book_owner, context=self.context).data
+        return book_owner_serialized
 
 
 class BookUploadSerializer(serializers.Serializer):
@@ -87,26 +87,6 @@ class BookUploadSerializer(serializers.Serializer):
         [book_instance.author.add(author) for author in validated_data['author']]
         return book_instance
 
-
-# class BookUploadSerializer(FlexFieldsModelSerializer):
-# book_shelf = BookShelfSerializer(required=False)
-
-# class Meta:
-# model = Book
-# fields = ['pk', 'book_shelf', 'title', 'description']
-# expandable_fields = {
-# 'condition': ('boookzdata.BookConditionSerializer', {'mane': False}),
-# 'category': ('boookzdata.CategorySerializer', {'many': True}),
-# 'comments': ('boookzdata.CommentSerializer', {'many': True}),
-# }
-
-# def create(self, validated_data):
-# instance = Book.objects.create(book_shelf=validated_data['book_shelf'], title=validated_data['title'],
-# description=validated_data['description'], condition=validated_data['condition'])
-# [instance.category.add(category) for category in validated_data['category']]
-# return instance
-
-
 class BookShelfSerializer(FlexFieldsModelSerializer):
     book_reader = BookReaderSerializer(read_only=True)
     books = BookSerializer(many=True)
@@ -114,18 +94,6 @@ class BookShelfSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = BookShelf
         fields = ['book_reader', 'books', ]
-
-
-class BookSiteSerializer(FlexFieldsModelSerializer):
-    class Meta:
-        model = BookSite
-        fields = ['pk', 'name', 'price', 'url', 'created', 'updated']
-        expandable_fields = {
-            'book': 'boookzdata.CategorySerializer',
-            'bookcondition': 'boookzdata.BookConditionSerializer',
-            'author': 'boookzdata.AuthorSerializer',
-        }
-
 
 class CommentSerializer(FlexFieldsModelSerializer):
     class Meta:

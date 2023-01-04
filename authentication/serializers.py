@@ -12,21 +12,6 @@ from authentication.models import BookReader, ProfileImage
 from boookzdata.models import Book
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 
-class BookReaderSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(
-        default=serializers.CurrentUserDefault(),
-        queryset=serializers.CurrentUserDefault()
-    )
-    username = serializers.SerializerMethodField(read_only=True)
-
-    class Meta:
-        model = BookReader
-        fields = ['user', 'username']
-
-
-    def get_username(self, obj):
-        return obj.user.username
-
 class ImageSerializer(FlexFieldsModelSerializer):
     image = VersatileImageFieldSerializer(
         sizes='product_headshot'
@@ -36,6 +21,20 @@ class ImageSerializer(FlexFieldsModelSerializer):
         model = ProfileImage
         fields = ['image']
 
+class BookReaderSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField(read_only=True)
+    profile_image = serializers.SerializerMethodField()
+    class Meta:
+        model = BookReader
+        fields = ['username', 'country', 'profile_image']
+
+    def get_profile_image(self, obj):
+        image = ImageSerializer(obj.profile_image, context=self.context).data['image']
+        url = (image if image is None else image['full_size'])
+        return url
+
+    def get_username(self, obj):
+        return obj.user.username
 
 class ListBookReaderSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(

@@ -5,11 +5,7 @@ from django.db.models.signals import post_save
 from versatileimagefield.fields import VersatileImageField, PPOIField
 from django_countries.fields import CountryField
 
-from boookzdata.models import BookShelf
-
-
 class ProfileImage(models.Model):
-    name = models.CharField(max_length=255)
     image = VersatileImageField(
         'ProfileImage',
         upload_to='images/',
@@ -18,7 +14,7 @@ class ProfileImage(models.Model):
     image_ppoi = PPOIField()
 
     def __str__(self):
-        return self.name
+        return f"{self.pk}"
 
 
 class BookReader(models.Model):
