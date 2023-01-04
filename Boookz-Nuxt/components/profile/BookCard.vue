@@ -25,5 +25,8 @@ function truncate(string, value) {
 </script>
 
 <style scoped>
-
+.selected {
+  background-color: #ddd;
+  border: 2px solid #333;
+}
 </style>

@@ -17,10 +17,17 @@
       <p class="text-sm md:text-lg mb-1">by: {{ book.book_owner.username }}</p>
     </div>
     <img
+      v-if="book.book_owner.profile_image"
       :src="book.book_owner.profile_image"
       :alt="book.book_owner.username"
       class="user-image w-16 h-16 rounded-full object-cover absolute bottom-[-40px] left-1/2 -translate-x-1/2 border-black border"
     />
+    <img
+        v-else
+        src="../assets/img/avatar.png"
+        alt="profile avatar"
+        class="user-image w-16 h-16 rounded-full object-cover absolute bottom-[-40px] left-1/2 -translate-x-1/2 border-black border"
+      />
   </div>
 </template>
 
