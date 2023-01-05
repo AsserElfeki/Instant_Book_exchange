@@ -89,6 +89,7 @@ class StartTransactionView(generics.CreateAPIView):
         origin = {"origin": "Transaction"}
         notification_target = {"book_reader": book_reader_receiver.pk}
         data = {**content, **origin, **notification_target}
+        print(data)
         notification = NotificationSerializer(data=data)
         if notification.is_valid(raise_exception=True):
             notification_saved = notification.save()
@@ -232,10 +233,12 @@ class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
                 content = {"content": f"{current_book_reader.user.username} received your book."}
         else:
             raise ExternalUserInterfer()
+
         origin = {"origin": "Transaction"}
         notification_target = {"book_reader": book_reader.pk}
         data = {**content, **origin, **notification_target}
         notification = NotificationSerializer(data=data)
         if notification.is_valid(raise_exception=True):
             notification_saved = notification.save()
+
         return transaction_status

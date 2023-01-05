@@ -160,7 +160,7 @@ class TransactionForProfileSerializer(serializers.ModelSerializer):
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
-        fields = ['pk', 'content', 'origin']
+        fields = ['pk', 'content', 'origin', 'book_reader']
 
 
 class ReportRecordSerializer(serializers.ModelSerializer):

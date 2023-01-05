@@ -17,6 +17,7 @@ class TransactionSerializer(serializers.ModelSerializer):
     book_reader_initiator = BookReaderSerializer(required=False)
     book_reader_receiver = BookReaderSerializer(required=False)
     transaction_status = serializers.SerializerMethodField()
+    created = serializers.DateField(read_only=True)
 
     class Meta:
         model = Transaction
