@@ -16,6 +16,7 @@
       <div class="flex flex-wrap gap-2 justify-center">
         <div
           v-for="book in store.userWantedBooks"
+          :key="book.pk"
           class="mt-12 basis-1/2 sm:basis-1/4 md:basis-2/12 flex flex-col justify-between gap-2"
         >
           <NuxtLink
@@ -27,11 +28,11 @@
           >
             <ProfileBookCard :book="book" />
           </NuxtLink>
-          <button v-if="!route.id" class="btn-sm self-center" @click="deleteBook(book)">Delete</button>
+          <button v-if="!route.id" class="btn-sm self-center" @click="deleteBook(book)">
+            Delete
+          </button>
         </div>
       </div>
-
-
     </div>
 
     <div v-else class="mt-16">
