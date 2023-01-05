@@ -150,7 +150,7 @@ class TransactionForProfileSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = (
             'token', 'book_reader_initiator', 'book_reader_receiver', 'initiator_book', 'receiver_book',
-            'transaction_status')
+            'transaction_status', 'created')
 
     def get_transaction_status(self, obj):
         name = TransactionStatusSerializer(obj.transaction_status, read_only=True, context=self.context).data['name']
