@@ -6,7 +6,7 @@
 
     <div v-if="store.userGiveAwayBooks.length" 
     class="flex flex-col items-center justify-center w-full mx-auto px-4">
-      <h2 v-if="route.id" class="font-bold text-xl font-sans m-2 self-start">{store.userName}'s Giveaway Books</h2>
+      <h2 v-if="route.id" class="font-bold text-xl font-sans m-2 self-start">{{store.userName}}'s Giveaway Books</h2>
       <h2 v-if="!route.id" class="font-bold text-xl font-sans m-2 self-start">My Giveaway Books</h2>
       <div class="flex gap-2 items-stretch">
           <NuxtLink 

@@ -19,14 +19,13 @@ export const useProfileStore = defineStore({
                 if (res) {
                     //console.log("name: ", res.at(0))
                     this.userName = res.username;
-                    this.userIsLoggedIn = true;
                     if (res.book_reader.giveaway_books[0]) {
                         this.userGiveAwayBooks = res.book_reader.giveaway_books
                     }
                     if (res.book_reader.wanted_books[0]) {
                         this.userWantedBooks = res.book_reader.wanted_books
                     }
-                    this.region = res.at(0).book_reader.country;
+                    this.region = res.book_reader.country;
                     this.userProfileImage = res.book_reader.profile_image;
                     // this.userRatings = res.book_reader.ratings
                     // this.userTransactions = res.book_reader.history
