@@ -61,8 +61,10 @@
 - [x] 59. have the api call from the profile components happen only after submission of the form 
 - [x] 66. button to delete the book
 - [ ] 60. display response of the forms TOASTS (youssef)
-- [ ] 31. transactions component (youssef)
-- [ ] 62. (+) button for authors and : category -> predifined select menu  
+- [x] 31. transactions component (youssef)
+- [ ] 62. (+) button for authors and : category -> predifined select menu (victor : NO HOTFIXES MF)
+- [ ] 63. make title get suggestions from google api and 
+- [ ] 72. search result page
 - [ ] 71. errors in addbok form
 - [ ] 40. notifications 
 - [ ] 52. dropdown menu for settings and logout ? 
@@ -76,6 +78,8 @@ then new notification : time to confirm receiving
 - [ ] 39. fixing errors and warnings 
 - [ ] 54. check on each redirect if the token is still valid and update state 
 - [ ] 64. optimize bookshelves to be 1 item
+
+
 
 
 #Notes: 
