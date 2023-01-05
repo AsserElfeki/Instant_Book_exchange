@@ -2,6 +2,13 @@
   <div
     class="bg-[#dddaee] max-w-xs shadow-xl relative rounded-3xl flex flex-col items-center overflow-visible p-3 h-80"
   >
+  <NuxtLink
+    @click.left="dataStore.setClickedBook(book)"
+    @click.middle="dataStore.setClickedBook(book)"
+    @click.right="dataStore.setClickedBook(book)"
+    :key="book.pk"
+    :to="`/books/${book.title.replaceAll(' ', '-')}`"
+  >
     <div class="rounded-3xl w-full max-h-[800px]">
       <img
         :src="book.images.at(0)"
@@ -13,7 +20,13 @@
         {{ truncate(book.title, 28) }}
       </h4>
     </div>
-    <div class="flex flex-col  justify-end min-w-full pb-4 h-full">
+  </NuxtLink>
+
+
+
+  <NuxtLink class="flex flex-col justify-end min-w-full pb-4 h-full" :to="`/profile/${book.book_owner.username.replaceAll(' ', '-')}`">
+
+    <div >
       <p class="text-sm md:text-lg mb-1">by: {{ book.book_owner.username }}</p>
     </div>
     <img
@@ -22,19 +35,17 @@
       :alt="book.book_owner.username"
       class="user-image w-16 h-16 rounded-full object-cover absolute bottom-[-40px] left-1/2 -translate-x-1/2 border-black border"
     />
-    <img
-        v-else
-        src="../assets/img/avatar.png"
-        alt="profile avatar"
-        class="user-image w-16 h-16 rounded-full object-cover absolute bottom-[-40px] left-1/2 -translate-x-1/2 border-black border"
-      />
+  </NuxtLink>
+
   </div>
 </template>
 
 <script setup>
 import { useUserStore } from "~/stores/userStore";
+import { useDataStore } from "~/stores/dataStore";
 const { book } = defineProps(["book"]);
 const store = useUserStore();
+const dataStore = useDataStore();
 function truncate(string, value) {
   if (string.length > value) return string.substring(0, value) + "…";
   else return string;
