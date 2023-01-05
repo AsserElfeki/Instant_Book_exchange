@@ -2,16 +2,23 @@ import uuid
 
 from django.db import models
 
-# Initiated
-# Accepted
-# Received by receiving user
-# Received by initiating user
-# Completed
+
+class TransactionRating(models.Model):
+    transaction = models.ForeignKey("transactions.Transaction", on_delete=models.CASCADE, null=True)
+    book_reader = models.ForeignKey("authentication.BookReader", on_delete=models.CASCADE,null=True)
+    comment = models.CharField(max_length=255)
+    rating = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"token-{self.transaction.token}: {self.rating}"
+
+
 class TransactionStatus(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
+
 
 # Books are removed from shelves
 class Transaction(models.Model):
@@ -26,10 +33,9 @@ class Transaction(models.Model):
                                        related_query_name='initiator_book', default="", null=True)
     receiver_book = models.ForeignKey('boookzdata.Book', on_delete=models.CASCADE, related_name='receiver_book',
                                       related_query_name='receiver_book', default="", null=True)
-    transaction_status = models.ForeignKey(TransactionStatus,on_delete=models.SET_NULL,
+    transaction_status = models.ForeignKey(TransactionStatus, on_delete=models.SET_NULL,
                                            related_name='transaction_status', related_query_name='transaction_status',
                                            default="", null=True)
-
 
     def __str__(self):
         return f"status-{self.transaction_status} {str(self.token)} "

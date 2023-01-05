@@ -9,8 +9,8 @@ from rest_framework.response import Response
 from authentication.models import BookReader
 from boookzdata.models import Book, BookShelf
 from boookzdata.serializers import BookSerializer, NotificationSerializer
-from .models import Transaction, TransactionStatus
-from .serializers import TransactionSerializer
+from .models import Transaction, TransactionStatus, TransactionRating
+from .serializers import TransactionSerializer, TransactionRatingSerializer
 
 from rest_framework import generics
 
@@ -35,6 +35,28 @@ class TransactionsView(ListAPIView):
         user_transactions_as_initiator = Transaction.objects.filter(book_reader_initiator=book_reader)
         user_transactions_as_receiver = Transaction.objects.filter(book_reader_receiver=book_reader)
         return list(chain(user_transactions_as_initiator, user_transactions_as_receiver))
+
+
+class RateTransactionView(generics.CreateAPIView):
+    serializer_class = TransactionSerializer
+    queryset = Transaction.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        transaction_token = self.kwargs['transaction_token']
+        comment = self.kwargs['comment']
+        rate = self.kwargs['rate']
+        transaction = self.queryset.get(token=transaction_token)
+        if transaction:
+            book_reader = BookReader.objects.get(user=request.user)
+            if transaction.transaction_status.name == "Completed":
+                data = {"transaction": transaction, "book_reader": book_reader, "comment": comment, "rate": rate}
+                serializer = TransactionRatingSerializer(data=data)
+                if serializer.is_valid(raise_exception=True):
+                    rate_instance = serializer.save()
+                return Response({"success": f"Rate '{rate_instance}' created successfully"})
+            return Response({"error": "Transaction is not completed"})
+        return Response({"error": "Transaction doesn't exist"})
 
 
 # View should save these books in serializer and get book_reder_receiver

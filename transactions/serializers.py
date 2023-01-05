@@ -4,7 +4,7 @@ from rest_flex_fields import FlexFieldsModelSerializer
 from rest_framework import serializers
 from authentication.serializers import BookReaderSerializer
 from boookzdata.serializers import BookSerializer
-from .models import Transaction, TransactionStatus
+from .models import Transaction, TransactionStatus, TransactionRating
 
 
 class TransactionStatusSerializer(FlexFieldsModelSerializer):
@@ -30,3 +30,12 @@ class TransactionSerializer(serializers.ModelSerializer):
     def get_transaction_status(self, obj):
         image = TransactionStatusSerializer(obj.transaction_status, read_only=True, context=self.context).data['name']
         return image
+
+
+class TransactionRatingSerializer(FlexFieldsModelSerializer):
+    transaction = TransactionSerializer()
+    book_reader = BookReaderSerializer()
+
+    class Meta:
+        model = TransactionRating
+        fields = ['transaction', "book_reader", "rating", "comment"]
