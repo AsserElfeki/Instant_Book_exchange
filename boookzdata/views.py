@@ -7,7 +7,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.decorators import APIView, action
 
 from authentication.models import BookReader
-from .serializers import BookSerializer, BookUploadSerializer, ImageSerializer
+from .serializers import BookSerializer, BookUploadSerializer, ImageSerializer, ReportRecordSerializer
 from .models import Book, Image, BookShelf, BookCondition, Category, Author
 from rest_flex_fields import is_expanded
 from rest_framework.permissions import IsAuthenticated
@@ -149,3 +149,19 @@ class DeleteBookView(APIView):
         books_to_delete.delete()
 
         return Response({"result": "book deleted"})
+
+
+class ReportRecordView(generics.CreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ReportRecordSerializer
+
+    def post(self, request, *args, **kwargs):
+        message = {"message": self.request.data.get("message", None)}
+        book_reader = {"book_reader": BookReader.objects.get(user=request.user).pk}
+        data = {**message, **book_reader}
+        serializer = ReportRecordSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            report_serializer = serializer.save()
+        return Response({"success": "report is created"})
+
+
