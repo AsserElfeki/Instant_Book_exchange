@@ -33,8 +33,6 @@ class TransactionSerializer(serializers.ModelSerializer):
 
 
 class TransactionRatingSerializer(FlexFieldsModelSerializer):
-    transaction = TransactionSerializer()
-    book_reader = BookReaderSerializer()
 
     class Meta:
         model = TransactionRating

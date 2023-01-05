@@ -44,13 +44,14 @@ class RateTransactionView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         transaction_token = self.kwargs['transaction_token']
-        comment = self.kwargs['comment']
-        rate = self.kwargs['rate']
+        comment = {"comment": self.request.data.get("comment", None)}
+        rating = {"rating": self.request.data.get("rating", None)}
         transaction = self.queryset.get(token=transaction_token)
         if transaction:
-            book_reader = BookReader.objects.get(user=request.user)
+            book_reader = {"book_reader": BookReader.objects.get(user=request.user).pk}
             if transaction.transaction_status.name == "Completed":
-                data = {"transaction": transaction, "book_reader": book_reader, "comment": comment, "rate": rate}
+                transaction = {"transaction": transaction.pk}
+                data = {**transaction, **book_reader, **comment, **rating}
                 serializer = TransactionRatingSerializer(data=data)
                 if serializer.is_valid(raise_exception=True):
                     rate_instance = serializer.save()
