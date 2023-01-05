@@ -42,6 +42,7 @@
     <div v-if="username != book.book_owner.username">
       <hr class="separator" />
       <h1 class="font-bold font-serif md:text-3xl inline mr-3 ml-3">Offered By:</h1>
+      <NuxtLink :to="`/profile/${book.book_owner.username.replaceAll(' ', '-')}`">
       <p class="inline mr-3 md:text-xl">{{ book.book_owner.username }}</p>
       <img
       v-if="book.book_owner.profile_image"
@@ -55,6 +56,7 @@
         alt="profile avatar"
         class="user-image w-16 h-16 rounded-full border-black border inline"
       />
+      </NuxtLink>
       <div>
         <button class="btn-sm w-28 m-4" @click="setShowTrade">Trade</button>
       </div>
