@@ -1,13 +1,21 @@
 <template>
   <div v-if="book" class="flex flex-col justify-center">
-    <div class="hero bg-gradient-to-r from-violet-100 to-violet-700 h-auto rounded-2xl p-2">
-      <div class="flex flex-col md:flex-row md:flex-nowrap justify-center md:justify-around items-center gap-8">
-        <img class="rounded-2xl h-60 md:h-96" :src="book.images.at(0)" alt="cover of the book" />
+    <div
+      class="hero bg-gradient-to-r from-violet-100 to-violet-700 h-auto rounded-2xl p-2"
+    >
+      <div
+        class="flex flex-col md:flex-row md:flex-nowrap justify-center md:justify-around items-center gap-8"
+      >
+        <img
+          class="rounded-2xl h-60 md:h-96"
+          :src="book.images.at(0)"
+          alt="cover of the book"
+        />
         <div class="flex flex-col gap-2">
           <h1 class="font-bold font-serif text-xl leading-none">{{ book.title }}</h1>
           <p class="">By: {{ book.author.join(", ") }}</p>
           <div>
-            <p class="inline">Category: </p>
+            <p class="inline">Category:</p>
             <p class="inline">{{ book.category.join(", ") }}</p>
           </div>
           <p class="">Condition: {{ book.condition }}</p>
@@ -25,13 +33,28 @@
     <div class="px-4 mx-auto w-full">
       <h1 class="font-bold font-serif text-3xl">Images:</h1>
       <br />
-      <swiper :modules="modules" :slides-per-view="1" :space-between="100" navigation :pagination="{ clickable: true }"
-        :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
-        class="flex justify-center items-center w-1/3">
-
-        <swiper-slide v-for="n in book.images.length" class="flex flex-row items-center justify-center">
-          <img class="rounded-md object-contain" :src="book.images.at(n - 1)" alt="cover of the book"
-            @click="showImage(book.images.at(n - 1))" style=" max-height: 500px; max-width: 500px;" />
+      <swiper
+        :modules="modules"
+        :slides-per-view="1"
+        :space-between="100"
+        navigation
+        :pagination="{ clickable: true }"
+        :scrollbar="{ draggable: true }"
+        @swiper="onSwiper"
+        @slideChange="onSlideChange"
+        class="flex justify-center items-center w-1/3"
+      >
+        <swiper-slide
+          v-for="n in book.images.length"
+          class="flex flex-row items-center justify-center"
+        >
+          <img
+            class="rounded-md object-contain"
+            :src="book.images.at(n - 1)"
+            alt="cover of the book"
+            @click="showImage(book.images.at(n - 1))"
+            style="max-height: 500px; max-width: 500px"
+          />
         </swiper-slide>
       </swiper>
       <div v-if="showModal" class="modal-overlay" @click="hideModal">
@@ -40,15 +63,28 @@
     </div>
     <hr class="separator" />
 
-    <div v-if="username != book.book_owner.username" class="flex items-center gap-2 md:gap-32 justify-start">
+    <div
+      v-if="username != book.book_owner.username"
+      class="flex items-center gap-2 md:gap-32 justify-start"
+    >
       <div class="flex items-center">
         <h1 class="font-bold font-serif md:text-3xl inline mr-3 ml-3">Offered By:</h1>
         <NuxtLink :to="`/profile/${book.book_owner.username.replaceAll(' ', '-')}`">
-          <p class="inline mr-3 md:text-xl font-serif font-bold">{{ book.book_owner.username }}</p>
-          <img v-if="book.book_owner.profile_image" :src="book.book_owner.profile_image" :alt="book.book_owner.username"
-            class="user-image w-16 h-16 rounded-full border-black border inline" />
-          <img v-else src="../../assets/img/avatar.png" alt="profile avatar"
-            class="user-image w-16 h-16 rounded-full border-black border inline" />
+          <p class="inline mr-3 md:text-xl font-serif font-bold">
+            {{ book.book_owner.username }}
+          </p>
+          <img
+            v-if="book.book_owner.profile_image"
+            :src="book.book_owner.profile_image"
+            :alt="book.book_owner.username"
+            class="user-image w-16 h-16 rounded-full border-black border inline"
+          />
+          <img
+            v-else
+            src="../../assets/img/avatar.png"
+            alt="profile avatar"
+            class="user-image w-16 h-16 rounded-full border-black border inline"
+          />
         </NuxtLink>
       </div>
       <div class="">
@@ -58,7 +94,6 @@
     <div v-if="showTrade">
       <Trade />
     </div>
-
   </div>
 </template>
 
@@ -84,7 +119,6 @@ export default {
       showModal: false,
       showTrade: false,
     };
-
   },
   methods: {
     showImage(image) {
@@ -95,7 +129,6 @@ export default {
     setShowTrade() {
       this.showTrade = true;
       console.log("show Trade");
-
     },
     hideModal() {
       this.showModal = false;

@@ -60,8 +60,8 @@
 - [x] 69. see other person profile 
 - [x] 59. have the api call from the profile components happen only after submission of the form 
 - [x] 66. button to delete the book
-- [ ] 60. display response of the forms TOASTS (youssef)
 - [x] 31. transactions component (youssef)
+- [ ] 60. display response of the forms TOASTS (youssef)
 - [ ] 62. (+) button for authors and : category -> predifined select menu (victor : NO HOTFIXES MF)
 - [ ] 63. make title get suggestions from google api and 
 - [ ] 72. search result page
