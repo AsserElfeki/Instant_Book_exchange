@@ -4,7 +4,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect
 
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from rest_flex_fields import FlexFieldsModelViewSet
 from rest_framework.generics import ListAPIView
@@ -33,16 +33,16 @@ class ProfileInfoView(ReadOnlyModelViewSet):
     def get_queryset(self):
         return User.objects.all().filter(id=self.request.user.id)
 
-class AnyProfileInfoView(APIView):
-    def get_object(self, username):
-        try:
-            return User.objects.get(username=username)
-        except User.DoesNotExist:
-            raise Http404
+class AnyProfileInfoView(ReadOnlyModelViewSet):
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
 
-    def get(self, request, username, format=None):
-        user = self.get_object(username)
-        serializer_class = UserSerializer(user) 
+    def retrive(self, request, username=None):
+        queryset = User.objects.all()
+        user = get_object_or_404(queryset, username=username)
+        serializer_class = UserSerializer(user, context=self.get_serializer_context()) 
         return Response(serializer_class.data)
 
 class ListBookReaderBooks(FlexFieldsModelViewSet):
