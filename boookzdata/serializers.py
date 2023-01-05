@@ -170,13 +170,14 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
     country = CountryField(name_only=True)
     transactions = serializers.SerializerMethodField()
     notifications = serializers.SerializerMethodField()
+    ratings = serializers.SerializerMethodField()
 
     class Meta:
         model = BookReader
-        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books', 'transactions', 'rating',
+        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books', 'transactions', 'ratings',
                   'notifications', ]
 
-    def get_notifications(self, obj):
+    def get_ratings(self, obj):
         book_reader = BookReader.objects.get(user=obj.user)
         book_reader_transaction_rating = TransactionRating.objects.filter(book_reader=book_reader)
         serialized = TransactionRatingSerializer(book_reader_transaction_rating, context=self.context, many=True)
