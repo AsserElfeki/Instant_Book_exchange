@@ -5,8 +5,9 @@ from rest_flex_fields import FlexFieldsModelSerializer
 
 from authentication.models import BookReader, ProfileImage, Notification
 from authentication.serializers import BookReaderSerializer, ProfileImageSerializer
+from transactions.serializers import TransactionRatingSerializer
 from .models import Book, Category, Author, BookCondition, User, Comment, Image, BookShelf
-from transactions.models import Transaction,TransactionStatus
+from transactions.models import Transaction, TransactionStatus, TransactionRating
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
 
@@ -48,7 +49,8 @@ class BookSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['pk', 'title', 'author', 'language', 'description', 'category', 'condition', 'images', 'book_owner', 'created', ]
+        fields = ['pk', 'title', 'author', 'language', 'description', 'category', 'condition', 'images', 'book_owner',
+                  'created', ]
 
     def get_images(self, obj):
         images = Image.objects.filter(book=obj)
@@ -86,7 +88,7 @@ class BookUploadSerializer(serializers.Serializer):
     book_shelf = serializers.PrimaryKeyRelatedField(queryset=BookShelf.objects.all())
 
     def create(self, validated_data):
-        book_instance = Book.objects.create(title=validated_data["title"], 
+        book_instance = Book.objects.create(title=validated_data["title"],
                                             description=validated_data["description"],
                                             condition=validated_data["condition"],
                                             book_shelf=validated_data["book_shelf"],
@@ -96,6 +98,7 @@ class BookUploadSerializer(serializers.Serializer):
         [book_instance.author.add(author) for author in validated_data['author']]
         return book_instance
 
+
 class BookShelfSerializer(FlexFieldsModelSerializer):
     book_reader = BookReaderSerializer(read_only=True)
     books = BookSerializer(many=True)
@@ -103,6 +106,7 @@ class BookShelfSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = BookShelf
         fields = ['book_reader', 'books', ]
+
 
 class CommentSerializer(FlexFieldsModelSerializer):
     class Meta:
@@ -126,11 +130,13 @@ class UserSerializer(serializers.ModelSerializer):
         serializer = ProfileInfoSerializer(book_reader, context=self.context)
         return serializer.data
 
-#Not the bast code but had to be done so frontend is happy. Maybe there is other way
+
+# Not the bast code but had to be done so frontend is happy. Maybe there is other way
 class TransactionStatusSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = TransactionStatus
         fields = ['name', ]
+
 
 class TransactionForProfileSerializer(serializers.ModelSerializer):
     token = serializers.CharField(required=False, max_length=64)
@@ -143,16 +149,19 @@ class TransactionForProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = (
-            'token', 'book_reader_initiator', 'book_reader_receiver', 'initiator_book', 'receiver_book', 'transaction_status')
+            'token', 'book_reader_initiator', 'book_reader_receiver', 'initiator_book', 'receiver_book',
+            'transaction_status')
 
     def get_transaction_status(self, obj):
         name = TransactionStatusSerializer(obj.transaction_status, read_only=True, context=self.context).data['name']
         return name
 
+
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = ['pk', 'content', 'origin']
+
 
 class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
     profile_image = serializers.SerializerMethodField()
@@ -164,7 +173,14 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
 
     class Meta:
         model = BookReader
-        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books', 'transactions', 'notifications']
+        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books', 'transactions', 'rating',
+                  'notifications', ]
+
+    def get_notifications(self, obj):
+        book_reader = BookReader.objects.get(user=obj.user)
+        book_reader_transaction_rating = TransactionRating.objects.filter(book_reader=book_reader)
+        serialized = TransactionRatingSerializer(book_reader_transaction_rating, context=self.context, many=True)
+        return serialized.data
 
     def get_notifications(self, obj):
         book_reader = BookReader.objects.get(user=obj.user)
@@ -172,19 +188,20 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
         serialized = NotificationSerializer(book_reader_notifications, context=self.context, many=True)
         return serialized.data
 
-
     def get_transactions(self, obj):
         book_reader = BookReader.objects.get(user=obj.user)
         user_transactions_as_initiator = Transaction.objects.filter(book_reader_initiator=book_reader)
-        serializer = TransactionForProfileSerializer(user_transactions_as_initiator, context=self.context, many=True).data
+        serializer = TransactionForProfileSerializer(user_transactions_as_initiator, context=self.context,
+                                                     many=True).data
         user_transactions_as_receiver = Transaction.objects.filter(book_reader_receiver=book_reader)
-        serializer2 = TransactionForProfileSerializer(user_transactions_as_receiver, context=self.context, many=True).data
+        serializer2 = TransactionForProfileSerializer(user_transactions_as_receiver, context=self.context,
+                                                      many=True).data
         return list(chain(serializer, serializer2))
 
     def get_profile_image(self, obj):
         images = ProfileImage.objects.filter(book_reader=obj)
         serializer = ProfileImageSerializer(images, context=self.context, many=True).data
-        image =next(iter(serializer or []), None) 
+        image = next(iter(serializer or []), None)
         image = image if image is None else image['image']['full_size']
         return image
 
@@ -199,4 +216,3 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
         books = Book.objects.filter(book_reader=obj, book_shelf=book_shelf)
         serializer = BookSerializer(books, context=self.context, many=True)
         return serializer.data
-
