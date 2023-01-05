@@ -63,6 +63,8 @@
 - [x] 31. transactions component (youssef)
 - [ ] 60. display response of the forms TOASTS (youssef)
 - [ ] 62. (+) button for authors and : category -> predifined select menu (victor : NO HOTFIXES MF)
+- [ ] 74. rest of transaction stages 
+- [ ] 75. ratings
 - [ ] 63. make title get suggestions from google api and 
 - [ ] 72. search result page
 - [ ] 71. errors in addbok form

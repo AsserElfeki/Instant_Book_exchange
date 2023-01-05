@@ -17,6 +17,7 @@ export const useUserStore = defineStore({
         },
         loginError: "",
         callingComponent: null,
+        addBookError : {},
     }),
     actions: {
         async signIn(form) {
@@ -33,7 +34,6 @@ export const useUserStore = defineStore({
                 }
             }
             catch (error) {
-                console.log("login error" + JSON.stringify(error.data));
                 this.loginError = error.data;
             }
 
@@ -45,15 +45,13 @@ export const useUserStore = defineStore({
                     method: 'POST',
                     body: form
                 })
-                console.log(res);
                 if (res.response) {
+                    //ToDo toast
                 }
             }
             catch (error) {
-                console.log("error: " + JSON.stringify(error.data));
                 this.registerError = error.data;
             }
-
         },
 
         async logOut() {
@@ -141,14 +139,21 @@ export const useUserStore = defineStore({
         },
 
         async addBook(form, shelf) {
-            const res = await $fetch('http://146.59.87.108:8000/data/upload/' + shelf, {
-                method: 'POST',
-                headers: {
-                    "authorization": "Bearer " + this.token,
-                },
-                body: form
-            })
-            await this.getUserInfo();
+            try {
+                const res = await $fetch('http://146.59.87.108:8000/data/upload/' + shelf, {
+                    method: 'POST',
+                    headers: {
+                        "authorization": "Bearer " + this.token,
+                    },
+                    body: form
+                })
+                if (res.success) {
+                    await this.getUserInfo();
+                }
+            }
+            catch (error) {
+                this.addBookError = error.data;
+            }
         },
 
         async deleteBook(book) {
