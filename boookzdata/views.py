@@ -23,7 +23,7 @@ class SearchGiveAwayBooksView(ListAPIView):
     serializer_class = BookSerializer
     permit_list_expands = ['category', 'sites', 'comments', 'sites.company', 'sites.productsize']
     filter_backends = [filters.SearchFilter]
-    search_fields = ("^name",)  # TODO search by author, category, etc
+    search_fields = ("^title",)
 
     def get_queryset(self):
         giveaway_shelves = BookShelf.objects.filter(shelf_name="giveaway")
