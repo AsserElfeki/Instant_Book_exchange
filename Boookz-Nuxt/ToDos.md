@@ -34,18 +34,18 @@
 - [x] 28. logout to endpoint 
 - [x] 29. route guards 
 - [x] 30. active tabs (dynamic components)
-- [ ] 31. transactions page
+- [ ] 31. transactions component (youssef)
 - [x] 32. settings page 
 - [x] 33. user shelves from the correct endpoints 
 - [x] 34. page transitions 
 - [x] 35. reactive tabs in nuxt 
 - [x] 36. addBook page / toast
 - [x] 37. fix styles of all existing pages/components to be responsive and looking good
-- [ ] 38. improving ux 
+- [x] 38. improving ux 
 - [ ] 39. fixing errors and warnings 
 - [ ] 40. notifications 
 - [x] 41. issue: profile page refresh goes to signin
-- [ ] 42. issue : opening a book in a new tab gives the last "clicked" book
+- [x] 42. issue : opening a book in a new tab gives the last "clicked" book
 - [x] 43. enhance swiper: add zoom option and pagination
 - [x] 44. Have pop-up zoomed gallery funct...
 - [x] 45. redo css for transactions and ratings (and their data)
@@ -63,12 +63,17 @@
 - [x] 57. book card in my profile should not have owner 
 - [x] 58. make the random book image clickable
 - [x] 59. have the api call from the profile components happen only after submission of the form 
-- [ ] 60. display response of the forms
+- [ ] 60. display response of the forms TOASTS (youssef)
 - [ ] 61. redo all the forms ?
-- [ ] 62. (+) button for authors and category 
+- [ ] 62. (+) button for authors and : category -> predifined select menu  
 - [x] 63. book title out pf bounds in profile wanted 
 - [ ] 64. optimize bookshelves to be 1 item
 - [ ] 65. toast for uploading profile pic 
+- [ ] 66. button to delete the book
+- [ ] 67. in the [id] page create comment section
+- [ ] 68. generic notification for transactions : click --> go to a new page with info on this transaction --> accept | deny -- acdepted | denied 
+then new notification : time to confirm receiving 
+- [ ] 69. see other person profile 
 
 
 #Notes: 
