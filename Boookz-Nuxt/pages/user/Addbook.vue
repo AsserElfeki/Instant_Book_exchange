@@ -5,7 +5,7 @@
       enctype="multipart/form-data"
       class="flex flex-col justify-center gap-3 w-full sm:w-3/5 lg:w-1/2 mx-auto p-2"
     >
-      <fieldset class="flex justify-around ">
+      <fieldset class="flex justify-around">
         <label for="shelf">Shelf:</label>
         <select
           id="shelf"
@@ -92,7 +92,7 @@
         id="book-images"
         type="file"
         multiple
-        accept=".png, .jpg, .jpeg"
+        accept=".png, .jpg, .jpeg, .heic"
         @change="updateFiles($event.target.files)"
         class="border p-2 rounded-md"
       />

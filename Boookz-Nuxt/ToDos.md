@@ -57,24 +57,25 @@
 - [x] 57. book card in my profile should not have owner 
 - [x] 58. make the random book image clickable
 - [x] 63. book title out pf bounds in profile wanted 
+- [x] 69. see other person profile 
 - [x] 59. have the api call from the profile components happen only after submission of the form 
-- [ ] 39. fixing errors and warnings 
-- [ ] 40. notifications 
-- [ ] 31. transactions component (youssef)
-- [ ] 52. dropdown menu for settings and logout ? 
-- [ ] 54. check on each redirect if the token is still valid and update state 
-- [ ] 55. change the navbar 
+- [x] 66. button to delete the book
 - [ ] 60. display response of the forms TOASTS (youssef)
-- [ ] 61. redo all the forms ?
+- [ ] 31. transactions component (youssef)
 - [ ] 62. (+) button for authors and : category -> predifined select menu  
-- [ ] 64. optimize bookshelves to be 1 item
+- [ ] 71. errors in addbok form
+- [ ] 40. notifications 
+- [ ] 52. dropdown menu for settings and logout ? 
+- [ ] 55. change the navbar 
 - [ ] 65. toast for uploading profile pic 
-- [ ] 66. button to delete the book
-- [ ] 67. in the [id] page create comment section
 - [ ] 68. generic notification for transactions : click --> go to a new page with info on this transaction --> accept | deny -- acdepted | denied 
 then new notification : time to confirm receiving 
-- [ ] 69. see other person profile 
 - [ ] 70. do something with the search bar 
+- [ ] 67. in the [id] page create comment section
+- [ ] 61. redo all the forms ?
+- [ ] 39. fixing errors and warnings 
+- [ ] 54. check on each redirect if the token is still valid and update state 
+- [ ] 64. optimize bookshelves to be 1 item
 
 
 #Notes: 

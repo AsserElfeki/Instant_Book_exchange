@@ -16,6 +16,7 @@
       <div class="flex flex-wrap gap-2 justify-center">
         <div
           v-for="book in store.userGiveAwayBooks"
+          :key="book.pk"
           class="mt-12 basis-1/2 sm:basis-1/4 md:basis-2/12 flex flex-col justify-between gap-2"
         >
           <NuxtLink
@@ -55,6 +56,4 @@ function deleteBook(book) {
 // await store.getUserInfo();
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

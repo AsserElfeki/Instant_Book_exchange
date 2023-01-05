@@ -115,16 +115,21 @@ export const useUserStore = defineStore({
                     //console.log("name: ", res.at(0))
                     this.userName = res.username;
                     this.userIsLoggedIn = true;
-                    if (res.book_reader.giveaway_books[0]) {
+                    if (res.book_reader.giveaway_books.length) {
                         this.userGiveAwayBooks = res.book_reader.giveaway_books
                     }
-                    if (res.book_reader.wanted_books[0]) {
+                    if (res.book_reader.wanted_books.length) {
                         this.userWantedBooks = res.book_reader.wanted_books
                     }
                     this.region = res.book_reader.country;
                     this.userProfileImage = res.book_reader.profile_image;
-                    // this.userRatings = res.book_reader.ratings
-                    // this.userTransactions = res.book_reader.history
+
+                    if (res.book_reader.ratings.length) {
+                        this.userRatings = res.book_reader.ratings
+                    }
+                    if (res.book_reader.transactions.length) {
+                        this.userTransactions = res.book_reader.transactions
+                    }
                 }
 
             }
@@ -152,6 +157,20 @@ export const useUserStore = defineStore({
                 headers: {
                     "authorization": "Bearer " + this.token,
                 },
+            })
+            await this.getUserInfo();
+        },
+
+        async startTransaction(initiator_book, receiver_book) {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/startTransaction/'  {
+                method: 'POST',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                },
+                body: {
+                    "initiator_book": initiator_book
+                    "receiver_book": receiver_book
+                }
             })
             await this.getUserInfo();
         }
