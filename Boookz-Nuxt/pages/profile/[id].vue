@@ -11,7 +11,7 @@
       />
       <img
         v-else
-        src="../assets/img/avatar.png"
+        src="../../assets/img/avatar.png"
         alt="profile avatar"
         class="w-32 h-32 rounded-full"
       />
@@ -66,11 +66,11 @@
 
 <script setup>
 // import { LazyProfileRatings, LazyProfileTransactions } from '~/.nuxt/components';
-import { useUserStore } from "~/stores/userStore";
+import { useProfileStore } from "~/stores/profileStore";
 definePageMeta({
   middleware: "auth",
 });
-const userStore = useUserStore();
+const userStore = useProfileStore();
 
 const activeTab = ref("");
 
@@ -78,6 +78,8 @@ function toggleTabs(event) {
   this.activeTab = event.target.innerText;
 }
 
+const route = useRoute().params;
+userStore.userName = route.id;
 await userStore.getUserInfo();
 </script>
 

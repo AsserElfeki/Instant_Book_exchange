@@ -8,17 +8,12 @@
         Offered by users in your area
       </h2>
       <div class="flex flex-row flex-wrap gap-3 justify-center items-stretch pb-6">
-          <NuxtLink
-            class="w-1/3 md:w-1/4 my-4"
+            <BookCard 
             v-for="book in store.giveAwayBooks"
             :key="book.pk"
-            @click.left="store.setClickedBook(book)"
-            @click.middle="store.setClickedBook(book)"
-            @click.right="store.setClickedBook(book)"
-            :to="`/books/${book.title.replaceAll(' ', '-')}`"
-          >
-            <BookCard :book="book" />
-          </NuxtLink>
+            :book="book" 
+            class="w-1/3 md:w-1/4 my-4"
+            />
       </div>
     </div>
 
@@ -30,17 +25,12 @@
       </h2>
       <div
         class="flex flex-row flex-wrap gap-3 justify-center items-stretch pb-6">
-        <NuxtLink
-          class="w-1/3 md:w-1/4 my-4 "
-          v-for="book in store.wantedBooks"
-          :key="book.title"
-          @click.left="store.setClickedBook(book)"
-          @click.middle="store.setClickedBook(book)"
-          @click.right="store.setClickedBook(book)"
-          :to="`/books/${book.title.replaceAll(' ', '-')}`"
-        >
-          <BookCard :book="book" />
-        </NuxtLink>
+            <BookCard 
+            v-for="book in store.wantedBooks"
+            :key="book.pk"
+            :book="book" 
+            class="w-1/3 md:w-1/4 my-4"
+            />
       </div>
     </div>
   </div>
