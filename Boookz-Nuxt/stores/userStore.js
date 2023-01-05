@@ -162,15 +162,15 @@ export const useUserStore = defineStore({
         },
 
         async startTransaction(initiator_book, receiver_book) {
-            const res = await $fetch('http://146.59.87.108:8000/transaction/startTransaction/'  {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/startTransaction/' ,{
                 method: 'POST',
                 headers: {
                     "authorization": "Bearer " + this.token,
                 },
                 body: {
-                    "initiator_book": initiator_book
+                    "initiator_book": initiator_book,
                     "receiver_book": receiver_book
-                }
+                },
             })
             await this.getUserInfo();
         }
