@@ -1,6 +1,8 @@
+import datetime
 import uuid
 
 from django.db import models
+from django.utils import timezone
 
 
 class TransactionRating(models.Model):
@@ -36,6 +38,7 @@ class Transaction(models.Model):
     transaction_status = models.ForeignKey(TransactionStatus, on_delete=models.SET_NULL,
                                            related_name='transaction_status', related_query_name='transaction_status',
                                            default="", null=True)
+    created = models.DateField(default=timezone.now)
 
     def __str__(self):
         return f"status-{self.transaction_status} {str(self.token)} "
