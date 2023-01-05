@@ -137,3 +137,15 @@ class BookUploadView(APIView):
                 image_saved = image_serializer.save()
 
         return Response({"success": "Book '{}' created successfully with image".format(book_saved)})
+
+class DeleteBookView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def delete(self, request, *args, **kwargs):
+        user = self.request.user
+        book_reader = BookReader.objects.get(user=user)
+        books = Book.objects.filter(book_reader=book_reader)
+        books_to_delete = books.get(id=self.kwargs['pk'])
+        books_to_delete.delete()
+
+        return Response({"result": "book deleted"})
