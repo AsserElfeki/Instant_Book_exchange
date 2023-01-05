@@ -38,33 +38,27 @@
         <img :src="modalImage" class="modal-image" />
       </div>
     </div>
+    <hr class="separator" />
 
-    <div v-if="username != book.book_owner.username">
-      <hr class="separator" />
-      <h1 class="font-bold font-serif md:text-3xl inline mr-3 ml-3">Offered By:</h1>
-      <NuxtLink :to="`/profile/${book.book_owner.username.replaceAll(' ', '-')}`">
-      <p class="inline mr-3 md:text-xl">{{ book.book_owner.username }}</p>
-      <img
-      v-if="book.book_owner.profile_image"
-      :src="book.book_owner.profile_image"
-      :alt="book.book_owner.username"
-      class="user-image w-16 h-16 rounded-full border-black border inline"
-    />
-    <img
-        v-else
-        src="../../assets/img/avatar.png"
-        alt="profile avatar"
-        class="user-image w-16 h-16 rounded-full border-black border inline"
-      />
-      </NuxtLink>
-      <div>
+    <div v-if="username != book.book_owner.username" class="flex items-center gap-2 md:gap-32 justify-start">
+      <div class="flex items-center">
+        <h1 class="font-bold font-serif md:text-3xl inline mr-3 ml-3">Offered By:</h1>
+        <NuxtLink :to="`/profile/${book.book_owner.username.replaceAll(' ', '-')}`">
+          <p class="inline mr-3 md:text-xl font-serif font-bold">{{ book.book_owner.username }}</p>
+          <img v-if="book.book_owner.profile_image" :src="book.book_owner.profile_image" :alt="book.book_owner.username"
+            class="user-image w-16 h-16 rounded-full border-black border inline" />
+          <img v-else src="../../assets/img/avatar.png" alt="profile avatar"
+            class="user-image w-16 h-16 rounded-full border-black border inline" />
+        </NuxtLink>
+      </div>
+      <div class="">
         <button class="btn-sm w-28 m-4" @click="setShowTrade">Trade</button>
       </div>
     </div>
     <div v-if="showTrade">
       <Trade />
     </div>
-    
+
   </div>
 </template>
 
@@ -100,7 +94,7 @@ export default {
     },
     setShowTrade() {
       this.showTrade = true;
-        console.log("show Trade");
+      console.log("show Trade");
 
     },
     hideModal() {
