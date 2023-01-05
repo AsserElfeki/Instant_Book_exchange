@@ -1,0 +1,50 @@
+import { defineStore } from 'pinia';
+export const useProfileStore = defineStore({
+    id: 'profileStore',
+    state: () => ({
+        userName: 'Leonardo Davinci',
+        userProfileImage: "",
+        userWantedBooks: [],
+        userGiveAwayBooks: [],
+        region: '',
+        userTransactions: [],
+        userRatings: [],
+    }),
+    actions: {
+        async getUserInfo() {
+            try {
+                const res = await $fetch('http://146.59.87.108:8000/authentication/profile/'+this.userName, {
+                })
+
+                if (res) {
+                    //console.log("name: ", res.at(0))
+                    this.userName = res.at(0).username;
+                    this.userIsLoggedIn = true;
+                    if (res.at(0).book_reader.giveaway_books[0]) {
+                        this.userGiveAwayBooks = res.at(0).book_reader.giveaway_books
+                    }
+                    if (res.at(0).book_reader.wanted_books[0]) {
+                        this.userWantedBooks = res.at(0).book_reader.wanted_books
+                    }
+                    this.region = res.at(0).book_reader.country;
+                    this.userProfileImage = res.at(0).book_reader.profile_image;
+                    // this.userRatings = res.book_reader.ratings
+                    // this.userTransactions = res.book_reader.history
+                }
+
+            }
+            catch (error) {
+                console.log("login error " + JSON.stringify(error.data));
+            }
+
+        },
+    },
+    //to get specific parts of data, like select <items> from <container> WHERE <condition>
+    getters: {
+    },
+    persist: {
+        // storage: persistedState.sessionStorage,
+    },
+    
+});
+

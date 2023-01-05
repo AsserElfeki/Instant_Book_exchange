@@ -1,26 +1,18 @@
 import uuid
 from itertools import chain
 
-from django.http import QueryDict
-from django.shortcuts import render
-from rest_flex_fields.views import FlexFieldsMixin
 from rest_framework.exceptions import APIException
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, RetrieveUpdateAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from authentication.models import BookReader
 from boookzdata.models import Book, BookShelf
-from boookzdata.serializers import BookSerializer
-from boookzdata.views import NotCorrectUrlProvided
+from boookzdata.serializers import BookSerializer, NotificationSerializer
 from .models import Transaction, TransactionStatus
 from .serializers import TransactionSerializer
 
-from rest_framework import generics, status
-from django.shortcuts import get_object_or_404
-
+from rest_framework import generics
 
 class NonExisitingBooksChosen(APIException):
     status_code = 503
@@ -53,6 +45,7 @@ class StartTransactionView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = TransactionSerializer
 
+#TODO(victor): we can initiate transaction many times its not checking it
     def perform_create(self, serializer):
         try:
             initiator_book = Book.objects.get(pk=self.request.data.get("initiator_book", None))
@@ -62,9 +55,17 @@ class StartTransactionView(generics.CreateAPIView):
         book_reader_initiator = initiator_book.get_book_reader()
         book_reader_receiver = receiver_book.get_book_reader()
         transaction_status, created = TransactionStatus.objects.get_or_create(name="Initiated")
-        serializer.save(token=self.get_token(), book_reader_initiator=book_reader_initiator,
+        transaction_saved = serializer.save(token=self.get_token(), book_reader_initiator=book_reader_initiator,
                         book_reader_receiver=book_reader_receiver, transaction_status=transaction_status,
                         initiator_book=initiator_book, receiver_book=receiver_book)
+
+        content = {"content": f"New transaction coming from {book_reader_initiator.user.username}."}
+        origin = {"origin": "Transaction"}
+        notification_target = {"book_reader": book_reader_receiver.pk}
+        data = {**content, **origin, **notification_target}
+        notification = NotificationSerializer(data=data)
+        if notification.is_valid(raise_exception=True):
+            notification_saved = notification.save()
 
     def get_token(self):
         return uuid.uuid4()
@@ -79,13 +80,29 @@ class DeclineTransactionView(RetrieveUpdateAPIView):
         transaction_token = self.kwargs['transaction_token']
         transaction = self.queryset.get(token=transaction_token)
         if transaction:
-            transaction_status, created = TransactionStatus.objects.get_or_create(name="Declined")
-            transaction.transaction_status = transaction_status
-            transaction.save()
-            serializer = self.get_serializer(transaction, data=request.data)
-            serializer.is_valid(raise_exception=True)
-            self.perform_update(serializer)
-            return Response(serializer.data)
+            if transaction.transaction_status.name != "Accepted" \
+            and transaction.transaction_status.name != "Completed" \
+            and transaction.transaction_status.name != "Received by initiating user" \
+            and transaction.transaction_status.name != "Received by receiving user":
+                transaction_status, created = TransactionStatus.objects.get_or_create(name="Declined")
+                transaction.transaction_status = transaction_status
+                transaction.save()
+                serializer = self.get_serializer(transaction, data=request.data)
+                serializer.is_valid(raise_exception=True)
+                self.perform_update(serializer)
+        
+                book_reader_initiator = transaction.book_reader_initiator
+                book_reader_receiver = transaction.book_reader_receiver
+                content = {"content": f"Outgoing transaction to {book_reader_receiver.user.username} was declined."}
+                origin = {"origin": "Transaction"}
+                notification_target = {"book_reader": book_reader_initiator.pk}
+                data = {**content, **origin, **notification_target}
+                notification = NotificationSerializer(data=data)
+                if notification.is_valid(raise_exception=True):
+                    notification_saved = notification.save()
+
+                return Response(serializer.data)
+            return Response({"error": "cannot change status of the transaction"})
 
 
 class ConfirmTransactionView(RetrieveUpdateAPIView):
@@ -97,16 +114,32 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
         transaction_token = self.kwargs['transaction_token']
         transaction = self.queryset.get(token=transaction_token)
         if transaction:
-            current_book_reader = BookReader.objects.get(user=self.request.user)
-            transaction_status, created = TransactionStatus.objects.get_or_create(name="Accepted")
-            if transaction.book_reader_receiver == current_book_reader:
-                transaction.transaction_status = transaction_status
-                transaction.save()
-                serializer = self.get_serializer(transaction, data=request.data)
-                serializer.is_valid(raise_exception=True)
-                self.perform_update(serializer)
-                return Response(serializer.data)
-            return Response("Wait until the transaction is accepted by receiver")
+            if transaction.transaction_status.name != "Declined" \
+            and transaction.transaction_status.name != "Completed" \
+            and transaction.transaction_status.name != "Received by initiating user" \
+            and transaction.transaction_status.name != "Received by receiving user":
+                current_book_reader = BookReader.objects.get(user=self.request.user)
+                transaction_status, created = TransactionStatus.objects.get_or_create(name="Accepted")
+                if transaction.book_reader_receiver == current_book_reader:
+                    transaction.transaction_status = transaction_status
+                    transaction.save()
+                    serializer = self.get_serializer(transaction, data=request.data)
+                    serializer.is_valid(raise_exception=True)
+                    self.perform_update(serializer)
+
+                    book_reader_initiator = transaction.book_reader_initiator
+                    book_reader_receiver = transaction.book_reader_receiver
+                    content = {"content": f"Outgoing transaction to {book_reader_receiver.user.username} was accepted."}
+                    origin = {"origin": "Transaction"}
+                    notification_target = {"book_reader": book_reader_initiator.pk}
+                    data = {**content, **origin, **notification_target}
+                    notification = NotificationSerializer(data=data)
+                    if notification.is_valid(raise_exception=True):
+                        notification_saved = notification.save()
+
+                    return Response(serializer.data)
+                return Response("Wait until the transaction is accepted by receiver")
+            return Response({"error": "cannot change status of the transaction"})
 
 
 class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
@@ -118,17 +151,24 @@ class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
         transaction_token = self.kwargs['transaction_token']
         transaction = self.queryset.get(token=transaction_token)
         if transaction:
-            current_book_reader = BookReader.objects.get(user=self.request.user)
-            transaction_status = self.get_transaction_status_based_on_current(transaction, current_book_reader)
-            transaction.transaction_status = transaction_status
-            transaction.save()
-            serializer = self.get_serializer(transaction, data=request.data)
-            serializer.is_valid(raise_exception=True)
-            self.perform_update(serializer)
-            if transaction_status.name == "Completed":
-                receiver_book, initiator_book = transaction.receiver_book, transaction.initiator_book
-                self.put_books_into_history_shelf(request, receiver_book, initiator_book)
-            return Response(serializer.data)
+            if transaction.transaction_status.name != "Declined" \
+            and transaction.transaction_status.name != "Completed" \
+            and transaction.transaction_status.name == "Accepted" \
+            or transaction.transaction_status.name == "Received by initiating user" \
+            or transaction.transaction_status.name == "Received by receiving user":
+
+                current_book_reader = BookReader.objects.get(user=self.request.user)
+                transaction_status = self.get_transaction_status_based_on_current(transaction, current_book_reader)
+                transaction.transaction_status = transaction_status
+                transaction.save()
+                serializer = self.get_serializer(transaction, data=request.data)
+                serializer.is_valid(raise_exception=True)
+                self.perform_update(serializer)
+                if transaction_status.name == "Completed":
+                    receiver_book, initiator_book = transaction.receiver_book, transaction.initiator_book
+                    self.put_books_into_history_shelf(request, receiver_book, initiator_book)
+                return Response(serializer.data)
+            return Response({"error": "cannot change status of the transaction"})
         return Response("Wait until the transaction is accepted by receiver")
 
     def put_books_into_history_shelf(self, request, receiver_book, initiator_book):
@@ -148,13 +188,53 @@ class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
         if current_book_reader == transaction.book_reader_receiver:
             if transaction.transaction_status.name == "Received by initiating user":
                 transaction_status, created = TransactionStatus.objects.get_or_create(name=f"Completed")
+
+                book_reader_initiator = transaction.book_reader_initiator
+                content = {"content": f"{current_book_reader.user.username} received your book and transaction was completed."}
+                origin = {"origin": "Transaction"}
+                notification_target = {"book_reader": book_reader_initiator.pk}
+                data = {**content, **origin, **notification_target}
+                notification = NotificationSerializer(data=data)
+                if notification.is_valid(raise_exception=True):
+                    notification_saved = notification.save()
+
             else:
                 transaction_status, created = TransactionStatus.objects.get_or_create(name=f"Received by receiving user")
+
+                book_reader_initiator = transaction.book_reader_initiator
+                content = {"content": f"{current_book_reader.user.username} received your book."}
+                origin = {"origin": "Transaction"}
+                notification_target = {"book_reader": book_reader_initiator.pk}
+                data = {**content, **origin, **notification_target}
+                notification = NotificationSerializer(data=data)
+                if notification.is_valid(raise_exception=True):
+                    notification_saved = notification.save()
+
         elif current_book_reader == transaction.book_reader_initiator:
             if transaction.transaction_status.name == "Received by receiving user":
                 transaction_status, created = TransactionStatus.objects.get_or_create(name=f"Completed")
+
+                book_reader_receiver = transaction.book_reader_receiver
+                content = {"content": f"{current_book_reader.user.username} received your book and transaction was completed."}
+                origin = {"origin": "Transaction"}
+                notification_target = {"book_reader": book_reader_receiver.pk}
+                data = {**content, **origin, **notification_target}
+                notification = NotificationSerializer(data=data)
+                if notification.is_valid(raise_exception=True):
+                    notification_saved = notification.save()
+
             else:
                 transaction_status, created = TransactionStatus.objects.get_or_create(name=f"Received by initiating user")
+
+                book_reader_receiver = transaction.book_reader_receiver
+                content = {"content": f"{current_book_reader.user.username} received your book."}
+                origin = {"origin": "Transaction"}
+                notification_target = {"book_reader": book_reader_receiver.pk}
+                data = {**content, **origin, **notification_target}
+                notification = NotificationSerializer(data=data)
+                if notification.is_valid(raise_exception=True):
+                    notification_saved = notification.save()
+
         else:
             raise ExternalUserInterfer()
         return transaction_status

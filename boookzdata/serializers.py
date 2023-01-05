@@ -3,7 +3,7 @@ from itertools import chain
 from django_countries.serializers import CountryFieldMixin
 from rest_flex_fields import FlexFieldsModelSerializer
 
-from authentication.models import BookReader, ProfileImage
+from authentication.models import BookReader, ProfileImage, Notification
 from authentication.serializers import BookReaderSerializer, ProfileImageSerializer
 from .models import Book, Category, Author, BookCondition, User, Comment, Image, BookShelf
 from transactions.models import Transaction,TransactionStatus
@@ -149,16 +149,29 @@ class TransactionForProfileSerializer(serializers.ModelSerializer):
         name = TransactionStatusSerializer(obj.transaction_status, read_only=True, context=self.context).data['name']
         return name
 
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ['pk', 'content', 'origin']
+
 class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
     profile_image = serializers.SerializerMethodField()
     wanted_books = serializers.SerializerMethodField()
     giveaway_books = serializers.SerializerMethodField()
     country = CountryField(name_only=True)
     transactions = serializers.SerializerMethodField()
+    notifications = serializers.SerializerMethodField()
 
     class Meta:
         model = BookReader
-        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books', 'transactions']
+        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books', 'transactions', 'notifications']
+
+    def get_notifications(self, obj):
+        book_reader = BookReader.objects.get(user=obj.user)
+        book_reader_notifications = Notification.objects.filter(book_reader=book_reader)
+        serialized = NotificationSerializer(book_reader_notifications, context=self.context, many=True)
+        return serialized.data
+
 
     def get_transactions(self, obj):
         book_reader = BookReader.objects.get(user=obj.user)
@@ -167,7 +180,6 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
         user_transactions_as_receiver = Transaction.objects.filter(book_reader_receiver=book_reader)
         serializer2 = TransactionForProfileSerializer(user_transactions_as_receiver, context=self.context, many=True).data
         return list(chain(serializer, serializer2))
-
 
     def get_profile_image(self, obj):
         images = ProfileImage.objects.filter(book_reader=obj)

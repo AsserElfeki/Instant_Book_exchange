@@ -15,7 +15,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import BookReader
+from .models import BookReader, Notification
 from .serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer, ListBookReaderSerializer, LoginSerializer
 from boookzdata.serializers import UserSerializer
 from rest_framework import generics, status
@@ -34,7 +34,6 @@ class ProfileInfoView(ReadOnlyModelViewSet):
         return User.objects.all().filter(id=self.request.user.id)
 
 class AnyProfileInfoView(APIView):
-    permission_classes = (IsAuthenticated,)
     def get_object(self, username):
         try:
             return User.objects.get(username=username)
@@ -65,6 +64,19 @@ class ChangePasswordView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
+
+
+class DeleteNotification(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def delete(self, request, *args, **kwargs):
+        user = self.request.user
+        book_reader = BookReader.objects.get(user=user)
+        notifications = Notification.objects.filter(book_reader=book_reader)
+        notification_to_delete = notifications.get(id=self.kwargs['pk'])
+        notification_to_delete.delete()
+
+        return Response({"result": "notification deleted"})
 
 class DeleteAccount(APIView):
     permission_classes = (IsAuthenticated,)

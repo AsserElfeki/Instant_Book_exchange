@@ -16,7 +16,7 @@ export const useUserStore = defineStore({
         registerError: {
         },
         loginError: "",
-        callingComponent: null
+        callingComponent: null,
     }),
     actions: {
         async signIn(form) {
