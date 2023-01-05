@@ -34,7 +34,6 @@
 - [x] 28. logout to endpoint 
 - [x] 29. route guards 
 - [x] 30. active tabs (dynamic components)
-- [ ] 31. transactions component (youssef)
 - [x] 32. settings page 
 - [x] 33. user shelves from the correct endpoints 
 - [x] 34. page transitions 
@@ -42,8 +41,6 @@
 - [x] 36. addBook page / toast
 - [x] 37. fix styles of all existing pages/components to be responsive and looking good
 - [x] 38. improving ux 
-- [ ] 39. fixing errors and warnings 
-- [ ] 40. notifications 
 - [x] 41. issue: profile page refresh goes to signin
 - [x] 42. issue : opening a book in a new tab gives the last "clicked" book
 - [x] 43. enhance swiper: add zoom option and pagination
@@ -55,18 +52,21 @@
 - [x] 49. remove "by" in the bookcard inside the profile 
 - [x] 50. max size of book image in index
 - [x] 51. uploading images not workinggggggg
-- [ ] 52. dropdown menu for settings and logout ? 
 - [x] 53. figure a way to decide which shelf the book is added to (might be another input, or the smart way)
-- [ ] 54. check on each redirect if the token is still valid and update state 
-- [ ] 55. change the navbar 
 - [x] 56. send book language as english name 
 - [x] 57. book card in my profile should not have owner 
 - [x] 58. make the random book image clickable
+- [x] 63. book title out pf bounds in profile wanted 
 - [x] 59. have the api call from the profile components happen only after submission of the form 
+- [ ] 39. fixing errors and warnings 
+- [ ] 40. notifications 
+- [ ] 31. transactions component (youssef)
+- [ ] 52. dropdown menu for settings and logout ? 
+- [ ] 54. check on each redirect if the token is still valid and update state 
+- [ ] 55. change the navbar 
 - [ ] 60. display response of the forms TOASTS (youssef)
 - [ ] 61. redo all the forms ?
 - [ ] 62. (+) button for authors and : category -> predifined select menu  
-- [x] 63. book title out pf bounds in profile wanted 
 - [ ] 64. optimize bookshelves to be 1 item
 - [ ] 65. toast for uploading profile pic 
 - [ ] 66. button to delete the book
@@ -74,6 +74,7 @@
 - [ ] 68. generic notification for transactions : click --> go to a new page with info on this transaction --> accept | deny -- acdepted | denied 
 then new notification : time to confirm receiving 
 - [ ] 69. see other person profile 
+- [ ] 70. do something with the search bar 
 
 
 #Notes: 

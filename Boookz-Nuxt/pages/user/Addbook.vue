@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col justify-center items-center border-2 border-red-500">
+  <div class="flex flex-col justify-center items-center">
     <form
       @submit.prevent="addBook"
       enctype="multipart/form-data"
-      class="flex flex-col justify-start gap-3 border-2 w-full md:w-1/2 items-start mx-auto p-2"
+      class="flex flex-col justify-center gap-3 w-full sm:w-3/5 lg:w-1/2 mx-auto p-2"
     >
-      <div class="flex justify-between gap-6">
+      <fieldset class="flex justify-around ">
         <label for="shelf">Shelf:</label>
         <select
           id="shelf"
@@ -16,9 +16,9 @@
           <option value="giveaway">Giveaway shelf</option>
           <option value="wanted">Wanted shelf</option>
         </select>
-      </div>
+      </fieldset>
 
-      <div class="flex justify-between gap-6">
+      <fieldset class="flex justify-around">
         <label for="language">Language:</label>
         <select
           id="language"
@@ -33,7 +33,7 @@
             {{ language }}
           </option>
         </select>
-      </div>
+      </fieldset>
 
       <label for="book-title" class="self-start">Book title:</label>
       <input
@@ -94,19 +94,11 @@
         multiple
         accept=".png, .jpg, .jpeg"
         @change="updateFiles($event.target.files)"
-        class="border-2 border-red-500 p-2 rounded-md"
+        class="border p-2 rounded-md"
       />
 
-      <button type="submit" class="btn-sm self-center">submit</button>
+      <button type="submit" class="btn-sm self-center">add book</button>
     </form>
-
-    <p>author: {{ bookForm.author }}</p>
-    <p>title: {{ bookForm.title }}</p>
-    <p>image: {{ bookForm.image }}</p>
-    <p>category: {{ bookForm.category }}</p>
-    <p>condition: {{ bookForm.condition }}</p>
-    <p>language: {{ bookForm.language }}</p>
-    <p>description: {{ bookForm.description }}</p>
   </div>
 </template>
 
@@ -123,15 +115,7 @@ export default {
     const conditions = ["Bad", "Perfect", "Good"];
     const categories = ["fiction", "romance", "science"];
 
-    // const route = useRoute();
-    // const shelf = route;
-    // console.log("shelf:", route.params.id);
-    // const images = [];
-    // const file = ref(null);
-
     const chosenLanguage = ref("");
-
-    const images = ref(null);
 
     const author = ref("");
     const category = ref("");
@@ -177,15 +161,9 @@ export default {
       fd.append("condition", bookForm.condition);
       fd.append("language", bookForm.language);
       fd.append("description", bookForm.description);
-      // fd.append("image", images);
-      // console.log("fd:", fd.entries);
-
-      // bookForm.author.push(author.value);
-      // bookForm.category.push(category.value);
 
       console.log("fd:", fd);
       userStore.addBook(fd, bookForm.shelf);
-      // userStore.addBook(fd);
     }
 
     return {
