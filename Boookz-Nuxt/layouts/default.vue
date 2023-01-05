@@ -35,11 +35,11 @@ html {
 }
 
 /* exact link will show the primary color for only the exact matching link */
-.router-link-exact-active {
-  background-color: #695ac9;
-  color: white;
-  box-shadow: 3px 3px 3px rgb(114, 114, 114);
-}
+/*.router-link-exact-active {*/
+  /*background-color: #695ac9;*/
+  /*color: white;*/
+  /*box-shadow: 3px 3px 3px rgb(114, 114, 114);*/
+/*}*/
 
 
 .page-enter-active,
