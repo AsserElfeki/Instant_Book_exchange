@@ -30,8 +30,16 @@ class ProfileInfoView(ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
 
-    def get_queryset(self):
-        return User.objects.all().filter(id=self.request.user.id)
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
+
+    def retrive(self, request):
+        queryset = User.objects.all()
+        user = get_object_or_404(queryset, id=self.request.user.id)
+        serializer_class = UserSerializer(user, context=self.get_serializer_context()) 
+        return Response(serializer_class.data)
 
 class AnyProfileInfoView(ReadOnlyModelViewSet):
     def get_serializer_context(self):
