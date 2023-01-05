@@ -1,6 +1,7 @@
 from django.urls import path, include
 
-from .views import BookViewSet, ImageViewSet, BookUploadView, SearchGiveAwayBooksView, AllWantedView, AllGiveawayView, WantedInSameCountryView, GiveawayInSameCountryView, DeleteBookView
+from .views import BookViewSet, ImageViewSet, BookUploadView, SearchGiveAwayBooksView, AllWantedView, AllGiveawayView, \
+    WantedInSameCountryView, GiveawayInSameCountryView, DeleteBookView, ReportRecordView
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -16,4 +17,5 @@ urlpatterns = [
     path('giveaway/country/', GiveawayInSameCountryView.as_view(), name='GiveawayBooksInSameCountry'),
     path('search', SearchGiveAwayBooksView.as_view(), name=' SearchGiveAwayBooks'),
     path('delete/<int:pk>', DeleteBookView.as_view(), name='DeleteBook'),
+    path('report/', ReportRecordView.as_view(), name='ReportRecord'),
 ]

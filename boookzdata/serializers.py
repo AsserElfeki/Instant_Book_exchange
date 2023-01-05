@@ -6,7 +6,7 @@ from rest_flex_fields import FlexFieldsModelSerializer
 from authentication.models import BookReader, ProfileImage, Notification
 from authentication.serializers import BookReaderSerializer, ProfileImageSerializer
 from transactions.serializers import TransactionRatingSerializer
-from .models import Book, Category, Author, BookCondition, User, Comment, Image, BookShelf
+from .models import Book, Category, Author, BookCondition, User, Comment, Image, BookShelf, ReportRecord
 from transactions.models import Transaction, TransactionStatus, TransactionRating
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 from rest_framework import serializers
@@ -161,6 +161,12 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = ['pk', 'content', 'origin']
+
+
+class ReportRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReportRecord
+        fields = ['message', 'book_reader', 'created', ]
 
 
 class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):

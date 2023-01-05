@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from versatileimagefield.fields import VersatileImageField, PPOIField
 
+
 class Image(models.Model):
     image = VersatileImageField(
         'Image',
@@ -43,6 +44,7 @@ class BookShelf(models.Model):
     def __str__(self):
         return f"{self.shelf_name} shelf"
 
+
 class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -55,7 +57,8 @@ class Book(models.Model):
     updated = models.DateField(auto_now=True)
     book_reader = models.ForeignKey("authentication.BookReader", on_delete=models.CASCADE, blank=True, null=True,
                                     related_name='book', related_query_name='book')
-    book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, blank=True, null=True, related_name='book', related_query_name='book')
+    book_shelf = models.ForeignKey('boookzdata.BookShelf', on_delete=models.CASCADE, blank=True, null=True,
+                                   related_name='book', related_query_name='book')
 
     class Meta:
         ordering = ['-created']
@@ -65,6 +68,7 @@ class Book(models.Model):
 
     def get_book_reader(self):
         return self.book_reader
+
 
 class Comment(models.Model):
     title = models.CharField(max_length=255)
@@ -78,7 +82,11 @@ class Comment(models.Model):
         return self.title
 
 
-class CustomerReportRecord(models.Model):
-    time_raised = models.DateTimeField(default=timezone.now, editable=False)
-    reference = models.CharField(unique=True, max_length=20)
-    description = models.TextField()
+class ReportRecord(models.Model):
+    message = models.CharField(max_length=255)
+    book_reader = models.ForeignKey("authentication.BookReader", on_delete=models.CASCADE, related_name='report',
+                                    related_query_name='report')
+    created = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"id-{self.pk} {self.book_reader}'s report"
