@@ -144,6 +144,16 @@ export const useUserStore = defineStore({
                 body: form
             })
             await this.getUserInfo();
+        },
+
+        async deleteBook(book) {
+            const res = await $fetch('http://146.59.87.108:8000/data/delete/' + book.pk, {
+                method: 'DELETE',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                },
+            })
+            await this.getUserInfo();
         }
     },
 

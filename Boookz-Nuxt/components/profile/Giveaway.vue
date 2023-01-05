@@ -4,14 +4,22 @@
       <NuxtLink to="/user/addbook" class="btn"> add more </NuxtLink>
     </div>
 
-    <div v-if="store.userGiveAwayBooks.length" 
-    class="flex flex-col items-center justify-center w-full mx-auto px-4">
-      <h2 v-if="route.id" class="font-bold text-xl font-sans m-2 self-start">{{store.userName}}'s Giveaway Books</h2>
-      <h2 v-if="!route.id" class="font-bold text-xl font-sans m-2 self-start">My Giveaway Books</h2>
-      <div class="flex gap-2 items-stretch">
-          <NuxtLink 
-            class="flex-1"
-            v-for="book in store.userGiveAwayBooks"
+    <div
+      v-if="store.userGiveAwayBooks.length"
+      class="flex flex-col items-center justify-center w-full mx-auto px-4"
+    >
+      <h2 v-if="route.id" class="font-bold text-xl font-sans m-2 self-start">
+        {{ store.userName }}'s Giveaway Books
+      </h2>
+      <h2 v-else class="font-bold text-xl font-sans m-2 self-start">My Giveaway Books</h2>
+
+      <div class="flex flex-wrap gap-2 justify-center">
+        <div
+          v-for="book in store.userGiveAwayBooks"
+          class="mt-12 basis-1/2 sm:basis-1/4 md:basis-2/12 flex flex-col justify-between gap-2"
+        >
+          <NuxtLink
+            class="h-full"
             @click.left="dataStore.setClickedBook(book)"
             @click.middle="dataStore.setClickedBook(book)"
             @click.right="dataStore.setClickedBook(book)"
@@ -19,6 +27,10 @@
           >
             <ProfileBookCard :book="book" />
           </NuxtLink>
+          <button v-if="!route.id" class="btn-sm self-center" @click="deleteBook(book)">
+            Delete
+          </button>
+        </div>
       </div>
     </div>
 
@@ -35,7 +47,14 @@ import { useDataStore } from "~/stores/dataStore";
 const route = useRoute().params;
 const store = !route.id ? useUserStore() : useProfileStore();
 const dataStore = useDataStore();
+
+function deleteBook(book) {
+  store.deleteBook(book);
+}
+
 // await store.getUserInfo();
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
