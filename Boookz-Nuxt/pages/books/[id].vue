@@ -43,14 +43,26 @@
       <hr class="separator" />
       <h1 class="font-bold font-serif md:text-3xl inline mr-3 ml-3">Offered By:</h1>
       <p class="inline mr-3 md:text-xl">{{ book.book_owner.username }}</p>
-      <img class="user-image w-16 h-16 rounded-full border-black border inline" :src="book.book_owner.profile_image"
-        alt="user profile" />
+      <img
+      v-if="book.book_owner.profile_image"
+      :src="book.book_owner.profile_image"
+      :alt="book.book_owner.username"
+      class="user-image w-16 h-16 rounded-full border-black border inline"
+    />
+    <img
+        v-else
+        src="../../assets/img/avatar.png"
+        alt="profile avatar"
+        class="user-image w-16 h-16 rounded-full border-black border inline"
+      />
       <div>
-        <button class="btn-sm w-28 mb-4 m-auto">Trade</button>
+        <button class="btn-sm w-28 m-4" @click="setShowTrade">Trade</button>
       </div>
     </div>
-
-
+    <div v-if="showTrade">
+      <Trade />
+    </div>
+    
   </div>
 </template>
 
@@ -72,7 +84,9 @@ export default {
     return {
       book: "",
       username: "",
+      loginSatus: false,
       showModal: false,
+      showTrade: false,
     };
 
   },
@@ -81,6 +95,11 @@ export default {
       this.showModal = true;
       this.modalImage = image;
       console.log("Show Image");
+    },
+    setShowTrade() {
+      this.showTrade = true;
+        console.log("show Trade");
+
     },
     hideModal() {
       this.showModal = false;
@@ -91,10 +110,10 @@ export default {
     const store = useDataStore();
     const userStore = useUserStore();
     this.book = store.clickedBook;
+    this.loginSatus = userStore.userIsLoggedIn;
     this.username = userStore.userName;
   },
   setup() {
-    const showModal = false;
     const modalImage = "";
     const onSwiper = (swiper) => {
       console.log(swiper);
