@@ -150,22 +150,39 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                     serializer.is_valid(raise_exception=True)
                     self.perform_update(serializer)
 
-                    #search for all transactions with these books and decline them
+                    #search for all transactions with these books and delete them
                     all_transactions_to_decline_1 = self.queryset.filter(initiator_book=transaction.initiator_book)
                     all_transactions_to_decline_2 = self.queryset.filter(initiator_book=transaction.receiver_book)
                     all_transactions_to_decline_3 = self.queryset.filter(receiver_book=transaction.initiator_book)
                     all_transactions_to_decline_4 = self.queryset.filter(receiver_book=transaction.receiver_book)
                         
                     all_to_decline = all_transactions_to_decline_1 | all_transactions_to_decline_2 | all_transactions_to_decline_3 | all_transactions_to_decline_4
+                    #exclude current transaction
+                    all_to_decline = all_to_decline.exclude(token=transaction_token)
+
+                    #send notifications to both user that transaction was canceled
 
                     transaction_status_declined, created = TransactionStatus.objects.get_or_create(name="Declined")
                     for trans in all_to_decline:
-                        trans.transaction_status = transaction_status_declined
-                        trans.save()
+                        book_reader_initiator = trans.book_reader_initiator
+                        book_reader_receiver = trans.book_reader_receiver
+                        content = {"content": f"Transaction from {book_reader_initiator.user.username} was canceled."}
+                        origin = {"origin": "Transaction"}
+                        notification_target = {"book_reader": book_reader_receiver.pk}
+                        data = {**content, **origin, **notification_target}
+                        notification = NotificationSerializer(data=data)
+                        if notification.is_valid(raise_exception=True):
+                            notification.save()
 
-                    #then accept current transation
-                    transaction.transaction_status = transaction_status;
-                    transaction.save()
+                        content = {"content": f"Transaction to {book_reader_receiver.user.username} was canceled."}
+                        origin = {"origin": "Transaction"}
+                        notification_target = {"book_reader": book_reader_initiator.pk}
+                        data = {**content, **origin, **notification_target}
+                        notification = NotificationSerializer(data=data)
+                        if notification.is_valid(raise_exception=True):
+                            notification.save()
+
+                        trans.delete()
 
                     book_reader_initiator = transaction.book_reader_initiator
                     book_reader_receiver = transaction.book_reader_receiver
