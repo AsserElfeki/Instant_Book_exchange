@@ -86,7 +86,7 @@
 - [ ] 80. about page
 - [ ] 81. deactivate account
 - [ ] 82. filter home page books by region / pref
-  
+- [ ] 83. add an even one more if condition in the transaction div of buttons
 
 
 
