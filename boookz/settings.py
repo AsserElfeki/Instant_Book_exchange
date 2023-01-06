@@ -129,7 +129,7 @@ DATABASE_POOL_ARGS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django_postgrespool2',
-        'NAME': 'localdb',
+        'NAME': 'boookzv2',
         'USER': config["DB_USER"],
         'PASSWORD': config["DB_PASS"],
         'HOST': '146.59.87.108',

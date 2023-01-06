@@ -43,3 +43,9 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"status-{self.transaction_status} {str(self.token)} "
+
+    def get_opposite_book_reader(self, current_book_reader):
+        if current_book_reader == self.book_reader_initiator:
+            return self.book_reader_receiver
+        else:
+            return self.book_reader_initiator

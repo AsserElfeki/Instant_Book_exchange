@@ -12,9 +12,6 @@ class BookReader(models.Model):
     is_verified = models.BooleanField(default=False)
     country = CountryField(blank=True, null=True, default='PL')
 
-    # rating
-    # transaction_history
-
     def __str__(self):
         return f"{self.user}'s profile"
 
