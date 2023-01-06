@@ -144,6 +144,12 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                 current_book_reader = BookReader.objects.get(user=self.request.user)
                 transaction_status, created = TransactionStatus.objects.get_or_create(name="Accepted")
                 if transaction.book_reader_receiver == current_book_reader:
+                    transaction.transaction_status = transaction_status
+                    transaction.save()
+                    serializer = self.get_serializer(transaction, data=request.data)
+                    serializer.is_valid(raise_exception=True)
+                    self.perform_update(serializer)
+
                     #search for all transactions with these books and decline them
                     all_transactions_to_decline_1 = self.queryset.filter(initiator_book=transaction.initiator_book)
                     all_transactions_to_decline_2 = self.queryset.filter(initiator_book=transaction.receiver_book)
@@ -158,11 +164,8 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                         trans.save()
 
                     #then accept current transation
-                    transaction.transaction_status = transaction_status
+                    transaction.transaction_status = transaction_status;
                     transaction.save()
-                    serializer = self.get_serializer(transaction, data=request.data)
-                    serializer.is_valid(raise_exception=True)
-                    self.perform_update(serializer)
 
                     book_reader_initiator = transaction.book_reader_initiator
                     book_reader_receiver = transaction.book_reader_receiver
