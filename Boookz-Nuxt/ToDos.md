@@ -69,12 +69,11 @@
 - [ ] 72. search result page
 - [ ] 76. in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
 - [ ] **71. errors in addbok form**
-- [ ] 40. notifications 
+- [ ] **40. notifications **
 - [ ] **52. dropdown menu for settings and logout and notifications**
 - [ ] **55. change the navbar** 
 - [ ] 65. toast for uploading profile pic 
-- [ ] **68. generic notification for transactions : click --> go to a new page with info on this transaction --> accept | deny -- acdepted | denied 
-then new notification : time to confirm receiving **
+- [ ] **68. generic notification for transactions : click --> go to a new page with info on this transaction --> accept | deny -- acdepted | denied .... then new notification : time to confirm receiving**
 - [ ] 70. do something with the search bar 
 - [ ] 67. in the [id] page create comment section
 - [ ] 61. redo all the forms ?

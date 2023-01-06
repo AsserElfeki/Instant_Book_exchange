@@ -18,7 +18,7 @@ export const useUserStore = defineStore({
         loginError: "",
         callingComponent: null,
         addBookError: {},
-        notifications : [],
+        notifications: [],
     }),
     actions: {
         async signIn(form) {
@@ -114,24 +114,13 @@ export const useUserStore = defineStore({
                     //console.log("name: ", res.at(0))
                     this.userName = res.username;
                     this.userIsLoggedIn = true;
-                    if (res.book_reader.giveaway_books.length) {
-                        this.userGiveAwayBooks = res.book_reader.giveaway_books
-                    }
-                    if (res.book_reader.wanted_books.length) {
-                        this.userWantedBooks = res.book_reader.wanted_books
-                    }
+                    this.userGiveAwayBooks = res.book_reader.giveaway_books
+                    this.userWantedBooks = res.book_reader.wanted_books
                     this.region = res.book_reader.country;
                     this.userProfileImage = res.book_reader.profile_image;
-
-                    if (res.book_reader.ratings.length) {
-                        this.userRatings = res.book_reader.ratings
-                    }
-                    if (res.book_reader.transactions.length) {
-                        this.userTransactions = res.book_reader.transactions
-                    }
-                    if (res.book_reader.notifications.length) {
-                        this.notifications = res.book_reader.notifications
-                    }
+                    this.userRatings = res.book_reader.ratings
+                    this.userTransactions = res.book_reader.transactions
+                    this.notifications = res.book_reader.notifications
                 }
 
             }

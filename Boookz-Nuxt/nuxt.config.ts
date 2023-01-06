@@ -1,4 +1,5 @@
 import { MiddlewareKey } from './.nuxt/types/middleware.d';
+import vuetify from './plugins/vuetify';
 
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -32,7 +33,9 @@ export default defineNuxtConfig({
     },
   },
   css: ['@fortawesome/fontawesome-svg-core/styles.css',
-    '~/assets/css/tailwind.css',],
+    '~/assets/css/tailwind.css',
+    'vuetify/styles',
+    '@mdi/font/css/materialdesignicons.min.css'],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -71,7 +74,7 @@ export default defineNuxtConfig({
       '@fortawesome/pro-regular-svg-icons',
       '@fortawesome/pro-light-svg-icons',
       '@fortawesome/free-brands-svg-icons',
-
+      'vuetify'
     ]
   },
   tailwindcss: {

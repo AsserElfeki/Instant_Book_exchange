@@ -25,6 +25,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.2",
+    "@mdi/font": "^7.1.96",
     "@pinia/nuxt": "^0.4.6",
     "iso-639-1": "^2.1.15",
     "json-server": "^0.17.1",
@@ -33,6 +34,7 @@
     "swiper": "^8.4.5",
     "uuid": "^9.0.0",
     "vue-carousel": "0.18.0",
-    "vue3-carousel": "^0.2.9"
+    "vue3-carousel": "^0.2.9",
+    "vuetify": "^3.1.0"
   }
 }
