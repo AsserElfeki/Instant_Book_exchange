@@ -42,6 +42,9 @@
         >Log Out</NuxtLink
       >
     </ul>
+
+    <ProfileNotificationBar />
+
   </div>
 </template>
 

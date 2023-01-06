@@ -17,7 +17,8 @@ export const useUserStore = defineStore({
         },
         loginError: "",
         callingComponent: null,
-        addBookError : {},
+        addBookError: {},
+        notifications : [],
     }),
     actions: {
         async signIn(form) {
@@ -127,6 +128,9 @@ export const useUserStore = defineStore({
                     }
                     if (res.book_reader.transactions.length) {
                         this.userTransactions = res.book_reader.transactions
+                    }
+                    if (res.book_reader.notifications.length) {
+                        this.notifications = res.book_reader.notifications
                     }
                 }
 

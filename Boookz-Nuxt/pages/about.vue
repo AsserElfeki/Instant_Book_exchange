@@ -1,8 +1,8 @@
 <template>
     <div>
-        <p>
+        <!-- <p>
         This project is made by students in POLSL 
-        </p>
+        </p> -->
     </div>
 </template>
 
