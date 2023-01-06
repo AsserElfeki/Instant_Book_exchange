@@ -2,14 +2,14 @@ import uuid
 from itertools import chain
 
 from rest_framework.exceptions import APIException
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from authentication.models import BookReader
 from boookzdata.models import Book, BookShelf
 from boookzdata.serializers import BookSerializer, NotificationSerializer
-from .models import Transaction, TransactionStatus, TransactionRating
+from .models import Transaction, TransactionStatus
 from .serializers import TransactionSerializer, TransactionRatingSerializer
 
 from rest_framework import generics
@@ -103,7 +103,7 @@ class DeclineTransactionView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Transaction.objects.all()
 
-    def get(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         transaction_token = self.kwargs['transaction_token']
         transaction = self.queryset.get(token=transaction_token)
         if transaction:
@@ -135,7 +135,7 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Transaction.objects.all()
 
-    def get(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         transaction_token = self.kwargs['transaction_token']
         transaction = self.queryset.get(token=transaction_token)
         if transaction:
@@ -144,6 +144,20 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                 current_book_reader = BookReader.objects.get(user=self.request.user)
                 transaction_status, created = TransactionStatus.objects.get_or_create(name="Accepted")
                 if transaction.book_reader_receiver == current_book_reader:
+                    #search for all transactions with these books and decline them
+                    all_transactions_to_decline_1 = self.queryset.filter(initiator_book=transaction.initiator_book)
+                    all_transactions_to_decline_2 = self.queryset.filter(initiator_book=transaction.receiver_book)
+                    all_transactions_to_decline_3 = self.queryset.filter(receiver_book=transaction.initiator_book)
+                    all_transactions_to_decline_4 = self.queryset.filter(receiver_book=transaction.receiver_book)
+                        
+                    all_to_decline = all_transactions_to_decline_1 | all_transactions_to_decline_2 | all_transactions_to_decline_3 | all_transactions_to_decline_4
+
+                    transaction_status_declined, created = TransactionStatus.objects.get_or_create(name="Declined")
+                    for trans in all_to_decline:
+                        trans.transaction_status = transaction_status_declined
+                        trans.save()
+
+                    #then accept current transation
                     transaction.transaction_status = transaction_status
                     transaction.save()
                     serializer = self.get_serializer(transaction, data=request.data)
@@ -159,8 +173,6 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                     notification = NotificationSerializer(data=data)
                     if notification.is_valid(raise_exception=True):
                         notification_saved = notification.save()
-
-                    return Response(serializer.data)
                 return Response("Wait until the transaction is accepted by receiver")
             return Response({"error": "cannot change status of the transaction"})
 
@@ -170,7 +182,7 @@ class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Transaction.objects.all()
 
-    def get(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         transaction_token = self.kwargs['transaction_token']
         transaction = self.queryset.get(token=transaction_token)
         if transaction:

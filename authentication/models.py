@@ -35,7 +35,9 @@ class Notification(models.Model):
     book_reader = models.ForeignKey(BookReader, related_name='notification', on_delete=models.CASCADE, blank=True, null=True)
     created = models.DateField(auto_now_add=True)
     origin = models.TextField()
-    wasSeen = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.pk} {self.book_reader}"
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
