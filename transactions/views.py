@@ -48,13 +48,23 @@ class RateTransactionView(generics.CreateAPIView):
         rating = {"rating": self.request.data.get("rating", None)}
         transaction = self.queryset.get(token=transaction_token)
         if transaction:
-            book_reader = {"book_reader": BookReader.objects.get(user=request.user).pk}
+            current_book_reader = BookReader.objects.get(user=request.user)
+            book_reader = {"book_reader": transaction.get_opposite_book_reader(current_book_reader).pk}
             if transaction.transaction_status.name == "Completed":
                 transaction = {"transaction": transaction.pk}
                 data = {**transaction, **book_reader, **comment, **rating}
                 serializer = TransactionRatingSerializer(data=data)
                 if serializer.is_valid(raise_exception=True):
                     rate_instance = serializer.save()
+
+                content = {"content": f"You have received a new rating"}
+                origin = {"origin": "Ratings"}
+                notification_target = {"book_reader": book_reader}
+                data = {**content, **origin, **notification_target}
+                notification = NotificationSerializer(data=data)
+                if notification.is_valid(raise_exception=True):
+                    notification.save()
+
                 return Response({"success": f"Rate '{rate_instance}' created successfully"})
             return Response({"error": "Transaction is not completed"})
         return Response({"error": "Transaction doesn't exist"})
@@ -70,7 +80,6 @@ class StartTransactionView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = TransactionSerializer
 
-    # TODO(victor): we can initiate transaction many times its not checking it
     def perform_create(self, serializer):
         try:
             initiator_book = Book.objects.get(pk=self.request.data.get("initiator_book", None))
@@ -85,14 +94,13 @@ class StartTransactionView(generics.CreateAPIView):
                                             transaction_status=transaction_status,
                                             initiator_book=initiator_book, receiver_book=receiver_book)
 
-        content = {"content": f"New transaction coming from {book_reader_initiator.user.username}."}
-        origin = {"origin": "Transaction"}
+        content = {"content": f"{book_reader_initiator.user.username} wants to trade with you. Go to transactions section to respond."}
+        origin = {"origin": "Transactions"}
         notification_target = {"book_reader": book_reader_receiver.pk}
         data = {**content, **origin, **notification_target}
-        print(data)
         notification = NotificationSerializer(data=data)
         if notification.is_valid(raise_exception=True):
-            notification_saved = notification.save()
+            notification.save()
 
     def get_token(self):
         return uuid.uuid4()
@@ -118,13 +126,13 @@ class DeclineTransactionView(RetrieveUpdateAPIView):
 
                 book_reader_initiator = transaction.book_reader_initiator
                 book_reader_receiver = transaction.book_reader_receiver
-                content = {"content": f"Outgoing transaction to {book_reader_receiver.user.username} was declined."}
-                origin = {"origin": "Transaction"}
+                content = {"content": f"Transaction with {book_reader_receiver.user.username} was declined."}
+                origin = {"origin": "Transactions"}
                 notification_target = {"book_reader": book_reader_initiator.pk}
                 data = {**content, **origin, **notification_target}
                 notification = NotificationSerializer(data=data)
                 if notification.is_valid(raise_exception=True):
-                    notification_saved = notification.save()
+                    notification.save()
 
                 return Response(serializer.data)
             return Response({"error": "cannot change status of the transaction"})
@@ -166,7 +174,7 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                     for trans in all_to_decline:
                         book_reader_initiator = trans.book_reader_initiator
                         book_reader_receiver = trans.book_reader_receiver
-                        content = {"content": f"Transaction from {book_reader_initiator.user.username} was canceled."}
+                        content = {"content": f"Transaction from {book_reader_initiator.user.username} was canceled because it was involved in another transaction."}
                         origin = {"origin": "Transaction"}
                         notification_target = {"book_reader": book_reader_receiver.pk}
                         data = {**content, **origin, **notification_target}
@@ -174,7 +182,7 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                         if notification.is_valid(raise_exception=True):
                             notification.save()
 
-                        content = {"content": f"Transaction to {book_reader_receiver.user.username} was canceled."}
+                        content = {"content": f"Transaction to {book_reader_receiver.user.username} was canceled because it was involved in another transaction."}
                         origin = {"origin": "Transaction"}
                         notification_target = {"book_reader": book_reader_initiator.pk}
                         data = {**content, **origin, **notification_target}
@@ -186,13 +194,13 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
 
                     book_reader_initiator = transaction.book_reader_initiator
                     book_reader_receiver = transaction.book_reader_receiver
-                    content = {"content": f"Outgoing transaction to {book_reader_receiver.user.username} was accepted."}
+                    content = {"content": f"Transaction with {book_reader_receiver.user.username} was accepted."}
                     origin = {"origin": "Transaction"}
                     notification_target = {"book_reader": book_reader_initiator.pk}
                     data = {**content, **origin, **notification_target}
                     notification = NotificationSerializer(data=data)
                     if notification.is_valid(raise_exception=True):
-                        notification_saved = notification.save()
+                        notification.save()
                 return Response("Wait until the transaction is accepted by receiver")
             return Response({"error": "cannot change status of the transaction"})
 
@@ -271,6 +279,6 @@ class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
         data = {**content, **origin, **notification_target}
         notification = NotificationSerializer(data=data)
         if notification.is_valid(raise_exception=True):
-            notification_saved = notification.save()
+            notification.save()
 
         return transaction_status
