@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div
-      class="header flex flex-col justify-between items-center py-1 md:py-8 rounded-md "
+      class="header flex flex-col justify-between items-center py-1 md:py-8 rounded-md min-w-full border-2 border-red-500 "
     >
       <img
         v-if="userStore.userProfileImage"
@@ -65,7 +65,6 @@
 </template>
 
 <script setup>
-// import { LazyProfileRatings, LazyProfileTransactions } from '~/.nuxt/components';
 import { useUserStore } from "~/stores/userStore";
 definePageMeta({
   middleware: "auth",
@@ -84,7 +83,6 @@ await userStore.getUserInfo();
 <style scoped>
 .header {
   /* height: 500px; */
-  width: 100%;
   background: linear-gradient(93.97deg, #695ac9 0.68%, #925ac9 98.66%);
 }
 

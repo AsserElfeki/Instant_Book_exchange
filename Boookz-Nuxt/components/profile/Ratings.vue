@@ -3,13 +3,17 @@
     <h2 class="font-bold text-xl font-sans m-2">My Reviews</h2>
     <div
       v-for="rating in store.userRatings"
-      :key="rating.id"
+      :key="rating.pk"
       class="border border-dashed border-black rounded-2xl p-4"
     >
       <div class="font-sans">
-        <img src="rating.image" alt="profile picture of the user who made the rating" />
-        <h3 class="inline text-xl font-bold font-sans">person {{ rating.name }}</h3>
-        <h3 class="inline">rated with {{ rating.stars }}</h3>
+        <img
+          :src="rating.book_reader.profile_image"
+          alt="profile picture of the user who made the rating"
+          class="rounded-full w-12 h-12 inline"
+        />
+        <h3 class="inline text-xl font-bold font-sans"> {{ rating.book_reader.username }} </h3>
+        <h3 class="inline"> rated with {{ rating.rating }}</h3>
         <p>comment: {{ rating.comment }}</p>
         <p>date: {{ rating.date }}</p>
       </div>

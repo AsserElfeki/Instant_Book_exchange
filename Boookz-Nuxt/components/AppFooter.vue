@@ -14,6 +14,13 @@
           <font-awesome-icon icon="fa-brands fa-linkedin" class="fa-2x" />
         </a>
       </li>
+
+      <li class="footer-element">
+      <NuxtLink to="/about">Meet The Team
+          <font-awesome-icon icon="fa-solid fa-people-group" class="fa-2x"/>
+      </NuxtLink>
+      </li>
+
     </ul>
   </footer>
 </template>
