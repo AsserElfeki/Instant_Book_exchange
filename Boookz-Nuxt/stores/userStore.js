@@ -2,8 +2,7 @@ import { defineStore } from 'pinia';
 export const useUserStore = defineStore({
     id: 'userStore',
     state: () => ({
-        userName: 'Leonardo Davinci',
-        userPassword: '',
+        userName: '',
         userProfileImage: "",
         userIsSearching: false,
         userIsLoggedIn: false,
@@ -56,42 +55,15 @@ export const useUserStore = defineStore({
         },
 
         async logOut() {
-            const res = await $fetch('http://146.59.87.108:8000/authentication/logout_all/', {
+            await $fetch('http://146.59.87.108:8000/authentication/logout_all/', {
                 method: 'POST',
                 headers: { "authorization": "Bearer " + this.token }
             })
             // this.userIsLoggedIn = false;
             // this.token = '';
             this.$reset();
+            await navigateTo('/')
         },
-
-        // async getUserWantedBooks() {
-        //     const res = await $fetch('http://146.59.87.108:8000/data/shelf/wanted', {
-        //         headers: { "authorization": "Bearer " + this.token }
-        //     })
-        //     this.userWantedBooks = res;
-        // },
-
-        // async getUserGiveAwayBooks() {
-        //     const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
-        //         headers: { "authorization": "Bearer " + this.token }
-        //     })
-        //     this.userGiveAwayBooks = res;
-        // },
-        //ToDo : change endpoints and request maybe 
-        // async getUserHistory() {
-        //     const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
-        //         headers: { "authorization": "Bearer " + this.token }
-        //     })
-        //     this.userTransactions = res;
-        // },
-        // async getUserRatings() {
-        //     const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
-        //         headers: { "authorization": "Bearer " + this.token }
-        //     })
-        //     this.userRatings = res;
-        // },
-
         resetErrors() {
             this.registerError = {};
             this.loginError = "";
@@ -171,7 +143,58 @@ export const useUserStore = defineStore({
                 },
             })
             await this.getUserInfo();
-        }
+        },
+
+        async deleteNotification(pk) {
+            const res = await $fetch('http://146.59.87.108:8000/authentication/notification_delete/' + pk, {
+                method: 'DELETE',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                }
+            })
+            await this.getUserInfo();
+        }, 
+               
+        async acceptTransaction(pk) {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/confirm/' + pk, {
+                method: 'PUT',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                }
+            })
+            await this.getUserInfo();
+        },
+
+        async declineTransaction(pk) {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/decline/' + pk, {
+                method: 'PUT',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                }
+            })
+            await this.getUserInfo();
+        },
+
+        async confirmBookRecieved(pk) {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/confirmReceive/' + pk, {
+                method: 'PUT',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                }
+            })
+            await this.getUserInfo();
+        }, 
+
+        async rateTransaction(pk, form) {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/rate/' + pk, {
+                method: 'POST',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                },
+                body: form
+            })
+            await this.getUserInfo();
+        }, 
     },
 
 
@@ -180,7 +203,7 @@ export const useUserStore = defineStore({
     getters: {
     },
     persist: {
-        // storage: persistedState.sessionStorage,
+        storage: persistedState.sessionStorage,
     },
 
 });

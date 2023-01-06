@@ -1,18 +1,43 @@
 <template>
-  <div class="flex m-0 p-0 border-2">
-    <button @click="showMenu = !showMenu" class="">
-      <font-awesome-icon  icon="fa-regular fa-bell" class="fa-xl" />
-    </button>
-    <ul v-if="showMenu" class="">
-      <li v-for="notification in userStore.notifications">{{ notification.content }}</li>
-    </ul>
+  <div class="">
+    <v-menu>
+      <template v-slot:activator="{ props: menu }">
+        <v-tooltip location="top">
+          <template v-slot:activator="{ props: tooltip }">
+            <v-btn 
+            :color="store.notifications?.length > 0 ? 'red' : 'white'"
+            v-bind="mergeProps(menu, tooltip)">
+              <font-awesome-icon
+                icon="fa-regular fa-bell"
+                class="fa-2x"
+              />
+            </v-btn>
+          </template>
+          <span>Notifications</span>
+        </v-tooltip>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in store.notifications"
+          :key="index"
+          class="hover:bg-violet-300 rounded-xl hover:cursor-pointer"
+        >
+          <v-list-item-title @click="handleNotification(item.pk)">{{ item.content }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </div>
 </template>
 
 <script setup>
-import { useUserStore } from "~/stores/userStore";
-const userStore = useUserStore();
-const showMenu = ref(false);
-</script>
+  import consolaGlobalInstance from 'consola';
+import { mergeProps } from 'vue';
+  import { useUserStore } from '~/stores/userStore';
 
-<style scoped></style>
+const store = useUserStore();
+
+async function handleNotification(notificationPK) {
+  store.deleteNotification(notificationPK);
+  // await navigateTo("/profile");
+  }
+</script>

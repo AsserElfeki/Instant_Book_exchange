@@ -35,7 +35,10 @@ export default defineNuxtConfig({
   css: ['@fortawesome/fontawesome-svg-core/styles.css',
     '~/assets/css/tailwind.css',
     'vuetify/styles',
-    '@mdi/font/css/materialdesignicons.min.css'],
+    'vuetify/dist/vuetify.min.css',
+    
+    '@mdi/font/css/materialdesignicons.min.css',
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},

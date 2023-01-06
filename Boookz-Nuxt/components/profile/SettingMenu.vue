@@ -1,24 +1,43 @@
 <template>
-  <div class="flex flex-col m-0 p-0 border-2 relative">
-    <button @click="showMenu = !showMenu" class="">
-      <font-awesome-icon  icon="fa-solid fa-gear" class="fa-xl" />
-    </button>
-    <div v-if="showMenu" class="flex flex-col absolute top-8">
-      <p v-for="item in menuItems">{{ item }}</p>
-    </div>
+  <div class="">
+    <v-menu>
+      <template v-slot:activator="{ props: menu }">
+        <v-tooltip location="top">
+          <template v-slot:activator="{ props: tooltip }">
+            <v-btn v-bind="mergeProps(menu, tooltip)">
+              <font-awesome-icon
+                icon="fa-solid fa-gear"
+                class="fa-2x"
+              />
+            </v-btn>
+          </template>
+          <span>Settings</span>
+        </v-tooltip>
+      </template>
+      <v-list>
+        <v-list-item @click="goToSettings">
+          <v-list-item-title>Settings</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item @click="logOut">
+          <v-list-item-title>LogOut</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </div>
 </template>
 
 <script setup>
-import { useUserStore } from "~/stores/userStore";
-const userStore = useUserStore();
-const showMenu = ref(false);
+  import { mergeProps } from 'vue';
+  import { useUserStore } from '~/stores/userStore';
 
-const menuItems = {
-    "Settings": "settings",
-    "Log out": "logOut"
+  const store = useUserStore();
+
+async function goToSettings() {
+    await navigateTo("/user/settings")
+  }
+
+function logOut() {
+    store.logOut();
 }
-
 </script>
-
-<style scoped></style>

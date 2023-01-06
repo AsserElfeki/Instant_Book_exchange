@@ -1,8 +1,11 @@
 <template>
   <div class="text-center my-12 py-12">
-    <v-menu>
+    <v-menu class="red">
       <template v-slot:activator="{ props: menu }">
-        <v-tooltip location="top">
+        <v-tooltip
+          location="top"
+          
+        >
           <template v-slot:activator="{ props: tooltip }">
             <v-btn
               color="primary"
@@ -18,6 +21,7 @@
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
+          dark
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
@@ -27,7 +31,7 @@
 </template>
 
 <script>
-  import { mergeProps } from 'vue'
+  import { mergeProps } from 'vue';
 
   export default {
     data: () => ({
@@ -41,5 +45,5 @@
     methods: {
       mergeProps,
     },
-  }
+  };
 </script>
