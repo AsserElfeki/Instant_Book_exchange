@@ -261,7 +261,7 @@ class ConfirmReceiveTransactionView(RetrieveUpdateAPIView):
                 transaction_status, created = TransactionStatus.objects.get_or_create(
                     name=f"Received by initiating user")
 
-                book_reader_receiver = transaction.book_reader_receiver
+                book_reader = transaction.book_reader_receiver
                 content = {"content": f"{current_book_reader.user.username} received your book."}
         else:
             raise ExternalUserInterfer()
