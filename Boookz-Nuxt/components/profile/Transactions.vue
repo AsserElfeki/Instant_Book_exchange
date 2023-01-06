@@ -40,7 +40,7 @@
             {{ transaction.receiver_book.title }}
           </h3>
           <font-awesome-icon
-            v-if="!transaction.book_reader_receiver.username === store.userName"
+            v-if="transaction.book_reader_receiver.username === store.userName"
             icon="fa-solid fa-arrow-right-from-bracket"
             class="text-green-500 fa-xl"
           />
