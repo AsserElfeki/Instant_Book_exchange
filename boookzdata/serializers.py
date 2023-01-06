@@ -207,7 +207,9 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
         serializer2 = TransactionForProfileSerializer(user_transactions_as_receiver, context=self.context,
                                                       many=True).data
         transactions = list(chain(serializer, serializer2))
+        
         transactions.sort(reverse=True, key=self.getKey)
+
         return transactions
 
     def get_profile_image(self, obj):
