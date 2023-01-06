@@ -150,7 +150,7 @@ class TransactionForProfileSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = (
             'token', 'book_reader_initiator', 'book_reader_receiver', 'initiator_book', 'receiver_book',
-            'transaction_status', 'created')
+            'transaction_status', 'created', 'modified')
 
     def get_transaction_status(self, obj):
         name = TransactionStatusSerializer(obj.transaction_status, read_only=True, context=self.context).data['name']
@@ -194,6 +194,9 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
         book_reader_notifications = Notification.objects.filter(book_reader=book_reader)
         serialized = NotificationSerializer(book_reader_notifications, context=self.context, many=True)
         return serialized.data
+    
+    def getKey(self, e):
+        return e['modified']
 
     def get_transactions(self, obj):
         book_reader = BookReader.objects.get(user=obj.user)
@@ -203,7 +206,9 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
         user_transactions_as_receiver = Transaction.objects.filter(book_reader_receiver=book_reader)
         serializer2 = TransactionForProfileSerializer(user_transactions_as_receiver, context=self.context,
                                                       many=True).data
-        return list(chain(serializer, serializer2))
+        transactions = list(chain(serializer, serializer2))
+        transactions.sort(reverse=True, key=self.getKey)
+        return transactions
 
     def get_profile_image(self, obj):
         images = ProfileImage.objects.filter(book_reader=obj)

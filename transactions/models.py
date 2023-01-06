@@ -39,6 +39,7 @@ class Transaction(models.Model):
                                            related_name='transaction_status', related_query_name='transaction_status',
                                            default="", null=True)
     created = models.DateField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"status-{self.transaction_status} {str(self.token)} "
