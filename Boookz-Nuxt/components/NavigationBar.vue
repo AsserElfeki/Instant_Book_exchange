@@ -59,7 +59,7 @@
         v-if="store.userProfileImage"
         :src="store.userProfileImage"
         alt="profile avatar"
-        class="w-8 h-8 rounded-full"
+        class="w-8 h-8 rounded-full hover:cursor-pointer"
         @click="redirect"
       />
       <img

@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div
-      class="header flex flex-col justify-between items-center py-1 md:py-8 rounded-md min-w-full border-2 border-red-500 "
+      class="header flex flex-col justify-between items-center py-1 md:py-8 rounded-md min-w-full"
     >
       <img
         v-if="userStore.userProfileImage"
