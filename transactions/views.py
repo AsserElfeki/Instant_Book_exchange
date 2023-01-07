@@ -57,10 +57,9 @@ class RateTransactionView(generics.CreateAPIView):
                 if serializer.is_valid(raise_exception=True):
                     rate_instance = serializer.save()
 
-                    content = {"content": f"You have received a new rating"}
+                    content = {"content": "You have received a new rating"}
                     origin = {"origin": "Ratings"}
-                    notification_target = {"book_reader": book_reader['book_reader']}
-                    data = {**content, **origin, **notification_target}
+                    data = {**content, **origin, **book_reader}
                     notification = NotificationSerializer(data=data)
                     if notification.is_valid(raise_exception=True):
                         notification.save()
