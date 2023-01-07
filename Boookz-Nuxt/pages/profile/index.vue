@@ -16,10 +16,10 @@
         class="w-32 h-32 rounded-full"
       />
 
-      <h2 class="text-white font-sans md:text-2xl md:font-bold">
+      <h2 class="text-white md:text-2xl md:font-bold">
         {{ userStore.userName }}
       </h2>
-      <h3 class="text-white font-sans font-thin">{{ userStore.region }}</h3>
+      <h3 class="text-white">{{ userStore.region }}</h3>
 
       <div
         class="md:mt-8 md:bg-white rounded-md h-24 flex flex-col md:flex-row justify-around items-center"

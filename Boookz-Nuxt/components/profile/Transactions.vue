@@ -3,7 +3,7 @@
     v-if="store.userTransactions.length"
     class="flex flex-col gap-4 justify-center"
   >
-    <h2 class="font-bold text-xl font-sans m-2">My History</h2>
+    <h2 class="font-bold text-xl m-2">My History</h2>
     <div
       v-for="(transaction, index) in store.userTransactions"
       :key="transaction.token"
@@ -14,10 +14,10 @@
         <div
           class="flex flex-row md:flex-row justify-between bg-white border border-dashed border-black rounded-xl p-4 gap-2 items-center"
         >
-          <h3 class="font-bold text-lg font-segoe">
+          <h3 class="font-bold text-lg">
             {{ transaction.book_reader_initiator }}
           </h3>
-          <h3 class="font-bold text-lg font-mono">
+          <h3 class="font-bold text-lg">
             {{ transaction.initiator_book }}
           </h3>
           <font-awesome-icon
@@ -35,10 +35,10 @@
         <div
           class="flex flex-row md:flex-row justify-between bg-white border border-dashed border-black rounded-xl p-4 gap-2 items-center"
         >
-          <h3 class="font-bold text-lg font-segoe">
+          <h3 class="font-bold text-lg ">
             {{ transaction.book_reader_receiver }}
           </h3>
-          <h3 class="font-bold text-lg font-mono">
+          <h3 class="font-bold text-lg ">
             {{ transaction.receiver_book }}
           </h3>
           <font-awesome-icon
@@ -53,7 +53,7 @@
           />
         </div>
         <div class="flex justify-around">
-          <h2 class="self-center text-violet-700 font-sans font-bold">
+          <h2 class="self-center text-violet-700 font-bold">
             Status: {{ transaction.transaction_status }}
           </h2>
           <div

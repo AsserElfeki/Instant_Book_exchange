@@ -1,5 +1,5 @@
 <template>
-  <footer class="mt-8 bg-gray-400">
+  <footer class="mt-8 bg-violet-400">
     <ul class="footer max-w-screen-xl flex justify-between mx-auto pt-2">
       <li class="footer-element">
         <a href="https://github.com/AsserElfeki/Instant_Book_exchange" target="_blank"
@@ -10,7 +10,7 @@
 
       <li class="footer-element">
         <a href="https://www.linkedin.com" target="_blank"
-          >linkedin account
+          >LinkedIn
           <font-awesome-icon icon="fa-brands fa-linkedin" class="fa-2x" />
         </a>
       </li>
