@@ -73,8 +73,6 @@
 - [ ] 72. search result page
 - [ ] 76. in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
 - [ ] 77. giveaway tab styles
-- [ ] 78. wanted books trading
-- [ ] 79. make the profile nuxtlink also vuetify and cursor 
 - [ ] **71. errors in addbok form**
 - [ ] 65. toast for uploading profile pic 
 - [ ] 70. search page  
@@ -89,6 +87,7 @@
 - [ ] 83. add an even one more if condition in the transaction div of buttons
 - [ ] 84. fonts 
 - [ ] 86. show the total of notification, and profile tabs when the user is not logged in
+- [ ] 87. format the date in ratings tab
 
 
 

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-menu>
+    <v-menu min-height="1000px">
       <template v-slot:activator="{ props: menu }">
         <v-tooltip location="top">
           <template v-slot:activator="{ props: tooltip }">

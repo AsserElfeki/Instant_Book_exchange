@@ -1,18 +1,18 @@
 <template>
   <div
-    class="flex flex-col gap-3 mx-5 my-9 justify-between items-center lg:flex-row relative"
+    class="flex flex-col mx-5 gap-2 items-center lg:flex-row justify-between w-full relative"
   >
     <NuxtLink
       to="/"
-      class="flex gap-2 justify-start self-start"
+      class="flex gap-2 justify-center self-start items-start"
       active-class="inactive"
     >
       <AppLogo />
-      <div class="gap-8">
-        <h1 class="hi font-bold text-[33px] leading-10 h-9 font-segoe">
+      <div class="flex flex-col justify-start">
+        <h1 class="font-bold text-[33px] leading-10 h-9">
           Boookz
         </h1>
-        <p class="text-xs">Book xchange website</p>
+        <p class="leading-none">Book xchange website</p>
       </div>
     </NuxtLink>
     <div class="flex my-auto items-center relative">
@@ -37,7 +37,7 @@
     </div>
     <ul
       v-if="!store.userIsLoggedIn"
-      class="flex flex-row gap-6 lg:gap-2 "
+      class="flex flex-row gap-6 lg:gap-2 self-end"
     >
       <NuxtLink
         class="btn-sm lg:btn"
@@ -53,13 +53,13 @@
 
     <ul
       v-else
-      class="flex gap-8 justify-center items-center "
+      class="flex gap-8 justify-center items-center self-end lg:self-auto"
     >
       <img
         v-if="store.userProfileImage"
         :src="store.userProfileImage"
         alt="profile avatar"
-        class="w-8 h-8 rounded-full"
+        class="w-8 h-8 rounded-full hover:cursor-pointer"
         @click="redirect"
       />
       <img
