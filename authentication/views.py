@@ -73,6 +73,17 @@ class ChangePasswordView(generics.UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
 
+class DeleteNotification(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def delete(self, request, *args, **kwargs):
+        user = self.request.user
+        book_reader = BookReader.objects.get(user=user)
+        notifications = Notification.objects.filter(book_reader=book_reader)
+        notifications.delete()
+
+        return Response({"result": "notifications deleted"})
+
 
 class DeleteNotification(APIView):
     permission_classes = (IsAuthenticated,)

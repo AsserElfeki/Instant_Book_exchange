@@ -1,7 +1,7 @@
 from django.urls import path
 
 from authentication.views import ProfileInfoView, RegisterView, ChangePasswordView, UpdateProfileView, LogoutView, \
-    LogoutAllView, ListBookReaderBooks, EmailVerify, LoginView, DeleteAccount, AnyProfileInfoView, DeleteNotification
+    LogoutAllView, ListBookReaderBooks, EmailVerify, LoginView, DeleteAccount, AnyProfileInfoView, DeleteNotification, DeleteAllNotification
 from rest_framework_simplejwt.views import TokenRefreshView 
 
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     path('update_profile/<int:pk>/', UpdateProfileView.as_view(), name='auth_update_profile'),
     path('delete/', DeleteAccount.as_view(), name="profile_delete"),
     path('notification_delete/<int:pk>', DeleteNotification.as_view(), name="notification_delete"),
+    path('notification_delete_all/', DeleteAllNotification.as_view(), name="notification_delete_all"),
     path('profile/', ProfileInfoView.as_view({'get': 'retrive'}), name="profile_info"),
     path('profile/<str:username>', AnyProfileInfoView.as_view({'get': 'retrive'}), name="any_profile_info"),
     path('logout/', LogoutView.as_view(), name='auth_logout'),
