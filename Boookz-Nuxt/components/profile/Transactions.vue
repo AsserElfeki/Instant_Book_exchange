@@ -35,10 +35,10 @@
         <div
           class="flex flex-row md:flex-row justify-between bg-white border border-dashed border-black rounded-xl p-4 gap-2 items-center"
         >
-          <h3 class="font-bold text-lg ">
+          <h3 class="font-bold text-lg">
             {{ transaction.book_reader_receiver }}
           </h3>
-          <h3 class="font-bold text-lg ">
+          <h3 class="font-bold text-lg">
             {{ transaction.receiver_book }}
           </h3>
           <font-awesome-icon
@@ -57,7 +57,10 @@
             Status: {{ transaction.transaction_status }}
           </h2>
           <div
-            v-if="transaction.transaction_status === 'Initiated'"
+            v-if="
+              transaction.transaction_status === 'Initiated' &&
+              transaction.book_reader_initiator !== store.userName
+            "
             class="flex gap-2"
           >
             <button
@@ -79,8 +82,7 @@
               transaction.transaction_status === 'Accepted' ||
               (transaction.transaction_status ===
                 'Received by initiating user' &&
-                transaction.book_reader_initiator !==
-                  store.userName) ||
+                transaction.book_reader_initiator !== store.userName) ||
               (transaction.transaction_status ===
                 'Received by receiving user' &&
                 transaction.book_reader_receiver !== store.userName)
@@ -123,15 +125,15 @@
             size="200"
           />
           <fieldset class="flex items-center gap-4">
-          <label for="rating">Rating:</label>
-          <input
-            v-model="form.rating"
-            id="rating"
-            type="number"
-            placeholder="stars"
-            max="5"
-            min="1"
-          />
+            <label for="rating">Rating:</label>
+            <input
+              v-model="form.rating"
+              id="rating"
+              type="number"
+              placeholder="stars"
+              max="5"
+              min="1"
+            />
           </fieldset>
         </form>
       </div>
@@ -148,7 +150,7 @@
 
 <script setup>
   import { useUserStore } from '~/stores/userStore';
-  import { useProfileStore } from "~/stores/profileStore";
+  import { useProfileStore } from '~/stores/profileStore';
   const route = useRoute().params;
   const store = !route.id ? useUserStore() : useProfileStore();
   const commentShown = ref(false);

@@ -12,7 +12,7 @@
       >
         <div
           v-for="book in store.userGiveAwayBooks"
-          class="w-1/3 md:w-1/4 my-4"
+          class="w-1/3 md:w-1/4 my-4 cursor-pointer"
           :class="{ selected: book.selected }"
           @click="toggleSelect(book)"
         >
@@ -66,6 +66,13 @@
 
 <style scoped>
   .selected {
-    border: 3px solid blue;
+    /*shadow right bottom */
+
+    --tw-shadow: 10px 15px 15px 3px rgba(96, 28, 206, 0.532),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+      border-radius: 28px;
+
   }
 </style>

@@ -1,11 +1,11 @@
-import {defineStore} from 'pinia';
+import { defineStore } from 'pinia';
 
 export const useGoogleAPIStore = defineStore({
     id: 'googleAPIStore',
     state: () => ({
         book_titles: [],
         book_authors: [],
-        book_limit: 5,
+        book_limit: 10,
     }),
     actions: {
         async searchForBookTitles(bookTitle, languageCode) {

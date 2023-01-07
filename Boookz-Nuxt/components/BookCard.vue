@@ -35,6 +35,13 @@
         :alt="book.book_owner.username"
         class="user-image w-16 h-16 rounded-full object-cover absolute bottom-[-40px] left-1/2 -translate-x-1/2 border-black border"
       />
+
+      <img
+        v-else
+        src="../assets/img/avatar.png"
+        :alt="book.book_owner.username"
+        class="user-image w-16 h-16 rounded-full object-cover absolute bottom-[-40px] left-1/2 -translate-x-1/2 border-black border"
+      />
     </NuxtLink>
   </div>
 </template>
