@@ -66,9 +66,9 @@
 - [x] 55. change the navbar 
 - [x] 68. generic notification for transactions : click --> go to a new page with info on this transaction --> accept | deny -- acdepted | denied .... then new notification : time to confirm receiving
 - [x] 74. rest of transaction stages 
+- [x] 75. ratings
 - [ ] 60. display response of the forms TOASTS (youssef)
 - [ ] 62. (+) button for authors and : category -> predifined select menu (victor : NO HOTFIXES MF)
-- [ ] 75. ratings
 - [ ] 63. make title get suggestions from google api and 
 - [ ] 72. search result page
 - [ ] 76. in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
