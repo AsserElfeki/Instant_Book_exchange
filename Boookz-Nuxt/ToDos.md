@@ -87,6 +87,8 @@
 - [ ] 81. deactivate account
 - [ ] 82. filter home page books by region / pref
 - [ ] 83. add an even one more if condition in the transaction div of buttons
+- [ ] 84. fonts 
+- [ ] 86. show the total of notification, and profile tabs when the user is not logged in
 
 
 
