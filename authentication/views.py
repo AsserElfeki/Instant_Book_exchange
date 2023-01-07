@@ -73,7 +73,7 @@ class ChangePasswordView(generics.UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
 
-class DeleteNotification(APIView):
+class DeleteAllNotification(APIView):
     permission_classes = (IsAuthenticated,)
 
     def delete(self, request, *args, **kwargs):
