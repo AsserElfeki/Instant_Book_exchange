@@ -31,6 +31,7 @@ class Notification(models.Model):
     content = models.TextField()
     book_reader = models.ForeignKey(BookReader, related_name='notification', on_delete=models.CASCADE, blank=True, null=True)
     created = models.DateField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
     origin = models.TextField()
 
     def __str__(self):

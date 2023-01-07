@@ -160,7 +160,7 @@ class TransactionForProfileSerializer(serializers.ModelSerializer):
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
-        fields = ['pk', 'content', 'origin', 'book_reader']
+        fields = ['pk', 'content', 'origin', 'book_reader', 'modified']
 
 
 class ReportRecordSerializer(serializers.ModelSerializer):
@@ -183,20 +183,26 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
         fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books', 'transactions', 'ratings',
                   'notifications', ]
 
+    def getKey(self, e):
+        return e['modified']
+
     def get_ratings(self, obj):
         book_reader = BookReader.objects.get(user=obj.user)
         book_reader_transaction_rating = TransactionRating.objects.filter(book_reader=book_reader)
-        serialized = TransactionRatingSerializer(book_reader_transaction_rating, context=self.context, many=True)
-        return serialized.data
+        serialized = TransactionRatingSerializer(book_reader_transaction_rating, context=self.context, many=True).data
+
+        ser_list = list(chain(serialized))
+        ser_list.sort(reverse=True, key=self.getKey)
+        return ser_list
 
     def get_notifications(self, obj):
         book_reader = BookReader.objects.get(user=obj.user)
         book_reader_notifications = Notification.objects.filter(book_reader=book_reader)
-        serialized = NotificationSerializer(book_reader_notifications, context=self.context, many=True)
-        return serialized.data
-    
-    def getKey(self, e):
-        return e['modified']
+        serialized = NotificationSerializer(book_reader_notifications, context=self.context, many=True).data
+
+        ser_list = list(chain(serialized))
+        ser_list.sort(reverse=True, key=self.getKey)
+        return ser_list
 
     def get_transactions(self, obj):
         book_reader = BookReader.objects.get(user=obj.user)

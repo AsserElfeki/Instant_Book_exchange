@@ -10,6 +10,8 @@ class TransactionRating(models.Model):
     book_reader = models.ForeignKey("authentication.BookReader", on_delete=models.CASCADE,null=True)
     comment = models.CharField(max_length=255)
     rating = models.IntegerField(default=0)
+    created = models.DateField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"token-{self.transaction.token}: {self.rating}"

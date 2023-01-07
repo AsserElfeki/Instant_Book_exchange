@@ -31,14 +31,8 @@ class TransactionSerializer(serializers.ModelSerializer):
 
 
 class TransactionRatingSerializer(FlexFieldsModelSerializer):
-    # transaction = serializers.SerializerMethodField()
 
     class Meta:
         model = TransactionRating
-        fields = ['transaction', "book_reader", "rating", "comment"]
-
-    # def get_transaction(self, obj):
-        # transaction = TransactionSerializer(obj.transaction, read_only=True, context=self.context).data['token']
-        # return transaction
-
+        fields = ['transaction', "book_reader", "rating", "comment", 'modified']
 
