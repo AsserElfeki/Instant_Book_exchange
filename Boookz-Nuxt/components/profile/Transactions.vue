@@ -11,7 +11,6 @@
       class="flex flex-col gap-2 m-2"
     >
       <h2>Date: {{ transaction.created }}</h2>
-      <!-- <h2>Initiated By: {{ transaction.book_reader_initiator.username }}</h2> -->
       <div class="bg-[#F2F0FE] rounded-xl p-4 flex flex-col gap-2">
         <div
           class="flex flex-row md:flex-row justify-between bg-white border border-dashed border-black rounded-xl p-4 gap-2 items-center"
@@ -23,7 +22,7 @@
             {{ transaction.initiator_book }}
           </h3>
           <font-awesome-icon
-            v-if="transaction.book_reader_initiator.username === store.userName"
+            v-if="transaction.book_reader_initiator === store.userName"
             icon="fa-solid fa-arrow-right-from-bracket"
             class="text-green-500 fa-xl"
           />
@@ -44,7 +43,7 @@
             {{ transaction.receiver_book }}
           </h3>
           <font-awesome-icon
-            v-if="transaction.book_reader_receiver.username === store.userName"
+            v-if="transaction.book_reader_receiver === store.userName"
             icon="fa-solid fa-arrow-right-from-bracket"
             class="text-green-500 fa-xl"
           />
@@ -81,11 +80,11 @@
               transaction.transaction_status === 'Accepted' ||
               (transaction.transaction_status ===
                 'Received by initiating user' &&
-                transaction.book_reader_initiator.username !==
+                transaction.book_reader_initiator !==
                   store.userName) ||
               (transaction.transaction_status ===
                 'Received by receiving user' &&
-                transaction.book_reader_receiver.username !== store.userName)
+                transaction.book_reader_receiver !== store.userName)
             "
             class="flex gap-2"
           >
