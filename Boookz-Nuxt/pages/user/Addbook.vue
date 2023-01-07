@@ -30,6 +30,7 @@
           :items="suggestedTitles"
           v-model="bookForm.title"
           @input="getTitleUsingGoogleAPI"
+          @change="getBookAuthorsFromTitle"
           no-filter
           size="40"
           id="book-title"
@@ -92,7 +93,7 @@ const categories = ["fiction", "romance", "science"];
 
 const chosenLanguage = ref("");
 const suggestedTitles = ref([]);
-// const suggestedImage = ref("");
+const suggestedAuthors = ref("");
 
 const fd = new FormData();
 
@@ -115,17 +116,13 @@ async function getTitleUsingGoogleAPI(event) {
       }
 }
 
-// async function getBookImageUsingGoogleAPI() {
-//   const languageCode = langStore.chosenLangCode
-//   console.log("TEST")
-//   console.log(bookForm.title)
-//
-//   if (bookForm.title.length > 0){
-//     await googleStore.getBookThumbnailFromTitle(bookForm.title, languageCode);
-//     suggestedImage.value = googleStore.book_image;
-//     console.log(suggestedImage.value)
-//   }
-// }
+async function getBookAuthorsFromTitle() {
+  const languageCode = langStore.chosenLangCode
+  if (bookForm.title.length > 0){
+    await googleStore.getBookAuthorsFromTitle(bookForm.title, languageCode);
+    bookForm.author = googleStore.book_authors;
+  }
+}
 function getLangfullName() {
   langStore.chooseLanguage(chosenLanguage.value);
   bookForm.language = langStore.chosenLangEnglishName;

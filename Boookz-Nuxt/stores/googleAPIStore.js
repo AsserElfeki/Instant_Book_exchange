@@ -4,7 +4,7 @@ export const useGoogleAPIStore = defineStore({
     id: 'googleAPIStore',
     state: () => ({
         book_titles: [],
-        book_image: null,
+        book_authors: [],
         book_limit: 5,
     }),
     actions: {
@@ -18,12 +18,12 @@ export const useGoogleAPIStore = defineStore({
                 this.book_titles.push(data["items"].at(index).volumeInfo.title);
             }
         },
-        async getBookThumbnailFromTitle(bookTitle, languageCode) {
+        async getBookAuthorsFromTitle(bookTitle, languageCode) {
             const data = await $fetch(
                 'https://www.googleapis.com/books/v1/volumes?q=' + bookTitle +
                 '&maxResults=1&projection=lite&langRestrict=' + languageCode
             );
-            this.book_image = data["items"].at(0).volumeInfo.imageLinks.thumbnail
+            this.book_authors = data["items"].at(0).volumeInfo.authors
         },
     },
     getters: {},
