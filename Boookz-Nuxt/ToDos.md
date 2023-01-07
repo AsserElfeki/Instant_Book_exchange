@@ -66,28 +66,49 @@
 - [x] 55. change the navbar 
 - [x] 68. generic notification for transactions : click --> go to a new page with info on this transaction --> accept | deny -- acdepted | denied .... then new notification : time to confirm receiving
 - [x] 74. rest of transaction stages 
+- [x] 83. add an even one more if condition in the transaction div of buttons
+- [x] 62. (+) button for authors and : category -> predifined select menu (victor : NO HOTFIXES MF)
+- [x] 63. make title get suggestions from google api and 
 - [x] 75. ratings
-- [ ] 60. display response of the forms TOASTS (youssef)
-- [ ] 62. (+) button for authors and : category -> predifined select menu (victor : NO HOTFIXES MF)
-- [ ] 63. make title get suggestions from google api and 
-- [ ] 72. search result page
+- [x] 84. fonts 
 - [ ] 76. in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
-- [ ] 77. giveaway tab styles
-- [ ] **71. errors in addbok form**
-- [ ] 65. toast for uploading profile pic 
-- [ ] 70. search page  
-- [ ] 67. in the [id] page create comment section
-- [ ] 61. redo all the forms ?
-- [ ] 39. fixing errors and warnings 
 - [ ] 54. check on each redirect if the token is still valid and update state 
-- [ ] 64. optimize bookshelves to be 1 item
-- [ ] 80. about page
-- [ ] 81. deactivate account
 - [ ] 82. filter home page books by region / pref
-- [ ] 83. add an even one more if condition in the transaction div of buttons
-- [ ] 84. fonts 
 - [ ] 86. show the total of notification, and profile tabs when the user is not logged in
-- [ ] 87. format the date in ratings tab
+- [ ] 64. optimize bookshelves to be 1 item
+
+## general forms:
+- [ ] 1. buttons 
+- [ ] 2. toasts
+- [ ] 3. styles 
+
+## settings form: 
+- [ ] 1. split 
+- [ ] 2. categories 
+- [ ] 3. fetch data 
+- [ ] 4. change username 
+- [ ] 5. spoken languages 
+- [ ] 6. deactivate account
+  
+## support message
+- [ ] 1. form in separate page 
+- [ ] 2. link in footer 
+
+## search page
+- [ ] 1. new page 
+- [ ] 2. fetch data 
+
+## about page
+- [ ] 1. new page
+- [ ] 2. nice styles (place to try whatever)
+
+
+## Styles: 
+shelves books 
+buttons in transactions and shelves and login/register and addbook 
+footer hover 
+book card responsiveness 
+?? display the uploaded image in the addbook page
 
 
 
