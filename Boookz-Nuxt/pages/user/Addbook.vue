@@ -93,7 +93,6 @@ const categories = ["fiction", "romance", "science"];
 
 const chosenLanguage = ref("");
 const suggestedTitles = ref([]);
-const suggestedAuthors = ref("");
 
 const fd = new FormData();
 
