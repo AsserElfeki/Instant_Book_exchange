@@ -57,16 +57,16 @@ class RateTransactionView(generics.CreateAPIView):
                 if serializer.is_valid(raise_exception=True):
                     rate_instance = serializer.save()
 
-                content = {"content": f"You have received a new rating"}
-                origin = {"origin": "Ratings"}
-                notification_target = {"book_reader": book_reader}
-                data = {**content, **origin, **notification_target}
-                notification = NotificationSerializer(data=data)
-                if notification.is_valid(raise_exception=True):
-                    notification.save()
+                    content = {"content": f"You have received a new rating"}
+                    origin = {"origin": "Ratings"}
+                    notification_target = {"book_reader": book_reader['book_reader']}
+                    data = {**content, **origin, **notification_target}
+                    notification = NotificationSerializer(data=data)
+                    if notification.is_valid(raise_exception=True):
+                        notification.save()
 
-                return Response({"success": f"Rate '{rate_instance}' created successfully"})
-            return Response({"error": "Transaction is not completed"})
+                    return Response({"success": f"Rate '{rate_instance}' created successfully"})
+                return Response({"error": "Transaction is not completed"})
         return Response({"error": "Transaction doesn't exist"})
 
 
