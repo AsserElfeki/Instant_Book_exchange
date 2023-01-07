@@ -185,4 +185,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+input {
+  border: 2px solid black;
+  border-radius: 7px;
+  padding: 10px;
+}
+</style>

@@ -28,7 +28,7 @@ export const useProfileStore = defineStore({
                     this.region = res.book_reader.country;
                     this.userProfileImage = res.book_reader.profile_image;
                     this.userRatings = res.book_reader.ratings
-                    this.userTransactions = res.book_reader.history
+                    this.userTransactions = res.book_reader.transactions
                 }
 
             }

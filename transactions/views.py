@@ -50,6 +50,7 @@ class RateTransactionView(generics.CreateAPIView):
         if transaction:
             current_book_reader = BookReader.objects.get(user=request.user)
             book_reader = {"book_reader": transaction.get_opposite_book_reader(current_book_reader).pk}
+            print(book_reader)
             if transaction.transaction_status.name == "Completed":
                 transaction = {"transaction": transaction.pk}
                 data = {**transaction, **book_reader, **comment, **rating}

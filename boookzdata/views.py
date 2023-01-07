@@ -103,27 +103,43 @@ class BookUploadView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, bookshelf_param):
+        if request.data.get('title') is None:
+            return Response({"error": "title cannot be empty"})
+
         title = {"title": request.data.get('title')}
+        if request.data.get('language') is None:
+            return Response({"error": "language cannot be empty"})
         language = {"language": request.data.get('language')}
         description = {"description": request.data.get('description')}
         authors=[]
+        if request.data.get('author') is None:
+            return Response({"error": "author cannot be empty"})
         for reqAuth in request.data.getlist("author"):
             aut,created = Author.objects.get_or_create(name=reqAuth)
             authors.append(aut.pk)
 
         categories=[]
+        if request.data.get('category') is None:
+            return Response({"error": "category cannot be empty"})
         for reqCat in request.data.getlist("category"):
             cat,created = Category.objects.get_or_create(name=reqCat)
             categories.append(cat.pk)
 
         authorsList = {"author": authors} 
         categoriesList = {"category": categories}
+
+        if request.data.get('condition') is None:
+            return Response({"error": "condition cannot be empty"})
+
         condition = {"condition": BookCondition.objects.get(name=request.data.get("condition")).pk}
         book_reader = {"book_reader": BookReader.objects.get(user=request.user).pk}
         if bookshelf_param == "wanted" or bookshelf_param == "giveaway":
             bookshelf = {"book_shelf": BookShelf.objects.get(shelf_name=bookshelf_param).pk}
         else:
             raise NotCorrectUrlProvided()
+
+        if request.data.get('image') is None:
+            return Response({"error": "image cannot be empty"})
 
         data= {**title, **description, **authorsList, **language, **categoriesList, **book_reader, **bookshelf, **condition}
         serializer = BookUploadSerializer(data=data)

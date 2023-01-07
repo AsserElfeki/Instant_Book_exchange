@@ -123,7 +123,13 @@ function changePicture() {
 // await userStore.getUserData();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+input {
+  border: 2px solid black;
+  border-radius: 7px;
+  padding: 10px;
+}
+</style>
 
 //add email 
 // split forms 

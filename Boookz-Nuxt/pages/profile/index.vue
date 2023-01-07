@@ -77,7 +77,7 @@ function toggleTabs(event) {
   this.activeTab = event.target.innerText;
 }
 
-await userStore.getUserInfo();
+onBeforeMount(() => {userStore.getUserInfo()})
 </script>
 
 <style scoped>

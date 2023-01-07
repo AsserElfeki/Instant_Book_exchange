@@ -3,8 +3,7 @@
     v-if="store.userTransactions.length"
     class="flex flex-col gap-4 justify-center"
   >
-    <h2 v-if="route.id" class="font-bold text-xl font-sans m-2">{{store.userName}}'s History</h2>
-    <h2 v-else class="font-bold text-xl font-sans m-2">My History</h2>
+    <h2 class="font-bold text-xl font-sans m-2">My History</h2>
     <div
       v-for="(transaction, index) in store.userTransactions"
       :key="transaction.token"

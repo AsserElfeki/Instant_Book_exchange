@@ -56,7 +56,15 @@
       class="flex gap-8 justify-center items-center "
     >
       <img
+        v-if="store.userProfileImage"
         :src="store.userProfileImage"
+        alt="profile avatar"
+        class="w-8 h-8 rounded-full"
+        @click="redirect"
+      />
+      <img
+        v-else
+        src="../assets/img/avatar.png"
         alt="profile avatar"
         class="w-8 h-8 rounded-full"
         @click="redirect"

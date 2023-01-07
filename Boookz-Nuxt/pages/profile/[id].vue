@@ -39,6 +39,7 @@
           Wanted
         </button>
         <button
+          v-if="!route.id"
           class="md:mx-7 md:w-18 md:h-20 px-2 rounded-md"
           :class="{ active: activeTab === 'Transactions' }"
           @click="toggleTabs($event)"
@@ -80,7 +81,7 @@ function toggleTabs(event) {
 
 const route = useRoute().params;
 userStore.userName = route.id;
-await userStore.getUserInfo();
+onBeforeMount(() => {userStore.getUserInfo()})
 </script>
 
 <style scoped>

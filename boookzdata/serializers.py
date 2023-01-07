@@ -5,7 +5,7 @@ from rest_flex_fields import FlexFieldsModelSerializer
 
 from authentication.models import BookReader, ProfileImage, Notification
 from authentication.serializers import BookReaderSerializer, ProfileImageSerializer
-from transactions.serializers import TransactionRatingSerializer
+from transactions.serializers import TransactionRatingSerializerView
 from .models import Book, Category, Author, BookCondition, User, Comment, Image, BookShelf, ReportRecord
 from transactions.models import Transaction, TransactionStatus, TransactionRating
 from versatileimagefield.serializers import VersatileImageFieldSerializer
@@ -204,7 +204,7 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
     def get_ratings(self, obj):
         book_reader = BookReader.objects.get(user=obj.user)
         book_reader_transaction_rating = TransactionRating.objects.filter(book_reader=book_reader)
-        serialized = TransactionRatingSerializer(book_reader_transaction_rating, context=self.context, many=True).data
+        serialized = TransactionRatingSerializerView(book_reader_transaction_rating, context=self.context, many=True).data
 
         ser_list = list(chain(serialized))
         ser_list.sort(reverse=True, key=self.getKey)
