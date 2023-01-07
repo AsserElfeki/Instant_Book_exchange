@@ -36,6 +36,7 @@ class ImageViewSet(FlexFieldsModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Image.objects.all()
 
+
 class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
     serializer_class = BookSerializer
     permit_list_expands = ['category', 'condition', ]
@@ -55,6 +56,7 @@ class BookViewSet(FlexFieldsMixin, ReadOnlyModelViewSet):
 
         return queryset
 
+
 class GiveawayInSameCountryView(ListAPIView):
     serializer_class = BookSerializer
     permission_classes = (IsAuthenticated,)
@@ -64,7 +66,8 @@ class GiveawayInSameCountryView(ListAPIView):
         giveaway_shelves = BookShelf.objects.filter(shelf_name="giveaway")
         book_reader = BookReader.objects.get(user=self.request.user)
         book_readers_in_country = BookReader.objects.filter(country=book_reader.country)
-        giveaway_books = Book.objects.filter(book_shelf_id__in=giveaway_shelves, book_reader__in=book_readers_in_country)
+        giveaway_books = Book.objects.filter(book_shelf_id__in=giveaway_shelves,
+                                             book_reader__in=book_readers_in_country)
         return giveaway_books
 
 
@@ -79,6 +82,7 @@ class WantedInSameCountryView(ListAPIView):
         book_readers_in_country = BookReader.objects.filter(country=book_reader.country)
         wanted_books = Book.objects.filter(book_shelf_id__in=wanted_shelves, book_reader__in=book_readers_in_country)
         return wanted_books
+
 
 class AllGiveawayView(ListAPIView):
     serializer_class = BookSerializer
@@ -99,6 +103,7 @@ class AllWantedView(ListAPIView):
         wanted_books = Book.objects.filter(book_shelf_id__in=wanted_shelves)
         return wanted_books
 
+
 class BookUploadView(APIView):
     permission_classes = (IsAuthenticated,)
 
@@ -111,21 +116,21 @@ class BookUploadView(APIView):
             return Response({"error": "language cannot be empty"})
         language = {"language": request.data.get('language')}
         description = {"description": request.data.get('description')}
-        authors=[]
+        authors = []
         if request.data.get('author') is None:
             return Response({"error": "author cannot be empty"})
-        for reqAuth in request.data.getlist("author"):
-            aut,created = Author.objects.get_or_create(name=reqAuth)
+        for reqAuth in request.data.get("author").split(','):
+            aut, created = Author.objects.get_or_create(name=reqAuth)
             authors.append(aut.pk)
 
-        categories=[]
+        categories = []
         if request.data.get('category') is None:
             return Response({"error": "category cannot be empty"})
-        for reqCat in request.data.getlist("category"):
-            cat,created = Category.objects.get_or_create(name=reqCat)
+        for reqCat in request.data.get("category").split(','):
+            cat, created = Category.objects.get_or_create(name=reqCat)
             categories.append(cat.pk)
 
-        authorsList = {"author": authors} 
+        authorsList = {"author": authors}
         categoriesList = {"category": categories}
 
         if request.data.get('condition') is None:
@@ -141,7 +146,8 @@ class BookUploadView(APIView):
         if request.data.get('image') is None:
             return Response({"error": "image cannot be empty"})
 
-        data= {**title, **description, **authorsList, **language, **categoriesList, **book_reader, **bookshelf, **condition}
+        data = {**title, **description, **authorsList, **language, **categoriesList, **book_reader, **bookshelf,
+                **condition}
         serializer = BookUploadSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             book_saved = serializer.save()
@@ -153,6 +159,7 @@ class BookUploadView(APIView):
                 image_saved = image_serializer.save()
 
         return Response({"success": "Book '{}' created successfully with image".format(book_saved)})
+
 
 class DeleteBookView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -179,5 +186,3 @@ class ReportRecordView(generics.CreateAPIView):
         if serializer.is_valid(raise_exception=True):
             report_serializer = serializer.save()
         return Response({"success": "report is created"})
-
-
