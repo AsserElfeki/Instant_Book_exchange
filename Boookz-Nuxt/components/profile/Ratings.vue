@@ -1,6 +1,7 @@
 <template>
   <div v-if="store.userRatings.length" class="flex flex-col gap-4 justify-center">
-    <h2 class="font-bold text-xl font-sans m-2">My Reviews</h2>
+    <h2 v-if="route.id" class="font-bold text-xl font-sans m-2">{{store.userName}}'s Reviews</h2>
+    <h2 v-else class="font-bold text-xl font-sans m-2">My Reviews</h2>
     <div
       v-for="rating in store.userRatings"
       :key="rating.pk"
@@ -27,6 +28,8 @@
 
 <script setup>
 import { useUserStore } from "~/stores/userStore";
-const store = useUserStore();
+import { useProfileStore } from "~/stores/profileStore";
+const route = useRoute().params;
+const store = !route.id ? useUserStore() : useProfileStore();
 // await store.getUserInfo();
 </script>

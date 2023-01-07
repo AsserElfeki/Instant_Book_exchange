@@ -140,10 +140,10 @@ class TransactionStatusSerializer(FlexFieldsModelSerializer):
 
 class TransactionForProfileSerializer(serializers.ModelSerializer):
     token = serializers.CharField(required=False, max_length=64)
-    book_reader_initiator = BookReaderSerializer(required=False)
-    book_reader_receiver = BookReaderSerializer(required=False)
-    initiator_book = BookSerializer(required=False)
-    receiver_book = BookSerializer(required=False)
+    book_reader_initiator = serializers.SerializerMethodField()
+    book_reader_receiver = serializers.SerializerMethodField()
+    initiator_book = serializers.SerializerMethodField()
+    receiver_book = serializers.SerializerMethodField()
     transaction_status = serializers.SerializerMethodField()
 
     class Meta:
@@ -155,7 +155,22 @@ class TransactionForProfileSerializer(serializers.ModelSerializer):
     def get_transaction_status(self, obj):
         name = TransactionStatusSerializer(obj.transaction_status, read_only=True, context=self.context).data['name']
         return name
+    
+    def get_book_reader_initiator(self, obj):
+        init_reader = BookReaderSerializer(obj.book_reader_initiator, context=self.context).data
+        return init_reader['username'] if init_reader is not None else init_reader 
 
+    def get_book_reader_receiver(self, obj):
+        receive_reader = BookReaderSerializer(obj.book_reader_receiver, context=self.context).data
+        return receive_reader['username'] if receive_reader is not None else receive_reader 
+
+    def get_initiator_book(self, obj):
+        init_book = BookSerializer(obj.initiator_book, context=self.context).data
+        return init_book['title'] if init_book is not None else init_book 
+
+    def get_receiver_book(self, obj):
+        receive_book = BookSerializer(obj.receiver_book, context=self.context).data
+        return receive_book['title'] if receive_book is not None else receive_book 
 
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:

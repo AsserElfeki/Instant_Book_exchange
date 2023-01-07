@@ -3,7 +3,8 @@
     v-if="store.userTransactions.length"
     class="flex flex-col gap-4 justify-center"
   >
-    <h2 class="font-bold text-xl font-sans m-2">My History</h2>
+    <h2 v-if="route.id" class="font-bold text-xl font-sans m-2">{{store.userName}}'s History</h2>
+    <h2 v-else class="font-bold text-xl font-sans m-2">My History</h2>
     <div
       v-for="(transaction, index) in store.userTransactions"
       :key="transaction.token"
@@ -16,10 +17,10 @@
           class="flex flex-row md:flex-row justify-between bg-white border border-dashed border-black rounded-xl p-4 gap-2 items-center"
         >
           <h3 class="font-bold text-lg font-segoe">
-            {{ transaction.book_reader_initiator.username }}
+            {{ transaction.book_reader_initiator }}
           </h3>
           <h3 class="font-bold text-lg font-mono">
-            {{ transaction.initiator_book.title }}
+            {{ transaction.initiator_book }}
           </h3>
           <font-awesome-icon
             v-if="transaction.book_reader_initiator.username === store.userName"
@@ -37,10 +38,10 @@
           class="flex flex-row md:flex-row justify-between bg-white border border-dashed border-black rounded-xl p-4 gap-2 items-center"
         >
           <h3 class="font-bold text-lg font-segoe">
-            {{ transaction.book_reader_receiver.username }}
+            {{ transaction.book_reader_receiver }}
           </h3>
           <h3 class="font-bold text-lg font-mono">
-            {{ transaction.receiver_book.title }}
+            {{ transaction.receiver_book }}
           </h3>
           <font-awesome-icon
             v-if="transaction.book_reader_receiver.username === store.userName"
@@ -149,7 +150,9 @@
 
 <script setup>
   import { useUserStore } from '~/stores/userStore';
-  const store = useUserStore();
+  import { useProfileStore } from "~/stores/profileStore";
+  const route = useRoute().params;
+  const store = !route.id ? useUserStore() : useProfileStore();
   const commentShown = ref(false);
   const transactionIndex = ref();
   const form = reactive({

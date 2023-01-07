@@ -1,7 +1,7 @@
-import uuid
-
+from django.template import context
 from rest_flex_fields import FlexFieldsModelSerializer
 from rest_framework import serializers
+from authentication.models import BookReader
 from authentication.serializers import BookReaderSerializer
 from .models import Transaction, TransactionStatus, TransactionRating
 
@@ -31,8 +31,17 @@ class TransactionSerializer(serializers.ModelSerializer):
 
 
 class TransactionRatingSerializer(FlexFieldsModelSerializer):
+    book_reader = serializers.SerializerMethodField()
+    transaction = serializers.SerializerMethodField()
 
     class Meta:
         model = TransactionRating
         fields = ['transaction', "book_reader", "rating", "comment", 'modified']
+        
+    def get_transaction(self, obj):
+        transaction = TransactionSerializer(obj.transaction, context=self.context).data
+        return transaction['token'] if transaction is not None else transaction
 
+    def get_book_reader(self, obj):
+        book_reader_who_gave_the_rating = BookReaderSerializer(obj.book_reader, context=self.context).data
+        return book_reader_who_gave_the_rating
