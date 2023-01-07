@@ -2,8 +2,7 @@ import { defineStore } from 'pinia';
 export const useUserStore = defineStore({
     id: 'userStore',
     state: () => ({
-        userName: 'Leonardo Davinci',
-        userPassword: '',
+        userName: '',
         userProfileImage: "",
         userIsSearching: false,
         userIsLoggedIn: false,
@@ -17,6 +16,8 @@ export const useUserStore = defineStore({
         },
         loginError: "",
         callingComponent: null,
+        addBookError: {},
+        notifications: [],
     }),
     actions: {
         async signIn(form) {
@@ -33,7 +34,6 @@ export const useUserStore = defineStore({
                 }
             }
             catch (error) {
-                console.log("login error" + JSON.stringify(error.data));
                 this.loginError = error.data;
             }
 
@@ -45,54 +45,25 @@ export const useUserStore = defineStore({
                     method: 'POST',
                     body: form
                 })
-                console.log(res);
                 if (res.response) {
+                    //ToDo toast
                 }
             }
             catch (error) {
-                console.log("error: " + JSON.stringify(error.data));
                 this.registerError = error.data;
             }
-
         },
 
         async logOut() {
-            const res = await $fetch('http://146.59.87.108:8000/authentication/logout_all/', {
+            await $fetch('http://146.59.87.108:8000/authentication/logout_all/', {
                 method: 'POST',
                 headers: { "authorization": "Bearer " + this.token }
             })
             // this.userIsLoggedIn = false;
             // this.token = '';
             this.$reset();
+            await navigateTo('/')
         },
-
-        // async getUserWantedBooks() {
-        //     const res = await $fetch('http://146.59.87.108:8000/data/shelf/wanted', {
-        //         headers: { "authorization": "Bearer " + this.token }
-        //     })
-        //     this.userWantedBooks = res;
-        // },
-
-        // async getUserGiveAwayBooks() {
-        //     const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
-        //         headers: { "authorization": "Bearer " + this.token }
-        //     })
-        //     this.userGiveAwayBooks = res;
-        // },
-        //ToDo : change endpoints and request maybe 
-        // async getUserHistory() {
-        //     const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
-        //         headers: { "authorization": "Bearer " + this.token }
-        //     })
-        //     this.userTransactions = res;
-        // },
-        // async getUserRatings() {
-        //     const res = await $fetch('http://146.59.87.108:8000/data/shelf/giveaway', {
-        //         headers: { "authorization": "Bearer " + this.token }
-        //     })
-        //     this.userRatings = res;
-        // },
-
         resetErrors() {
             this.registerError = {};
             this.loginError = "";
@@ -115,21 +86,13 @@ export const useUserStore = defineStore({
                     //console.log("name: ", res.at(0))
                     this.userName = res.username;
                     this.userIsLoggedIn = true;
-                    if (res.book_reader.giveaway_books.length) {
-                        this.userGiveAwayBooks = res.book_reader.giveaway_books
-                    }
-                    if (res.book_reader.wanted_books.length) {
-                        this.userWantedBooks = res.book_reader.wanted_books
-                    }
+                    this.userGiveAwayBooks = res.book_reader.giveaway_books
+                    this.userWantedBooks = res.book_reader.wanted_books
                     this.region = res.book_reader.country;
                     this.userProfileImage = res.book_reader.profile_image;
-
-                    if (res.book_reader.ratings.length) {
-                        this.userRatings = res.book_reader.ratings
-                    }
-                    if (res.book_reader.transactions.length) {
-                        this.userTransactions = res.book_reader.transactions
-                    }
+                    this.userRatings = res.book_reader.ratings
+                    this.userTransactions = res.book_reader.transactions
+                    this.notifications = res.book_reader.notifications
                 }
 
             }
@@ -141,14 +104,21 @@ export const useUserStore = defineStore({
         },
 
         async addBook(form, shelf) {
-            const res = await $fetch('http://146.59.87.108:8000/data/upload/' + shelf, {
-                method: 'POST',
-                headers: {
-                    "authorization": "Bearer " + this.token,
-                },
-                body: form
-            })
-            await this.getUserInfo();
+            try {
+                const res = await $fetch('http://146.59.87.108:8000/data/upload/' + shelf, {
+                    method: 'POST',
+                    headers: {
+                        "authorization": "Bearer " + this.token,
+                    },
+                    body: form
+                })
+                if (res.success) {
+                    await this.getUserInfo();
+                }
+            }
+            catch (error) {
+                this.addBookError = error.data;
+            }
         },
 
         async deleteBook(book) {
@@ -173,7 +143,58 @@ export const useUserStore = defineStore({
                 },
             })
             await this.getUserInfo();
-        }
+        },
+
+        async deleteNotification(pk) {
+            const res = await $fetch('http://146.59.87.108:8000/authentication/notification_delete/' + pk, {
+                method: 'DELETE',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                }
+            })
+            await this.getUserInfo();
+        }, 
+               
+        async acceptTransaction(pk) {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/confirm/' + pk, {
+                method: 'PUT',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                }
+            })
+            await this.getUserInfo();
+        },
+
+        async declineTransaction(pk) {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/decline/' + pk, {
+                method: 'PUT',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                }
+            })
+            await this.getUserInfo();
+        },
+
+        async confirmBookRecieved(pk) {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/confirmReceive/' + pk, {
+                method: 'PUT',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                }
+            })
+            await this.getUserInfo();
+        }, 
+
+        async rateTransaction(pk, form) {
+            const res = await $fetch('http://146.59.87.108:8000/transaction/rate/' + pk, {
+                method: 'POST',
+                headers: {
+                    "authorization": "Bearer " + this.token,
+                },
+                body: form
+            })
+            await this.getUserInfo();
+        }, 
     },
 
 
@@ -182,7 +203,7 @@ export const useUserStore = defineStore({
     getters: {
     },
     persist: {
-        // storage: persistedState.sessionStorage,
+        storage: persistedState.sessionStorage,
     },
 
 });

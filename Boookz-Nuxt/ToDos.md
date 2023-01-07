@@ -61,23 +61,32 @@
 - [x] 59. have the api call from the profile components happen only after submission of the form 
 - [x] 66. button to delete the book
 - [x] 31. transactions component (youssef)
+- [x] 40. notifications
+- [x] 52. dropdown menu for settings and logout and notifications
+- [x] 55. change the navbar 
+- [x] 68. generic notification for transactions : click --> go to a new page with info on this transaction --> accept | deny -- acdepted | denied .... then new notification : time to confirm receiving
+- [x] 74. rest of transaction stages 
 - [ ] 60. display response of the forms TOASTS (youssef)
 - [ ] 62. (+) button for authors and : category -> predifined select menu (victor : NO HOTFIXES MF)
+- [ ] 75. ratings
 - [ ] 63. make title get suggestions from google api and 
 - [ ] 72. search result page
-- [ ] 71. errors in addbok form
-- [ ] 40. notifications 
-- [ ] 52. dropdown menu for settings and logout ? 
-- [ ] 55. change the navbar 
+- [ ] 76. in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
+- [ ] 77. giveaway tab styles
+- [ ] 78. wanted books trading
+- [ ] 79. make the profile nuxtlink also vuetify and cursor 
+- [ ] **71. errors in addbok form**
 - [ ] 65. toast for uploading profile pic 
-- [ ] 68. generic notification for transactions : click --> go to a new page with info on this transaction --> accept | deny -- acdepted | denied 
-then new notification : time to confirm receiving 
-- [ ] 70. do something with the search bar 
+- [ ] 70. search page  
 - [ ] 67. in the [id] page create comment section
 - [ ] 61. redo all the forms ?
 - [ ] 39. fixing errors and warnings 
 - [ ] 54. check on each redirect if the token is still valid and update state 
 - [ ] 64. optimize bookshelves to be 1 item
+- [ ] 80. about page
+- [ ] 81. deactivate account
+- [ ] 82. filter home page books by region / pref
+- [ ] 83. add an even one more if condition in the transaction div of buttons
 
 
 

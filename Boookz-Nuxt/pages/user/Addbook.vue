@@ -37,7 +37,6 @@
 
       <label for="book-title" class="self-start">Book title:</label>
       <input
-        required
         size="40"
         id="book-title"
         type="text"
@@ -152,18 +151,20 @@ export default {
     }
 
     async function addBook() {
-      // const fd = new FormData();
-      fd.append("title", bookForm.title);
-      // fd.append("author", bookForm.author);
-      // fd.append("category", bookForm.category);
-      fd.append("author", [this.author]);
-      fd.append("category", [this.category]);
-      fd.append("condition", bookForm.condition);
-      fd.append("language", bookForm.language);
-      fd.append("description", bookForm.description);
-
-      console.log("fd:", fd);
-      userStore.addBook(fd, bookForm.shelf);
+      if (bookForm.shelf) {
+        fd.append("title", bookForm.title);
+        fd.append("author", [this.author]);
+        fd.append("category", [this.category]);
+        fd.append("condition", bookForm.condition);
+        fd.append("language", bookForm.language);
+        fd.append("description", bookForm.description);
+  
+        console.log("fd:", fd);
+        userStore.addBook(fd, bookForm.shelf);
+      }
+      else {
+        alert("please select a shelf")
+      }
     }
 
     return {
