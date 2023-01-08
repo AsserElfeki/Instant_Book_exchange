@@ -30,8 +30,6 @@ class TransactionSerializer(serializers.ModelSerializer):
         return image
 
 class TransactionRatingSerializer(FlexFieldsModelSerializer):
-    # book_reader = BookReaderSerializer()
-    # transaction = TransactionSerializer()
 
     class Meta:
         model = TransactionRating
@@ -41,11 +39,15 @@ class TransactionRatingSerializer(FlexFieldsModelSerializer):
 class TransactionRatingSerializerView(FlexFieldsModelSerializer):
     book_reader = serializers.SerializerMethodField()
     transaction = serializers.SerializerMethodField()
+    modified = serializers.SerializerMethodField()
 
     class Meta:
         model = TransactionRating
         fields = ['transaction', "book_reader", "rating", "comment", 'modified']
         
+    def get_modified(self, obj):
+        return obj.modified.date()
+
     def get_transaction(self, obj):
         transaction = TransactionSerializer(obj.transaction, context=self.context).data
         return transaction['token'] if transaction is not None else transaction
