@@ -8,15 +8,16 @@
         Choose one of your giveaway books :))
       </h1>
       <div
-        class="flex flex-row flex-wrap gap-3 justify-center items-stretch pb-6"
+        class="text-sm md:text-md flex flex-row flex-wrap gap-3 justify-around  border-2 mb-5 border-black"
       >
-        <div
-          v-for="book in store.userGiveAwayBooks"
-          class="w-1/3 md:w-1/4 my-4 cursor-pointer"
-          :class="{ selected: book.selected }"
-          @click="toggleSelect(book)"
-        >
-          <ProfileBookCard :book="book" />
+        <div v-for="book in store.userGiveAwayBooks"
+            class="cursor-pointer  basis-1/4 "
+            :class="{ selected: book.selected }"
+            @click="toggleSelect(book)"
+            >
+          <ProfileBookCard
+            :book="book" class="overflow-hidden"
+          />
         </div>
       </div>
       <div class="btn">

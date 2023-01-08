@@ -49,4 +49,11 @@ if you work on one of them please let the others know so no 2 people work on the
 - [ ] code cleanup and robstness and reusability
 - [ ] merge giveaway & wanted in 1 component 
 - [ ] mergeing bookcards 
+
+## Bugs 
+- [ ] 1. profile pic not loaded instantly after refresh
+## enhancments : 
+- [ ] 1. add a loading spinner when fetching data
+- [ ] dark mode
+- [ ] transitions and animation
 - [ ] 

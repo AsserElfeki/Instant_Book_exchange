@@ -1,12 +1,12 @@
 <template>
   <div
-    class="bg-[#dddaee] max-w-xs shadow-xl relative rounded-3xl p-1 md:p-3 h-full"
+    class="bg-[#dddaee] max-w-xs shadow-xl relative rounded-3xl py-1 md:p-3 h-full max-h-96"
   >
     <div class="rounded-3xl  max-h-[800px] flex flex-col gap-2 justify-between p-2  h-full">
       <img
         :src="book.images.at(0)"
         :alt="book.title"
-        class="w-full rounded-3xl max-h-40 object-cover md:min-h-[350px]"
+        class="w-full rounded-3xl max-h-40 md:max-h-72 object-contain md:min-h-[250px]"
       />
 
       <p class="text-[#e76f51] text-md md:text-lg max-h-20">{{ truncate(book.title, 50) }}</p>

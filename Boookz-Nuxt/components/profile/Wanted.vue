@@ -33,7 +33,7 @@
         <div
           v-for="book in store.userWantedBooks"
           :key="book.pk"
-          class="mt-12 basis-1/2 sm:basis-1/4 flex flex-col justify-between gap-2"
+          class="mt-12 basis-1/3 sm:basis-1/4 flex flex-col justify-between gap-2"
         >
           <NuxtLink
             class="h-full"
