@@ -31,6 +31,15 @@
       </NuxtLink>
       </li>
 
+      <li class="hover:text-white border-b-2 border-transparent hover:border-white">
+        <NuxtLink
+        to="/support" 
+        class="flex flex-col-reverse"
+          >Contact Support
+          <font-awesome-icon icon="fa-solid fa-headset" class="fa-2x " />
+        </NuxtLink>
+      </li>
+
     </ul>
   </footer>
 </template>

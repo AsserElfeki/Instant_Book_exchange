@@ -2,10 +2,10 @@
 if you work on one of them please let the others know so no 2 people work on the same thing
 
 ## Missing functionalities
+- [x] 4.clear all notifications 
 - [ ] 1.show the total of notification, and profile tabs when the user is not logged in
 - [ ] 2.in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
 - [ ] 3.filter home page books by region / pref
-- [ ] 4.clear all notifications 
 - [ ] check on each redirect if the token is still valid and update state 
 - [ ] optimize bookshelves to be 1 item
 - [ ] delete all books ?
@@ -19,6 +19,8 @@ if you work on one of them please let the others know so no 2 people work on the
 - [ ] 2. toasts to inform the user what happened
 - [ ] 3. styles (we need same style for all forms)
 
+## addBook form: 
+- [ ] 1. categories from google api
 ## Settings form: 
 - [ ] 1. split into 2 forms : 1 for info and the other for password
 - [ ] 2. categories of books he likes
@@ -28,11 +30,11 @@ if you work on one of them please let the others know so no 2 people work on the
 - [ ] 6. deactivate account ability 
   
 ## Contact Support 
-- [ ] 1. form in separate page 
-- [ ] 2. link in footer 
+- [x] 1. form in separate page 
+- [x] 2. link in footer 
 
 ## Search page
-- [ ] 1. new page "./searchresults"
+- [x] 1. new page "./searchresults"
 - [ ] 2. fetch data and render it 
 
 ## About page

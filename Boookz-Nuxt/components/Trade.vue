@@ -8,10 +8,10 @@
         Choose one of your giveaway books :))
       </h1>
       <div
-        class="text-sm md:text-md flex flex-row flex-wrap gap-3 justify-around  border-2 mb-5 border-black"
+        class="text-sm md:text-md flex flex-row flex-wrap justify-around gap-2 mb-5  w-full"
       >
         <div v-for="book in store.userGiveAwayBooks"
-            class="cursor-pointer  basis-1/4 "
+            class="cursor-pointer  basis-1/4"
             :class="{ selected: book.selected }"
             @click="toggleSelect(book)"
             >
