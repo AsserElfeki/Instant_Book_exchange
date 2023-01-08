@@ -113,7 +113,7 @@
 - [x] shelves books 
 - [x] buttons in transactions and shelves and login/register and addbook 
 - [ ] footer hover 
-- [ ] book card responsiveness 
+- [x] book card responsiveness 
 - [ ] ?? display the uploaded image in the addbook page
 
 

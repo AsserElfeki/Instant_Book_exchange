@@ -19,12 +19,14 @@
           <ProfileBookCard :book="book" />
         </div>
       </div>
-      <button
-        class="btn-sm w-28 m-4"
-        @click="confirmChoice"
-      >
-        Confirm
-      </button>
+      <div class="btn">
+        <button
+          class=""
+          @click="confirmChoice"
+        >
+          Confirm
+        </button>
+      </div>
     </div>
     <div v-if="selectedBook">Selected book: {{ selectedBook.title }}</div>
   </div>
@@ -72,7 +74,6 @@
       0 4px 6px -2px rgba(0, 0, 0, 0.05);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-      border-radius: 28px;
-
+    border-radius: 28px;
   }
 </style>

@@ -87,8 +87,8 @@
           />
         </NuxtLink>
       </div>
-      <div class="">
-        <button class="btn-sm w-28 m-4" @click="setShowTrade">Trade</button>
+      <div class="btn">
+        <button class="w-20" @click="setShowTrade">Trade</button>
       </div>
     </div>
     <div v-if="showTrade">
