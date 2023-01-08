@@ -153,7 +153,7 @@ export const useUserStore = defineStore({
                 }
             })
             await this.getUserInfo();
-        }, 
+        },
                
         async acceptTransaction(pk) {
             const res = await $fetch('http://146.59.87.108:8000/transaction/confirm/' + pk, {
@@ -183,7 +183,7 @@ export const useUserStore = defineStore({
                 }
             })
             await this.getUserInfo();
-        }, 
+        },
 
         async rateTransaction(pk, form) {
             const res = await $fetch('http://146.59.87.108:8000/transaction/rate/' + pk, {
@@ -196,10 +196,25 @@ export const useUserStore = defineStore({
             await this.getUserInfo();
         },
 
+        async sendToSupport(message) {
+            await $fetch('http://146.59.87.108:8000/data/report/', {
+                method: 'POST',
+                headers: { "authorization": "Bearer " + this.token, },
+                body: { "message" : message }
+                
+            })
+        },
 
+        async clearNotifications() {
+            await $fetch('http://146.59.87.108:8000/authentication/notification_delete_all/', {
+                method: 'DELETE',
+                headers: { "authorization": "Bearer " + this.token, },
+            })
+            await this.getUserInfo();
+
+        }
+     
     },
-
-
 
     //to get specific parts of data, like select <items> from <container> WHERE <condition>
     getters: {
