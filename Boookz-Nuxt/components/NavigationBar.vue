@@ -119,16 +119,6 @@
         store.logOut();
       };
 
-      // function showSettings() {
-      //   notificationshown.value = false;
-      //   settingsshown.value = true;
-      // }
-
-      // function showNotifications() {
-      //   settingsshown.value = false;
-      //   notificationshown.value = true;
-      // }
-
       return {
         searchQuery,
         googleAPIStore,
@@ -144,7 +134,4 @@
 </script>
 
 <style scoped>
-  .hi {
-    font-family: 'Segoe';
-  }
 </style>
