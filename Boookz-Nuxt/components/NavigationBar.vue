@@ -9,9 +9,7 @@
     >
       <AppLogo />
       <div class="flex flex-col justify-start">
-        <h1 class="font-bold text-[33px] leading-10 h-9">
-          Boookz
-        </h1>
+        <h1 class="font-bold text-[33px] leading-10 h-9">Boookz</h1>
         <p class="leading-none">Book xchange website</p>
       </div>
     </NuxtLink>
@@ -80,7 +78,6 @@
   import { useUserStore } from '~/stores/userStore';
   import { useDataStore } from '~/stores/dataStore';
 
-
   import 'vuetify/styles';
   import { createVuetify } from 'vuetify';
   import * as components from 'vuetify/components';
@@ -108,7 +105,7 @@
 
       const search = () => {
         // googleAPIStore.searchForBook(searchQuery.value);
-        dataStore.searchForBook(searchQuery.value)
+        dataStore.searchForBook(searchQuery.value);
       };
 
       const redirect = () => {
@@ -133,5 +130,4 @@
   };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

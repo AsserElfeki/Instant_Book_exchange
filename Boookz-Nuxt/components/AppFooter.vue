@@ -24,7 +24,7 @@
       <li class="hover:text-white border-b-2 border-transparent hover:border-white">
       <NuxtLink 
       to="/about"
-      class="flex flex-col-reverse"
+      class="flex flex-col-reverse justify-center items-center border-2 border-black"
       >
       Meet The Team
           <font-awesome-icon icon="fa-solid fa-people-group" class="fa-2x "/>
