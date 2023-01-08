@@ -76,6 +76,12 @@
 - [ ] 82. filter home page books by region / pref
 - [ ] 86. show the total of notification, and profile tabs when the user is not logged in
 - [ ] 64. optimize bookshelves to be 1 item
+- [ ] clear all notifications 
+- [ ] delete all books ?
+- [ ] delete "remember me?"
+- [ ] limit number of rendered books in homepage 
+- [ ] clean code 
+- [ ] add country to register 
 
 ## general forms:
 - [ ] 1. buttons 
@@ -104,11 +110,11 @@
 
 
 ## Styles: 
-shelves books 
-buttons in transactions and shelves and login/register and addbook 
-footer hover 
-book card responsiveness 
-?? display the uploaded image in the addbook page
+- [x] shelves books 
+- [x] buttons in transactions and shelves and login/register and addbook 
+- [ ] footer hover 
+- [ ] book card responsiveness 
+- [ ] ?? display the uploaded image in the addbook page
 
 
 

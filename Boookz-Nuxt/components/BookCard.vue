@@ -7,7 +7,7 @@
       @click.middle="dataStore.setClickedBook(book)"
       @click.right="dataStore.setClickedBook(book)"
       :key="book.pk"
-      :to="`/books/${book.title.replaceAll(' ', '-')}`"
+      :to="`/books/${book.title.replaceAll('/', '-')}`"
     >
       <div class="rounded-3xl w-full max-h-[800px] flex flex-col items-center">
         <img

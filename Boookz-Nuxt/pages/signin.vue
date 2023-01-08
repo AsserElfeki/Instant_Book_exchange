@@ -46,8 +46,8 @@
           <input type="checkbox" name="remember" id="remember" v-model="form.remember" />
           <label for="remember"> Remember me</label>
         </div>
-        <div class="flex justify-center">
-          <button type="" class="btn">Sign in</button>
+        <div class="btn self-center">
+          <button>Sign in</button>
         </div>
 
         <div

@@ -153,12 +153,9 @@
         class="border p-2 rounded-md"
       />
 
-      <button
-        type="submit"
-        class="btn-sm self-center"
-      >
-        add book
-      </button>
+      <div class="btn-sm self-center">
+        <button type="submit">add book</button>
+      </div>
     </form>
   </div>
 </template>

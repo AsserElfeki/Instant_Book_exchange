@@ -63,18 +63,22 @@
             "
             class="flex gap-2"
           >
+          <div class="btn-sm">
             <button
               @click="acceptTransaction(transaction.token)"
               class="btn-sm"
             >
               Accept
             </button>
+            </div>
+            <div class="btn-sm">
             <button
               @click="declineTransaction(transaction.token)"
               class="btn-sm"
             >
               Decline
             </button>
+            </div>
           </div>
 
           <div
@@ -87,7 +91,7 @@
                 'Received by receiving user' &&
                 transaction.book_reader_receiver !== store.userName)
             "
-            class="flex gap-2"
+            class="btn-sm"
           >
             <button
               @click="confirmBookRecieved(transaction.token)"
@@ -99,11 +103,10 @@
 
           <div
             v-if="transaction.transaction_status === 'Completed'"
-            class="flex gap-2"
+            class="btn-sm"
           >
             <button
               @click="showComment(index)"
-              class="btn-sm"
             >
               Rate the transaction
             </button>

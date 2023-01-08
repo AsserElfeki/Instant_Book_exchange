@@ -3,11 +3,11 @@
     <div class="self-center w-full">
       <RandomBook :book="store.randomBook" />
     </div>
-    <div class="flex flex-col justify-center items-center">
+    <div class="flex flex-col justify-center items-center ">
       <h2 class="flex justify-center text-3xl m-8 text-violet-600">
         Offered by users in your area
       </h2>
-      <div class="flex flex-row flex-wrap gap-3 justify-center items-stretch pb-6">
+      <div class="flex flex-row flex-wrap gap-3 justify-center pb-6 w-full">
             <BookCard 
             v-for="book in store.giveAwayBooks"
             :key="book.pk"
@@ -17,14 +17,12 @@
       </div>
     </div>
 
-
-
     <div class="flex flex-col justify-center items-center">
       <h2 class="flex justify-center text-3xl m-8 text-violet-600">
         Wanted by users in your area
       </h2>
       <div
-        class="flex flex-row flex-wrap gap-3 justify-center items-stretch pb-6">
+        class="flex flex-row flex-wrap gap-3 justify-center pb-6 w-full">
             <BookCard 
             v-for="book in store.wantedBooks"
             :key="book.pk"

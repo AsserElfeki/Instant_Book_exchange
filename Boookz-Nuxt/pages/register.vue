@@ -128,8 +128,8 @@
           <input type="checkbox" name="remember" id="remember" v-model="form.remember" />
           <label for="remember"> Remember me</label>
         </div>
-        <div class="flex justify-center">
-          <button type="submit" class="btn">Register</button>
+        <div class="btn self-center">
+          <button type="submit" >Register</button>
         </div>
         <div></div>
       </form>
@@ -138,13 +138,11 @@
 </template>
 
 <script setup>
-import { v4 as uuidv4 } from "uuid";
 import { useUserStore } from "~/stores/userStore";
 
 //data
 const store = useUserStore();
 const remember = ref(false);
-const id = uuidv4();
 const form = reactive({
   username: "",
   first_name: "",
