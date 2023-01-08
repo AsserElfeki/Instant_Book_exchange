@@ -78,6 +78,8 @@
 <script>
   import { useGoogleAPIStore } from '~/stores/googleAPIStore';
   import { useUserStore } from '~/stores/userStore';
+  import { useDataStore } from '~/stores/dataStore';
+
 
   import 'vuetify/styles';
   import { createVuetify } from 'vuetify';
@@ -95,6 +97,7 @@
       });
 
       const googleAPIStore = useGoogleAPIStore();
+      const dataStore = useDataStore();
       const store = useUserStore();
 
       const notificationshown = ref(false);
@@ -104,7 +107,8 @@
       // const userIsLoggedIn = store.userIsLoggedIn
 
       const search = () => {
-        googleAPIStore.searchForBook(searchQuery.value);
+        // googleAPIStore.searchForBook(searchQuery.value);
+        dataStore.searchForBook(searchQuery.value)
       };
 
       const redirect = () => {

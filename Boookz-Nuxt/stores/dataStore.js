@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import {navigateTo} from "nuxt/app";
 
 export const useDataStore = defineStore({
   id: 'dataStore',
@@ -7,6 +8,7 @@ export const useDataStore = defineStore({
     giveAwayBooks: [],
     randomBook: {},
     clickedBook: {},
+    searchResults: [],
   }),
   actions: {
     async getWantedBooksFromDB() {
@@ -22,7 +24,13 @@ export const useDataStore = defineStore({
     setClickedBook(book) {
       this.clickedBook = book;
       this.persist
-    }
+    },
+
+    async searchForBook(book_title) {
+      const res = await $fetch('http://146.59.87.108:8000/data/search?search=' + book_title);
+      this.searchResults = res;
+      await navigateTo("/SearchResults")
+        },
 
   },
 
