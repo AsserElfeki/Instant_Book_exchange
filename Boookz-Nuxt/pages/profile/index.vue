@@ -106,7 +106,7 @@
   });
   const userStore = useUserStore();
 
-  const activeTab = ref('');
+  const activeTab = ref('Giveaway');
 
   function toggleTabs(event) {
     this.activeTab = event.target.innerText;
