@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="store.userTransactions.length"
-    class="flex flex-col gap-4 justify-center"
+    class="flex flex-col gap-4 justify-center "
   >
     <h2 class="font-bold text-xl m-2">My History</h2>
     <div
@@ -63,21 +63,23 @@
             "
             class="flex gap-2"
           >
-          <div class="btn-sm">
-            <button
-              @click="acceptTransaction(transaction.token)"
-              class="btn-sm"
-            >
-              Accept
-            </button>
+            <div class="btn-sm">
+              <button
+                @click="acceptTransaction(transaction.token)"
+              class="text-xs md:text-lg"
+
+              >
+                Accept
+              </button>
             </div>
             <div class="btn-sm">
-            <button
-              @click="declineTransaction(transaction.token)"
-              class="btn-sm"
-            >
-              Decline
-            </button>
+              <button
+                @click="declineTransaction(transaction.token)"
+              class="text-xs md:text-lg"
+
+              >
+                Decline
+              </button>
             </div>
           </div>
 
@@ -95,9 +97,9 @@
           >
             <button
               @click="confirmBookRecieved(transaction.token)"
-              class="btn-sm"
+              class="text-xs md:text-lg"
             >
-              Book Recieved? Confirm
+              I recieved the book
             </button>
           </div>
 
@@ -105,11 +107,9 @@
             v-if="transaction.transaction_status === 'Completed'"
             class="btn-sm"
           >
-            <button
-              @click="showComment(index)"
-            >
-              Rate the transaction
-            </button>
+            <button @click="showComment(index)"
+              class="text-xs md:text-lg"
+            >Rate the transaction</button>
           </div>
         </div>
       </div>

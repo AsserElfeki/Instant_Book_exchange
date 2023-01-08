@@ -3,7 +3,7 @@ if you work on one of them please let the others know so no 2 people work on the
 
 ## Missing functionalities
 - [x] 4.clear all notifications 
-- [ ] 1.show the total of notification, and profile tabs when the user is not logged in
+- [x] 1.show the total of notification, and profile tabs 
 - [ ] 2.in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
 - [ ] 3.filter home page books by region / pref
 - [ ] check on each redirect if the token is still valid and update state 

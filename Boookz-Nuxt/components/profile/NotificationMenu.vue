@@ -7,11 +7,19 @@
             <v-btn
               :color="store.notifications?.length > 0 ? 'red' : 'white'"
               v-bind="mergeProps(menu, tooltip)"
+              class="relative"
             >
               <font-awesome-icon
                 icon="fa-regular fa-bell"
                 class="fa-2x"
               />
+              <v-badge
+              class="absolute bottom-1 right-0"
+                color="white"
+                :content="`${store.notifications.length}`"
+                max="9"
+              >
+              </v-badge>
             </v-btn>
           </template>
           <span>Notifications</span>
@@ -53,7 +61,7 @@
     // await navigateTo("/profile");
   }
 
-function clearNotifications() {
+  function clearNotifications() {
     store.clearNotifications();
   }
 </script>

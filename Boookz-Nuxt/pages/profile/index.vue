@@ -22,36 +22,71 @@
       <h3 class="text-white">{{ userStore.region }}</h3>
 
       <div
-        class="md:mt-8 md:bg-white rounded-md h-24 flex flex-col md:flex-row justify-around items-center"
+        class="md:mt-8 bg-white rounded-md h-24 flex flex-col md:flex-row justify-center items-center w-10/12"
       >
-        <button
-          class="md:mx-7 md:w-18 md:h-20 px-2 rounded-md"
-          :class="{ active: activeTab === 'Giveaway' }"
-          @click="toggleTabs($event)"
+        <v-toolbar
+          color="transparent"
+          class="w-full"
         >
-          Giveaway
-        </button>
-        <button
-          class="md:mx-7 md:w-18 md:h-20 px-2 rounded-md"
-          :class="{ active: activeTab === 'Wanted' }"
-          @click="toggleTabs($event)"
-        >
-          Wanted
-        </button>
-        <button
-          class="md:mx-7 md:w-18 md:h-20 px-2 rounded-md"
-          :class="{ active: activeTab === 'Transactions' }"
-          @click="toggleTabs($event)"
-        >
-          Transactions
-        </button>
-        <button
-          class="md:mx-7 md:w-18 md:h-20 px-2 rounded-md"
-          :class="{ active: activeTab === 'Ratings' }"
-          @click="toggleTabs($event)"
-        >
-          Ratings
-        </button>
+          <v-tabs
+            dark
+            background-color=""
+            grow
+            vertical
+            mobile-break-point="600px"
+            class="flex flex-col"
+            center-active
+          >
+            <v-tab @click="activeTab = 'Giveaway'">
+              <v-badge
+                floating
+                color="rgb(167 139 250)"
+                :content="`${userStore.userGiveAwayBooks.length}`"
+                max="9"
+                class="text-xs md:text-lg"
+              >
+                Giveaway
+              </v-badge>
+            </v-tab>
+
+            <v-tab @click="activeTab = 'Wanted'">
+              <v-badge
+                floating
+                color="rgb(167 139 250)"
+                :content="`${userStore.userWantedBooks.length}`"
+                max="9"
+                class="text-xs md:text-lg"
+              >
+                Wanted
+              </v-badge>
+            </v-tab>
+
+            <v-tab @click="activeTab = 'Transactions'">
+              <v-badge
+                floating
+                color="rgb(167 139 250)"
+                :content="`${userStore.userTransactions.length}`"
+                max="9"
+                class="text-xs md:text-lg"
+              >
+                Transactions
+              </v-badge>
+            </v-tab>
+
+            <v-tab @click="activeTab = 'Ratings'">
+              <v-badge
+                floating
+                color="rgb(167 139 250)"
+                :content="`${userStore.userRatings.length}`"
+                max="9"
+                class="text-xs md:text-lg"
+              >
+                Ratings
+              </v-badge>
+            </v-tab>
+          </v-tabs>
+        </v-toolbar>
+        
       </div>
     </div>
 
@@ -65,28 +100,30 @@
 </template>
 
 <script setup>
-import { useUserStore } from "~/stores/userStore";
-definePageMeta({
-  middleware: "auth",
-});
-const userStore = useUserStore();
+  import { useUserStore } from '~/stores/userStore';
+  definePageMeta({
+    middleware: 'auth',
+  });
+  const userStore = useUserStore();
 
-const activeTab = ref("");
+  const activeTab = ref('');
 
-function toggleTabs(event) {
-  this.activeTab = event.target.innerText;
-}
+  function toggleTabs(event) {
+    this.activeTab = event.target.innerText;
+  }
 
-onBeforeMount(() => {userStore.getUserInfo()})
+  onBeforeMount(() => {
+    userStore.getUserInfo();
+  });
 </script>
 
 <style scoped>
-.header {
-  /* height: 500px; */
-  background: linear-gradient(93.97deg, #695ac9 0.68%, #925ac9 98.66%);
-}
+  .header {
+    /* height: 500px; */
+    background: linear-gradient(93.97deg, #695ac9 0.68%, #925ac9 98.66%);
+  }
 
-.active {
-  background: #d4cdff;
-}
+  .active {
+    background: #d4cdff;
+  }
 </style>

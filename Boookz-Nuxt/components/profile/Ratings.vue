@@ -1,5 +1,5 @@
 <template>
-  <div v-if="store.userRatings.length" class="flex flex-col gap-4 justify-center">
+  <div v-if="store.userRatings.length" class="flex flex-col gap-4 justify-center px-2">
     <h2 v-if="route.id" class="font-bold text-xl  m-2">{{store.userName}}'s Reviews</h2>
     <h2 v-else class="font-bold text-xl  m-2">My Reviews</h2>
     <div
