@@ -49,9 +49,6 @@ add extra components :
   @apply flex flex-col gap-3 mx-5 my-9 justify-between items-center lg:flex-row;
 }
 
-.content {
-  @apply min-h-screen overflow-hidden;
-}
 
 .footer-element a {
   @apply flex flex-col-reverse gap-2 justify-between items-center;

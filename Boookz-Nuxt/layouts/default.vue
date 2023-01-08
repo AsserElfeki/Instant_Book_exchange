@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper min-h-screen">
     <div class="bg-violet-300 flex justify-center mb-8 max-h-min py-2 sticky top-0 z-50">
       <NavigationBar class="max-w-[1200px] " />
     </div>

@@ -35,7 +35,7 @@ if you work on one of them please let the others know so no 2 people work on the
 
 ## Search page
 - [x] 1. new page "./searchresults"
-- [ ] 2. fetch data and render it 
+- [x] 2. fetch data and render it 
 
 ## About page
 - [ ] 2. nice styles (place to try whatever) **Asser**
