@@ -1,6 +1,6 @@
 <template>
   <footer class="mt-8 bg-violet-400">
-    <ul class="footer max-w-screen-xl flex justify-between items-center border-2 border-red-500 mx-auto py-2">
+    <ul class="footer max-w-screen-xl flex justify-between items-center mx-auto py-2">
       
       <li class="hover:text-white border-b-2 border-transparent hover:border-white">
         <a 

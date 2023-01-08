@@ -4,14 +4,14 @@ if you work on one of them please let the others know so no 2 people work on the
 ## Missing functionalities
 - [x] 4.clear all notifications 
 - [x] 1.show the total of notification, and profile tabs 
+- [x] 3.filter home page books by region / pref
 - [ ] 2.in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
-- [ ] 3.filter home page books by region / pref
 - [ ] check on each redirect if the token is still valid and update state 
 - [ ] optimize bookshelves to be 1 item
 - [ ] delete all books ?
 - [ ] delete "remember me?"
 - [ ] limit number of rendered books in homepage 
-- [ ] add country to register 
+- [ ] add country to register (iso something)
 - [ ] get category of books from google api as well
 
 ## In all forms:
@@ -19,8 +19,7 @@ if you work on one of them please let the others know so no 2 people work on the
 - [ ] 2. toasts to inform the user what happened
 - [ ] 3. styles (we need same style for all forms)
 
-## addBook form: 
-- [ ] 1. categories from google api
+
 ## Settings form: 
 - [ ] 1. split into 2 forms : 1 for info and the other for password
 - [ ] 2. categories of books he likes

@@ -44,6 +44,20 @@
         </div>
 
         <div class="">
+          <label for="country"></label>
+          <input
+            required
+            class="input"
+            size="28"
+            type="name"
+            name="lastname"
+            id="country"
+            placeholder="country"
+            v-model="form.last_name"
+          />
+        </div>
+
+        <div class="">
           <label for="username"></label>
           <input
             required
@@ -125,11 +139,16 @@
         </div>
 
         <div class="">
-          <input type="checkbox" name="remember" id="remember" v-model="form.remember" />
+          <input
+            type="checkbox"
+            name="remember"
+            id="remember"
+            v-model="form.remember"
+          />
           <label for="remember"> Remember me</label>
         </div>
         <div class="btn self-center">
-          <button type="submit" >Register</button>
+          <button type="submit">Register</button>
         </div>
         <div></div>
       </form>
@@ -138,31 +157,31 @@
 </template>
 
 <script setup>
-import { useUserStore } from "~/stores/userStore";
+  import { useUserStore } from '~/stores/userStore';
 
-//data
-const store = useUserStore();
-const remember = ref(false);
-const form = reactive({
-  username: "",
-  first_name: "",
-  last_name: "",
-  email: "",
-  password: "",
-  password2: "",
-  country: "PL",
-});
+  //data
+  const store = useUserStore();
+  const remember = ref(false);
+  const form = reactive({
+    username: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    password2: '',
+    country: 'PL',
+  });
 
-//functions
-async function register() {
-  store.register(form);
-}
+  //functions
+  async function register() {
+    store.register(form);
+  }
 </script>
 
 <style scoped>
-.input {
-  border: 2px solid black;
-  border-radius: 7px;
-  padding: 10px;
-}
+  .input {
+    border: 2px solid black;
+    border-radius: 7px;
+    padding: 10px;
+  }
 </style>
