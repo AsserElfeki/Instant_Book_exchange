@@ -7,7 +7,7 @@
       <RandomBook :book="dataStore.randomBook" />
     </div>
 
-    <div class="flex flex-col justify-center items-center">
+    <div class="flex flex-col justify-center items-center ">
       <h2
         v-if="userStore.userIsLoggedIn"
         class="flex justify-center text-4xl m-8 text-violet-600"
@@ -21,16 +21,16 @@
         Offered books
       </h2>
 
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-4">
         <div
           v-if="dataStore.giveAwayBooks.length > 0"
-          class="flex flex-row flex-wrap gap-3 justify-center pb-6"
+          class="flex flex-row flex-wrap gap-3 justify-center pb-4"
         >
           <BookCard
             v-for="book in loadedGiveawayBooks"
             :key="book.pk"
             :book="book"
-            class="w-1/3 md:w-1/4 my-4"
+            class="w-1/3 md:w-1/4 my-6"
           />
         </div>
 
@@ -56,6 +56,8 @@
       </div>
     </div>
 
+    <hr class="separator mx-auto" />
+
     <div class="flex flex-col justify-center items-center">
       <h2
         v-if="userStore.userIsLoggedIn"
@@ -78,7 +80,7 @@
             v-for="book in loadedWantedBooks"
             :key="book.pk"
             :book="book"
-            class="w-1/3 md:w-1/4 my-4"
+            class="w-1/3 md:w-1/4 my-6"
           />
         </div>
         <div

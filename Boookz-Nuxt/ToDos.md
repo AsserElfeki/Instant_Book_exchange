@@ -11,14 +11,14 @@ if you work on one of them please let the others know so no 2 people work on the
 - [ ] 2.in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
 - [ ] check on each redirect if the token is still valid and update state 
 - [ ] optimize bookshelves to be 1 item
-- [ ] delete all books ?
 - [ ] delete "remember me?"
-- [ ] add country to register (iso something)
-- [ ] get category of books from google api as well
+- [ ] **add country to register (iso something)**
+- [ ] **get category of books from google api as well**
+- [ ] description in addbook form 
 
 ## In all forms:
 - [x] 1. buttons styles
-- [ ] 2. toasts to inform the user what happened
+- [ ] 2. **toasts to inform the user what happened**
 - [ ] 3. styles (we need same style for all forms)
 
 
@@ -57,6 +57,7 @@ if you work on one of them please let the others know so no 2 people work on the
 ## Bugs 
 - [ ] 1. profile pic not loaded instantly after refresh
 - [ ] homepage books layout after refresh
+- [ ] region filter is buggy (fix by loading data store again after login)
 ## enhancments : 
 - [ ] 1. add a loading spinner when fetching data
 - [ ] dark mode

@@ -4,8 +4,8 @@
   >
     <h3 class="self-start text-[#695AC9]">#suggested for YOU</h3>
 
-    <div class="flex justify-around items-center flex-row gap-3 md:gap-20">
-      <div class="rounded-md max-h-[400px]">
+    <div class="flex flex-row justify-evenly items-center gap-3 md:gap-20 w-full">
+      <div class=" max-h-[400px] ">
         <NuxtLink
           :to="`/books/${book.title}`"
           @click.left="store.setClickedBook(book)"
@@ -14,7 +14,7 @@
         >
           <img
             v-if="book.images"
-            class="rounded-md w-full min-w-[200px] max-w-sm max-h-[400px]"
+            class="rounded-md  min-w-[200px] max-w-sm max-h-[400px]"
             :src="book.images.at(0)"
             alt="cover of the book"
           />
@@ -22,31 +22,38 @@
       </div>
 
       <div class="flex flex-col gap-4">
-        <h3 class="text-xl text-black text-center">{{ book.title }}</h3>
-        <h3 class="text-left text-md">By:</h3>
+        <h3 class="text-2xl text-black">{{ book.title }}</h3>
         <div>
-          <p v-for="author in book.author" :key="author" class="">{{ author }}</p>
+          <h3 class="text-left text-md text-xl">By:</h3>
+          <p
+            v-for="author in book.author"
+            :key="author"
+            class="text-xl"
+          >
+            {{ author }}
+          </p>
         </div>
+        <p class="text-violet-700 text-lg">{{ book.description }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useDataStore } from "~/stores/dataStore";
-const store = useDataStore();
+  import { useDataStore } from '~/stores/dataStore';
+  const store = useDataStore();
 
-const { book } = defineProps(["book"]);
+  const { book } = defineProps(['book']);
 
-console.log("random book:", book);
+  console.log('random book:', book);
 </script>
 
 <style scoped>
-.container {
-  background-image: url("../assets/img/heroBackground.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  /* height: 400px; */
-}
+  .container {
+    background-image: url('../assets/img/heroBackground.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* height: 400px; */
+  }
 </style>
