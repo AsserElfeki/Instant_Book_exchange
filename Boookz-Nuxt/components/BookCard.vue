@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-[#dddaee] max-w-xs max-h shadow-xl relative rounded-3xl flex flex-col justify-between items-center overflow-visible p-3"
+    class="bg-[#dddaee] max-w-xs shadow-xl relative rounded-3xl flex flex-col justify-between items-center overflow-visible p-2"
   >
     <NuxtLink
       @click.left="dataStore.setClickedBook(book)"
@@ -14,10 +14,10 @@
         <img
           :src="book.images.at(0)"
           :alt="book.title"
-          class="rounded-3xl object-contain"
+          class="rounded-3xl object-cover basis-3/4"
         />
 
-        <h4 class="text-[#e76f51] text-center text-sm md:text-xl md:leading-tight">
+        <h4 class="text-[#e76f51] text-center text-sm md:text-xl md:leading-tight mt-1">
           {{ truncate(book.title, 28) }}
         </h4>
       </div>

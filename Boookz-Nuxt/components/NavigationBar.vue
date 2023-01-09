@@ -16,7 +16,7 @@
     <div class="flex my-auto items-center relative">
       <form @submit.prevent="search">
         <input
-          placeholder="Search"
+          placeholder="Search offered books"
           type="text"
           class="bg-gray-100 rounded-lg px-3 w-60 md:w-96 h-8"
           v-model="searchQuery"
@@ -106,6 +106,7 @@
       const search = () => {
         // googleAPIStore.searchForBook(searchQuery.value);
         dataStore.searchForBook(searchQuery.value);
+        searchQuery.value = '';
       };
 
       const redirect = () => {

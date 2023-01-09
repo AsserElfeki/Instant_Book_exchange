@@ -14,7 +14,8 @@
                 class="fa-2x"
               />
               <v-badge
-              class="absolute bottom-1 right-0"
+                v-if="store.notifications?.length > 0"
+                class="absolute bottom-1 right-0"
                 color="white"
                 :content="`${store.notifications.length}`"
                 max="9"

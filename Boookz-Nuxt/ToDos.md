@@ -5,12 +5,14 @@ if you work on one of them please let the others know so no 2 people work on the
 - [x] 4.clear all notifications 
 - [x] 1.show the total of notification, and profile tabs 
 - [x] 3.filter home page books by region / pref
+- [x] trade button in case of guest should not be there 
+- [x] notification number should not be there if 0
+- [x] limit number of rendered books in homepage 
 - [ ] 2.in wanted books, the button trade should only appear if I have the book and then it shows me one of his giveaways
 - [ ] check on each redirect if the token is still valid and update state 
 - [ ] optimize bookshelves to be 1 item
 - [ ] delete all books ?
 - [ ] delete "remember me?"
-- [ ] limit number of rendered books in homepage 
 - [ ] add country to register (iso something)
 - [ ] get category of books from google api as well
 
@@ -27,6 +29,7 @@ if you work on one of them please let the others know so no 2 people work on the
 - [ ] 4. ability to change username (does it exist in BE?)
 - [ ] 5. spoken languages field 
 - [ ] 6. deactivate account ability 
+- [ ] 
   
 ## Contact Support 
 - [x] 1. form in separate page 
@@ -53,8 +56,9 @@ if you work on one of them please let the others know so no 2 people work on the
 
 ## Bugs 
 - [ ] 1. profile pic not loaded instantly after refresh
+- [ ] homepage books layout after refresh
 ## enhancments : 
 - [ ] 1. add a loading spinner when fetching data
 - [ ] dark mode
 - [ ] transitions and animation
-- [ ] 
+- [ ] use <v-card> for bookcards

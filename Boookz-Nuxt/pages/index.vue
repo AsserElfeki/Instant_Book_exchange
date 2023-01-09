@@ -1,66 +1,104 @@
 <template>
   <div class="flex flex-col justify-center mb-4">
     <div
-      v-if="store.randomBook"
+      v-if="dataStore.randomBook"
       class="self-center w-full"
     >
-      <RandomBook :book="store.randomBook" />
+      <RandomBook :book="dataStore.randomBook" />
     </div>
+
     <div class="flex flex-col justify-center items-center">
-      <h2 class="flex justify-center text-3xl m-8 text-violet-600">
-        Offered by users in your area
+      <h2
+        v-if="userStore.userIsLoggedIn"
+        class="flex justify-center text-4xl m-8 text-violet-600"
+      >
+        Offered books by users in your area
       </h2>
-      <div
-        v-if="store.giveAwayBooks.length > 0"
-        class="flex flex-row flex-wrap gap-3 justify-center pb-6"
-      >
-        <BookCard
-          v-for="book in store.giveAwayBooks"
-          :key="book.pk"
-          :book="book"
-          class="w-1/3 md:w-1/4 my-4"
-        />
-      </div>
-      <div
+      <h2
         v-else
-        class="flex flex-col gap-2 items-center justify-center"
+        class="flex justify-center text-4xl m-8 text-violet-600"
       >
-        <font-awesome-icon
-          icon="fa-solid fa-face-sad-tear"
-          class="text-red-400 fa-xl"
-        />
-        <p class="text-lg">
-          Oops, It seems no books are currently offered in your area.
-        </p>
+        Offered books
+      </h2>
+
+      <div class="flex flex-col gap-2">
+        <div
+          v-if="dataStore.giveAwayBooks.length > 0"
+          class="flex flex-row flex-wrap gap-3 justify-center pb-6"
+        >
+          <BookCard
+            v-for="book in loadedGiveawayBooks"
+            :key="book.pk"
+            :book="book"
+            class="w-1/3 md:w-1/4 my-4"
+          />
+        </div>
+
+        <div
+          v-else
+          class="flex flex-col gap-2 items-center justify-center"
+        >
+          <font-awesome-icon
+            icon="fa-solid fa-face-sad-tear"
+            class="text-red-400 fa-xl"
+          />
+          <p class="text-lg">
+            Oops, It seems no books are currently offered in your area.
+          </p>
+        </div>
+
+        <div
+          v-if="dataStore.giveAwayBooks.length >= giveawayBooksEnd"
+          class="btn-sm self-center"
+        >
+          <button @click="showMoreGiveawayBooks">show more</button>
+        </div>
       </div>
     </div>
 
     <div class="flex flex-col justify-center items-center">
-      <h2 class="flex justify-center text-3xl m-8 text-violet-600">
-        Wanted by users in your area
+      <h2
+        v-if="userStore.userIsLoggedIn"
+        class="flex justify-center text-4xl m-8 text-violet-600"
+      >
+        Wanted books by users in your area
       </h2>
-      <div
-        v-if="store.wantedBooks.length > 0"
-        class="flex flex-row flex-wrap gap-3 justify-center pb-6"
-      >
-        <BookCard
-          v-for="book in store.wantedBooks"
-          :key="book.pk"
-          :book="book"
-          class="w-1/3 md:w-1/4 my-4"
-        />
-      </div>
-      <div
+      <h2
         v-else
-        class="flex flex-col gap-2 items-center justify-center"
+        class="flex justify-center text-4xl m-8 text-violet-600"
       >
-        <font-awesome-icon
-          icon="fa-solid fa-face-sad-tear"
-          class="text-red-400 fa-xl"
-        />
-        <p class="text-lg">
-          Oops, It seems no books are currently wanted in your area.
-        </p>
+        Wanted books
+      </h2>
+      <div class="flex flex-col gap-2">
+        <div
+          v-if="dataStore.wantedBooks.length > 0"
+          class="flex flex-row flex-wrap gap-3 justify-center pb-6"
+        >
+          <BookCard
+            v-for="book in loadedWantedBooks"
+            :key="book.pk"
+            :book="book"
+            class="w-1/3 md:w-1/4 my-4"
+          />
+        </div>
+        <div
+          v-else
+          class="flex flex-col gap-2 items-center justify-center"
+        >
+          <font-awesome-icon
+            icon="fa-solid fa-face-sad-tear"
+            class="text-red-400 fa-xl"
+          />
+          <p class="text-lg">
+            Oops, It seems no books are currently wanted in your area.
+          </p>
+        </div>
+        <div
+          v-if="dataStore.wantedBooks.length >= wantedBooksEnd"
+          class="btn-sm self-center"
+        >
+          <button @click="showMoreWantedBooks">show more</button>
+        </div>
       </div>
     </div>
   </div>
@@ -68,8 +106,37 @@
 
 <script setup>
   import { useDataStore } from '~/stores/dataStore';
+  import { useUserStore } from '~/stores/userStore';
+  const dataStore = useDataStore();
+  const userStore = useUserStore();
 
-  const store = useDataStore();
+  const start = 0;
+  const wantedBooksEnd = ref(6);
+  const giveawayBooksEnd = ref(6);
+
+  const loadedGiveawayBooks = computed(() => {
+    if (dataStore.giveAwayBooks.length >= giveawayBooksEnd.value)
+      return dataStore.giveAwayBooks.slice(start, giveawayBooksEnd.value);
+    else {
+      return dataStore.giveAwayBooks;
+    }
+  });
+
+  const loadedWantedBooks = computed(() => {
+    if (dataStore.wantedBooks.length >= wantedBooksEnd.value)
+      return dataStore.wantedBooks.slice(start, wantedBooksEnd.value);
+    else {
+      return dataStore.wantedBooks;
+    }
+  });
+
+  function showMoreGiveawayBooks() {
+    giveawayBooksEnd.value += 6;
+  }
+
+  function showMoreWantedBooks() {
+    wantedBooksEnd.value += 6;
+  }
 </script>
 
 <style scoped></style>

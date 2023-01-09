@@ -1,5 +1,8 @@
 <template>
-  <div v-if="book" class="flex flex-col justify-center">
+  <div
+    v-if="book"
+    class="flex flex-col justify-center"
+  >
     <div
       class="hero bg-gradient-to-r from-violet-100 to-violet-700 h-auto rounded-2xl p-2"
     >
@@ -12,11 +15,13 @@
           alt="cover of the book"
         />
         <div class="flex flex-col gap-2">
-          <h1 class="font-bold font-serif text-xl leading-none">{{ book.title }}</h1>
-          <p class="">By: {{ book.author.join(", ") }}</p>
+          <h1 class="font-bold font-serif text-xl leading-none">
+            {{ book.title }}
+          </h1>
+          <p class="">By: {{ book.author.join(', ') }}</p>
           <div>
             <p class="inline">Category:</p>
-            <p class="inline">{{ book.category.join(", ") }}</p>
+            <p class="inline">{{ book.category.join(', ') }}</p>
           </div>
           <p class="">Condition: {{ book.condition }}</p>
           <p class="">Language: {{ book.language }}</p>
@@ -57,8 +62,15 @@
           />
         </swiper-slide>
       </swiper>
-      <div v-if="showModal" class="modal-overlay" @click="hideModal">
-        <img :src="modalImage" class="modal-image" />
+      <div
+        v-if="showModal"
+        class="modal-overlay"
+        @click="hideModal"
+      >
+        <img
+          :src="modalImage"
+          class="modal-image"
+        />
       </div>
     </div>
     <hr class="separator" />
@@ -67,17 +79,20 @@
       v-if="username != book.book_owner.username"
       class="flex items-center gap-2 md:gap-32 justify-start"
     >
-      <div class="flex items-center">
-        <h1 class="font-bold font-serif md:text-3xl inline mr-3 ml-3">Offered By:</h1>
-        <NuxtLink :to="`/profile/${book.book_owner.username.replaceAll(' ', '-')}`">
-          <p class="inline mr-3 md:text-xl font-serif font-bold">
+      <div class="flex items-baseline justify-center">
+        <h1 class="font-bold md:text-2xl inline mr-3 ml-3">Owner:</h1>
+        <NuxtLink
+          :to="`/profile/${book.book_owner.username.replaceAll(' ', '-')}`"
+          class="cursor-pointer rounded-xl"
+        >
+          <p class="inline mr-3 md:text-xl font-bold">
             {{ book.book_owner.username }}
           </p>
           <img
             v-if="book.book_owner.profile_image"
             :src="book.book_owner.profile_image"
             :alt="book.book_owner.username"
-            class="user-image w-16 h-16 rounded-full border-black border inline"
+            class="user-image w-10 h-10 rounded-full border-black border inline"
           />
           <img
             v-else
@@ -87,8 +102,16 @@
           />
         </NuxtLink>
       </div>
-      <div class="btn">
-        <button class="w-20" @click="setShowTrade">Trade</button>
+      <div
+        v-if="userStore.userIsLoggedIn"
+        class="btn"
+      >
+        <button
+          class="w-20"
+          @click="setShowTrade"
+        >
+          Trade
+        </button>
       </div>
     </div>
     <div v-if="showTrade">
@@ -98,101 +121,103 @@
 </template>
 
 <script>
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { useDataStore } from "~/stores/dataStore";
-import { useUserStore } from "~/stores/userStore";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-  data() {
-    return {
-      book: "",
-      username: "",
-      loginSatus: false,
-      showModal: false,
-      showTrade: false,
-    };
-  },
-  methods: {
-    showImage(image) {
-      this.showModal = true;
-      this.modalImage = image;
-      console.log("Show Image");
+  import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+  import { useDataStore } from '~/stores/dataStore';
+  import { useUserStore } from '~/stores/userStore';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
+  import 'swiper/css/scrollbar';
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
     },
-    setShowTrade() {
-      this.showTrade = true;
-      console.log("show Trade");
+    data() {
+      return {
+        book: '',
+        username: '',
+        loginSatus: false,
+        showModal: false,
+        showTrade: false,
+      };
     },
-    hideModal() {
-      this.showModal = false;
-      console.log("Hide Image");
+    methods: {
+      showImage(image) {
+        this.showModal = true;
+        this.modalImage = image;
+        console.log('Show Image');
+      },
+      setShowTrade() {
+        this.showTrade = true;
+        console.log('show Trade');
+      },
+      hideModal() {
+        this.showModal = false;
+        console.log('Hide Image');
+      },
     },
-  },
-  mounted() {
-    const store = useDataStore();
-    const userStore = useUserStore();
-    this.book = store.clickedBook;
-    this.loginSatus = userStore.userIsLoggedIn;
-    this.username = userStore.userName;
-  },
-  setup() {
-    const modalImage = "";
-    const onSwiper = (swiper) => {
-      console.log(swiper);
-    };
-    const onSlideChange = () => {
-      console.log("slide change");
-    };
-    return {
-      onSwiper,
-      onSlideChange,
-      modules: [Navigation, Pagination, Scrollbar, A11y],
-      modalImage,
-    };
-  },
-};
+    mounted() {
+      const store = useDataStore();
+      const userStore = useUserStore();
+      this.book = store.clickedBook;
+      this.loginSatus = userStore.userIsLoggedIn;
+      this.username = userStore.userName;
+    },
+    setup() {
+      const userStore = useUserStore();
+      const modalImage = '';
+      const onSwiper = (swiper) => {
+        console.log(swiper);
+      };
+      const onSlideChange = () => {
+        console.log('slide change');
+      };
+      return {
+        onSwiper,
+        onSlideChange,
+        modules: [Navigation, Pagination, Scrollbar, A11y],
+        modalImage,
+        userStore,
+      };
+    },
+  };
 </script>
 
 <style scoped>
-.hero {
-  /* background-image: url("../../assets/img/heroBookBackground.png"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  /* height: 400px; */
-}
+  .hero {
+    /* background-image: url("../../assets/img/heroBookBackground.png"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* height: 400px; */
+  }
 
-.swiper-pagination {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-}
+  .swiper-pagination {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+  }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.modal-image {
-  max-width: 80%;
-  max-height: 80%;
-}
+  .modal-image {
+    max-width: 80%;
+    max-height: 80%;
+  }
 </style>
