@@ -56,7 +56,7 @@ if you work on one of them please let the others know so no 2 people work on the
 
 ## Bugs 
 - [ ] 1. profile pic not loaded instantly after refresh
-- [ ] homepage books layout after refresh
+- [ ] homepage books layout after refresh and the "oops" message is repeated
 - [ ] region filter is buggy (fix by loading data store again after login)
 ## enhancments : 
 - [ ] 1. add a loading spinner when fetching data

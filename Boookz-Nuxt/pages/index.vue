@@ -7,7 +7,7 @@
       <RandomBook :book="dataStore.randomBook" />
     </div>
 
-    <div class="flex flex-col justify-center items-center ">
+    <div class="flex flex-col justify-center items-center">
       <h2
         v-if="userStore.userIsLoggedIn"
         class="flex justify-center text-4xl m-8 text-violet-600"
