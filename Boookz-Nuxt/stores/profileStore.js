@@ -15,10 +15,7 @@ export const useProfileStore = defineStore({
             try {
                 const res = await $fetch('http://146.59.87.108:8000/authentication/profile/'+this.userName, {
                 })
-
                 if (res) {
-                    //console.log("name: ", res.at(0))
-                    this.userName = res.username;
                     if (res.book_reader.giveaway_books[0]) {
                         this.userGiveAwayBooks = res.book_reader.giveaway_books
                     }
