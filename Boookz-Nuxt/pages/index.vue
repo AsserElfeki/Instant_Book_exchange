@@ -35,7 +35,7 @@
         </div>
 
         <div
-          v-else
+          v-show="!dataStore.giveAwayBooks.length"
           class="flex flex-col gap-2 items-center justify-center"
         >
           <font-awesome-icon
@@ -84,7 +84,7 @@
           />
         </div>
         <div
-          v-else
+          v-show="!dataStore.wantedBooks.length"
           class="flex flex-col gap-2 items-center justify-center"
         >
           <font-awesome-icon
