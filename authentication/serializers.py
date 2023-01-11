@@ -17,7 +17,7 @@ class ProfileImageSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = ProfileImage
-        fields = ['image', ]
+        fields = ['image', 'book_reader']
 
 class BookReaderSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(read_only=True)
@@ -133,7 +133,7 @@ class LoginSerializer(TokenObtainPairSerializer):
 
         data = super().validate(attrs)
         book_reader = BookReader.objects.get(user=self.user)
-        if not book_reader.is_verified:
+        if not book_reader.is_verified or book_reader.is_banned:
             error_message = "This profile wasn't activated"
             error_name = "inactive_profile"
             raise AuthenticationFailed(error_message, error_name)

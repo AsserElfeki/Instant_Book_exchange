@@ -15,8 +15,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import BookReader, Notification
-from .serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer, ListBookReaderSerializer, LoginSerializer
+from .models import BookReader, Notification, ProfileImage
+from .serializers import RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer, ListBookReaderSerializer, LoginSerializer, ProfileImageSerializer
 from boookzdata.serializers import UserSerializer
 from rest_framework import generics, status
 from django.contrib.auth.models import User
@@ -25,6 +25,29 @@ from .utils import Util
 
 
 # Create your views here.
+
+class ProfilePictureUpload(APIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ProfileImageSerializer
+
+    def post(self, request, *args, **kwarg):
+        if request.data.get('image') is None:
+            return Response({"error": "image cannot be empty"})
+        image_data = {"image": request.data.get('image')}
+        book_reader = BookReader.objects.get(user=request.user).pk
+        reader = {"book_reader": book_reader}
+
+        prev_images = ProfileImage.objects.filter(book_reader=book_reader)
+        prev_images.delete()
+
+        data = {**image_data, **reader}
+        image = self.serializer_class(data=data)
+        if image.is_valid(raise_exception=True):
+            image.save()
+            return Response({"success": "image uploaded"})
+        
+        return Response({"error": "failed to upload an image"})
+
 
 class ProfileInfoView(ReadOnlyModelViewSet):
     serializer_class = UserSerializer

@@ -196,7 +196,7 @@ class ProfileInfoSerializer(CountryFieldMixin, FlexFieldsModelSerializer):
 
     class Meta:
         model = BookReader
-        fields = ['country', 'profile_image', 'wanted_books', 'giveaway_books', 'transactions', 'ratings',
+        fields = ['country', 'profile_image', 'languages', 'wanted_books', 'giveaway_books', 'transactions', 'ratings',
                   'notifications', ]
 
     def getKey(self, e):

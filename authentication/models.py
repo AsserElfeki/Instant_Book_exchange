@@ -5,11 +5,11 @@ from django.db.models.signals import post_save
 from versatileimagefield.fields import VersatileImageField, PPOIField
 from django_countries.fields import CountryField
 
-
-
 class BookReader(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_verified = models.BooleanField(default=False)
+    is_banned = models.BooleanField(default=False)
+    languages = models.TextField(null=True, blank=True)
     country = CountryField(blank=True, null=True, default='PL')
 
     def __str__(self):
