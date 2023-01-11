@@ -46,11 +46,15 @@ class BookSerializer(FlexFieldsModelSerializer):
     author = serializers.SerializerMethodField()
     category = serializers.SerializerMethodField()
     book_owner = serializers.SerializerMethodField()
-
+    book_shelf = serializers.SerializerMethodField()
     class Meta:
         model = Book
         fields = ['pk', 'title', 'author', 'language', 'description', 'category', 'condition', 'images', 'book_owner',
-                  'created', ]
+                  'created', 'book_shelf',]
+
+    def get_book_shelf(self, obj):
+        serializer = BookShelfSerializer(obj.book_shelf)
+        return serializer.data['shelf_name']
 
     def get_images(self, obj):
         images = Image.objects.filter(book=obj)
@@ -100,12 +104,9 @@ class BookUploadSerializer(serializers.Serializer):
 
 
 class BookShelfSerializer(FlexFieldsModelSerializer):
-    book_reader = BookReaderSerializer(read_only=True)
-    books = BookSerializer(many=True)
-
     class Meta:
         model = BookShelf
-        fields = ['book_reader', 'books', ]
+        fields = ['shelf_name', ]
 
 
 class CommentSerializer(FlexFieldsModelSerializer):
