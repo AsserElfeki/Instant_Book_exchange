@@ -44,9 +44,8 @@
           >
             <ProfileBookCard :book="book" />
           </NuxtLink>
-          <div class="btn-sm self-center">
+          <div v-if="!route.id" class="btn-sm self-center">
             <button
-              v-if="!route.id"
               @click="deleteBook(book)"
             >
               Delete
