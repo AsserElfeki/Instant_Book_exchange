@@ -38,13 +38,13 @@
           v-show="!dataStore.giveAwayBooks.length"
           class="flex flex-col gap-2 items-center justify-center"
         >
+          <p class="text-lg">
+            Oops, It seems no books are currently offered in your area.
+          </p>
           <font-awesome-icon
             icon="fa-solid fa-face-sad-tear"
             class="text-red-400 fa-xl"
           />
-          <p class="text-lg">
-            Oops, It seems no books are currently offered in your area.
-          </p>
         </div>
 
         <div
@@ -87,13 +87,13 @@
           v-show="!dataStore.wantedBooks.length"
           class="flex flex-col gap-2 items-center justify-center"
         >
+          <p class="text-lg">
+            Oops, It seems no books are currently wanted in your area.
+          </p>
           <font-awesome-icon
             icon="fa-solid fa-face-sad-tear"
             class="text-red-400 fa-xl"
           />
-          <p class="text-lg">
-            Oops, It seems no books are currently wanted in your area.
-          </p>
         </div>
         <div
           v-if="dataStore.wantedBooks.length >= wantedBooksEnd"
