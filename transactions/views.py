@@ -94,7 +94,8 @@ class StartTransactionView(generics.CreateAPIView):
                                             transaction_status=transaction_status,
                                             initiator_book=initiator_book, receiver_book=receiver_book)
 
-        content = {"content": f"{book_reader_initiator.user.username} wants to trade with you. Go to transactions section to respond."}
+        content = {
+            "content": f"{book_reader_initiator.user.username} wants to trade with you. Go to transactions section to respond."}
         origin = {"origin": "Transactions"}
         notification_target = {"book_reader": book_reader_receiver.pk}
         data = {**content, **origin, **notification_target}
@@ -158,23 +159,24 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                     serializer.is_valid(raise_exception=True)
                     self.perform_update(serializer)
 
-                    #search for all transactions with these books and delete them
+                    # search for all transactions with these books and delete them
                     all_transactions_to_decline_1 = self.queryset.filter(initiator_book=transaction.initiator_book)
                     all_transactions_to_decline_2 = self.queryset.filter(initiator_book=transaction.receiver_book)
                     all_transactions_to_decline_3 = self.queryset.filter(receiver_book=transaction.initiator_book)
                     all_transactions_to_decline_4 = self.queryset.filter(receiver_book=transaction.receiver_book)
-                        
+
                     all_to_decline = all_transactions_to_decline_1 | all_transactions_to_decline_2 | all_transactions_to_decline_3 | all_transactions_to_decline_4
-                    #exclude current transaction
+                    # exclude current transaction
                     all_to_decline = all_to_decline.exclude(token=transaction_token)
 
-                    #send notifications to both user that transaction was canceled
+                    # send notifications to both user that transaction was canceled
 
                     transaction_status_declined, created = TransactionStatus.objects.get_or_create(name="Declined")
                     for trans in all_to_decline:
                         book_reader_initiator = trans.book_reader_initiator
                         book_reader_receiver = trans.book_reader_receiver
-                        content = {"content": f"Transaction from {book_reader_initiator.user.username} was canceled because it was involved in another transaction."}
+                        content = {
+                            "content": f"Transaction from {book_reader_initiator.user.username} was canceled because it was involved in another transaction."}
                         origin = {"origin": "Transaction"}
                         notification_target = {"book_reader": book_reader_receiver.pk}
                         data = {**content, **origin, **notification_target}
@@ -182,7 +184,8 @@ class ConfirmTransactionView(RetrieveUpdateAPIView):
                         if notification.is_valid(raise_exception=True):
                             notification.save()
 
-                        content = {"content": f"Transaction to {book_reader_receiver.user.username} was canceled because it was involved in another transaction."}
+                        content = {
+                            "content": f"Transaction to {book_reader_receiver.user.username} was canceled because it was involved in another transaction."}
                         origin = {"origin": "Transaction"}
                         notification_target = {"book_reader": book_reader_initiator.pk}
                         data = {**content, **origin, **notification_target}
