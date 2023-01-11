@@ -18,6 +18,7 @@ export const useUserStore = defineStore({
         callingComponent: null,
         addBookError: {},
         notifications: [],
+        chosenBookForATrade: {},
     }),
     actions: {
         async signIn(form) {
