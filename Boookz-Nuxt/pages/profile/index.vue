@@ -4,8 +4,8 @@
       class="header flex flex-col justify-between items-center py-1 pt-4 md:py-8 rounded-md min-w-full"
     >
       <img
-        v-if="userStore.userProfileImage"
-        :src="userStore.userProfileImage"
+        v-if="profilePic"
+        :src="profilePic"
         alt="profile avatar"
         class="w-32 h-32 rounded-full"
       />
@@ -86,7 +86,6 @@
             </v-tab>
           </v-tabs>
         </v-toolbar>
-        
       </div>
     </div>
 
@@ -105,8 +104,10 @@
     middleware: 'auth',
   });
   const userStore = useUserStore();
-
+  await userStore.getUserInfo();
   const activeTab = ref('Giveaway');
+
+  const profilePic = userStore.userProfileImage;
 
   function toggleTabs(event) {
     this.activeTab = event.target.innerText;
