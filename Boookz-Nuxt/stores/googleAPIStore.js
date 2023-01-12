@@ -11,7 +11,7 @@ export const useGoogleAPIStore = defineStore({
         async searchForBookTitles(bookTitle, languageCode) {
             const data = await $fetch(
                 'https://www.googleapis.com/books/v1/volumes?q=' + bookTitle + '&maxResults=' + this.book_limit +
-                "&projection=lite&langRestrict=" + languageCode
+                "&langRestrict=" + languageCode
             );
             this.book_titles = [];
             for (const index in data["items"]) {

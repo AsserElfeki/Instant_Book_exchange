@@ -4,7 +4,7 @@
   >
     <h3 class="self-start text-[#695AC9]">#suggested for YOU</h3>
 
-    <div class="flex flex-row justify-evenly items-center gap-3 md:gap-20 w-full">
+    <div class="flex flex-col md:flex-row justify-evenly items-center gap-3 md:gap-20 w-full">
       <div class=" max-h-[400px] ">
         <NuxtLink
           :to="`/books/${book.title}`"
