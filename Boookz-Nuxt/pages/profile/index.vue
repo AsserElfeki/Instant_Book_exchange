@@ -10,7 +10,7 @@
         class="w-32 h-32 rounded-full"
       />
       <img
-        v-else
+        v-show="!profilePic"
         src="../../assets/img/avatar.png"
         alt="profile avatar"
         class="w-32 h-32 rounded-full"
