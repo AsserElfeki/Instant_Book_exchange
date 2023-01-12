@@ -112,6 +112,9 @@
   const dataStore = useDataStore();
   const userStore = useUserStore();
 
+  await dataStore.getWantedBooksFromDB();
+  await dataStore.getOfferedBooksFromDB();
+
   const start = 0;
   const wantedBooksEnd = ref(6);
   const giveawayBooksEnd = ref(6);

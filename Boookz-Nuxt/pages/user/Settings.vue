@@ -100,6 +100,8 @@
 
 <script setup>
 import { useUserStore } from "~/stores/userStore";
+import { useToast } from "vue-toastification";
+const toast = useToast();
 
 const userStore = useUserStore();
 

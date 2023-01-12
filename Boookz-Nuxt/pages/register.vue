@@ -53,7 +53,7 @@
             name="lastname"
             id="country"
             placeholder="country"
-            v-model="form.last_name"
+            v-model="form.country"
           />
         </div>
 
@@ -158,7 +158,7 @@
 
 <script setup>
   import { useUserStore } from '~/stores/userStore';
-
+  import { useToast } from 'vue-toastification';
   //data
   const store = useUserStore();
   const remember = ref(false);
@@ -169,12 +169,21 @@
     email: '',
     password: '',
     password2: '',
-    country: 'PL',
+    country: '',
   });
+
+  const toast = useToast();
 
   //functions
   async function register() {
-    store.register(form);
+    store.resetErrors();
+    await store.register(form);
+    if (store.registerSuccess) {
+      toast.success('Registration successful', {
+        timeout: 5000,
+      });
+      await navigateTo('/signin');
+    }
   }
 </script>
 

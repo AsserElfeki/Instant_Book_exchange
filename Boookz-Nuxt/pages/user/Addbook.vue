@@ -164,6 +164,7 @@
   import { useUserStore } from '~/stores/userStore';
   import { useLangAPIStore } from '~/stores/languagesStore';
   import { useGoogleAPIStore } from '~/stores/googleAPIStore';
+  import { useToast } from 'vue-toastification';
 
   const userStore = useUserStore();
   const langStore = useLangAPIStore();
@@ -189,6 +190,9 @@
     description: 'some description',
     shelf: '',
   });
+
+  const toast = useToast();
+
   async function getTitleUsingGoogleAPI(event) {
     bookForm.title = event.target.value;
     const languageCode = langStore.chosenLangCode;
@@ -232,9 +236,13 @@
       fd.append('language', bookForm.language);
       fd.append('description', bookForm.description);
 
-      console.log('fd:', fd);
-      console.log('bookForm:', bookForm);
+      // console.log('fd:', fd);
+      // console.log('bookForm:', bookForm);
       userStore.addBook(fd, bookForm.shelf);
+      if (userStore.addBookSuccessfull) {
+        toast.success('Book added successfully');
+        await navigateTo('/profile');
+      }
       fd.delete('image');
       fd.delete('title');
       fd.delete('author');

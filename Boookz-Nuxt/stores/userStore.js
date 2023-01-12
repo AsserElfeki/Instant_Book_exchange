@@ -19,6 +19,8 @@ export const useUserStore = defineStore({
         addBookError: {},
         notifications: [],
         chosenBookForATrade: {},
+        registerSuccess: false,
+        addBookSuccessfull : false,
     }),
     actions: {
         async signIn(form) {
@@ -46,12 +48,11 @@ export const useUserStore = defineStore({
                     method: 'POST',
                     body: form
                 })
-                if (res.response) {
-                    //ToDo toast
-                }
+                this.registerSuccess = true;
             }
             catch (error) {
                 this.registerError = error.data;
+                this.registerSuccess = false;
             }
         },
 
@@ -114,11 +115,13 @@ export const useUserStore = defineStore({
                     body: form
                 })
                 if (res.success) {
+                    this.addBookSuccessfull = true;
                     await this.getUserInfo();
                 }
             }
             catch (error) {
                 this.addBookError = error.data;
+                this.addBookSuccessfull = false;
             }
         },
 
@@ -155,7 +158,7 @@ export const useUserStore = defineStore({
             })
             await this.getUserInfo();
         },
-               
+
         async acceptTransaction(pk) {
             const res = await $fetch('http://146.59.87.108:8000/transaction/confirm/' + pk, {
                 method: 'PUT',
@@ -201,8 +204,8 @@ export const useUserStore = defineStore({
             await $fetch('http://146.59.87.108:8000/data/report/', {
                 method: 'POST',
                 headers: { "authorization": "Bearer " + this.token, },
-                body: { "message" : message }
-                
+                body: { "message": message }
+
             })
         },
 
@@ -214,7 +217,7 @@ export const useUserStore = defineStore({
             await this.getUserInfo();
 
         }
-     
+
     },
 
     //to get specific parts of data, like select <items> from <container> WHERE <condition>

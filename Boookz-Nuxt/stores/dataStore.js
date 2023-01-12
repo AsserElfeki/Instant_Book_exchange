@@ -51,6 +51,11 @@ export const useDataStore = defineStore({
       await navigateTo("/SearchResults")
     },
 
+    async updateData() {
+      await this.getWantedBooksFromDB();
+      await this.getOfferedBooksFromDB();
+    }
+
   },
 
   //to get specific parts of data, like select <items> from <container> WHERE <condition>

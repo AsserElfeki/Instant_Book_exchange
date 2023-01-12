@@ -30,14 +30,23 @@
 <script setup>
   import { mergeProps } from 'vue';
   import { useUserStore } from '~/stores/userStore';
+  import { useDataStore } from '~/stores/dataStore';
+  import { useToast } from 'vue-toastification';
+
+  const dataStore = useDataStore();
+  const toast = useToast();
 
   const store = useUserStore();
 
-async function goToSettings() {
-    await navigateTo("/user/settings")
+  async function goToSettings() {
+    await navigateTo('/user/settings');
   }
 
-function logOut() {
+  async function logOut() {
     store.logOut();
-}
+    await dataStore.updateData();
+    toast.success('You are logged out', {
+      timeout: 5000,
+    });
+  }
 </script>
