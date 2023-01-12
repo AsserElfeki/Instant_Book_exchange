@@ -140,13 +140,19 @@ class RegisterView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         user = request.data
+        country = request.data.get("country")
+        if country is None or len(country) > 2:
+            return Response({"error": "country field"})
         serializer = self.serializer_class(data=user)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         user_data = serializer.data
         user = User.objects.get(email=user_data["email"])
         book_reader = BookReader.objects.get(user=user)
-        book_reader.country = request.data.get("country")
+        country = request.data.get("country")
+        if country is None or len(country) > 2:
+            return Response({"error": "country field"})
+        book_reader.country = country 
         book_reader.save()
         data = self.get_verification_email_data(request, user)
         Util.send_email(data=data)
