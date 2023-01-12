@@ -1,5 +1,7 @@
 <template>
-  <div class="flex mt-32 mx-auto justify-around items-center gap-1">
+  <div
+    class="flex flex-col md:flex-row md:mt-32 mx-auto justify-around items-center gap-1"
+  >
     <div class="img">
       <img
         src="../assets/img/register-img.png"
