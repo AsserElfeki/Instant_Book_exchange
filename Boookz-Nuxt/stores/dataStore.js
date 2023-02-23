@@ -51,6 +51,7 @@ export const useDataStore = defineStore({
       await navigateTo("/SearchResults")
     },
 
+
     async updateData() {
       await this.getWantedBooksFromDB();
       await this.getOfferedBooksFromDB();
