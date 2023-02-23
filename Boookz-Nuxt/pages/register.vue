@@ -160,7 +160,6 @@
 
 <script setup>
   import { useUserStore } from '~/stores/userStore';
-  import { useToast } from 'vue-toastification';
   //data
   const store = useUserStore();
   const remember = ref(false);
@@ -174,14 +173,14 @@
     country: '',
   });
 
-  const toast = useToast();
+  const {$toast} = useNuxtApp();
 
   //functions
   async function register() {
     store.resetErrors();
     await store.register(form);
     if (store.registerSuccess) {
-      toast.success('Registration successful', {
+      $toast.success('Registration successful', {
         timeout: 3000,
       });
       await navigateTo('/signin');

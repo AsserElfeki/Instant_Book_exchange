@@ -31,10 +31,9 @@
   import { mergeProps } from 'vue';
   import { useUserStore } from '~/stores/userStore';
   import { useDataStore } from '~/stores/dataStore';
-  import { useToast } from 'vue-toastification';
 
   const dataStore = useDataStore();
-  const toast = useToast();
+  const {$toast} = useNuxtApp();
 
   const store = useUserStore();
 
@@ -45,7 +44,7 @@
   async function logOut() {
     store.logOut();
     await dataStore.updateData();
-    toast.success('You are logged out', {
+    $toast.success('You are logged out', {
       timeout: 5000,
     });
   }

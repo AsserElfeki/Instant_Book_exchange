@@ -64,7 +64,6 @@
 <script setup>
 import { v4 as uuidv4 } from "uuid";
 import { useUserStore } from "~/stores/userStore";
-import { useToast } from "vue-toastification";
 
 //data
 const store = useUserStore();
@@ -76,13 +75,13 @@ const form = reactive({
   password: "",
   remember: remember,
 });
-const toast = useToast();
+const {$toast} = useNuxtApp();
 
 //functions
 async function signIn() {
   await store.signIn(form);
   if (store.userIsLoggedIn) {
-    toast.success("You are logged in", {
+    $toast.success("You are logged in", {
       timeout: 3000,
       
     });
