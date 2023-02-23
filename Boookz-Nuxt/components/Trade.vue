@@ -39,9 +39,8 @@
   import { useUserStore } from '~/stores/userStore';
   import { useDataStore } from '~/stores/dataStore';
   import { useProfileStore } from '../stores/profileStore';
-  import { useToast } from 'vue-toastification';
 
-  const toast = useToast();
+  const {$toast} = useNuxtApp();
   const userStore = useUserStore();
   const profileStore = useProfileStore();
   const dataStore = useDataStore();
@@ -96,7 +95,7 @@
       );
     }
 
-    toast.success('Transaction started');
+    $toast.success('Transaction started');
   }
 </script>
 

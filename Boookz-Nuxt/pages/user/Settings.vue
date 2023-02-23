@@ -114,8 +114,7 @@
 
 <script setup>
 import { useUserStore } from "~/stores/userStore";
-import { useToast } from "vue-toastification";
-const toast = useToast();
+const {$toast} = useNuxtApp();
 
 const userStore = useUserStore();
 

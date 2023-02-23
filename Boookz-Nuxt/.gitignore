@@ -8,3 +8,4 @@ package-lock.json
 .env
 .vscode
 dist
+ecosystem.config.js

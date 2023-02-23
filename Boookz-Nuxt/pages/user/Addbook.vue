@@ -164,7 +164,6 @@
   import { useUserStore } from '~/stores/userStore';
   import { useLangAPIStore } from '~/stores/languagesStore';
   import { useGoogleAPIStore } from '~/stores/googleAPIStore';
-  import { useToast } from 'vue-toastification';
 
   const userStore = useUserStore();
   const langStore = useLangAPIStore();
@@ -239,7 +238,7 @@
     shelf: '',
   });
 
-  const toast = useToast();
+  const {$toast} = useNuxtApp();
 
   async function getTitleUsingGoogleAPI(event) {
     bookForm.title = event.target.value;
@@ -288,7 +287,7 @@
       // console.log('bookForm:', bookForm);
       userStore.addBook(fd, bookForm.shelf);
       if (userStore.addBookSuccessfull) {
-        toast.success('Book added successfully');
+        $toast.success('Book added successfully');
         await navigateTo('/profile');
       }
       fd.delete('image');
