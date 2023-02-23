@@ -171,7 +171,6 @@ export default {
     const userCanTradeBook = ref(false);
 
     const onSwiper = (swiper) => {
-      console.log(swiper);
     };
     const onSlideChange = () => {
       console.log('slide change');
@@ -182,8 +181,6 @@ export default {
         if (userBook.title === store.clickedBook.title) {
           userStore.chosenBookForATrade = userBook
           userCanTradeBook.value = true;
-          console.log(userStore.chosenBookForATrade)
-          console.log('user has a book');
           break;
         }
         console.log('user does not have a book');

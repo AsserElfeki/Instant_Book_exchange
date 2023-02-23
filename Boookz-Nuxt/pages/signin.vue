@@ -39,7 +39,6 @@
             placeholder="Enter your password"
             v-model="form.password"
           />
-          <p>password {{ form.password }}</p>
         </div>
 
         <div class="">
