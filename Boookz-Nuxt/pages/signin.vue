@@ -84,7 +84,7 @@ async function signIn() {
   await store.signIn(form);
   if (store.userIsLoggedIn) {
     toast.success("You are logged in", {
-      timeout: 5000,
+      timeout: 3000,
       
     });
   }

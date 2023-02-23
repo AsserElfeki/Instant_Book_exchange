@@ -182,7 +182,7 @@
     await store.register(form);
     if (store.registerSuccess) {
       toast.success('Registration successful', {
-        timeout: 5000,
+        timeout: 3000,
       });
       await navigateTo('/signin');
     }

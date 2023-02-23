@@ -1,12 +1,11 @@
 <template>
-  <div class="flex justify-center container mx-auto">
-    <form
-      @submit.prevent="updateUser"
-      class="flex flex-col justify-center items-center gap-4  px-2"
-    >
+  <div class="flex justify-center container mx-auto border-2 border-black ">
+
+    <form @submit.prevent="updateAvatar"
+    class="flex flex-col justify-center items-center gap-4  px-2">
       <h2 class="font-sans font-extrabold text-xl self-start my-8">Public Profile</h2>
 
-      <div class="flex flex-row justify-around gap-12 md:w-full">
+      <div class="flex flex-row justify-around gap-12 md:w-full border-2 border-red-500">
         <img
           src="../../assets/img/avatar.png"
           alt="avatar"
@@ -19,6 +18,21 @@
           <button type="button" class="btn-light" @click="removePicture">Remove Picture</button>
         </div>
       </div>
+    </form>
+
+    <form @submit.prevent="updateData">
+    
+    </form>
+
+    <form @submit.prevent="updatePrivacy">
+
+    </form>
+
+    <form
+      @submit.prevent="updateUser"
+      class="flex flex-col justify-center items-center gap-4  px-2"
+    >
+      
 
       <div class="flex flex-col w-full sm:flex-row justify-between gap-4 ">
         <div class="flex flex-col">
