@@ -13,7 +13,7 @@ export const useProfileStore = defineStore({
     actions: {
         async getUserInfo() {
             try {
-                const res = await $fetch('http://146.59.87.108:8000/authentication/profile/'+this.userName, {
+                const res = await $fetch('https://146.59.87.108:4433/authentication/profile/'+this.userName, {
                 })
                 if (res) {
                     if (res.book_reader.giveaway_books[0]) {

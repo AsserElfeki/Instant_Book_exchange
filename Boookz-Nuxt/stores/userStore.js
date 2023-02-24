@@ -20,12 +20,12 @@ export const useUserStore = defineStore({
         notifications: [],
         chosenBookForATrade: {},
         registerSuccess: false,
-        addBookSuccessfull : false,
+        addBookSuccessfull: false,
     }),
     actions: {
         async signIn(form) {
             try {
-                const res = await $fetch('http://146.59.87.108:8000/authentication/login/', {
+                const res = await $fetch('https://146.59.87.108:4433/authentication/login/', {
                     method: 'POST',
                     body: form
                 })
@@ -44,7 +44,7 @@ export const useUserStore = defineStore({
 
         async register(form) {
             try {
-                const res = await $fetch('http://146.59.87.108:8000/authentication/register/', {
+                const res = await $fetch('https://146.59.87.108:4433/authentication/register/', {
                     method: 'POST',
                     body: form
                 })
@@ -57,7 +57,7 @@ export const useUserStore = defineStore({
         },
 
         async logOut() {
-            await $fetch('http://146.59.87.108:8000/authentication/logout_all/', {
+            await $fetch('https://146.59.87.108:4433/authentication/logout_all/', {
                 method: 'POST',
                 headers: { "authorization": "Bearer " + this.token }
             })
@@ -78,7 +78,7 @@ export const useUserStore = defineStore({
 
         async getUserInfo() {
             try {
-                const res = await $fetch('http://146.59.87.108:8000/authentication/profile/', {
+                const res = await $fetch('https://146.59.87.108:4433/authentication/profile/', {
                     headers: {
                         "authorization": "Bearer " + this.token,
                     }
@@ -107,7 +107,7 @@ export const useUserStore = defineStore({
 
         async addBook(form, shelf) {
             try {
-                const res = await $fetch('http://146.59.87.108:8000/data/upload/' + shelf, {
+                const res = await $fetch('https://146.59.87.108:4433/data/upload/' + shelf, {
                     method: 'POST',
                     headers: {
                         "authorization": "Bearer " + this.token,
@@ -126,7 +126,7 @@ export const useUserStore = defineStore({
         },
 
         async deleteBook(book) {
-            const res = await $fetch('http://146.59.87.108:8000/data/delete/' + book.pk, {
+            const res = await $fetch('https://146.59.87.108:4433/data/delete/' + book.pk, {
                 method: 'DELETE',
                 headers: {
                     "authorization": "Bearer " + this.token,
@@ -136,7 +136,7 @@ export const useUserStore = defineStore({
         },
 
         async startTransaction(initiator_book, receiver_book) {
-            const res = await $fetch('http://146.59.87.108:8000/transaction/startTransaction/', {
+            const res = await $fetch('https://146.59.87.108:4433/transaction/startTransaction/', {
                 method: 'POST',
                 headers: {
                     "authorization": "Bearer " + this.token,
@@ -150,7 +150,7 @@ export const useUserStore = defineStore({
         },
 
         async deleteNotification(pk) {
-            const res = await $fetch('http://146.59.87.108:8000/authentication/notification_delete/' + pk, {
+            const res = await $fetch('https://146.59.87.108:4433authentication/notification_delete/' + pk, {
                 method: 'DELETE',
                 headers: {
                     "authorization": "Bearer " + this.token,
@@ -160,7 +160,7 @@ export const useUserStore = defineStore({
         },
 
         async acceptTransaction(pk) {
-            const res = await $fetch('http://146.59.87.108:8000/transaction/confirm/' + pk, {
+            const res = await $fetch('https://146.59.87.108:4433/transaction/confirm/' + pk, {
                 method: 'PUT',
                 headers: {
                     "authorization": "Bearer " + this.token,
@@ -170,7 +170,7 @@ export const useUserStore = defineStore({
         },
 
         async declineTransaction(pk) {
-            const res = await $fetch('http://146.59.87.108:8000/transaction/decline/' + pk, {
+            const res = await $fetch('https://146.59.87.108:4433/transaction/decline/' + pk, {
                 method: 'PUT',
                 headers: {
                     "authorization": "Bearer " + this.token,
@@ -180,7 +180,7 @@ export const useUserStore = defineStore({
         },
 
         async confirmBookRecieved(pk) {
-            const res = await $fetch('http://146.59.87.108:8000/transaction/confirmReceive/' + pk, {
+            const res = await $fetch('https://146.59.87.108:4433/transaction/confirmReceive/' + pk, {
                 method: 'PUT',
                 headers: {
                     "authorization": "Bearer " + this.token,
@@ -190,7 +190,7 @@ export const useUserStore = defineStore({
         },
 
         async rateTransaction(pk, form) {
-            const res = await $fetch('http://146.59.87.108:8000/transaction/rate/' + pk, {
+            const res = await $fetch('https://146.59.87.108:4433/transaction/rate/' + pk, {
                 method: 'POST',
                 headers: {
                     "authorization": "Bearer " + this.token,
@@ -201,7 +201,7 @@ export const useUserStore = defineStore({
         },
 
         async sendToSupport(message) {
-            await $fetch('http://146.59.87.108:8000/data/report/', {
+            await $fetch('https://146.59.87.108:4433data/report/', {
                 method: 'POST',
                 headers: { "authorization": "Bearer " + this.token, },
                 body: { "message": message }
@@ -210,7 +210,7 @@ export const useUserStore = defineStore({
         },
 
         async clearNotifications() {
-            await $fetch('http://146.59.87.108:8000/authentication/notification_delete_all/', {
+            await $fetch('https://146.59.87.108:4433/authentication/notification_delete_all/', {
                 method: 'DELETE',
                 headers: { "authorization": "Bearer " + this.token, },
             })

@@ -13,7 +13,7 @@ export const useDataStore = defineStore({
   }),
   actions: {
     async getWantedBooksFromDB() {
-      const res = await $fetch('http://146.59.87.108:8000/data/wanted/');
+      const res = await $fetch('https://146.59.87.108:4433/data/wanted/');
       const userStore = useUserStore();
       if (userStore.userIsLoggedIn) {
         const booksInArea = res.filter(item => {
@@ -27,7 +27,7 @@ export const useDataStore = defineStore({
     },
 
     async getOfferedBooksFromDB() {
-      const res = await $fetch('http://146.59.87.108:8000/data/giveaway/');
+      const res = await $fetch('https://146.59.87.108:4433/data/giveaway/');
       const userStore = useUserStore();
       if (userStore.userIsLoggedIn) {
         const booksInArea = res.filter(item => {
@@ -46,7 +46,7 @@ export const useDataStore = defineStore({
     },
 
     async searchForBook(book_title) {
-      const res = await $fetch('http://146.59.87.108:8000/data/search?search=' + book_title);
+      const res = await $fetch('https://146.59.87.108:4433/data/search?search=' + book_title);
       this.searchResults = res;
       await navigateTo("/SearchResults")
     },
