@@ -60,27 +60,7 @@
                 Wanted
               </v-badge>
             </v-tab>
-<!--
-            <v-tab @click="activeTab = 'Transactions'">
-              <v-badge
-                floating
-                color="rgb(167 139 250)"
-                :content="`${userStore.userTransactions.length}`"
-                max="9"
-                class="text-xs md:text-lg"
-              >
-                Transactions
-              </v-badge>
-            </v-tab>
-        <button
-          v-if="!route.id"
-          class="md:mx-7 md:w-18 md:h-20 px-2 rounded-md"
-          :class="{ active: activeTab === 'Transactions' }"
-          @click="toggleTabs($event)"
-        >
-          Transactions
-        </button>
-            -->
+
             <v-tab @click="activeTab = 'Ratings'">
               <v-badge
                 floating
