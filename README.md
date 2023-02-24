@@ -1,3 +1,14 @@
+# Book Exchange webApp
+
+![welcome section](./assets/home_page.gif)
+
+**This was a Software Engineering University project** Developed by a team of 7 in Agile methodologies.
+
+## ![icon](./assets/BE_icon.png) Backend
+
+
+
+
 # How To Use
 ### Git
 Clone the repository (to clone you have to use githubtoken or ssh connection), if you want to do any work on your local version always do:
