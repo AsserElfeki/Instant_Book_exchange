@@ -9,12 +9,12 @@ export const useProfileStore = defineStore({
         region: '',
         userTransactions: [],
         userRatings: [],
-        BE_API: "https://boookzexchange.store"
+        BE_API: "https://boookzexchange.store:4433/"
     }),
     actions: {
         async getUserInfo() {
             try {
-                const res = await $fetch(BE_API+'authentication/profile/'+this.userName, {
+                const res = await $fetch(this.BE_API + 'authentication/profile/' + this.userName, {
                 })
                 if (res) {
                     if (res.book_reader.giveaway_books[0]) {
@@ -42,6 +42,6 @@ export const useProfileStore = defineStore({
     persist: {
         // storage: persistedState.sessionStorage,
     },
-    
+
 });
 

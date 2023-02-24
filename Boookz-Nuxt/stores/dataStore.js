@@ -10,11 +10,11 @@ export const useDataStore = defineStore({
     randomBook: {},
     clickedBook: {},
     searchResults: [],
-    BE_API: "https://boookzexchange.store",
+    BE_API: "https://boookzexchange.store:4433/",
   }),
   actions: {
     async getWantedBooksFromDB() {
-      const res = await $fetch(BE_API+'data/wanted/');
+      const res = await $fetch(this.BE_API + 'data/wanted/');
       const userStore = useUserStore();
       if (userStore.userIsLoggedIn) {
         const booksInArea = res.filter(item => {
@@ -28,7 +28,7 @@ export const useDataStore = defineStore({
     },
 
     async getOfferedBooksFromDB() {
-      const res = await $fetch(BE_API +'data/giveaway/');
+      const res = await $fetch(this.BE_API + 'data/giveaway/');
       const userStore = useUserStore();
       if (userStore.userIsLoggedIn) {
         const booksInArea = res.filter(item => {
@@ -47,7 +47,7 @@ export const useDataStore = defineStore({
     },
 
     async searchForBook(book_title) {
-      const res = await $fetch(BE_API +'data/search?search=' + book_title);
+      const res = await $fetch(this.BE_API + 'data/search?search=' + book_title);
       this.searchResults = res;
       await navigateTo("/SearchResults")
     },
