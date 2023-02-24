@@ -9,11 +9,12 @@ export const useProfileStore = defineStore({
         region: '',
         userTransactions: [],
         userRatings: [],
+        BE_API: "https://boookzexchange.store"
     }),
     actions: {
         async getUserInfo() {
             try {
-                const res = await $fetch('https://146.59.87.108:4433/authentication/profile/'+this.userName, {
+                const res = await $fetch(BE_API+'authentication/profile/'+this.userName, {
                 })
                 if (res) {
                     if (res.book_reader.giveaway_books[0]) {
