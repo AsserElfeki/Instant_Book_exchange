@@ -27,6 +27,7 @@ Simply put, it's a webApp that allows registered users to exchange books with ea
 
 ## 🐙 Responsiveness and compatibility:
 The website is fully responsive for all viewports and compatibale with all major browsers, and have been tested on *Chrome*, *Firefox*, *Opera*, *Edge*.
+
 *📱in mobile viewport*
 ![scrolling gif in mobile dimension](./assets/mobile_vp.gif)
 
