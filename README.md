@@ -1,7 +1,8 @@
-# Book Exchange webApp
+# Book Exchange web application
 🌐 [visit the deployed website](https://boookzexchange.store/) 
 
 🖥 (desktop viewport)
+
 ![welcome section](./assets/home_page.gif)
 
 **This was a Software Engineering University project** Developed by a team of 7 in Agile methodologies.
