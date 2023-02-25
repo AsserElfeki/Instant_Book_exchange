@@ -5,8 +5,8 @@
 
 ![welcome section](./assets/home_page.gif)
 
-**This was a Software Engineering University project** Developed by a team of 7 in Agile methodologies.
-Simply put, it's a webApp that allows registered users to exchange books with each other. 
+**This was a Software Engineering University project** Developed by a team of 7 using Agile methodologies.
+it's a portal where book readers can exchange books they already read with new books from other users. It also suggests offerd books in your area. 
 ****
 ## Front-End: 
 ### Tech stack & external libraries: 
@@ -30,9 +30,11 @@ Simply put, it's a webApp that allows registered users to exchange books with ea
 The website is fully responsive for all viewports and compatibale with all major browsers, and have been tested on *Chrome*, *Firefox*, *Opera*, *Edge*.
 
 *📱in mobile viewport*
+
 ![scrolling gif in mobile dimension](./assets/mobile_vp.gif)
 
 *in tablet viewport*
+
 ![scrolling gif in tablet dimension](./assets/tablet_vp.gif)
 
 ****
