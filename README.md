@@ -2,6 +2,7 @@
 🌐 [visit the deployed website](https://boookzexchange.store/) 
 
 🖥 (desktop viewport)
+check other viewports below
 
 ![welcome section](./assets/home_page.gif)
 
