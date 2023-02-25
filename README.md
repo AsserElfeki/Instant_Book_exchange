@@ -6,7 +6,8 @@
 ![welcome section](./assets/home_page.gif)
 
 **This was a Software Engineering University project** Developed by a team of 7 using Agile methodologies.
-it's a portal where book readers can exchange books they already read with new books from other users. It also suggests offerd books in your area. 
+it's a portal where book readers can exchange books they already read with new books from other users. It also suggests offerd books in your area.
+As a registered user, when adding a book, the application automatically suggests titles of the book while you are typing it, and once chosen it fetches from Google Books API information about the book such as Authors and description (if available). 
 ****
 ## Front-End: 
 ### Tech stack & external libraries: 
